@@ -194,6 +194,8 @@ body {
     font-weight: 600;
     font-size: 18px;
     letter-spacing: -0.8px;
+    width: 150px;
+    text-align: center;
 }
 .info-text2 {
   padding: 100px 100px 0 50px;
@@ -245,7 +247,7 @@ body {
   font-family: "Barlow Condensed";
   letter-spacing: -0.8px;
 }
-.info-2 p span{
+.info-text1 p span{
   position: relative;
   width:150px;
   display: inline-block;
