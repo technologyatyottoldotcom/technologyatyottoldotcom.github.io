@@ -121,7 +121,7 @@ html {
     font-weight: 600;
     font-size: 18px;
     letter-spacing: -.8px;
-    width: 150px;
+    width: 210px;
     text-align: center
 }
 
@@ -383,13 +383,6 @@ p {
     padding: 0
 }
 
-.cont1-text1 div {
-    font-family: Ubuntu;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 18.38px;
-    letter-spacing: -.5px
-}
 .getintouchemail {
     font-family: Ubuntu;
     font-weight: 600;
