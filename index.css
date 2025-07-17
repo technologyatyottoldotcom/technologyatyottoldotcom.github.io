@@ -165,7 +165,12 @@ html {
 .info-text1>p {
     font-weight: 600;
     font-size: 14px;
-    letter-spacing: -.5px
+    letter-spacing: -.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 .info-2 span {
@@ -176,7 +181,7 @@ html {
 
 .info-2 p {
     position: relative;
-    width: 150px;
+    width: 210px;
     display: inline-block;
     font-size: 30px;
     font-family: "Barlow Condensed";
