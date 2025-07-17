@@ -366,14 +366,6 @@ html {
     height: 100px
 }
 
-.getintouch {
-    font-family: Ubuntu;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 18.38px;
-    letter-spacing: -.5px
-}
-
 .footer-container-1 {
     display: flex;
     justify-content: center;
