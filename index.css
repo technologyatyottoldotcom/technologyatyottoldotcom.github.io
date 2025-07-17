@@ -103,7 +103,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 }
 .banner-name-card {
   display: flex;
@@ -119,11 +118,11 @@ body {
   cursor: pointer;
 }
 .banner-name {
-  font-family: "Yeseva One";
-  font-weight: 400;
-  font-size: 50px;
-  line-height: 59px;
-  letter-spacing: -1px;
+    font-family: "Yeseva One";
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 59px;
+    letter-spacing: -4px;
 }
 
 .header1 {
@@ -169,12 +168,12 @@ body {
 
 
 .header2 {
-  text-align: center;
-  font-family: "Ubuntu";
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 110.88px;
-  letter-spacing: -1px;
+      text-align: center;
+    font-family: "Ubuntu";
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 110.88px;
+    letter-spacing: -1px;
 }
 
 .info-1 {
@@ -230,8 +229,8 @@ body {
   color: #011627e5;
 }
 .info-text1 > p {
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 14px;
     letter-spacing: -0.5px;
 }
 .info-2 span {
@@ -248,13 +247,13 @@ body {
   letter-spacing: -0.8px;
 }
 .info-text1 p span{
-  position: relative;
-  width:150px;
-  display: inline-block;
-  font-size: 30px;
-  font-family: "Barlow Condensed";
-  letter-spacing: -0.8px;
-  font-weight:400px;
+    position: relative;
+    width: 150px;
+    display: inline-block;
+    font-size: 30px;
+    letter-spacing: -0.8px;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .info-2 p::after {
