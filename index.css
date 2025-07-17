@@ -120,7 +120,7 @@ body {
 .banner-name {
     font-family: "Yeseva One";
     font-weight: 500;
-    font-size: 64px;
+    font-size: 75px;
     line-height: 59px;
     letter-spacing: -4px;
 }
@@ -179,8 +179,8 @@ body {
 .info-1 {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 20%;
-    row-gap: 40px;
+    column-gap: 10%;
+    row-gap: 20px;
     justify-content: center;
     width: 70%;
     justify-content:center;
@@ -602,8 +602,7 @@ body {
   width: 90%;
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
-  border-top: 1px solid #011627e5;
+  padding-top: 5%;
   margin: 3% 5% 3% 5%;
 }
 
@@ -614,9 +613,17 @@ body {
   width: 100px;
   height: 100px;
 }
+.getintouch{
+    font-family: "Ubuntu";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18.38px;
+    letter-spacing: -0.5px;
+}
 .footer-container-1 {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  text-align:center;
 }
 .cont1-text1 {
   width: 320px;
