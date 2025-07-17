@@ -122,9 +122,17 @@ html {
     font-size: 18px;
     letter-spacing: -.8px;
     width: 210px;
-    text-align: center
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: center;
 }
-
+.info-text1:hover {
+  background: #fafafa;        /* Slightly darker background */
+  transform: scale(1.05);        /* Slight zoom */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
 .info-text2 {
     padding: 100px 100px 0 50px;
     display: flex;
