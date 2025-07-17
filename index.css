@@ -77,7 +77,6 @@ body {
   align-items: center;
   height: fit-content;
   flex-direction: column;
-  margin-bottom: 10%;
 }
 .banner-image > img {
       /* width: 740px; */
@@ -125,7 +124,6 @@ body {
   font-size: 50px;
   line-height: 59px;
   letter-spacing: -1px;
-  cursor:pointer;
 }
 
 .header1 {
@@ -180,24 +178,22 @@ body {
 }
 
 .info-1 {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  padding-bottom: 200px;
-  margin-left: 5%;
-  margin-right: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20%;
+    row-gap: 40px;
+    justify-content: center;
+    width: 70%;
+    justify-content:center;
+    margin: auto;
 }
 .info-text1 {
-  width: 500px;
-  flex: 1;
-  padding: 100px 100px 0 100px;
-  display: flex;
-  flex-direction: column;
-  font-family: Ubuntu;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 35px;
-  letter-spacing: -0.8px;
+    display: flex;
+    flex-direction: column;
+    font-family: Ubuntu;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.8px;
 }
 .info-text2 {
   padding: 100px 100px 0 50px;
@@ -232,11 +228,9 @@ body {
   color: #011627e5;
 }
 .info-text1 > p {
-  width: 500px;
-  height: 105px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.8;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: -0.5px;
 }
 .info-2 span {
   font-size: 24px;
@@ -245,10 +239,20 @@ body {
 }
 .info-2 p {
   position: relative;
+  width:150px;
   display: inline-block;
   font-size: 30px;
   font-family: "Barlow Condensed";
   letter-spacing: -0.8px;
+}
+.info-2 p span{
+  position: relative;
+  width:150px;
+  display: inline-block;
+  font-size: 30px;
+  font-family: "Barlow Condensed";
+  letter-spacing: -0.8px;
+  font-weight:400px;
 }
 
 .info-2 p::after {
