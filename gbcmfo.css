@@ -694,6 +694,7 @@ p {
 .reach-box-image{
   flex-direction: column;
   display: flex;
+  max-width: 85%;
 }
   .banner-image img {
     width: 100%;
