@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreatBear India Value — Managed Accounts</title>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Yeseva+One&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --ink:#011627;
+    --ink-60:#011627;
+    --ink-40:#011627;
+    --ink-20:#011627;
+    --ink-10:#f1f1f1;
+    --ink-05:#e8e8e8;
+    --white:#FFFFFF;
+    --heading:'Yeseva One',serif;
+    --body:'Ubuntu',sans-serif;
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{background:var(--white);color:var(--ink);font-family:var(--body);font-weight:400;line-height:1.8}
+  ::selection{background:var(--ink);color:var(--white)}
+  a{color:var(--ink);text-decoration:none}
+  a:hover{opacity:.6}
+
+  h1,h2,h3,h4,.section-title{font-family:var(--heading)}
+
+  .container{width:80%;margin:0 auto}
+  section{padding:4.5rem 0}
+  .divider{width:80%;height:1px;background:var(--ink-10);margin:0 auto}
+
+  .hero{text-align:center;padding:5rem 2rem 5rem}
+  .hero-logo{margin-bottom:2rem}
+  .hero-logo img{width:180px;height:auto}
+  .hero h1{font-size:clamp(2.2rem,4.5vw,3.4rem);color:var(--ink);line-height:1.2;margin-bottom:.8rem;letter-spacing: -4px;font-weight: 500;}
+  .hero-sub{font-size:.95rem;color:var(--ink-60);font-weight:400;max-width:500px;margin:0 auto;line-height:1.8}
+  .hero-tag{display:inline-block;margin-top:1.8rem;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-40);font-weight:400}
+
+  .section-label{font-family:var(--body);font-size:.65rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--ink-40);margin-bottom:.4rem;font-weight:400}
+  .section-title{font-size:clamp(1.5rem,3vw,2.2rem);color:var(--ink);line-height:1.25;margin-bottom:1.5rem;letter-spacing: -2px;font-weight: 500;}
+  p{color:var(--ink);font-size:.9rem;line-height:1.9;font-weight:400;margin-bottom:1rem}
+  p:last-child{margin-bottom:0}
+  strong{font-weight:700}
+
+  /* ── PANEL CARDS ──────────────────────── */
+  .two-col-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem}
+  .panel{background:#fafafa;border:1px solid var(--ink-10);border-radius:8px;padding:2rem 2.2rem;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(1,22,39,.04)}
+  .panel h3{font-size:1.15rem;color:var(--ink);margin-bottom:.7rem;letter-spacing: -1px;font-weight: 500;}
+  .panel h4{font-size:1.05rem;color:var(--ink);margin-bottom:.5rem;letter-spacing: -1px;font-weight: 500;}
+  .panel ul{list-style:none;padding:0}
+  .panel li{font-size:.85rem;color:var(--ink);font-weight:400;line-height:1.85;padding:.2rem 0;padding-left:1rem;position:relative}
+  .panel li::before{content:'·';position:absolute;left:0;color:var(--ink-20);font-weight:700}
+
+  .quote{margin-top:2.5rem;padding:1.5rem 0;border-top:1px solid var(--ink-10);border-bottom:1px solid var(--ink-10)}
+  .quote p{font-style:italic;font-weight:400;font-size:.95rem;color:var(--ink);margin-bottom:.4rem}
+  .quote cite{font-style:normal;font-size:.78rem;color:var(--ink-40);font-weight:400}
+
+  .principles{margin-top:1.5rem}
+  .principle{padding:1.2rem 0;border-bottom:1px solid var(--ink-05);display:grid;grid-template-columns:2.5rem 1fr;gap:.8rem;align-items:start}
+  .principle:first-child{border-top:1px solid var(--ink-05)}
+  .principle .num{font-family:var(--heading);font-size:.95rem;color:var(--ink-20);padding-top:.1rem}
+  .principle p{margin:0;font-size:.88rem}
+
+  .callout{margin-top:1rem;padding:1rem 1.4rem;background:var(--ink-05);border-radius:6px;font-size:.9rem}
+  .callout p{margin:0}
+
+  .steps{counter-reset:step}
+  .step{counter-increment:step;padding:1rem 0;border-bottom:1px solid var(--ink-05);padding-left:3.8rem;position:relative}
+  .step:first-child{border-top:1px solid var(--ink-05)}
+  .step::before{content:'Step ' counter(step);position:absolute;left:0;top:1.1rem;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);font-weight:400}
+  .step p{margin:0;font-size:.88rem}
+
+  .checklist h4{margin-bottom:1rem}
+  .check{display:flex;gap:.6rem;margin-bottom:.6rem;align-items:baseline}
+  .check::before{content:'—';color:var(--ink-20);font-size:.8rem;flex-shrink:0}
+  .check p{margin:0;font-size:.86rem}
+
+  .cycle-wrap{margin:2rem auto 0;max-width:90%}
+  .cycle-wrap svg{width:100%;height:auto}
+  .cycle-note{text-align:center;margin-top:1rem;font-size:.8rem;color:var(--ink-40);font-style:italic}
+
+  .stats{display:flex;gap:3rem;margin-top:1.5rem;flex-wrap:wrap}
+  .stat .big{font-family:var(--heading);font-size:2.6rem;color:var(--ink);line-height:1.1}
+  .stat .label{font-size:.75rem;color:var(--ink-40);margin-top:.2rem;font-weight:400}
+
+  .port-stats{display:flex;gap:3rem;margin-top:1.5rem;margin-bottom:2rem}
+  .port-stat .big{font-family:var(--heading);font-size:2rem;color:var(--ink);line-height:1.1}
+  .port-stat .label{font-size:.75rem;color:var(--ink-40);margin-top:.15rem}
+
+  .rev-items{margin-top:1.5rem}
+  .rev-item{margin-bottom:1.2rem}
+  .rev-item h4{font-size:.9rem;font-weight:500;color:var(--ink);margin-bottom:.15rem;font-family:var(--body)}
+  .rev-item p{font-size:.86rem;margin:0}
+
+  .positions{margin-top:2rem}
+  .positions h3{font-size:1.1rem;color:var(--ink);margin-bottom:1rem}
+  .pos-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem}
+  .pos h4{font-size:.95rem;color:var(--ink);margin-bottom:.4rem}
+  .pos p{font-size:.84rem}
+
+  .adv-list{margin-top:1.5rem}
+  .adv-item{padding:1rem 0;border-bottom:1px solid var(--ink-05)}
+  .adv-item:first-child{border-top:1px solid var(--ink-05)}
+  .adv-item h4{font-size:.9rem;font-weight:500;color:var(--ink);margin-bottom:.15rem;font-family:var(--body)}
+  .adv-item p{margin:0;font-size:.86rem}
+
+  .bio{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--ink-10)}
+  .bio h3{font-size:1.2rem;color:var(--ink);margin-bottom:.1rem}
+  .bio .role{font-size:.78rem;color:var(--ink-40);margin-bottom:1.2rem}
+  .bio-entry{margin-bottom:1rem}
+  .bio-entry .year{font-size:.65rem;letter-spacing:1px;color:var(--ink-40);font-weight:400;margin-bottom:.1rem}
+  .bio-entry p{font-size:.85rem;margin:0}
+  .bio-badge{margin-top:1rem;font-size:.75rem;color:var(--ink-40);font-style:italic}
+
+  .terms-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:1.5rem;border-top:1px solid var(--ink-10)}
+  .term{padding:1.2rem 1rem;border-bottom:1px solid var(--ink-05);text-align:center}
+  .term .label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);margin-bottom:.2rem;font-weight:400}
+  .term .value{font-family:var(--heading);font-size:1.3rem;color:var(--ink)}
+  .term .note{font-size:.72rem;color:var(--ink-40);margin-top:.2rem;line-height:1.5}
+
+  .contact{text-align:center;padding:4rem 0 3rem}
+  .contact h2{font-size:1.6rem;color:var(--ink);margin-bottom:.5rem}
+  .contact-name{font-size:.92rem;font-weight:400;margin-bottom:.8rem}
+  .contact-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;font-size:.85rem}
+  .contact-links a{color:var(--ink-60)}
+  .contact-links a:hover{color:var(--ink)}
+  .contact-loc{margin-top:1rem;font-size:.78rem;color:var(--ink-20)}
+  footer{text-align:center;padding:1.5rem 0;font-size:.7rem;color:var(--ink-20)}
+
+  .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+
+  @media(max-width:768px){
+    .container{width:90%}
+    .divider{width:90%}
+    .two-col-cards,.pos-grid,.terms-grid{grid-template-columns:1fr}
+    .stats,.port-stats{flex-direction:column;gap:1.5rem}
+    .contact-links{flex-direction:column;align-items:center;gap:.6rem}
+    section{padding:3rem 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo"><img src="gblogo.png" alt="GreatBear Capital"></div>
+  <h1>GreatBear India Value</h1>
+  <p class="hero-sub">Conservative &amp; Concentrated<br>Value investment strategy managed through market cycles</p>
+  <div class="hero-tag">Managed Accounts</div>
+</div>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">About GreatBear</h2>
+    <div class="two-col-cards">
+      <div class="panel">
+        <h3>Our Story</h3>
+        <p>GreatBear began operations when Mr. Saptarshi Das shifted base back from London, UK to India in 2015. The essence of GreatBear is built on the cognizance that investing is not just an act but a way of life.</p>
+        <p>GreatBear brings to the fore, in every act of its investment operations, simple life principles of prudence, humility, continuous learning, hard work, deep research, patience, and foremost, persistence.</p>
+        <p>We want to allocate capital to those companies which display similar attributes: companies which have sustainable innovation, present significant margin of safety, and have very high shareholder alignment.</p>
+        <p><strong>We are value investors.</strong> We think long term and do extensive on-ground due diligence to identify opportunities.</p>
+      </div>
+      <div class="panel">
+        <h3>Stewardship</h3>
+        <p>Stewardship is a word that means taking care of something. It's overseeing something on behalf of someone else and acting in a way that keeps the owner's best interests at heart.</p>
+        <p>When you entrust GreatBear with your capital to invest for your future, we take stewardship of your investment — and so it is our duty to look after it with the utmost care.</p>
+        <p>When it comes to investments, there may be short-term ups and downs in the markets from time to time. But our responsibility is to help your investment grow over time, while supporting long-term benefits for the economy, the environment, and society more broadly.</p>
+      </div>
+    </div>
+    <div class="quote">
+      <p>We are value investors and broadly follow a natural ESG framework and avoid sin stocks.</p>
+      <cite>— Saptarshi Das, CFA, Portfolio Manager</cite>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Principles</div>
+    <h2 class="section-title">Code of Conduct</h2>
+    <div class="principles">
+      <div class="principle"><span class="num">1</span><p>We operate a culture of true partnership. Our investor clients are our partners and our fortunes are directly proportional to theirs. Most of our personal wealth is invested alongside them.</p></div>
+      <div class="principle"><span class="num">2</span><p>Our effort is to survive the vicissitudes of financial markets and economic conditions — not collide head-on with them. We aim for decent returns, not a roulette game.</p></div>
+      <div class="principle"><span class="num">3</span><p>We are not in the business of buying a company just to sell it later. We would like to grow our wealth with the fortunes of a good company held long term.</p></div>
+      <div class="principle"><span class="num">4</span><p>We take immediate action when we have made an error — whether from information processing errors, new information, or plain simple oversight.</p></div>
+      <div class="principle"><span class="num">5</span><p>We will always be fully transparent about our operations. Every investor, however small or large, has equal right to all information and service.</p></div>
+      <div class="principle"><span class="num">6</span><p>We communicate bad news first. Good news can always wait. If there are no suitable capital allocations, we happily use money market instruments to wait.</p></div>
+      <div class="principle"><span class="num">7</span><p>We will never enter into agreements with third parties which have incentives misaligned with our investors — however strong or fair the incentive might be.</p></div>
+      <div class="principle"><span class="num">8</span><p>We want us to be a happy bunch of people, both investors and the management team. We treat everyone with dignity, respect and care in all our dealings.</p></div>
+      <div class="principle"><span class="num">9</span><p>We will not enter into confidential binding agreements that might jeopardize trust. No special treatment given to any single party.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Investment Approach</div>
+    <h2 class="section-title">Investment Philosophy</h2>
+    <div class="two-col-cards">
+      <div class="panel">
+        <h4>Strategy Synthesis</h4>
+        <p>We invest in businesses, not a ticker. We don't subscribe to the philosophy that only buying low-multiple stocks is value investing. Price is important, but we believe the largest potential value exists in cash-flow-generating, innovation-driven businesses making earth a more sustainable place for future generations.</p>
+        <p>We also believe in 'responsible capitalism' — capitalism in which stakeholder interests are largely aligned with shareholder interests, and profit maximization is directly proportional to human value maximisation.</p>
+      </div>
+      <div class="panel">
+        <h4>Long-Only Value</h4>
+        <p>GreatBear is a long-only value investor. We feel that market irrationality about the price of a business may have no upper bound — we don't particularly like that exposure from shorting.</p>
+        <p>We look at a business with a private equity approach. Buying stock is essentially an opportunity to identify mispriced assets and seek re-rating while growing with the fortunes of the company.</p>
+        <div class="callout"><p><strong>Capital allocation is our main job.</strong></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Stock Selection Process</div>
+    <h2 class="section-title">Research Methodology</h2>
+    <div class="two-col-cards">
+      <div class="panel">
+        <h4>Selection Process</h4>
+        <div class="steps">
+          <div class="step"><p>Continuously research companies and identify those which show significant difference between value and price.</p></div>
+          <div class="step"><p>Understand industry microeconomics to form a view on the future company-specific business picture. We need at least one unique key insight about the business.</p></div>
+          <div class="step"><p>Understand if the drivers for re-rating exist.</p></div>
+          <div class="step"><p>Buy only if valuations are opportune. We typically never buy at more than <strong>10x P/E, 3x market cap to sales, or 0.2 PEG</strong>. We are looking for considerable margin of safety.</p></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="checklist">
+          <h4>Identifying a Solid Business</h4>
+          <div class="check"><p>Is the business increasing or maintaining its market share?</p></div>
+          <div class="check"><p>Does the company show stable or growing operating margin?</p></div>
+          <div class="check"><p>Is the company moving up the value chain in its products or services?</p></div>
+          <div class="check"><p>Is there evidence of organic sustainable growth?</p></div>
+          <div class="check"><p>Is there enough management stake to minimise agency problems?</p></div>
+          <div class="check"><p>Is the industry growing with freedom from excessive government interference?</p></div>
+          <div class="check"><p>Is the business improving people's lives?</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Due Diligence</div>
+    <h2 class="section-title">Assessing Management Quality</h2>
+    <div class="two-col-cards">
+      <div class="panel">
+        <h4>Financial Quality Checks</h4>
+        <ul>
+          <li>No anomalies in interest income/payment</li>
+          <li>No deferred taxation issues</li>
+          <li>Interest cover preferably above 5x</li>
+          <li>At least 80% of assets tangible</li>
+          <li>Account receivables not abnormal vs payables</li>
+          <li>Positive and ideally increasing working capital</li>
+          <li>No aggressive cash variations from investing activities</li>
+          <li>Cash from financing matches debt/dividend payments</li>
+          <li>Option remuneration and equity dilution implications</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>Behavioural Assessment</h4>
+        <p>GreatBear's view is that management quality is what management does or has done — rather than what they say or the reputation they have.</p>
+        <ul>
+          <li>Promoter has significant stake (at least 50%, not decreasing)</li>
+          <li>Freedom of the board; appropriate sitting fees</li>
+          <li>Clear focus on core competencies</li>
+          <li>No track record with law enforcement, tax officials, or human rights issues</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Market Timing</div>
+    <h2 class="section-title">Portfolio Through a Market Cycle</h2>
+    <p>Effort to be broadly correct than precisely wrong.</p>
+    <div class="cycle-wrap">
+      <svg viewBox="0 0 900 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 60 70 C 100 70, 140 75, 190 110 C 240 150, 290 280, 370 290 C 440 298, 480 290, 520 250 C 570 200, 620 100, 680 65 C 720 45, 760 40, 800 48 C 830 54, 850 62, 870 70" stroke="#011627" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".25"/>
+        <text x="60" y="48" fill="#011627" font-family="Ubuntu,sans-serif" font-size="12" font-weight="700" text-anchor="start">Money Market ETFs</text>
+        <text x="60" y="62" fill="#011627" font-family="Ubuntu,sans-serif" font-size="10" text-anchor="start" opacity=".4">Can be up to 80%</text>
+        <text x="450" y="24" fill="#011627" font-family="Ubuntu,sans-serif" font-size="11" font-weight="400" text-anchor="middle" opacity=".4">Average market cycle of 7 years</text>
+        <text x="400" y="325" fill="#011627" font-family="Ubuntu,sans-serif" font-size="12" font-weight="700" text-anchor="middle">Maximum Stock Positions</text>
+        <text x="400" y="339" fill="#011627" font-family="Ubuntu,sans-serif" font-size="10" text-anchor="middle" opacity=".4">Can be up to 100%</text>
+        <text x="720" y="100" fill="#011627" font-family="Ubuntu,sans-serif" font-size="12" font-weight="700" text-anchor="middle">Maximum Index ETFs</text>
+        <text x="720" y="114" fill="#011627" font-family="Ubuntu,sans-serif" font-size="10" text-anchor="middle" opacity=".4">Can be up to 80%</text>
+        <text x="840" y="34" fill="#011627" font-family="Ubuntu,sans-serif" font-size="12" font-weight="700" text-anchor="middle">Money Market ETFs</text>
+        <text x="840" y="48" fill="#011627" font-family="Ubuntu,sans-serif" font-size="10" text-anchor="middle" opacity=".4">Can be up to 80%</text>
+      </svg>
+    </div>
+    <p class="cycle-note">Market cycles are identified by analysing stock market valuations and interest rate cycles</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Construction</div>
+    <h2 class="section-title">Portfolio Construction</h2>
+    <div class="port-stats">
+      <div class="port-stat"><div class="big">10–12</div><div class="label">Companies maximum</div></div>
+      <div class="port-stat"><div class="big">7–15%</div><div class="label">Allocation per position</div></div>
+    </div>
+    <p>We can buy low liquidity stocks, and we don't limit ourselves to a minimum market cap threshold.</p>
+    <div class="rev-items">
+      <div class="rev-item"><h4>Continual Portfolio Monitoring</h4><p>The behaviour of the representative NAV is continuously monitored through various market environments, forming the primary qualitative basis for price risk behaviour.</p></div>
+      <div class="rev-item"><h4>Stock Selection Revisited</h4><p>Sometimes there is new information, error in analysis, or oversight which may change the thesis. Long term investing is a thought process, not sticking to an investment to prove a point.</p></div>
+      <div class="rev-item"><h4>New Ideas Continuously Explored</h4><p>News sources, research reports, corporate actions, or simple discovery may unearth ideas with potential for inclusion.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Performance</div>
+    <h2 class="section-title">Track Record</h2>
+    <div class="stats">
+      <div class="stat"><div class="big">18%+</div><div class="label">Annualised Return in INR (~12 yrs)</div></div>
+      <div class="stat"><div class="big">14%+</div><div class="label">Annualised Return in USD</div></div>
+      <div class="stat"><div class="big">~5%</div><div class="label">Annualised Alpha vs Nifty50</div></div>
+    </div>
+    <div class="positions">
+      <h3>Some of Our Positions</h3>
+      <div class="pos-grid">
+        <div class="pos"><h4>Australian Premium Solar</h4><p>Trades at a relatively low P/E (≈11–15x). Strong revenue expansion. Positioned in the growing Indian solar/renewables sector with tailwinds from energy transition.</p></div>
+        <div class="pos"><h4>Bank of Maharashtra</h4><p>Low valuation (P/E ~9x). Strong ROE (~19%) with significant improvement in asset quality. One of the best run public sector banks.</p></div>
+        <div class="pos"><h4>Natco Pharma</h4><p>Attractive P/E (~11x) vs sector average (~62x). High ROCE (~30%) and ROE (~25%). Active in niche cancer drugs with pipeline potential.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Edge</div>
+    <h2 class="section-title">Competitive Advantage</h2>
+    <div class="adv-list">
+      <div class="adv-item"><h4>Disciplined Value Process</h4><p>Self-imposed constraints to conform to value investing. Stock selection is the key and only driver of excess portfolio returns.</p></div>
+      <div class="adv-item"><h4>No Leverage, No Shorting</h4><p>No leverage and no portfolio shorting. No aggressive trading done in the portfolio.</p></div>
+      <div class="adv-item"><h4>Concentrated Conviction</h4><p>No stylistic bias, no over-diversification. Few portfolios in Indian/Asian equity space go down the market cap spectrum as GreatBear does.</p></div>
+      <div class="adv-item"><h4>Patience as Edge</h4><p>We strive to do the hardest thing in investing — wait. We do not believe we have any skill in market timing.</p></div>
+    </div>
+    <div class="bio">
+      <h3>Saptarshi Das, CFA</h3>
+      <div class="role">Portfolio Manager</div>
+      <div class="bio-entry"><div class="year">2015 – Present</div><p>GreatBear Ventures — Private Wealth Management for HNI entrepreneurs and family offices. Discretionary fund advisory.</p></div>
+      <div class="bio-entry"><div class="year">2009 – 2015</div><p>Octopus Investments ($7 Bn AUM), FQS Capital, Visiongain Global — London. Portfolio management of a $75 Mn absolute return fund. Overseeing $300–500 Mn allocation to Emerging and Asian markets.</p></div>
+      <div class="bio-entry"><div class="year">2008 – 2009</div><p>Masters in Management — Imperial College London</p></div>
+      <div class="bio-entry"><div class="year">2002 – 2006</div><p>Mechanical Engineering — Gujarat University, India</p></div>
+      <div class="bio-badge">Asia Hedge 2018 Nominated · AUM ~$20 Mn</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="container reveal">
+    <div class="section-label">Investment Terms</div>
+    <h2 class="section-title">Terms</h2>
+    <div class="terms-grid">
+      <div class="term"><div class="label">Min. Commitment</div><div class="value">$1 Mn</div><div class="note">or Rs. 5 Crs.</div></div>
+      <div class="term"><div class="label">Management Fee</div><div class="value">2.0%</div></div>
+      <div class="term"><div class="label">Performance Fee</div><div class="value">20.0%</div><div class="note">15% hurdle, HWM</div></div>
+      <div class="term"><div class="label">TER Cap</div><div class="value">2.25%</div></div>
+      <div class="term"><div class="label">Lockup</div><div class="value">None</div><div class="note">1 mo. notice, 2% exit yr 1</div></div>
+      <div class="term"><div class="label">Custodian / Broker</div><div class="value" style="font-size:1rem">Orbis / Zerodha</div></div>
+    </div>
+    <p style="margin-top:1.2rem;font-size:.8rem;color:var(--ink-40)">Setup Fee: ₹5,000 Resident Indians · $5,000 FPI corporates · $1,000 FPI HNIs</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="contact">
+  <div class="container reveal">
+    <h2>Stewardship</h2>
+    <p class="contact-name">Saptarshi Das, CFA</p>
+    <div class="contact-links">
+      <a href="mailto:s.das@greatbearcapital.com">s.das@greatbearcapital.com</a>
+      <a href="tel:+918160080658">+91 8160 080 658</a>
+      <a href="tel:+447884812292">+44 7884 812 292</a>
+      <a href="https://www.greatbearcapital.com" target="_blank">greatbearcapital.com</a>
+    </div>
+    <p class="contact-loc">Ahmedabad, India</p>
+  </div>
+</div>
+
+<footer><p>© GreatBear Capital</p></footer>
+
+<script>
+const r = document.querySelectorAll('.reveal');
+const o = new IntersectionObserver(e => {
+  e.forEach(x => { if(x.isIntersecting){x.target.classList.add('visible');o.unobserve(x.target)} });
+}, {threshold:.08});
+r.forEach(el => o.observe(el));
+</script>
+</body>
+</html>
