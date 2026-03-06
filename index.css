@@ -97,8 +97,8 @@ html {
 .header2 {
   text-align: center;
   font-family: Ubuntu;
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 500;
+  font-size: 18px;
   line-height: 110.88px;
   letter-spacing: -1px
 }
@@ -686,4 +686,5 @@ p {
   opacity: 0;
   transition: all 0.5s ease;
   z-index: 1;
+
 }
