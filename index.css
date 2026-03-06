@@ -35,7 +35,7 @@ html {
   align-items: center;
   height: fit-content;
   flex-direction: column;
-  height:55vh;
+  height:45vh;
 }
 
 .banner-image>img {
@@ -689,4 +689,5 @@ p {
   z-index: 1;
 
 }
+
 
