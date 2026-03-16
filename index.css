@@ -457,6 +457,13 @@ p {
 }
 
 @media (max-width: 768px) {
+  .banner-name{
+    font-family: "Yeseva One";
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 40px;
+    letter-spacing: -4px;
+}
 
   #section-1 {
     display: flex;
@@ -473,7 +480,7 @@ p {
     text-align: center;
   }
   #section-3{
-    margin-top: 20%;
+    margin-top: 40%;
   }
 
   .navbar-links {
