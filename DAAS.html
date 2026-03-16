@@ -1,0 +1,818 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Asset Strategy | GreatBear Capital</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+    <meta property="og:title" content="Multi-Asset Strategy | GreatBear Capital" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="AI-enhanced multi-asset portfolio management. Institutional-grade execution via Interactive Brokers, quarterly rebalancing." />
+    <meta property="og:site_name" content="GreatBear Multi-Family Office" />
+    <meta property="og:locale" content="en_GB" />
+    <style>
+        :root {
+            --ink: #011627;
+            --ink-90: #011627e5;
+            --ink-60: #011627a0;
+            --ink-40: #01162766;
+            --ink-20: #01162733;
+            --ink-10: #0116271a;
+            --ink-05: #0116270d;
+            --cream: #faf9f7;
+            --white: #ffffff;
+            --green: #1a7a42;
+            --sand: #f0ede8;
+        }
+        html { scroll-behavior: smooth; }
+        html, body { overflow-x: hidden; margin: 0; background: var(--cream); color: var(--ink-90); }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        /* === GRAIN OVERLAY === */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px;
+        }
+
+        /* === SCROLL REVEAL === */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(32px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+        .reveal.d1 { animation-delay: 0.1s; }
+        .reveal.d2 { animation-delay: 0.2s; }
+        .reveal.d3 { animation-delay: 0.3s; }
+        .reveal.d4 { animation-delay: 0.4s; }
+
+        /* === NAV === */
+        .nav-bar { padding: 20px 5% 0; display: flex; justify-content: space-between; align-items: center; }
+        .nav-bar .logo img { height: 120px; width: 120px; }
+        .nav-bar .nav-cta {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 10px 24px;
+            border: 1.5px solid var(--ink);
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+        .nav-bar .nav-cta:hover { background: var(--ink); color: var(--cream); }
+
+        /* === HERO === */
+        .hero {
+            padding: 80px 5% 60px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            min-height: 70vh;
+        }
+        .hero-left {}
+        .hero-overline {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--ink-60);
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 40px;
+        }
+        .hero-overline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 28px;
+            height: 1.5px;
+            background: var(--ink-60);
+        }
+        .hero-title {
+            font-family: "Yeseva One", serif;
+            font-size: 58px;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin: 0 0 24px;
+        }
+        .hero-sub {
+            font-family: "Ubuntu", sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 1.75;
+            letter-spacing: -0.5px;
+            color: var(--ink-60);
+            max-width: 520px;
+            margin: 0 0 36px;
+        }
+        .hero-tags { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+        .hero-tag {
+            font-family: "Ubuntu", sans-serif;
+            font-size: 12px;
+            letter-spacing: -0.2px;
+            padding: 7px 18px;
+            border: 1px solid var(--ink-20);
+            border-radius: 40px;
+            color: var(--ink-90);
+            background: var(--white);
+        }
+        .hero-disclaimer {
+            font-family: "Ubuntu", sans-serif;
+            font-size: 12px;
+            color: var(--ink-40);
+            letter-spacing: -0.3px;
+        }
+
+        /* Hero right — strategy summary card */
+        .hero-card {
+            background: var(--white);
+            border: 1px solid var(--ink-10);
+            border-radius: 20px;
+            padding: 44px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--ink) 0%, transparent 100%);
+        }
+        .hero-card-label {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ink-40);
+            margin-bottom: 24px;
+        }
+        .hero-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 36px; }
+        .hc-item {}
+        .hc-val { font-family: "Yeseva One", serif; font-size: 28px; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .hc-label { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 13px; color: var(--ink-40); letter-spacing: -0.2px; line-height: 1.4; }
+
+        /* === CTA BUTTON === */
+        .btn-strategy {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 14px 32px;
+            border: 1.5px solid var(--ink);
+            transition: all 0.35s ease;
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
+        }
+        .btn-strategy:hover { background: var(--ink); color: var(--cream); }
+        .btn-strategy .arrow { transition: transform 0.3s ease; }
+        .btn-strategy:hover .arrow { transform: translateX(4px); }
+
+        /* === SECTION SCAFFOLD === */
+        .sec { position: relative; padding: 100px 5% 70px; }
+        .sec-accent {
+            position: absolute;
+            top: 50px;
+            left: 5%;
+            width: 40px;
+            height: 1.5px;
+            background: var(--ink-20);
+            z-index: 0;
+        }
+        .sec-num {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--ink-40);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 12px;
+        }
+        .sec-title {
+            font-family: "Yeseva One", serif;
+            font-weight: 400;
+            font-size: 42px;
+            line-height: 1.12;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+            margin: 0 0 14px;
+        }
+        .sec-sub {
+            font-family: "Ubuntu", sans-serif;
+            font-weight: 300;
+            font-size: 17px;
+            line-height: 1.75;
+            letter-spacing: -0.5px;
+            color: var(--ink-60);
+            max-width: 640px;
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+
+        /* === DIVIDER === */
+        .gb-div { display: flex; align-items: center; gap: 8px; padding: 0 5%; }
+        .gb-div p {
+            position: relative;
+            display: inline-block;
+            font-size: 28px;
+            font-family: "Barlow Condensed", sans-serif;
+            letter-spacing: -0.6px;
+            white-space: nowrap;
+            color: var(--ink-90);
+            margin: 0;
+        }
+        .gb-div p::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -3px;
+            width: 0;
+            height: 2px;
+            background-color: var(--ink);
+            transition: width 0.5s ease-in-out;
+        }
+        .gb-div p:hover::after { width: 100%; right: auto; left: 0; }
+        .gb-div .div-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--ink-20) 0%, transparent 100%);
+        }
+
+        /* === AI SECTION === */
+        .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 50px; position: relative; z-index: 1; align-items: start; }
+        .ai-text { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 16px; line-height: 1.85; letter-spacing: -0.4px; color: var(--ink-60); }
+        .ai-text strong { color: var(--ink-90); font-weight: 500; }
+        .ai-badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+        .ai-badge {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 14px;
+            border: 1px solid var(--ink-10);
+            border-radius: 3px;
+            color: var(--ink-60);
+            background: var(--white);
+        }
+        .ai-card {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 40px 36px;
+            border: 1px solid var(--ink-10);
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--ink);
+        }
+        .ai-card-label { font-family: "Barlow Condensed", sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--ink-40); margin-bottom: 16px; }
+        .ai-card-title { font-family: "Yeseva One", serif; font-size: 22px; letter-spacing: -0.5px; margin-bottom: 14px; }
+        .ai-card-body { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 14.5px; line-height: 1.8; color: var(--ink-60); letter-spacing: -0.3px; }
+        .ai-card-body em { font-style: normal; color: var(--ink-90); font-weight: 500; }
+
+        /* === CONSTRAINTS === */
+        .con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 50px 0 20px; position: relative; z-index: 1; }
+        .con-block {
+            padding: 32px 28px;
+            border-radius: 16px;
+            border: 1px solid var(--ink-10);
+            background: var(--white);
+            transition: box-shadow 0.3s ease;
+        }
+        .con-block:hover { box-shadow: 0 6px 24px rgba(1,22,39,0.04); }
+        .con-block-title {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--ink-90);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--ink-10);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .con-block-title::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--ink);
+            border-radius: 1px;
+            display: inline-block;
+        }
+        .con-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: "Ubuntu", sans-serif;
+            font-size: 14px;
+            letter-spacing: -0.3px;
+            color: var(--ink-60);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--ink-05);
+        }
+        .con-row:last-child { border-bottom: none; }
+        .con-row-label { flex: 1; }
+        .con-row-val { font-weight: 500; color: var(--ink-90); text-align: right; white-space: nowrap; }
+        .con-row-sub { color: var(--ink-40); font-weight: 300; font-size: 12px; }
+        .con-note {
+            font-family: "Ubuntu", sans-serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: 12px;
+            color: var(--ink-40);
+            margin-top: 12px;
+            line-height: 1.6;
+            letter-spacing: -0.2px;
+        }
+
+        /* === MANAGEMENT === */
+        .mgmt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 50px 0 20px; position: relative; z-index: 1; }
+        .mgmt-item {
+            padding: 32px 28px;
+            border-radius: 16px;
+            border: 1px solid var(--ink-10);
+            background: var(--white);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .mgmt-item::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--ink);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .mgmt-item:hover::after { transform: scaleX(1); }
+        .mgmt-item:hover { box-shadow: 0 8px 28px rgba(1,22,39,0.05); }
+        .mgmt-item-num {
+            font-family: "Yeseva One", serif;
+            font-size: 36px;
+            color: #01162710;
+            margin-bottom: 10px;
+        }
+        .mgmt-item-title {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--ink-90);
+            margin-bottom: 12px;
+        }
+        .mgmt-item-body {
+            font-family: "Ubuntu", sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.75;
+            letter-spacing: -0.4px;
+            color: var(--ink-60);
+        }
+
+        /* === FEES === */
+        .fee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; position: relative; z-index: 1; }
+        .fee-box {
+            text-align: center;
+            padding: 40px 24px;
+            border-radius: 18px;
+            border: 1px solid var(--ink-10);
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+        .fee-box:hover { box-shadow: 0 8px 30px rgba(1,22,39,0.05); transform: translateY(-3px); }
+        .fee-big { font-family: "Yeseva One", serif; font-size: 40px; letter-spacing: -1px; margin-bottom: 6px; }
+        .fee-label { font-family: "Barlow Condensed", sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink-40); margin-bottom: 6px; }
+        .fee-desc { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 13px; color: var(--ink-40); letter-spacing: -0.3px; }
+        .fee-highlight { border-color: var(--ink); }
+        .fee-highlight .fee-big { color: var(--green); }
+        .min-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; position: relative; z-index: 1; }
+        .min-chip {
+            font-family: "Ubuntu", sans-serif;
+            font-size: 15px;
+            letter-spacing: -0.3px;
+            padding: 14px 32px;
+            border: 1px solid var(--ink-10);
+            border-radius: 40px;
+            color: var(--ink-90);
+            background: var(--white);
+        }
+        .min-chip strong { font-weight: 600; }
+
+        /* === CONTACT === */
+        .contact-sec {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 70px 5% 80px;
+            gap: 40px;
+        }
+        .contact-left {}
+        .contact-title {
+            font-family: "Yeseva One", serif;
+            font-weight: 400;
+            font-size: 46px;
+            line-height: 1.05;
+            letter-spacing: -1px;
+            max-width: 500px;
+            margin: 0 0 20px;
+        }
+        .contact-links { display: flex; gap: 24px; flex-wrap: wrap; }
+        .contact-links a {
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ink);
+            text-decoration: none;
+            padding: 12px 28px;
+            border: 1.5px solid var(--ink);
+            transition: all 0.3s ease;
+        }
+        .contact-links a:hover { background: var(--ink); color: var(--cream); }
+
+        /* === FOOTER === */
+        #footer {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            border-top: 1px solid var(--ink-20);
+            margin: 0 5% 40px 5%;
+        }
+        .footer-container-1 { display: flex; justify-content: space-between; align-items: center; }
+        .cont1-text1 div {
+            font-family: "Ubuntu", sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 18px;
+            letter-spacing: -0.4px;
+            color: var(--ink-60);
+            margin: 0;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; gap: 40px; min-height: auto; }
+            .ai-grid { grid-template-columns: 1fr; gap: 30px; }
+            .mgmt-grid { grid-template-columns: 1fr; }
+            .con-grid { grid-template-columns: 1fr; }
+            .contact-sec { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 768px) {
+            .nav-bar .logo img { height: 90px; width: 90px; }
+            .nav-bar .nav-cta { font-size: 11px; padding: 8px 18px; letter-spacing: 1.5px; }
+            .hero { padding: 50px 5% 40px; }
+            .hero-title { font-size: 34px; letter-spacing: -1px; }
+            .hero-sub { font-size: 16px; }
+            .hero-tags { gap: 8px; }
+            .hero-tag { font-size: 11px; padding: 5px 14px; }
+            .hero-card { padding: 30px 24px; }
+            .hc-val { font-size: 22px; }
+            .sec { padding: 70px 5% 50px; }
+            .sec-title { font-size: 28px; }
+            .gb-div p { font-size: 18px; }
+            .fee-grid { grid-template-columns: 1fr; }
+            .min-row { flex-direction: column; align-items: center; }
+            .contact-title { font-size: 32px; }
+            .contact-links { flex-direction: column; }
+            #footer { padding: 20px 0; margin: 0 5% 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════ NAV ═══════ -->
+    <div class="nav-bar">
+        <div class="logo">
+            <a href="index.html"><img src="./images/gblogo.png" alt="GreatBear Logo" /></a>
+        </div>
+        <a href="./files/StrategyDetails.pdf" target="_blank" class="nav-cta">Strategy Details &rarr;</a>
+    </div>
+
+    <!-- ═══════ HERO ═══════ -->
+    <div class="hero">
+        <div class="hero-left">
+            <div class="hero-overline reveal">GreatBear Multi-Asset Strategy</div>
+            <h1 class="hero-title reveal d1">Diversified Portfolio Built with Discipline &amp; Intelligence</h1>
+            <p class="hero-sub reveal d2">
+                A dynamic asset allocation strategy spanning global equities, fixed income, and alternatives&mdash;systematically constructed, tactically adjusted quarterly, and executed through managed accounts.
+            </p>
+            <div class="hero-tags reveal d3">
+                <span class="hero-tag">ETF Holdings</span>
+                <span class="hero-tag">Quarterly Rebalancing</span>
+                <span class="hero-tag">Managed via Interactive Brokers</span>
+                <span class="hero-tag">AI-Enhanced Research</span>
+            </div>
+            <p class="hero-disclaimer reveal d4">Investing involves risks, including loss of capital</p>
+        </div>
+        <div class="hero-card reveal d2">
+            <div class="hero-card-label">Strategy Overview</div>
+            <div class="hero-card-grid">
+                <div class="hc-item">
+                    <div class="hc-val">10%</div>
+                    <div class="hc-label">Target annualised volatility</div>
+                </div>
+                <div class="hc-item">
+                    <div class="hc-val">Max Sharpe</div>
+                    <div class="hc-label">Risk-adjusted return objective</div>
+                </div>
+                <div class="hc-item">
+                    <div class="hc-val">Quarterly</div>
+                    <div class="hc-label">Rebalance frequency</div>
+                </div>
+                <div class="hc-item">
+                    <div class="hc-val">60 / 40</div>
+                    <div class="hc-label">Benchmark: MSCI ACWI / Bloomberg Agg</div>
+                </div>
+            </div>
+            <a href="./files/StrategyDetails.pdf" target="_blank" class="btn-strategy" style="margin-top: 32px;">
+                View Full Strategy Details <span class="arrow">&rarr;</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ═══════ DIVIDER ═══════ -->
+    <div class="gb-div" style="margin-top: 20px;">
+        <p>AI-ENHANCED APPROACH</p>
+        <div class="div-line"></div>
+    </div>
+
+    <!-- ═══════ AI + METHODOLOGY ═══════ -->
+    <div class="sec">
+        <div class="sec-accent"></div>
+        <div class="sec-num reveal">02 &mdash; Methodology</div>
+        <div class="sec-title reveal d1">Our Edge: Claude AI for Asset Allocation</div>
+        <div class="sec-sub reveal d2">We combine deep human judgment with the analytical rigour of Anthropic&rsquo;s Claude AI to build and maintain portfolios that are robust, transparent, and continuously improving.</div>
+
+        <div class="ai-grid">
+            <div class="reveal d2">
+                <p class="ai-text">
+                    <strong>Claude AI is embedded in our investment process</strong>&mdash;not as a black box, but as an analytical partner. We use Claude to synthesise macro-economic research, stress-test allocation scenarios, screen country-level valuations against long-term averages, and model risk-return trade-offs across hundreds of potential portfolio configurations.
+                </p>
+                <p class="ai-text" style="margin-top: 16px;">
+                    Every tactical tilt is <strong>debated, validated, and documented</strong> using AI-assisted analysis before human sign-off. This ensures consistency, reduces cognitive bias, and creates a full audit trail for every allocation decision.
+                </p>
+                <div class="ai-badge-row">
+                    <span class="ai-badge">Macro Synthesis</span>
+                    <span class="ai-badge">Valuation Screening</span>
+                    <span class="ai-badge">Scenario Analysis</span>
+                    <span class="ai-badge">Risk Modelling</span>
+                    <span class="ai-badge">Audit Trail</span>
+                </div>
+            </div>
+            <div class="ai-card reveal d3">
+                <div class="ai-card-label">How Claude AI Fits In</div>
+                <div class="ai-card-title">Human Judgment + AI Rigour</div>
+                <p class="ai-card-body">
+                    Strategic Asset Allocation is set by the investment committee based on long-term capital market assumptions. Claude AI then assists in the <em>tactical overlay</em>&mdash;identifying where short-to-medium term macro conditions justify tilts within pre-defined guardrails. Country-specific equity picks are filtered through a <em>valuation screen</em> (P/E within &plusmn;5% of 10-year average), with Claude processing the underlying data across multiple geographies simultaneously.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ DIVIDER ═══════ -->
+    <div class="gb-div">
+        <p>PORTFOLIO CONSTRAINTS</p>
+        <div class="div-line"></div>
+    </div>
+
+    <!-- ═══════ CONSTRAINTS ═══════ -->
+    <div class="sec">
+        <div class="sec-accent"></div>
+        <div class="sec-num reveal">03 &mdash; Construction</div>
+        <div class="sec-title reveal d1">Portfolio Construction &amp; Constraints</div>
+        <div class="sec-sub reveal d2">Every allocation decision operates within a defined framework of bands, tilts, and guardrails&mdash;ensuring discipline while preserving room for conviction.</div>
+
+        <div class="con-grid">
+
+            <div class="con-block reveal d1">
+                <div class="con-block-title">Asset Class Bands</div>
+                <div class="con-row">
+                    <span class="con-row-label">Equity</span>
+                    <span class="con-row-val">40&ndash;60% <span class="con-row-sub">(SAA 55%)</span></span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Fixed Income</span>
+                    <span class="con-row-val">20&ndash;40% <span class="con-row-sub">(SAA 20%)</span></span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Alternatives</span>
+                    <span class="con-row-val">10&ndash;30% <span class="con-row-sub">(SAA 24%)</span></span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Cash</span>
+                    <span class="con-row-val">Constant 1%</span>
+                </div>
+            </div>
+
+            <div class="con-block reveal d2">
+                <div class="con-block-title">Equity Tilts</div>
+                <div class="con-row">
+                    <span class="con-row-label">DM region / country</span>
+                    <span class="con-row-val">&plusmn;20% rel. to ACWI</span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">EM tactical bets</span>
+                    <span class="con-row-val">&plusmn;30% rel. to ACWI</span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Countries &lt;1% ACWI</span>
+                    <span class="con-row-val">Excluded &rarr; region ETF</span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">EM core (IEMG)</span>
+                    <span class="con-row-val">SAA base; countries overlay</span>
+                </div>
+            </div>
+
+            <div class="con-block reveal d3">
+                <div class="con-block-title">Bond Tilts</div>
+                <div class="con-row">
+                    <span class="con-row-label">DM bonds</span>
+                    <span class="con-row-val">60&ndash;80% of FI <span class="con-row-sub">(SAA 80%)</span></span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">EM bonds</span>
+                    <span class="con-row-val">20&ndash;40% of FI <span class="con-row-sub">(SAA 20%)</span></span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Individual instruments</span>
+                    <span class="con-row-val">&plusmn;30% rel. to SAA</span>
+                </div>
+                <div class="con-note">*EMLC +50% flagged as conviction breach</div>
+            </div>
+
+            <div class="con-block reveal d4">
+                <div class="con-block-title">Portfolio Parameters</div>
+                <div class="con-row">
+                    <span class="con-row-label">Target volatility</span>
+                    <span class="con-row-val">10% annualised</span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Objective</span>
+                    <span class="con-row-val">Maximise Sharpe ratio</span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Rebalance</span>
+                    <span class="con-row-val">Quarterly</span>
+                </div>
+                <div class="con-row">
+                    <span class="con-row-label">Benchmark</span>
+                    <span class="con-row-val">60/40 ACWI / Agg</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══════ DIVIDER ═══════ -->
+    <div class="gb-div">
+        <p>HOW WE MANAGE</p>
+        <div class="div-line"></div>
+    </div>
+
+    <!-- ═══════ MANAGEMENT ═══════ -->
+    <div class="sec">
+        <div class="sec-accent"></div>
+        <div class="sec-num reveal">04 &mdash; Execution</div>
+        <div class="sec-title reveal d1">Managed Accounts via Interactive Brokers</div>
+        <div class="sec-sub reveal d2">Your capital stays in your name, in your account. We manage the allocation&mdash;you retain full custody and transparency at all times.</div>
+
+        <div class="mgmt-grid">
+            <div class="mgmt-item reveal d1">
+                <div class="mgmt-item-num">01</div>
+                <div class="mgmt-item-title">Separate Managed Accounts</div>
+                <div class="mgmt-item-body">Portfolios are held in individually segregated accounts at Interactive Brokers&mdash;one of the world&rsquo;s largest electronic brokerages. You always own the underlying ETFs directly.</div>
+            </div>
+            <div class="mgmt-item reveal d2">
+                <div class="mgmt-item-num">02</div>
+                <div class="mgmt-item-title">Quarterly Rebalancing</div>
+                <div class="mgmt-item-body">Strategic allocations are reviewed annually. Tactical tilts are rebalanced every quarter (or after a &gt;5% drawdown in any major asset class) within strict guardrails to capture opportunities without style drift.</div>
+            </div>
+            <div class="mgmt-item reveal d3">
+                <div class="mgmt-item-num">03</div>
+                <div class="mgmt-item-title">Full Transparency</div>
+                <div class="mgmt-item-body">Real-time access to holdings, P&amp;L, and transaction history through Interactive Brokers&rsquo; client portal. Every allocation decision is documented and available for review on request.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ DIVIDER ═══════ -->
+    <div class="gb-div">
+        <p>FEES &amp; MINIMUMS</p>
+        <div class="div-line"></div>
+    </div>
+
+    <!-- ═══════ FEES ═══════ -->
+    <div class="sec">
+        <div class="sec-accent"></div>
+        <div class="sec-num reveal">05 &mdash; Terms</div>
+        <div class="sec-title reveal d1">Simple, Aligned Fee Structure</div>
+        <div class="sec-sub reveal d2">No performance fees. No hidden charges. Our interests are aligned with yours through a straightforward management fee.</div>
+
+        <div class="min-row reveal d2" style="margin-top: 50px;">
+            <div class="min-chip"><strong>$1 Mn</strong>&nbsp; minimum &mdash; Individuals</div>
+            <div class="min-chip"><strong>$5 Mn</strong>&nbsp; minimum &mdash; Institutions</div>
+        </div>
+
+        <div class="fee-grid">
+            <div class="fee-box reveal d1">
+                <div class="fee-label">Management Fee</div>
+                <div class="fee-big">1.00%</div>
+                <div class="fee-desc">Annual, charged quarterly</div>
+            </div>
+            <div class="fee-box reveal d2">
+                <div class="fee-label">Total Expense Ratio</div>
+                <div class="fee-big">1.25%</div>
+                <div class="fee-desc">Inclusive of underlying ETF costs</div>
+            </div>
+            <div class="fee-box fee-highlight reveal d3">
+                <div class="fee-label">Performance Fee</div>
+                <div class="fee-big">None</div>
+                <div class="fee-desc">Zero. No hurdle, no catch.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ DIVIDER ═══════ -->
+    <div class="gb-div">
+        <p>GET IN TOUCH</p>
+        <div class="div-line"></div>
+    </div>
+
+    <!-- ═══════ CONTACT ═══════ -->
+    <div class="contact-sec">
+        <div class="contact-left reveal">
+            <div class="contact-title">Reach out to us for a meaningful conversation.</div>
+            <div class="contact-links">
+                <a href="mailto:info@greatbearcapital.com" target="_blank">Email Us</a>
+                <a href="https://wa.me/918160080658?text=I%20want%20to%20learn%20more%20about%20the%20GreatBear%20Multi-Asset%20Strategy.%20Please%20get%20back%20to%20me." target="_blank">WhatsApp Us</a>
+                <a href="./files/StrategyDetails.pdf" target="_blank">Strategy Details &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <div id="footer">
+        <div class="footer-container-1">
+            <div class="cont1-text1">
+                <div>E: info@greatbearcapital.com &nbsp;|&nbsp; M: +91 8160080658</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ SCROLL REVEAL OBSERVER ═══════ -->
+    <script>
+    (function() {
+        var els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(function(el) { el.style.opacity = '1'; });
+            return;
+        }
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        els.forEach(function(el) {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    })();
+    </script>
+
+</body>
+</html>
