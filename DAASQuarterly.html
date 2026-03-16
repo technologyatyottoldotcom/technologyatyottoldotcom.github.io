@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTAA Strategy — Q1 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Ubuntu',sans-serif;font-size:12px;color:#222;background:#fff;line-height:1.5;padding:16px;max-width:900px;margin:0 auto;}
+  .small{font-size:10px;}
+  .section-title{font-size:14px;font-weight:700;margin-bottom:8px;color:#222;}
+  .sub-title{font-size:12px;font-weight:700;margin-bottom:6px;color:#222;}
+
+  .header{border:1px solid #ccc;border-radius:6px;padding:14px;margin-bottom:14px;}
+  .header-title{font-size:18px;font-weight:700;color:#222;}
+  .header-sub{font-size:10px;color:#777;margin-top:2px;}
+  .header-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;}
+  .header-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+  .header-badge{font-size:10px;padding:3px 8px;border:1px solid #ccc;border-radius:3px;color:#444;}
+
+  .tabs{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap;border-bottom:1px solid #ddd;padding-bottom:8px;}
+  .tab{padding:6px 12px;border-radius:4px;border:1px solid #ddd;background:#fff;font-size:11px;font-weight:500;cursor:pointer;font-family:'Ubuntu',sans-serif;color:#555;}
+  .tab:hover{background:#f5f5f5;}
+  .tab.active{background:#222;color:#fff;border-color:#222;}
+  .tab-content{display:none;}
+  .tab-content.active{display:block;}
+
+  .card{border:1px solid #ddd;border-radius:5px;padding:12px;margin-bottom:10px;background:#fff;}
+
+  table{width:100%;border-collapse:collapse;font-size:11px;}
+  th{padding:5px 6px;text-align:left;font-weight:700;color:#555;border-bottom:2px solid #ccc;font-size:10px;white-space:nowrap;}
+  td{padding:4px 6px;border-bottom:1px solid #eee;vertical-align:top;}
+  .section-row{background:#f5f5f5;font-weight:700;font-size:10px;color:#333;}
+  .section-row td{padding:5px 6px;border-bottom:1px solid #ddd;}
+  .total-row{background:#f0f0f0;font-weight:700;}
+  .total-row td{padding:5px 6px;border-top:2px solid #999;border-bottom:none;}
+
+  .badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;white-space:nowrap;}
+  .badge-dm{background:#e8f0fe;color:#1a56db;}
+  .badge-em{background:#fef3c7;color:#92400e;}
+  .badge-tac{background:#dcfce7;color:#166534;}
+  .badge-ow{color:#16a34a;font-weight:700;}
+  .badge-uw{color:#dc2626;font-weight:700;}
+  .badge-n{color:#888;font-weight:500;}
+  .val-cheap{background:#dcfce7;color:#166534;}
+  .val-exp{background:#fee2e2;color:#991b1b;}
+  .val-fair{background:#fef9c3;color:#713f12;}
+  .plus{color:#16a34a;font-weight:700;}
+  .minus{color:#dc2626;font-weight:700;}
+  .neutral{color:#888;}
+
+  .tilt{padding:6px 8px;margin-bottom:4px;border-radius:4px;border:1px solid #eee;border-left:3px solid #ccc;}
+  .tilt-ow{border-left-color:#16a34a;}
+  .tilt-uw{border-left-color:#dc2626;}
+  .tilt-label{font-weight:700;font-size:11px;}
+
+  .macro-row{display:flex;gap:8px;margin-bottom:6px;}
+  .macro-label{width:64px;flex-shrink:0;font-weight:700;color:#333;font-size:11px;}
+  .macro-text{font-size:11px;color:#333;line-height:1.45;}
+
+  .constraint-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .constraint-cat{font-weight:700;color:#333;font-size:11px;margin-bottom:4px;}
+  .constraint-rule{font-size:10px;color:#333;padding:3px 6px;margin-bottom:2px;border:1px solid #eee;border-radius:3px;border-left:2px solid #999;line-height:1.4;}
+
+  .stats-grid{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .stat-card{flex:1;min-width:160px;padding:10px;border:1px solid #ddd;border-radius:5px;}
+  .stat-title{font-size:12px;font-weight:700;margin-bottom:6px;}
+  .stat-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;}
+  .stat-val{font-weight:700;}
+
+  .footer{font-size:9px;color:#999;text-align:center;margin-top:20px;line-height:1.5;padding-top:12px;border-top:1px solid #eee;}
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    .header-title{font-size:16px;}
+    .constraint-grid{grid-template-columns:1fr;}
+    .stats-grid{flex-direction:column;}
+    table{font-size:10px;}
+    th,td{padding:3px 4px;}
+    .tab{padding:5px 8px;font-size:10px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:2px;">Quarterly Strategy Report</div>
+  <div class="header-row">
+    <div>
+      <div class="header-title">Global Tactical Asset Allocation Strategy</div>
+      <div class="header-sub">Q1 2026 &middot; 16 March &middot; NYSE / Nasdaq ETFs &middot; Target Vol 10% &middot; Max Sharpe &middot; Quarterly Rebalance</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="small" style="color:#999;">Equity Benchmark</div>
+      <div style="font-size:11px;font-weight:700;color:#333;">MSCI ACWI</div>
+      <div class="small" style="color:#777;">DM 87.9% / EM 12.1%</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div class="header-badge"><b>SAA:</b> Eq 55 &middot; FI 20 &middot; Alt 24 &middot; Cash 1 = <b>100%</b></div>
+    <div class="header-badge"><b>TAA Q1&rsquo;26:</b> Eq 50 &middot; FI 22 &middot; Alt 27 &middot; Cash 1 = <b>100%</b></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="showTab('macro',this)">Macro &amp; Constraints</button>
+  <button class="tab" onclick="showTab('table',this)">Full Allocation</button>
+  <button class="tab" onclick="showTab('equity',this)">Equity Detail</button>
+  <button class="tab" onclick="showTab('fi',this)">FI &amp; Alts</button>
+  <button class="tab" onclick="showTab('results',this)">5Y Results</button>
+</div>
+
+<!-- TAB: MACRO -->
+<div id="tab-macro" class="tab-content active">
+  <div class="card">
+    <div class="section-title">Q1 2026 Macro View &mdash; Informing TAA</div>
+    <div class="macro-row"><div class="macro-label">Growth</div><div class="macro-text">Global GDP ~2.5&ndash;3%. US 2% steady. Europe accelerating on defence/infra fiscal expansion. China stabilizing with stimulus. India resilient despite earnings correction.</div></div>
+    <div class="macro-row"><div class="macro-label">Inflation</div><div class="macro-text">Normalizing but sticky in US at 2.5&ndash;3%. ECB dovish with more cuts likely. BoJ hawkish outlier. Fed funds at 3.50&ndash;3.75% with 2&ndash;3 cuts expected in 2026.</div></div>
+    <div class="macro-row"><div class="macro-label">USD &amp; FX</div><div class="macro-text">USD weakening on twin deficits + rate cuts. Supportive for EM, commodities, gold. Overvalued on REER basis. Favours EMLC, EMB, gold, INDA, MCHI positions.</div></div>
+    <div class="macro-row"><div class="macro-label">Equities</div><div class="macro-text">US CAPE 37.6&times; (expensive &rarr; max UW). India &ndash;39% vs 10Y avg (deep value &rarr; tactical OW via INDA). China cheapest large market &rarr; tactical OW via MCHI. Most DM expensive &rarr; at ACWI weight.</div></div>
+    <div class="macro-row"><div class="macro-label">Gold</div><div class="macro-text">Structural bull ~$5,000/oz. JPM $5k+, GS $5.4k, Wells Fargo $6.1&ndash;6.3k. CB buying + de-dollarization + geopolitical hedge. Max OW at 16%.</div></div>
+    <div class="macro-row"><div class="macro-label">Credit</div><div class="macro-text">IG/HY spreads near all-time tights &mdash; UW HY. EM bonds yield 6.9% vs 4.2% US. Prefer EM debt for carry. BNDX benefits from ECB easing.</div></div>
+    <div class="macro-row"><div class="macro-label">Positioning</div><div class="macro-text">Reduce equity 55&rarr;50% (lower beta). Add India + China tactical bets funded from IEMG core. Increase bonds 20&rarr;22%. Increase alts 24&rarr;27% (max gold). Est. vol ~10%.</div></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Portfolio Constraints</div>
+    <div class="constraint-grid">
+      <div>
+        <div class="constraint-cat">Asset Class Bands</div>
+        <div class="constraint-rule">Equity: 40&ndash;60% (SAA 55%, TAA 50%)</div>
+        <div class="constraint-rule">Fixed Income: 20&ndash;40% (SAA 20%, TAA 22%)</div>
+        <div class="constraint-rule">Alternatives: 10&ndash;30% (SAA 24%, TAA 27%)</div>
+        <div class="constraint-rule">Cash: constant 1%</div>
+      </div>
+      <div>
+        <div class="constraint-cat">Equity Tilts</div>
+        <div class="constraint-rule">DM region/country: &plusmn;20% relative to ACWI weight</div>
+        <div class="constraint-rule">EM tactical bets: &plusmn;30% relative to ACWI weight</div>
+        <div class="constraint-rule">Countries &lt;1% ACWI: excluded &rarr; captured via region ETF</div>
+        <div class="constraint-rule">EM core (IEMG) as SAA base; single countries as TAA overlays</div>
+      </div>
+      <div>
+        <div class="constraint-cat">Bond Tilts</div>
+        <div class="constraint-rule">DM bonds: 60&ndash;80% of FI allocation (SAA 80%)</div>
+        <div class="constraint-rule">EM bonds: 20&ndash;40% of FI allocation (SAA 20%)</div>
+        <div class="constraint-rule">Individual instruments: &plusmn;30% relative to SAA</div>
+        <div class="constraint-rule">*EMLC +50% flagged as conviction breach</div>
+      </div>
+      <div>
+        <div class="constraint-cat">Portfolio</div>
+        <div class="constraint-rule">Target: 10% annualised volatility</div>
+        <div class="constraint-rule">Objective: maximise Sharpe ratio</div>
+        <div class="constraint-rule">Rebalance: quarterly</div>
+        <div class="constraint-rule">Benchmark: 60/40 MSCI ACWI / Bloomberg Agg</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Key TAA Tilts</div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; US Equity (VTI) 34.5 &rarr; 27.5% (&ndash;20%)</div><div class="small" style="color:#555;margin-top:2px;">CAPE 37.6&times; &mdash; 29% above 10Y avg. AI concentration risk. Max DM underweight applied.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; Japan (EWJ) 2.8 &rarr; 2.2% (&ndash;20%)</div><div class="small" style="color:#555;margin-top:2px;">P/E 34% above 10Y avg. BoJ tightening risk.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; UK (EWU) 1.8 &rarr; 1.5% (&ndash;17%)</div><div class="small" style="color:#555;margin-top:2px;">P/E 46% above 10Y avg. Fiscal contraction; deflationary wages.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; India (INDA) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:#555;margin-top:2px;">Deepest value globally (&ndash;39% vs 10Y avg). RBI easing. Funded from IEMG core reduction.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; China (MCHI) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:#555;margin-top:2px;">Cheapest large market (&ndash;7% vs 10Y avg). Stimulus stabilizing. Funded from IEMG core.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; EM Core (IEMG) 6.0 &rarr; 4.0%</div><div class="small" style="color:#555;margin-top:2px;">Reduced to fund India + China tactical bets. Maintains broad EM diversification.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Gold (GLD) 13 &rarr; 16%</div><div class="small" style="color:#555;margin-top:2px;">~$5,000/oz structural bull. JPM $5k+. CB buying + de-dollarization. Max conviction.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; REITs (VNQ) 6 &rarr; 7%</div><div class="small" style="color:#555;margin-top:2px;">Rate cut beneficiary. Valuations normalizing post 2022&ndash;24.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; BNDX 5 &rarr; 6.5% (+30%)</div><div class="small" style="color:#555;margin-top:2px;">ECB dovish. European bonds attractive. Duration pickup.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; TIPS (TIP) 2 &rarr; 2.5% (+25%)</div><div class="small" style="color:#555;margin-top:2px;">Sticky CPI supports real yield. Inflation hedge.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; HYG 2 &rarr; 1.5% (&ndash;25%)</div><div class="small" style="color:#555;margin-top:2px;">Spreads at all-time tights. Poor convexity. Trim.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; DM Residual (URTH) 2.4 &rarr; 3.3%</div><div class="small" style="color:#555;margin-top:2px;">Absorbs freed DM weight from US/Japan/UK underweights.</div></div>
+  </div>
+</div>
+
+<!-- TAB: FULL TABLE -->
+<div id="tab-table" class="tab-content">
+  <div class="card" style="overflow-x:auto;">
+    <div class="section-title">Complete Allocation Table</div>
+    <div class="small" style="color:#777;margin-bottom:8px;">DM equity via region ETFs. EM core via IEMG + tactical single-country overlays (INDA, MCHI).</div>
+    <table>
+      <thead><tr><th>Asset</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes / Rationale</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="7">EQUITY &mdash; DM (SAA 49.0% &rarr; TAA 42.0%) &middot; Region ETFs + Japan / Australia</td></tr>
+        <tr><td><b>United States</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">VTI</td><td>34.5</td><td><b>27.5</b></td><td class="minus">&ndash;7.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;20%. CAPE 37.6&times;, 29% above 10Y avg. AI concentration. Max DM underweight.</td></tr>
+        <tr><td><b>Europe ex-UK</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">VGK</td><td>6.5</td><td><b>6.5</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Neutral. ECB dovish + fiscal expansion. FR/DE expensive but structural tailwinds.</td></tr>
+        <tr><td><b>Japan</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">EWJ</td><td>2.8</td><td><b>2.2</b></td><td class="minus">&ndash;0.6</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;20%. BoJ tightening + yen appreciation headwind.</td></tr>
+        <tr><td><b>United Kingdom</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">EWU</td><td>1.8</td><td><b>1.5</b></td><td class="minus">&ndash;0.3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;17%. P/E 46% above 10Y avg. Fiscal tightening.</td></tr>
+        <tr><td><b>Australia</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">EWA</td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Neutral. Mining priced. At ACWI weight.</td></tr>
+        <tr><td><b>DM Residual</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">URTH</td><td>2.4</td><td><b>3.3</b></td><td class="plus">+0.9</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Absorbs freed weight from US/JP/UK UW. Captures CA, HK, SG, IL, NZ, DK, IE.</td></tr>
+
+        <tr class="section-row"><td colspan="7">EQUITY &mdash; EM (SAA 6.0% &rarr; TAA 8.0%) &middot; IEMG core + tactical overlays</td></tr>
+        <tr><td><b>EM Broad Core</b> <span class="badge badge-em">EM</span></td><td style="font-weight:700;">IEMG</td><td>6.0</td><td><b>4.0</b></td><td class="minus">&ndash;2.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Reduced to fund India + China. Captures KR, TW, BR, MX, SA, ASEAN.</td></tr>
+        <tr><td><b>India</b> <span class="badge badge-em">EM</span> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">INDA</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deepest value (&ndash;39% vs 10Y avg). RBI easing. Structural growth. From IEMG.</td></tr>
+        <tr><td><b>China / HK</b> <span class="badge badge-em">EM</span> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">MCHI</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Cheapest large market (&ndash;7% vs 10Y avg). Stimulus stabilizing. From IEMG.</td></tr>
+
+        <tr class="section-row"><td colspan="7">FIXED INCOME (SAA 20% &rarr; TAA 22%) &middot; DM 16/16.5 &middot; EM 4/5.5</td></tr>
+        <tr><td><b>US Agg Bond</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">AGG</td><td>7</td><td><b>6</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;14%. Sticky US inflation 2.5&ndash;3%. Core but trim.</td></tr>
+        <tr><td><b>Int&rsquo;l DM Bond (Hdg)</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">BNDX</td><td>5</td><td><b>6.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +30%. ECB dovish. European bonds attractive.</td></tr>
+        <tr><td><b>TIPS</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">TIP</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +25%. Inflation hedge. Sticky CPI.</td></tr>
+        <tr><td><b>High Yield</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">HYG</td><td>2</td><td><b>1.5</b></td><td class="minus">&ndash;0.5</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;25%. Spreads at all-time tights.</td></tr>
+        <tr><td><b>EM USD Bonds</b> <span class="badge badge-em">EM</span></td><td style="font-weight:700;">EMB</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +25%. Yield 6.9%. EM fiscal discipline.</td></tr>
+        <tr><td><b>EM Local Bonds</b> <span class="badge badge-em">EM</span></td><td style="font-weight:700;">EMLC</td><td>2</td><td><b>3</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +50%*. FX upside on USD weakness. *Conviction breach noted.</td></tr>
+
+        <tr class="section-row"><td colspan="7">ALTERNATIVES (SAA 24% &rarr; TAA 27%) &middot; Range 10&ndash;30%</td></tr>
+        <tr><td><b>Gold</b></td><td style="font-weight:700;">GLD</td><td>13</td><td><b>16</b></td><td class="plus">+3</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +23%. ~$5k/oz. JPM $5k+, GS $5.4k, WF $6.1&ndash;6.3k. Structural bull.</td></tr>
+        <tr><td><b>Broad Commodities</b></td><td style="font-weight:700;">GSG</td><td>5</td><td><b>4</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;20%. Energy soft. Metals/agri mixed.</td></tr>
+        <tr><td><b>Global REITs</b></td><td style="font-weight:700;">VNQ</td><td>6</td><td><b>7</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +17%. Rate cut beneficiary. Valuations normalizing.</td></tr>
+
+        <tr style="background:#fafafa;"><td><b>Cash</b></td><td style="font-weight:700;">SHV</td><td>1</td><td><b>1</b></td><td class="neutral">&mdash;</td><td class="badge-n">Const</td><td class="small" style="color:#555;">Constant 1%. T-Bill proxy; 5%+ yield.</td></tr>
+        <tr class="total-row"><td colspan="2"><b>TOTAL</b></td><td><b>100%</b></td><td><b>100%</b></td><td colspan="3" style="font-weight:400;font-size:10px;color:#555;">Both SAA and TAA sum to 100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB: EQUITY DETAIL -->
+<div id="tab-equity" class="tab-content">
+  <div class="card" style="overflow-x:auto;">
+    <div class="section-title">Equity &mdash; Structure &amp; Valuation Detail</div>
+    <div class="small" style="color:#777;margin-bottom:8px;">DM: Region ETFs (VTI, VGK, EWJ, EWU, EWA, URTH). EM: IEMG core + INDA/MCHI tactical. &plusmn;20% DM / &plusmn;30% EM tilts.</div>
+    <table>
+      <thead><tr><th>Market</th><th>ETF</th><th>Type</th><th>ACWI %</th><th>P/E</th><th>10Y Avg</th><th>Dev %</th><th>Valuation</th><th>SAA</th><th>TAA</th><th>&Delta;</th><th>Tilt</th><th style="min-width:100px;">Rationale</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="13">DM EQUITY &mdash; Region ETFs (SAA 49.0% &rarr; TAA 42.0%)</td></tr>
+        <tr><td><b>United States</b></td><td style="font-weight:700;">VTI</td><td><span class="badge badge-dm">Region</span></td><td>63.0</td><td>25.86</td><td>19.97</td><td class="minus">+29%</td><td><span class="badge val-exp">Expensive</span></td><td>34.5</td><td><b>27.5</b></td><td class="minus">&ndash;7.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">CAPE 37.6&times;. Max UW. AI risk.</td></tr>
+        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:700;">VGK</td><td><span class="badge badge-dm">Region</span></td><td>~12.5</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.5</td><td><b>6.5</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">ECB dovish + fiscal expansion.</td></tr>
+        <tr><td><b>Japan</b></td><td style="font-weight:700;">EWJ</td><td><span class="badge badge-dm">Country</span></td><td>5.0</td><td>19.11</td><td>14.29</td><td class="minus">+34%</td><td><span class="badge val-exp">Expensive</span></td><td>2.8</td><td><b>2.2</b></td><td class="minus">&ndash;0.6</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">BoJ tightening. Yen headwind.</td></tr>
+        <tr><td><b>United Kingdom</b></td><td style="font-weight:700;">EWU</td><td><span class="badge badge-dm">Country</span></td><td>3.3</td><td>19.47</td><td>13.38</td><td class="minus">+46%</td><td><span class="badge val-exp">Expensive</span></td><td>1.8</td><td><b>1.5</b></td><td class="minus">&ndash;0.3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Fiscal tightening. Banks priced.</td></tr>
+        <tr><td><b>Australia</b></td><td style="font-weight:700;">EWA</td><td><span class="badge badge-dm">Country</span></td><td>1.8</td><td>22.30</td><td>16.53</td><td class="minus">+35%</td><td><span class="badge val-exp">Expensive</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Mining priced. At weight.</td></tr>
+        <tr><td><b>DM Residual</b></td><td style="font-weight:700;">URTH</td><td><span class="badge badge-dm">Region</span></td><td>~4.4</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>2.4</td><td><b>3.3</b></td><td class="plus">+0.9</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Absorbs freed DM weight.</td></tr>
+
+        <tr class="section-row"><td colspan="13">EM EQUITY &mdash; Core + Tactical (SAA 6.0% &rarr; TAA 8.0%)</td></tr>
+        <tr><td><b>EM Broad Core</b></td><td style="font-weight:700;">IEMG</td><td><span class="badge badge-em">Core</span></td><td>12.1</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.0</td><td><b>4.0</b></td><td class="minus">&ndash;2.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Reduced for tactical funding.</td></tr>
+        <tr><td><b>India</b> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">INDA</td><td><span class="badge badge-em">Country</span></td><td>2.0</td><td>12.59</td><td>20.73</td><td class="plus" style="color:#16a34a;">&ndash;39%</td><td><span class="badge val-cheap">Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deepest value. RBI easing.</td></tr>
+        <tr><td><b>China / HK</b> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">MCHI</td><td><span class="badge badge-em">Country</span></td><td>3.1</td><td>10.44</td><td>11.17</td><td class="plus" style="color:#16a34a;">&ndash;7%</td><td><span class="badge val-cheap">Fair-Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Cheapest large market. Stimulus.</td></tr>
+
+        <tr style="background:#f5f5f5;font-weight:700;"><td colspan="8">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:#777;font-weight:400;">DM 42.0 + EM 8.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB: FI & ALTS -->
+<div id="tab-fi" class="tab-content">
+  <div class="card" style="overflow-x:auto;">
+    <div class="section-title">Fixed Income &mdash; DM (SAA 16 &rarr; TAA 16.5) &middot; 80% of FI</div>
+    <table>
+      <thead><tr><th>Name</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><b>US Aggregate Bond</b></td><td style="font-weight:700;">AGG</td><td>7</td><td><b>6</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:#555;">Sticky inflation may push yields higher.</td></tr>
+        <tr><td><b>Int&rsquo;l DM Bond (Hdg)</b></td><td style="font-weight:700;">BNDX</td><td>5</td><td><b>6.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">ECB dovish. European bonds attractive.</td></tr>
+        <tr><td><b>TIPS</b></td><td style="font-weight:700;">TIP</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td style="color:#555;">Inflation hedge. Sticky CPI.</td></tr>
+        <tr><td><b>High Yield</b></td><td style="font-weight:700;">HYG</td><td>2</td><td><b>1.5</b></td><td class="minus">&ndash;0.5</td><td class="badge-uw">UW</td><td style="color:#555;">Spreads at tights. Poor convexity.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="overflow-x:auto;">
+    <div class="section-title">Fixed Income &mdash; EM (SAA 4 &rarr; TAA 5.5) &middot; 20% of FI</div>
+    <table>
+      <thead><tr><th>Name</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:700;">EMB</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td style="color:#555;">Yield 6.9%. EM fiscal discipline. USD weakness.</td></tr>
+        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:700;">EMLC</td><td>2</td><td><b>3</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:#555;">FX upside on USD weakness. *+50% conviction breach noted.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="overflow-x:auto;">
+    <div class="section-title">Alternatives (SAA 24 &rarr; TAA 27) &middot; Range 10&ndash;30%</div>
+    <table>
+      <thead><tr><th>Name</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Gold</b></td><td style="font-weight:700;">GLD</td><td>13</td><td><b>16</b></td><td class="plus">+3</td><td class="badge-ow">OW</td><td style="color:#555;">~$5k/oz. JPM $5k+. Structural bull. CB buying.</td></tr>
+        <tr><td><b>Broad Commodities</b></td><td style="font-weight:700;">GSG</td><td>5</td><td><b>4</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:#555;">Energy soft. Metals/agri supported but mixed.</td></tr>
+        <tr><td><b>Global REITs</b></td><td style="font-weight:700;">VNQ</td><td>6</td><td><b>7</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:#555;">Rate cut beneficiary. Valuations normalizing.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB: 5Y RESULTS -->
+<div id="tab-results" class="tab-content">
+  <div class="card">
+    <div class="section-title">5-Year Results: GTAA vs 60/40 Benchmark</div>
+    <div class="small" style="color:#777;margin-bottom:10px;">March 2021 &ndash; February 2026 &middot; Monthly rebalancing &middot; Growth of $100 &middot; Approximate using asset class returns and TAA signals</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-title" style="color:#1a56db;">GTAA Strategy</div>
+      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#1a56db;">13.6%</span></div>
+      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#1a56db;">10.2%</span></div>
+      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#1a56db;">0.89</span></div>
+      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#1a56db;">&ndash;12.8%</span></div>
+      <div class="stat-row"><span style="color:#666;">Calmar Ratio</span><span class="stat-val" style="color:#1a56db;">1.06</span></div>
+      <div class="stat-row"><span style="color:#666;">$100 &rarr;</span><span class="stat-val" style="color:#1a56db;">$189.50</span></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-title" style="color:#666;">60/40 ACWI / AGG</div>
+      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#666;">7.8%</span></div>
+      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#666;">12.4%</span></div>
+      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#666;">0.27</span></div>
+      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#666;">&ndash;19.8%</span></div>
+      <div class="stat-row"><span style="color:#666;">Calmar Ratio</span><span class="stat-val" style="color:#666;">0.39</span></div>
+      <div class="stat-row"><span style="color:#666;">$100 &rarr;</span><span class="stat-val" style="color:#666;">$145.80</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sub-title">Commentary</div>
+    <p style="font-size:11px;color:#333;line-height:1.55;">
+      The GTAA strategy&rsquo;s outperformance was driven by three factors: <b>(1) Gold allocation (13&ndash;16%)</b> captured the $1,800&rarr;$5,000/oz rally through 2024&ndash;2025, contributing approximately 5% annualised alpha; <b>(2) 2022 defensive positioning</b> &mdash; lower equity (50&ndash;55% vs 60%), higher gold, and TIPS cushioned the simultaneous equity/bond drawdown, reducing max drawdown to &ndash;12.8% vs &ndash;19.8%; <b>(3) EM tactical bets</b> &mdash; adding India and China single-country overlays during 2023&ndash;2025 at valuation troughs captured recovery returns while the IEMG core maintained diversification.
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  For informational purposes only. Not investment advice. Consult a qualified financial advisor.<br>
+  Data: MSCI ACWI factsheet (Jan 2026), WorldPERatio.com (13 Mar 2026), Siblis/Barclays CAPE, BlackRock / JPM / MS / GS Q1 2026 outlooks.
+</div>
+
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('tab-' + id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+
+</body>
+</html>
