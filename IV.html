@@ -60,10 +60,10 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .hero-tag{display:inline-block;margin-top:24px;font-family:"Barlow Condensed",sans-serif;font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-40);padding:6px 18px;border:1px solid var(--ink-20);border-radius:30px}
 
 /* SECTION */
-.sec{position:relative;padding:90px 5% 60px}
+.sec{position:relative;padding:60px 5% 50px}
 .container{width:80%;max-width:1000px;margin:0 auto}
 .sec .container{width:100%}
-.sec-accent{position:absolute;top:50px;left:5%;width:40px;height:1.5px;background:var(--ink-20)}
+
 .sec-num{font-family:"Barlow Condensed",sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-40);position:relative;z-index:1;margin-bottom:10px}
 .sec-title{font-weight:500;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.2;letter-spacing:-1.5px;position:relative;z-index:1;margin:0 0 14px}
 .sec-sub{font-family:var(--body);font-weight:300;font-size:.95rem;line-height:1.8;color:var(--ink-60);max-width:640px;position:relative;z-index:1;margin:0 0 1.5rem}
@@ -71,20 +71,20 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 /* DIVIDER */
 .gb-div{display:flex;align-items:center;gap:8px;padding:0 5%}
 .gb-div p{position:relative;display:inline-block;font-size:26px;font-family:"Barlow Condensed",sans-serif;letter-spacing:-.6px;white-space:nowrap;color:var(--ink-90);margin:0}
-.gb-div p::after{content:"";position:absolute;right:0;bottom:-3px;width:0;height:2px;background-color:var(--ink);transition:width .5s ease-in-out}
-.gb-div p:hover::after{width:100%;right:auto;left:0}
+.gb-div p::after{display:none}
+
 .gb-div .div-line{flex:1;height:1px;background:linear-gradient(90deg,var(--ink-20) 0%,transparent 100%)}
 
 /* CARDS */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;position:relative;z-index:1}
 .card{background:var(--white);border:1px solid var(--ink-10);border-radius:16px;padding:32px 28px;transition:box-shadow .3s ease;position:relative;overflow:hidden}
 .card:hover{box-shadow:0 6px 24px rgba(1,22,39,.04)}
-.card::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--ink);transform:scaleY(0);transform-origin:top;transition:transform .4s ease}
-.card:hover::before{transform:scaleY(1)}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.card:hover::before{transform:scaleX(1)}
 .card h3{font-size:1.1rem;letter-spacing:-1px;font-weight:500;margin-bottom:10px;color:var(--ink-90)}
 .card h4{font-family:var(--body);font-size:.95rem;font-weight:500;letter-spacing:-.3px;margin-bottom:8px;color:var(--ink-90)}
-.card ul{list-style:none;padding:0}
-.card li{font-size:.85rem;color:var(--ink-60);line-height:1.85;padding:3px 0 3px 16px;position:relative}
+.card ul{font-family:var(--body);list-style:none;padding:0}
+.card li{font-family:var(--body);font-size:.85rem;color:var(--ink-60);line-height:1.85;padding:3px 0 3px 16px;position:relative}
 .card li::before{content:"\2022";position:absolute;left:0;color:var(--ink-20);font-size:.7rem}
 
 /* QUOTE */
@@ -97,23 +97,23 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .pr{padding:14px 0 14px 40px;border-bottom:1px solid var(--ink-05);position:relative}
 .pr:first-child{border-top:1px solid var(--ink-05)}
 .pr .pr-n{position:absolute;left:0;top:16px;font-family:var(--heading);font-size:.9rem;color:var(--ink-20)}
-.pr p{margin:0;font-size:.87rem}
+.pr p{font-family:var(--body);margin:0;font-size:.87rem}
 
 /* CALLOUT */
 .callout{margin-top:14px;padding:14px 18px;background:rgba(1,22,39,.03);border:1px solid var(--ink-10);border-radius:8px}
-.callout p{margin:0;font-size:.88rem;color:var(--ink-90)}
+.callout p{font-family:var(--body);margin:0;font-size:.88rem;color:var(--ink-90)}
 
 /* STEPS */
 .steps{counter-reset:step;margin-top:12px}
 .stp{counter-increment:step;padding:14px 0 14px 60px;border-bottom:1px solid var(--ink-05);position:relative}
 .stp:first-child{border-top:1px solid var(--ink-05)}
 .stp::before{content:'Step ' counter(step);position:absolute;left:0;top:16px;font-family:"Barlow Condensed",sans-serif;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40)}
-.stp p{margin:0;font-size:.87rem}
+.stp p{font-family:var(--body);margin:0;font-size:.87rem}
 
 /* CHECKLIST */
 .chk{display:flex;gap:8px;margin-bottom:8px;align-items:baseline}
 .chk::before{content:"\2014";color:var(--ink-20);font-size:.8rem;flex-shrink:0}
-.chk p{margin:0;font-size:.85rem}
+.chk p{font-family:var(--body);margin:0;font-size:.85rem}
 
 /* SVG CYCLE */
 .cycle-wrap{margin:28px auto 0;max-width:90%;position:relative;z-index:1}
@@ -137,7 +137,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .adv{padding:16px 0;border-bottom:1px solid var(--ink-05)}
 .adv:first-child{border-top:1px solid var(--ink-05)}
 .adv h4{font-family:var(--body);font-size:.9rem;font-weight:500;color:var(--ink-90);margin-bottom:4px}
-.adv p{margin:0;font-size:.85rem}
+.adv p{font-family:var(--body);margin:0;font-size:.85rem}
 
 /* BIO */
 .bio-sec{margin-top:36px;padding-top:28px;border-top:1px solid var(--ink-10);position:relative;z-index:1}
@@ -145,7 +145,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .bio-sec .role{font-family:"Barlow Condensed",sans-serif;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);margin-bottom:18px}
 .bio-entry{margin-bottom:12px}
 .bio-entry .yr{font-family:"Barlow Condensed",sans-serif;font-size:.6rem;letter-spacing:1px;color:var(--ink-40);margin-bottom:2px;text-transform:uppercase}
-.bio-entry p{font-size:.84rem;margin:0}
+.bio-entry p{font-family:var(--body);font-size:.84rem;margin:0}
 .bio-badge{margin-top:14px;font-size:.73rem;color:var(--ink-40);font-style:italic}
 
 /* TERMS */
@@ -168,7 +168,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .rev-items{margin-top:20px;position:relative;z-index:1}
 .rev-item{margin-bottom:16px}
 .rev-item h4{font-family:var(--body);font-size:.9rem;font-weight:500;color:var(--ink-90);margin-bottom:3px}
-.rev-item p{font-size:.85rem;margin:0}
+.rev-item p{font-family:var(--body);font-size:.85rem;margin:0}
 
 /* CONTACT */
 .contact-sec{display:flex;justify-content:space-between;align-items:flex-end;padding:70px 5% 80px;gap:40px}
@@ -198,7 +198,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 .nav-bar .nav-cta{font-size:10px;padding:7px 16px}
 .hero{padding:50px 5% 40px}
 .hero h1{font-size:clamp(1.8rem,5vw,2.4rem)}
-.sec{padding:60px 5% 40px}
+.sec{padding:50px 5% 35px}
 .sec-title{font-size:clamp(1.3rem,4vw,1.8rem)}
 .gb-div p{font-size:18px}
 .stats-row{flex-direction:column;gap:20px}
@@ -222,7 +222,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>WHO WE ARE</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">01 &mdash; About</div>
     <div class="sec-title reveal d1">About GreatBear</div>
     <div class="two-col">
@@ -247,7 +247,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>PRINCIPLES</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">02 &mdash; Values</div>
     <div class="sec-title reveal d1">Code of Conduct</div>
     <div class="principles">
@@ -264,7 +264,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>INVESTMENT APPROACH</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">03 &mdash; Philosophy</div>
     <div class="sec-title reveal d1">Investment Philosophy</div>
     <div class="two-col">
@@ -283,7 +283,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>RESEARCH</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">04 &mdash; Process</div>
     <div class="sec-title reveal d1">Research Methodology</div>
     <div class="two-col">
@@ -310,7 +310,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>DUE DILIGENCE</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">05 &mdash; Assessment</div>
     <div class="sec-title reveal d1">Assessing Management Quality</div>
     <div class="two-col">
@@ -342,7 +342,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>MARKET CYCLE</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">06 &mdash; Timing</div>
     <div class="sec-title reveal d1">Portfolio Through a Market Cycle</div>
     <div class="sec-sub reveal d2">Effort to be broadly correct than precisely wrong.</div>
@@ -364,7 +364,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>CONSTRUCTION</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">07 &mdash; Portfolio</div>
     <div class="sec-title reveal d1">Portfolio Construction</div>
     <div class="stats-row reveal d1">
@@ -380,7 +380,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>PERFORMANCE</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">08 &mdash; Track Record</div>
     <div class="sec-title reveal d1">Track Record</div>
     <div class="stats-row reveal d1">
@@ -397,7 +397,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>COMPETITIVE EDGE</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">09 &mdash; Edge</div>
     <div class="sec-title reveal d1">Competitive Advantage</div>
     <div class="adv-list">
@@ -418,7 +418,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="gb-div"><p>TERMS</p><div class="div-line"></div></div>
 <div class="sec">
-    <div class="sec-accent"></div>
+    
     <div class="sec-num reveal">10 &mdash; Investment Terms</div>
     <div class="sec-title reveal d1">Terms</div>
     <div class="terms-grid">
@@ -437,7 +437,7 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
         <div class="contact-title">Stewardship</div>
         <p style="font-size:.9rem;margin-bottom:20px">Saptarshi Das, CFA</p>
         <div class="contact-links">
-            <a href="mailto:info@greatbearcapital.com">Email</a>
+            <a href="/cdn-cgi/l/email-protection#4e272028210e293c2b2f3a2c2b2f3c2d2f3e273a2f22602d2123">Email</a>
             <a href="tel:+918160080658">+91 8160 080 658</a>
             <a href="tel:+447884812292">+44 7884 812 292</a>
             <a href="https://www.greatbearcapital.com" target="_blank">greatbearcapital.com</a>
@@ -447,15 +447,9 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div id="footer"><div class="footer-container-1"><div class="cont1-text1"><div>&copy; GreatBear Capital</div></div></div></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
     var els=document.querySelectorAll('.reveal');
     if(!('IntersectionObserver' in window)){els.forEach(function(e){e.style.opacity='1'});return}
     var obs=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){if(entry.isIntersecting){entry.target.style.animationPlayState='running';obs.unobserve(entry.target)}})
-    },{threshold:.12});
-    els.forEach(function(e){e.style.animationPlayState='paused';obs.observe(e)})
-})();
-</script>
-
-</body></html>
+        entries.forEach(function(entry){if(entry.isIntersecting){entry.target.style.animationPlayState='running';obs.unobser
