@@ -6,7 +6,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" />
     <meta property="og:title" content="GreatBear Capital" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.greatbearcapital.com/" />
@@ -21,10 +21,7 @@
             --ink-60:#011627a0;
             --ink-40:#01162766;
             --ink-20:#01162733;
-            --ink-10:#0116271a;
-            --ink-05:#0116270d;
             --cream:#faf9f7;
-            --white:#ffffff;
         }
         html { scroll-behavior: smooth; }
         html, body { overflow-x: hidden; margin: 0; background: var(--cream); color: var(--ink-90); min-height: 100vh; }
@@ -33,7 +30,6 @@
         a { color: var(--ink); text-decoration: none; transition: opacity .2s; }
         a:hover { opacity: .65; }
 
-        /* Grain */
         body::after {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -42,7 +38,6 @@
             background-repeat: repeat; background-size: 256px;
         }
 
-        /* Animations */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
@@ -55,9 +50,7 @@
         .reveal.d1 { animation-delay: .15s; }
         .reveal.d2 { animation-delay: .3s; }
         .reveal.d3 { animation-delay: .5s; }
-        .reveal.d4 { animation-delay: .7s; }
 
-        /* Layout */
         .page {
             display: flex;
             flex-direction: column;
@@ -68,13 +61,8 @@
             text-align: center;
         }
 
-        /* Logo */
-        .logo img {
-            height: 140px;
-            width: 140px;
-        }
+        .logo img { height: 140px; width: 140px; }
 
-        /* Title */
         .main-title {
             font-family: "Yeseva One", serif;
             font-size: clamp(2rem, 4vw, 3.6rem);
@@ -85,7 +73,6 @@
             margin: 40px auto 0;
         }
 
-        /* Accent line */
         .accent-line {
             width: 50px;
             height: 1.5px;
@@ -96,7 +83,6 @@
             transform: scaleX(0);
         }
 
-        /* Contact */
         .contact-row {
             display: flex;
             gap: 32px;
@@ -123,12 +109,9 @@
             background: var(--ink-20);
         }
 
-        /* Footer */
         .foot {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             text-align: center;
             padding: 16px 0;
             font-family: "Ubuntu", sans-serif;
@@ -137,7 +120,6 @@
             letter-spacing: -0.2px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .logo img { height: 100px; width: 100px; }
             .main-title { font-size: clamp(1.4rem, 5vw, 2.2rem); letter-spacing: -1px; margin-top: 30px; white-space: normal; }
@@ -158,6 +140,13 @@
         <div class="accent-line"></div>
 
         <div class="contact-row reveal d3">
-            <a href="/cdn-cgi/l/email-protection#81e8efe7eec1e6f3e4e0f5e3e4e0f3e2e0f1e8f5e0edafe2eeec"><span class="__cf_email__" data-cfemail="91f8fff7fed1f6e3f4f0e5f3f4f0e3f2f0e1f8e5f0fdbff2fefc">[email&#160;protected]</span></a>
+            <a href="mailto:info@greatbearcapital.com">info@greatbearcapital.com</a>
             <span class="sep"></span>
-           
+            <a href="tel:+918160080658">+91 8160 080 658</a>
+        </div>
+    </div>
+
+    <div class="foot">&copy; GreatBear Capital</div>
+
+</body>
+</html>
