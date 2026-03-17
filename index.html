@@ -1,64 +1,170 @@
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GreatBear Capital</title>
-    <link rel="stylesheet" href="index.css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <!-- Open Graph Meta Tags -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap" />
     <meta property="og:title" content="GreatBear Capital" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.greatbearcapital.com/" /> <!-- Replace with your actual URL -->
+    <meta property="og:url" content="https://www.greatbearcapital.com/" />
     <meta property="og:image" content="https://www.greatbearcapital.com/images/gblogo.png" />
-    <!-- Replace with your image URL -->
-    <meta property="og:description" content="GreatBear Capital- Stewardship." />
+    <meta property="og:description" content="GreatBear Capital — Stewardship." />
     <meta property="og:site_name" content="GreatBear Capital" />
     <meta property="og:locale" content="en_GB" />
+    <style>
+        :root {
+            --ink:#011627;
+            --ink-90:#011627e5;
+            --ink-60:#011627a0;
+            --ink-40:#01162766;
+            --ink-20:#01162733;
+            --ink-10:#0116271a;
+            --ink-05:#0116270d;
+            --cream:#faf9f7;
+            --white:#ffffff;
+        }
+        html { scroll-behavior: smooth; }
+        html, body { overflow-x: hidden; margin: 0; background: var(--cream); color: var(--ink-90); min-height: 100vh; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        ::selection { background: var(--ink); color: var(--cream); }
+        a { color: var(--ink); text-decoration: none; transition: opacity .2s; }
+        a:hover { opacity: .65; }
 
+        /* Grain */
+        body::after {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; opacity: .025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat; background-size: 256px;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes lineGrow {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        .reveal { opacity: 0; animation: fadeUp .7s ease forwards; }
+        .reveal.d1 { animation-delay: .15s; }
+        .reveal.d2 { animation-delay: .3s; }
+        .reveal.d3 { animation-delay: .5s; }
+        .reveal.d4 { animation-delay: .7s; }
+
+        /* Layout */
+        .page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo img {
+            height: 140px;
+            width: 140px;
+        }
+
+        /* Title */
+        .main-title {
+            font-family: "Yeseva One", serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 500;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            max-width: 600px;
+            margin: 40px auto 0;
+        }
+
+        /* Accent line */
+        .accent-line {
+            width: 50px;
+            height: 1.5px;
+            background: var(--ink-20);
+            margin: 36px auto;
+            transform-origin: center;
+            animation: lineGrow .6s ease .4s forwards;
+            transform: scaleX(0);
+        }
+
+        /* Contact */
+        .contact-row {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .contact-row a {
+            font-family: "Ubuntu", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+            color: var(--ink-60);
+            transition: color .3s ease;
+        }
+        .contact-row a:hover {
+            color: var(--ink-90);
+            opacity: 1;
+        }
+        .contact-row .sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--ink-20);
+        }
+
+        /* Footer */
+        .foot {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 16px 0;
+            font-family: "Ubuntu", sans-serif;
+            font-size: 11px;
+            color: var(--ink-20);
+            letter-spacing: -0.2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo img { height: 100px; width: 100px; }
+            .main-title { font-size: clamp(1.8rem, 6vw, 2.6rem); letter-spacing: -1px; margin-top: 30px; }
+            .contact-row { gap: 20px; }
+            .contact-row a { font-size: 13px; }
+        }
+    </style>
 </head>
-
 <body>
-    <section id="section-1">
-        <div class="logo">
-            <img src="./images/gblogo.png" alt="" />
-        </div>
-    </section>
 
-    <div id="section-2">
-        <div class="banner-text">
-            <div class="banner-name-card">
-                <div class="banner-name">Stewardship led Capital Management</div>
-            </div>
+    <div class="page">
+        <div class="logo reveal">
+            <img src="./images/gblogo.png" alt="GreatBear Capital" />
+        </div>
+
+        <h1 class="main-title reveal d1">Stewardship led Capital Management</h1>
+
+        <div class="accent-line"></div>
+
+        <div class="contact-row reveal d3">
+            <a href="mailto:info@greatbearcapital.com">info@greatbearcapital.com</a>
+            <span class="sep"></span>
+            <a href="tel:+918160080658">+91 8160 080 658</a>
         </div>
     </div>
 
-    <div id="section-3">
-        <div class="info-1">
-            <!-- <div class="info-text1" onclick="window.open('GreatBearMA.html', '_self')" style="cursor: pointer;">
-                <p>Indian Equity Managed Accounts
-                    <span>Value Equity Strategy managed through a market cycle.</span>
-                </p>
-            </div>
-            <div class="info-text1" onclick="window.open('GreatBearGlobalBrands.html', '_self')" style="cursor: pointer;">
-                <p>Global Equity Managed Accounts
-                    <span>Global Brands Strategy investing in high moat companies.</span>
-                </p>
-            </div>
-            <div class="info-text1" onclick="window.open('DAAS.html', '_self')" style="cursor: pointer;">
-                <p>Asset Allocation Managed Accounts
-                    <span>Implemented via ETFs combining human judgment and AI rigour</span>
-                </p>
-            </div>
-        </div> -->
-        <div class="info-text1"><p>info@greatbearcapital.com<span>+91 8160 080 658</span></p></div>
-    </div>
+    <div class="foot">&copy; GreatBear Capital</div>
+
 </body>
-
 </html>
-
-
-
-
-
-
