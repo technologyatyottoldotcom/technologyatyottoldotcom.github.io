@@ -7,78 +7,78 @@
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Ubuntu',sans-serif;font-size:12px;color:#222;background:#fff;line-height:1.5;padding:16px;max-width:900px;margin:0 auto;background:#faf9f7;}
-  .small{font-size:10px;}
-  .section-title{font-size:14px;font-weight:700;margin-bottom:8px;color:#222;}
-  .sub-title{font-size:12px;font-weight:700;margin-bottom:6px;color:#222;}
+  body{font-family:'Ubuntu',sans-serif;font-size:15px;color:#222;background:transparent;line-height:1.55;padding:24px;max-width:80%;margin:0 auto;}
+  .small{font-size:12px;}
+  .section-title{font-size:17px;font-weight:700;margin-bottom:10px;color:#222;}
+  .sub-title{font-size:15px;font-weight:700;margin-bottom:8px;color:#222;}
 
-  .header{border:1px solid #ccc;border-radius:6px;padding:14px;margin-bottom:14px;}
-  .header-title{font-size:18px;font-weight:700;color:#222;}
-  .header-sub{font-size:10px;color:#777;margin-top:2px;}
-  .header-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;}
-  .header-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
-  .header-badge{font-size:10px;padding:3px 8px;border:1px solid #ccc;border-radius:3px;color:#444;}
+  .header{border:1px solid #ccc;border-radius:6px;padding:18px;margin-bottom:18px;}
+  .header-title{font-size:22px;font-weight:700;color:#222;}
+  .header-sub{font-size:12px;color:#777;margin-top:3px;}
+  .header-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;}
+  .header-meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;}
+  .header-badge{font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:3px;color:#444;}
 
-  .tabs{display:flex;gap:4px;margin-bottom:14px;flex-wrap:wrap;border-bottom:1px solid #ddd;padding-bottom:8px;}
-  .tab{padding:6px 12px;border-radius:4px;border:1px solid #ddd;background:#fff;font-size:11px;font-weight:500;cursor:pointer;font-family:'Ubuntu',sans-serif;color:#555;}
-  .tab:hover{background:#f5f5f5;}
-  .tab.active{background:#222;color:#fff;border-color:#222;}
+  .tabs{display:flex;gap:5px;margin-bottom:18px;flex-wrap:wrap;border-bottom:1px solid #ddd;padding-bottom:10px;}
+  .tab{padding:8px 16px;border-radius:4px;border:1px solid #7c3aed;background:transparent;font-size:13px;font-weight:500;cursor:pointer;font-family:'Ubuntu',sans-serif;color:#7c3aed;}
+  .tab:hover{background:#ede9fe;}
+  .tab.active{background:#6d28d9;color:#fff;border-color:#6d28d9;}
   .tab-content{display:none;}
   .tab-content.active{display:block;}
 
-  .card{border:1px solid #ddd;border-radius:5px;padding:12px;margin-bottom:10px;background:#fff;}
+  .card{border:1px solid #ddd;border-radius:5px;padding:16px;margin-bottom:14px;background:transparent;}
 
-  table{width:100%;border-collapse:collapse;font-size:11px;}
-  th{padding:5px 6px;text-align:left;font-weight:700;color:#555;border-bottom:2px solid #ccc;font-size:10px;white-space:nowrap;}
-  td{padding:4px 6px;border-bottom:1px solid #eee;vertical-align:top;}
-  .section-row{background:#f5f5f5;font-weight:700;font-size:10px;color:#333;}
-  .section-row td{padding:5px 6px;border-bottom:1px solid #ddd;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{padding:6px 8px;text-align:left;font-weight:700;color:#555;border-bottom:2px solid #ccc;font-size:12px;white-space:nowrap;}
+  td{padding:5px 8px;border-bottom:1px solid #eee;vertical-align:top;}
+  .section-row{background:#f5f5f5;font-weight:700;font-size:12px;color:#333;}
+  .section-row td{padding:6px 8px;border-bottom:1px solid #ddd;}
   .total-row{background:#f0f0f0;font-weight:700;}
-  .total-row td{padding:5px 6px;border-top:2px solid #999;border-bottom:none;}
+  .total-row td{padding:6px 8px;border-top:2px solid #999;border-bottom:none;}
 
-  .badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;white-space:nowrap;}
-  .badge-dm{background:#e8f0fe;color:#1a56db;}
-  .badge-em{background:#fef3c7;color:#92400e;}
-  .badge-tac{background:#dcfce7;color:#166534;}
-  .badge-ow{color:#16a34a;font-weight:700;}
-  .badge-uw{color:#dc2626;font-weight:700;}
+  .badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:700;white-space:nowrap;}
+  .badge-dm{color:#2563eb;}
+  .badge-em{color:#b45309;}
+  .badge-tac{color:#047857;}
+  .badge-ow{color:#059669;font-weight:700;}
+  .badge-uw{color:#e11d48;font-weight:700;}
   .badge-n{color:#888;font-weight:500;}
-  .val-cheap{background:#dcfce7;color:#166534;}
-  .val-exp{background:#fee2e2;color:#991b1b;}
-  .val-fair{background:#fef9c3;color:#713f12;}
-  .plus{color:#16a34a;font-weight:700;}
-  .minus{color:#dc2626;font-weight:700;}
+  .val-cheap{color:#059669;}
+  .val-exp{color:#e11d48;}
+  .val-fair{color:#b45309;}
+  .plus{color:#059669;font-weight:700;}
+  .minus{color:#e11d48;font-weight:700;}
   .neutral{color:#888;}
 
-  .tilt{padding:6px 8px;margin-bottom:4px;border-radius:4px;border:1px solid #eee;border-left:3px solid #ccc;}
-  .tilt-ow{border-left-color:#16a34a;}
-  .tilt-uw{border-left-color:#dc2626;}
-  .tilt-label{font-weight:700;font-size:11px;}
+  .tilt{padding:8px 10px;margin-bottom:6px;border-radius:4px;border:1px solid #eee;border-left:3px solid #ccc;}
+  .tilt-ow{border-left-color:#059669;}
+  .tilt-uw{border-left-color:#e11d48;}
+  .tilt-label{font-weight:700;font-size:13px;}
 
-  .macro-row{display:flex;gap:8px;margin-bottom:6px;}
-  .macro-label{width:64px;flex-shrink:0;font-weight:700;color:#333;font-size:11px;}
-  .macro-text{font-size:11px;color:#333;line-height:1.45;}
+  .macro-row{display:flex;gap:10px;margin-bottom:8px;}
+  .macro-label{width:80px;flex-shrink:0;font-weight:700;color:#333;font-size:14px;}
+  .macro-text{font-size:13px;color:#333;line-height:1.5;}
 
-  .constraint-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .constraint-cat{font-weight:700;color:#333;font-size:11px;margin-bottom:4px;}
-  .constraint-rule{font-size:10px;color:#333;padding:3px 6px;margin-bottom:2px;border:1px solid #eee;border-radius:3px;border-left:2px solid #999;line-height:1.4;}
+  .constraint-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .constraint-cat{font-weight:700;color:#333;font-size:14px;margin-bottom:5px;}
+  .constraint-rule{font-size:12px;color:#333;padding:4px 8px;margin-bottom:3px;border:1px solid #eee;border-radius:3px;border-left:2px solid #999;line-height:1.45;}
 
-  .stats-grid{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
-  .stat-card{flex:1;min-width:160px;padding:10px;border:1px solid #ddd;border-radius:5px;}
-  .stat-title{font-size:12px;font-weight:700;margin-bottom:6px;}
-  .stat-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;}
+  .stats-grid{display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+  .stat-card{flex:1;min-width:200px;padding:14px;border:1px solid #ddd;border-radius:5px;}
+  .stat-title{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .stat-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;}
   .stat-val{font-weight:700;}
 
-  .footer{font-size:9px;color:#999;text-align:center;margin-top:20px;line-height:1.5;padding-top:12px;border-top:1px solid #eee;}
+  .footer{font-size:11px;color:#999;text-align:center;margin-top:24px;line-height:1.5;padding-top:14px;border-top:1px solid #eee;}
 
   @media(max-width:600px){
-    body{padding:10px;}
-    .header-title{font-size:16px;}
+    body{padding:12px;max-width:100%;}
+    .header-title{font-size:18px;}
     .constraint-grid{grid-template-columns:1fr;}
     .stats-grid{flex-direction:column;}
-    table{font-size:10px;}
-    th,td{padding:3px 4px;}
-    .tab{padding:5px 8px;font-size:10px;}
+    table{font-size:12px;}
+    th,td{padding:4px 5px;}
+    .tab{padding:6px 10px;font-size:12px;}
   }
 </style>
 </head>
@@ -86,7 +86,7 @@
 
 <!-- HEADER -->
 <div class="header">
-  <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:2px;">Quarterly Strategy Report</div>
+  <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:2px;">Quarterly Strategy Report</div>
   <div class="header-row">
     <div>
       <div class="header-title">Global Tactical Asset Allocation Strategy</div>
@@ -94,7 +94,7 @@
     </div>
     <div style="text-align:right;">
       <div class="small" style="color:#999;">Equity Benchmark</div>
-      <div style="font-size:11px;font-weight:700;color:#333;">MSCI ACWI</div>
+      <div style="font-size:13px;font-weight:700;color:#333;">MSCI ACWI</div>
       <div class="small" style="color:#777;">DM 87.9% / EM 12.1%</div>
     </div>
   </div>
@@ -312,7 +312,7 @@
 
   <div class="card">
     <div class="sub-title">Commentary</div>
-    <p style="font-size:11px;color:#333;line-height:1.55;">
+    <p style="font-size:13px;color:#333;line-height:1.6;">
       The GTAA strategy&rsquo;s outperformance was driven by three factors: <b>(1) Gold allocation (13&ndash;16%)</b> captured the $1,800&rarr;$5,000/oz rally through 2024&ndash;2025, contributing approximately 5% annualised alpha; <b>(2) 2022 defensive positioning</b> &mdash; lower equity (50&ndash;55% vs 60%), higher gold, and TIPS cushioned the simultaneous equity/bond drawdown, reducing max drawdown to &ndash;12.8% vs &ndash;19.8%; <b>(3) EM tactical bets</b> &mdash; adding India and China single-country overlays during 2023&ndash;2025 at valuation troughs captured recovery returns while the IEMG core maintained diversification.
     </p>
   </div>
