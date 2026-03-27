@@ -1,0 +1,349 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Probability Theory of a Decision Process | GreatBear Capital</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap">
+<meta property="og:title" content="The Probability Theory of a Decision Process | GreatBear Capital">
+<meta property="og:description" content="An exploration of probability theory in investing and trading — by Saptarshi Das, CFA.">
+<meta property="og:site_name" content="GreatBear Capital">
+<meta property="og:locale" content="en_GB">
+<style>
+:root {
+    --ink:#011627;
+    --ink-90:#011627e5;
+    --ink-60:#011627a0;
+    --ink-40:#01162766;
+    --ink-20:#01162733;
+    --ink-10:#0116271a;
+    --ink-05:#0116270d;
+    --cream:#faf9f7;
+    --white:#ffffff;
+    --heading:'Yeseva One',serif;
+    --body:'Ubuntu',sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+html,body{overflow-x:hidden;margin:0;background:var(--cream);color:var(--ink-90)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+::selection{background:var(--ink);color:var(--cream)}
+a{color:var(--ink);text-decoration:none;transition:opacity .2s}
+a:hover{opacity:.65}
+
+body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;animation:fadeUp .7s ease forwards}
+.reveal.d1{animation-delay:.1s}
+.reveal.d2{animation-delay:.2s}
+.reveal.d3{animation-delay:.35s}
+
+/* NAV */
+.nav-bar{padding:20px 5% 0;display:flex;justify-content:space-between;align-items:center}
+.nav-bar .logo img{height:110px;width:110px}
+.nav-bar .nav-cta{font-family:"Barlow Condensed",sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--ink);padding:9px 22px;border:1.5px solid var(--ink);transition:all .3s ease}
+.nav-bar .nav-cta:hover{background:var(--ink);color:var(--cream)}
+
+/* HERO */
+.letter-hero{
+    max-width:900px;
+    margin:0 auto;
+    padding:80px 5% 0;
+    text-align:center;
+}
+.letter-hero .overline{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    color:var(--ink-40);
+    margin-bottom:18px;
+    position:relative;
+    display:inline-block;
+    padding:0 40px;
+}
+.letter-hero .overline::before,.letter-hero .overline::after{
+    content:"";position:absolute;top:50%;width:28px;height:1px;background:var(--ink-40);
+}
+.letter-hero .overline::before{left:0}
+.letter-hero .overline::after{right:0}
+.letter-hero h1{
+    font-family:var(--heading);
+    font-size:clamp(2.4rem,5vw,3.8rem);
+    font-weight:500;
+    line-height:1.08;
+    letter-spacing:-2px;
+    margin:0 0 20px;
+}
+.letter-hero .meta{
+    font-family:var(--body);
+    font-size:.85rem;
+    color:var(--ink-40);
+    letter-spacing:-.2px;
+    line-height:1.6;
+}
+.letter-hero .meta strong{
+    color:var(--ink-90);
+    font-weight:500;
+}
+
+/* DIVIDER */
+.gb-div{display:flex;align-items:center;gap:8px;padding:0 5%;max-width:900px;margin:0 auto}
+.gb-div p{position:relative;display:inline-block;font-size:26px;font-family:"Barlow Condensed",sans-serif;letter-spacing:-.6px;white-space:nowrap;color:var(--ink-90);margin:0}
+.gb-div p::after{content:"";position:absolute;right:0;bottom:-3px;width:0;height:2px;background-color:var(--ink);transition:width .5s ease-in-out}
+.gb-div p:hover::after{width:100%;right:auto;left:0}
+.gb-div .div-line{flex:1;height:1px;background:linear-gradient(90deg,var(--ink-20) 0%,transparent 100%)}
+
+/* LETTER BODY */
+.letter{
+    max-width:900px;
+    margin:0 auto;
+    padding:60px 5% 40px;
+}
+.letter p{
+    font-family:var(--body);
+    font-size:1rem;
+    line-height:2;
+    font-weight:300;
+    letter-spacing:-.3px;
+    color:var(--ink-90);
+    margin-bottom:28px;
+    text-align:left;
+}
+.letter p:last-of-type{
+    margin-bottom:0;
+}
+.letter img {
+    max-width: 100%;
+    height: auto;
+    margin: 30px 0;
+    border-radius: 4px;
+}
+.letter sup {
+    font-size: 0.7em;
+    line-height: 0; /* Prevents superscripts from messing up the line spacing */
+}
+
+/* DROP CAP */
+.letter .drop-cap::first-letter{
+    font-family:var(--heading);
+    font-size:3.6rem;
+    float:left;
+    line-height:.8;
+    padding-right:10px;
+    padding-top:6px;
+    color:var(--ink-90);
+}
+
+/* PULL QUOTE */
+.pull-quote{
+    margin:48px 0;
+    padding:32px 0;
+    border-top:1px solid var(--ink-10);
+    border-bottom:1px solid var(--ink-10);
+    text-align:center;
+}
+.pull-quote p{
+    font-family:var(--heading) !important;
+    font-size:1.4rem !important;
+    font-weight:500 !important;
+    line-height:1.5 !important;
+    color:var(--ink-90) !important;
+    letter-spacing:-.8px !important;
+    max-width:560px;
+    margin:0 auto !important;
+}
+
+/* SIGN OFF */
+.sign-off{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 5% 40px;
+    text-align:left;
+}
+.sign-off .line{
+    width:40px;
+    height:1.5px;
+    background:var(--ink-20);
+    margin-bottom:20px;
+}
+.sign-off .name{
+    font-family:var(--heading);
+    font-size:1.3rem;
+    letter-spacing:-.5px;
+    margin-bottom:2px;
+}
+.sign-off .title-role{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--ink-40);
+}
+.sign-off .date{
+    font-family:var(--body);
+    font-size:.8rem;
+    color:var(--ink-40);
+    margin-top:8px;
+    letter-spacing:-.2px;
+}
+
+/* CONTACT */
+.contact-sec{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    padding:70px 5% 80px;
+    gap:40px;
+    max-width:900px;
+    margin:0 auto;
+}
+.contact-title{
+    font-family:var(--heading);
+    font-weight:500;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    line-height:1.1;
+    letter-spacing:-1px;
+    max-width:600px;
+    margin:0 0 20px;
+    white-space:nowrap;
+}
+.contact-links{display:flex;gap:18px;flex-wrap:wrap}
+.contact-links a{
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:var(--ink);
+    padding:11px 24px;
+    border:1.5px solid var(--ink);
+    transition:all .3s ease;
+}
+.contact-links a:hover{background:var(--ink);color:var(--cream)}
+
+/* FOOTER */
+#footer{width:90%;display:flex;flex-direction:column;padding-top:16px;border-top:1px solid var(--ink-20);margin:0 5% 30px}
+.footer-container-1{display:flex;justify-content:space-between;align-items:center}
+.cont1-text1 div{font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:-.3px;color:var(--ink-40);margin:0}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .nav-bar .logo img{height:80px;width:80px}
+    .nav-bar .nav-cta{font-size:10px;padding:7px 16px}
+    .letter-hero{padding:50px 5% 0}
+    .letter-hero h1{font-size:clamp(1.8rem,6vw,2.6rem)}
+    .letter{padding:40px 5% 30px}
+    .letter p{font-size:.92rem;line-height:1.9}
+    .pull-quote p{font-size:1.15rem !important}
+    .gb-div p{font-size:18px}
+    .contact-sec{flex-direction:column;align-items:flex-start;padding:50px 5% 60px}
+    .contact-title{font-size:1.6rem;white-space:normal}
+    .contact-links{flex-direction:column}
+    .contact-links a{text-align:center}
+    #footer{padding:20px 0;margin:0 5% 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+    <div class="logo"><a href="index.html"><img src="./images/gblogo.png" alt="GreatBear"></a></div>
+    <a href="index.html" class="nav-cta">GreatBear Capital &rarr;</a>
+</div>
+
+<div class="letter-hero">
+    <div class="overline reveal">Letter</div>
+    <h1 class="reveal d1">The Probability Theory of a Decision Process…</h1>
+    <div class="meta reveal d2">
+        <strong>Saptarshi Das, CFA</strong><br>
+        March 27, 2026
+    </div>
+</div>
+
+<div class="gb-div" style="margin-top:50px;">
+    <p>THE LETTER</p>
+    <div class="div-line"></div>
+</div>
+
+<div class="letter">
+
+    <p class="drop-cap reveal">Investing or trading is a game of probability at best. Even though few calculate the probability of a successful decision when trading or investing in a security, intuitively, probability theory is always running at the back of our mind when taking investment decisions if not explicitly as in systematic trading. </p>
+
+    <p class="reveal">I keep wondering on what is the difference between ‘investing and trading’ and ‘discretionary and systematic’ investing style in terms of probability theory and I come to the same conclusion all the time that they all are the same, i.e. each of then try to take a decision which has a minimum threshold probability of being correct. </p>
+
+    <p class="reveal">Minimum threshold probability is determined by the investor. The more speculative the investor or risk tolerant the investor, the lower the threshold probability is. In mathematical terms, it is the product of the probability of the sufficiency of the information based on bounded rationality and the probability of the decision on that information being correct. </p>
+
+    <p class="reveal">Bounded rationality is the behavioural characteristics of an investor or trader who is bounded by his capacity to accumulate information and process them. A decision is taken based on the rationality of bounded information which is satisfactory to the decision maker. </p>
+
+    <p class="reveal" style="font-style: italic;">As an equation, <br><br>
+    Decision taken D=0, if <br>
+    p<sup>Sufficiency of Information based on Bounded Rational Decision</sup> &times; p<sup>Correct Decision Given Information</sup> &lt; p<sup>Minimum Threshold for Positive Decision</sup> <br><br>
+    and <br><br>
+    Decision taken D=1, if<br>
+    p<sup>Sufficiency of Information based on Bounded Rational Decision</sup> &times; p<sup>Correct Decision Given Information</sup> &gt; p<sup>Minimum Threshold for Positive Decision</sup> </p>
+
+    <p class="reveal">The above methodology works equally appropriate for a discretionary or a systematic investment style. In discretionary investing, the investor or trader is calculating the overall probability of success intuitively which forms the basis of confidence of the investor or trader in the trade. In systematic investing, things are more explicit in manner that the probability is calculated by various indicators like moving averages and Bollinger bands. </p>
+    
+    <p class="reveal">In both forms of investment styles, the investor or trader’s success is dependent on either having the skill to calculate probabilities correctly or develop models that predict probabilities correctly. </p>
+
+    <div class="pull-quote reveal">
+        <p>Many a time, successful investment process is considered an art rather than science. I think successful investment process is the art of calculating scientific concepts successfully.</p>
+    </div>
+
+    <p class="reveal">If a trade is for a long-time horizon, the accuracy of probabilities for both sufficiency and decision correctness needs to be more because the longer the time horizon, the lower the probabilities of both and hence the trade needs to be of higher potential returns for a positive decision. The exact opposite is true for a trader whose time frame is shorter. </p>
+
+    <p class="reveal">Although written down in numbers, it is seen that most investors or traders make inappropriate judgements of their probabilities. When I come to think about it, I come to believe that the relation between p<sup>Sufficiency of Information based on Bounded Rational Decision</sup> and p<sup>Correct Decision Given Information</sup> is like an option and its underlying. </p>
+
+    <p class="reveal">More the p<sup>Sufficiency of Information based on Bounded Rational Decision</sup>, more is the p<sup>Correct Decision Given Information</sup>. p<sup>Correct Decision Given Information</sup> behaves like the option and p<sup>Sufficiency of Information based on Bounded Rational Decision</sup> behaves like the underlying. And hence delta of correct decision = &Delta;p<sup>Correct Decision Given Information</sup> / &Delta;p<sup>Sufficiency of Information based on Bounded Rational Decision</sup> above all levels of D=1 holds the relationship shown below. </p>
+
+    <img src="./images/prob.png" alt="Chart demonstrating the Delta of Probability of Correct Decision versus Probability of Overall Correct Decision" class="reveal">
+
+    <p class="reveal">In the above figure, a decision is only positive if Over probability is more than 50%. This can vary from investor to investor. The relationship between p<sup>Sufficiency of Information based on Bounded Rational Decision</sup> and p<sup>Correct Decision Given Information</sup> shows that the more astute an investor or trader is skilled in increasing his efficiency of data and information collection to take a decision in Bounded rationality, the more the investor or trader is successful in taking an overall correct decision. </p>
+
+    <p class="reveal">My point here is that it is very important to ascertain the factor exposures of a security which affects it the most and have appropriate skill to make judgements on that information. Hence as it is always said, if, discretionary, invest in what you know and if systematic, know your systems and its deficiencies because information has to be correctly processed first and not the decision on the information.</p>
+
+</div>
+
+<div class="sign-off reveal">
+    <div class="line"></div>
+    <div class="name">Saptarshi Das, CFA</div>
+    <div class="title-role">Founder, GreatBear Capital</div>
+    <div class="date">March 2026</div>
+</div>
+
+<div class="gb-div" style="margin-top:40px;">
+    <p>GET IN TOUCH</p>
+    <div class="div-line"></div>
+</div>
+
+<div class="contact-sec">
+    <div class="reveal">
+        <div class="contact-title">Reach out to us for a meaningful conversation.</div>
+        <div class="contact-links">
+            <a href="mailto:info@greatbearcapital.com">Email</a>
+            <a href="tel:+918160080658">+91 8160 080 658</a>
+            <a href="https://www.greatbearcapital.com" target="_blank">greatbearcapital.com</a>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="footer-container-1">
+        <div class="cont1-text1"><div>&copy; GreatBear Capital</div></div>
+    </div>
+</div>
+
+<script>
+(function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.style.opacity='1'});return}
+    var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){if(entry.isIntersecting){entry.target.style.animationPlayState='running';obs.unobserve(entry.target)}});
+    });
+    els.forEach(function(e){obs.observe(e)});
+})();
+</script>
+</body>
+</html>
