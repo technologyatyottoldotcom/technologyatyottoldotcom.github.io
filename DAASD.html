@@ -3,109 +3,291 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GTAA Strategy — Q1 2026</title>
+<title>GTAA Strategy Detail | Q1 2026</title>
 <meta property="og:title" content="Multi-Asset Dynamic Asset Allocation Strategy | GreatBear Capital" />
 <meta property="og:type" content="website" />
 <meta property="og:description" content="AI-enhanced multi-asset portfolio management. Institutional-grade execution via Interactive Brokers, quarterly rebalancing." />
 <meta property="og:site_name" content="GreatBear Capital" />
 <meta property="og:locale" content="en_GB" />
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" />
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Ubuntu',sans-serif;font-size:15px;color:#222;background:#faf9f7;line-height:1.55;padding:24px;max-width:80%;margin:0 auto;}
-  .small{font-size:12px;}
-  .section-title{font-size:17px;font-weight:700;margin-bottom:10px;color:#222;}
-  .sub-title{font-size:15px;font-weight:700;margin-bottom:8px;color:#222;}
+:root {
+  --ink: #011627;
+  --ink-90: #011627e5;
+  --ink-60: #011627a0;
+  --ink-40: #01162766;
+  --ink-20: #01162733;
+  --ink-10: #0116271a;
+  --ink-05: #0116270d;
+  --cream: #faf9f7;
+  --white: #ffffff;
+  --green: #1a7a42;
+  --red: #b91c3a;
+  --sand: #f0ede8;
+}
+html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; margin: 0; background: var(--cream); color: var(--ink-90); }
+*, *::before, *::after { box-sizing: border-box; }
 
-  .header{border:1px solid #ccc;border-radius:6px;padding:18px;margin-bottom:18px;}
-  .header-title{font-size:22px;font-weight:700;color:#222;}
-  .header-sub{font-size:12px;color:#777;margin-top:3px;}
-  .header-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;}
-  .header-meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;}
-  .header-badge{font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:3px;color:#444;}
+/* === GRAIN === */
+body::after {
+  content: "";
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 256px;
+}
 
-  .tabs{display:flex;gap:5px;margin-bottom:18px;flex-wrap:wrap;border-bottom:1px solid #ddd;padding-bottom:10px;}
-  .tab{padding:8px 16px;border-radius:4px;border:1px solid #7c3aed;background:transparent;font-size:13px;font-weight:500;cursor:pointer;font-family:'Ubuntu',sans-serif;color:#7c3aed;}
-  .tab:hover{background:#ede9fe;}
-  .tab.active{background:#6d28d9;color:#fff;border-color:#6d28d9;}
-  .tab-content{display:none;}
-  .tab-content.active{display:block;}
+/* === REVEAL === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.reveal.d1 { animation-delay: 0.08s; }
+.reveal.d2 { animation-delay: 0.16s; }
+.reveal.d3 { animation-delay: 0.24s; }
+.reveal.d4 { animation-delay: 0.32s; }
 
-  .card{border:1px solid #ddd;border-radius:5px;padding:16px;margin-bottom:14px;background:transparent;}
+/* === LAYOUT === */
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 5% 60px; }
 
-  table{width:100%;border-collapse:collapse;font-size:13px;}
-  th{padding:6px 8px;text-align:left;font-weight:700;color:#555;border-bottom:2px solid #ccc;font-size:12px;white-space:nowrap;}
-  td{padding:5px 8px;border-bottom:1px solid #eee;vertical-align:top;}
-  .section-row{background:#f5f5f5;font-weight:700;font-size:12px;color:#333;}
-  .section-row td{padding:6px 8px;border-bottom:1px solid #ddd;}
-  .total-row{background:#f0f0f0;font-weight:700;}
-  .total-row td{padding:6px 8px;border-top:2px solid #999;border-bottom:none;}
+/* === HEADER === */
+.gb-header { margin-bottom: 40px; }
+.gb-overline {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--ink-40); margin-bottom: 16px;
+  position: relative; padding-left: 40px;
+}
+.gb-overline::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 28px; height: 1.5px; background: var(--ink-40);
+}
+.gb-title {
+  font-family: "Yeseva One", serif;
+  font-size: 44px; line-height: 1.08; letter-spacing: -1.5px;
+  margin: 0 0 14px; color: var(--ink);
+}
+.gb-subtitle {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 1.75; letter-spacing: -0.4px;
+  color: var(--ink-60); max-width: 700px; margin: 0 0 24px;
+}
+.gb-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.gb-tag {
+  font-family: "Ubuntu", sans-serif; font-size: 12px;
+  letter-spacing: -0.2px; padding: 7px 18px;
+  border: 1px solid var(--ink-20); border-radius: 40px;
+  color: var(--ink-90); background: var(--sand);
+}
 
-  .badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:700;white-space:nowrap;}
-  .badge-dm{color:#2563eb;}
-  .badge-em{color:#b45309;}
-  .badge-tac{color:#047857;}
-  .badge-ow{color:#059669;font-weight:700;}
-  .badge-uw{color:#e11d48;font-weight:700;}
-  .badge-n{color:#888;font-weight:500;}
-  .val-cheap{color:#059669;}
-  .val-exp{color:#e11d48;}
-  .val-fair{color:#b45309;}
-  .plus{color:#059669;font-weight:700;}
-  .minus{color:#e11d48;font-weight:700;}
-  .neutral{color:#888;}
+/* === TABS === */
+.tabs {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--ink-10);
+  padding-bottom: 12px; margin-bottom: 36px;
+}
+.tab {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 10px 20px; border: 1.5px solid var(--ink-20);
+  border-radius: 0; background: transparent;
+  color: var(--ink-60); cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab:hover { border-color: var(--ink); color: var(--ink); background: var(--sand); }
+.tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
-  .tilt{padding:8px 10px;margin-bottom:6px;border-radius:4px;border:1px solid #eee;border-left:3px solid #ccc;}
-  .tilt-ow{border-left-color:#059669;}
-  .tilt-uw{border-left-color:#e11d48;}
-  .tilt-label{font-weight:700;font-size:13px;}
+/* === CARDS === */
+.card {
+  border-radius: 16px; padding: 28px 28px; margin-bottom: 20px;
+  background: var(--sand); border: none;
+  transition: box-shadow 0.3s ease;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(1,22,39,0.04); }
 
-  .macro-row{display:flex;gap:10px;margin-bottom:8px;}
-  .macro-label{width:80px;flex-shrink:0;font-weight:700;color:#333;font-size:14px;}
-  .macro-text{font-size:13px;color:#333;line-height:1.5;}
+/* === SECTION TITLES === */
+.section-title {
+  font-family: "Yeseva One", serif;
+  font-size: 22px; letter-spacing: -0.5px;
+  margin-bottom: 14px; color: var(--ink);
+}
+.sub-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 10px; color: var(--ink-90);
+  padding-bottom: 8px; border-bottom: 1px solid var(--ink-10);
+}
+.small {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--ink-40); letter-spacing: -0.2px;
+}
 
-  .constraint-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .constraint-cat{font-weight:700;color:#333;font-size:14px;margin-bottom:5px;}
-  .constraint-rule{font-size:12px;color:#333;padding:4px 8px;margin-bottom:3px;border:1px solid #eee;border-radius:3px;border-left:2px solid #999;line-height:1.45;}
+/* === TABLES === */
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: "Ubuntu", sans-serif; }
+th {
+  padding: 8px 10px; text-align: left; font-weight: 500;
+  color: var(--ink-40); border-bottom: 1.5px solid var(--ink-10);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
+}
+td { padding: 7px 10px; border-bottom: 1px solid var(--ink-05); vertical-align: top; font-weight: 300; color: var(--ink-60); letter-spacing: -0.2px; }
+tbody tr:nth-child(even):not(.section-row):not(.total-row):not(.satellite-row) { background: rgba(240,237,232,0.5); }
+td b, td strong { color: var(--ink-90); font-weight: 500; }
+.section-row { background: rgba(1,22,39,0.04); font-weight: 600; font-size: 12px; color: var(--ink-90); }
+.section-row td { padding: 8px 10px; border-bottom: 1px solid var(--ink-10); font-family: "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.total-row { background: rgba(1,22,39,0.06); font-weight: 600; }
+.total-row td { padding: 8px 10px; border-top: 1.5px solid var(--ink-20); border-bottom: none; }
+.satellite-row { background: rgba(26,122,66,0.06); }
+.satellite-row td { border-bottom: 1px solid rgba(26,122,66,0.1); }
 
-  .stats-grid{display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
-  .stat-card{flex:1;min-width:200px;padding:14px;border:1px solid #ddd;border-radius:5px;}
-  .stat-title{font-size:15px;font-weight:700;margin-bottom:8px;}
-  .stat-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;}
-  .stat-val{font-weight:700;}
+/* === BADGES === */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; white-space: nowrap; font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.5px; text-transform: uppercase; }
+.badge-dm { color: #2563eb; }
+.badge-em { color: #b45309; }
+.badge-tac { color: var(--green); }
+.badge-sat { color: var(--green); }
+.badge-core { color: #0369a1; }
+.badge-ow { color: var(--green); font-weight: 700; }
+.badge-uw { color: var(--red); font-weight: 700; }
+.badge-n { color: var(--ink-40); font-weight: 500; }
+.val-cheap { color: var(--green); }
+.val-exp { color: var(--red); }
+.val-fair { color: #b45309; }
+.plus { color: var(--green); font-weight: 600; }
+.minus { color: var(--red); font-weight: 600; }
+.neutral { color: var(--ink-40); }
 
-  .footer{font-size:11px;color:#999;text-align:center;margin-top:24px;line-height:1.5;padding-top:14px;border-top:1px solid #eee;}
+/* === TILTS === */
+.tilt {
+  padding: 12px 16px; margin-bottom: 8px; border-radius: 10px;
+  border: none; border-left: 3px solid var(--ink-20);
+  background: var(--sand); transition: box-shadow 0.2s ease;
+}
+.tilt:hover { box-shadow: 0 2px 12px rgba(1,22,39,0.04); }
+.tilt-ow { border-left-color: var(--green); }
+.tilt-uw { border-left-color: var(--red); }
+.tilt-label { font-weight: 500; font-size: 14px; color: var(--ink-90); letter-spacing: -0.3px; }
 
-  @media(max-width:600px){
-    body{padding:12px;max-width:100%;}
-    .header-title{font-size:18px;}
-    .constraint-grid{grid-template-columns:1fr;}
-    .stats-grid{flex-direction:column;}
-    table{font-size:12px;}
-    th,td{padding:4px 5px;}
-    .tab{padding:6px 10px;font-size:12px;}
-  }
+/* === MACRO === */
+.macro-row { display: flex; gap: 12px; margin-bottom: 10px; }
+.macro-label {
+  width: 90px; flex-shrink: 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--ink-90); font-weight: 500; padding-top: 2px;
+}
+.macro-text { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 14px; color: var(--ink-60); line-height: 1.7; letter-spacing: -0.3px; }
+
+/* === CONSTRAINTS === */
+.constraint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.constraint-cat {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--ink-90); margin-bottom: 8px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink-10);
+}
+.constraint-rule {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--ink-60); letter-spacing: -0.2px;
+  padding: 6px 10px; margin-bottom: 4px;
+  border-radius: 6px; border-left: 2px solid var(--ink-10);
+  line-height: 1.5; background: var(--cream);
+}
+
+/* === STATS GRID === */
+.stats-grid { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.stat-card {
+  flex: 1; min-width: 200px; padding: 20px;
+  border-radius: 16px; background: var(--sand);
+  transition: box-shadow 0.3s ease;
+}
+.stat-card:hover { box-shadow: 0 4px 20px rgba(1,22,39,0.04); }
+.stat-title { font-family: "Barlow Condensed", sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.stat-row { display: flex; justify-content: space-between; font-family: "Ubuntu", sans-serif; font-size: 14px; font-weight: 300; margin-bottom: 0; padding: 8px 10px; color: var(--ink-60); letter-spacing: -0.2px; border-radius: 6px; }
+.stat-row:nth-child(even) { background: var(--cream); }
+.stat-row:nth-child(odd) { background: transparent; }
+.stat-val { font-weight: 500; color: var(--ink-90); }
+
+/* === ATTRIBUTION === */
+.attrib-table td, .attrib-table th { text-align: center; padding: 7px 10px; }
+.attrib-table td:first-child, .attrib-table th:first-child { text-align: left; }
+.attrib-pos { color: var(--green); font-weight: 600; }
+.attrib-neg { color: var(--red); font-weight: 600; }
+
+/* === LEGEND === */
+.legend { display: flex; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; font-family: "Ubuntu", sans-serif; font-weight: 300; color: var(--ink-60); }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+/* === MANAGER CARDS === */
+.manager-card {
+  border-radius: 16px; padding: 28px; margin-bottom: 16px;
+  background: var(--sand); border-left: 3px solid var(--ink-10);
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.manager-card:hover { box-shadow: 0 6px 24px rgba(1,22,39,0.04); border-left-color: var(--ink); }
+.manager-card .sub-title { border-bottom: none; padding-bottom: 0; margin-bottom: 4px; }
+.mc-team {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--ink-60); letter-spacing: -0.2px;
+  margin-bottom: 12px; padding: 12px 16px;
+  background: var(--cream); border-radius: 8px;
+  border-left: 3px solid var(--ink-20);
+}
+.mc-section { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 13px; color: var(--ink-60); margin-bottom: 10px; letter-spacing: -0.2px; line-height: 1.7; padding: 10px 14px; border-radius: 8px; background: var(--cream); }
+.mc-label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--ink-40); margin-bottom: 6px;
+}
+
+/* === FOOTER === */
+.gb-footer {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 12px; color: var(--ink-40); text-align: center;
+  margin-top: 40px; line-height: 1.6; padding-top: 20px;
+  border-top: 1px solid var(--ink-10); letter-spacing: -0.2px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .page-wrap { padding: 20px 4%; }
+  .gb-title { font-size: 28px; }
+  .constraint-grid { grid-template-columns: 1fr; }
+  .stats-grid { flex-direction: column; }
+  table { font-size: 12px; }
+  th, td { padding: 4px 6px; }
+  .tab { padding: 7px 12px; font-size: 11px; letter-spacing: 1px; }
+  .section-title { font-size: 20px; }
+}
+
+/* === GLOBAL FONT INHERITANCE === */
+body, td, th, div, span, p, li, input, button, select, textarea {
+  font-family: "Ubuntu", sans-serif;
+}
+b, strong { font-weight: 500; color: var(--ink-90); }
+.section-title, h1, h2, h3 { font-family: "Yeseva One", serif; font-weight: 400; }
 </style>
+
 </head>
 <body>
+<div class="page-wrap">
 
 <!-- HEADER -->
-<div class="header">
-  <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:2px;">Quarterly Strategy Report</div>
-  <div class="header-row">
-    <div>
-      <div class="header-title">Global Tactical Asset Allocation Strategy</div>
-      <div class="header-sub">Q1 2026 &middot; 16 March &middot; NYSE / Nasdaq ETFs &middot; Target Vol 10% &middot; Max Sharpe &middot; Quarterly Rebalance</div>
-    </div>
-    <div style="text-align:right;">
-      <div class="small" style="color:#999;">Equity Benchmark</div>
-      <div style="font-size:13px;font-weight:700;color:#333;">MSCI ACWI</div>
-      <div class="small" style="color:#777;">DM 87.9% / EM 12.1%</div>
-    </div>
-  </div>
-  <div class="header-meta">
-    <div class="header-badge"><b>SAA:</b> Eq 55 &middot; FI 20 &middot; Alt 24 &middot; Cash 1 = <b>100%</b></div>
-    <div class="header-badge"><b>TAA Q1&rsquo;26:</b> Eq 50 &middot; FI 22 &middot; Alt 27 &middot; Cash 1 = <b>100%</b></div>
+<div class="gb-header reveal">
+  <div class="gb-overline">Quarterly Strategy Report &middot; Q1 2026 &middot; 16 March</div>
+  <h1 class="gb-title">Global Tactical Asset Allocation Strategy</h1>
+  <p class="gb-subtitle">A dynamic asset allocation strategy spanning global equities, fixed income, and alternatives &mdash; systematically constructed via NYSE / Nasdaq ETFs, tactically adjusted quarterly, targeting maximum Sharpe ratio at 10% volatility.</p>
+  <div class="gb-tags">
+    <span class="gb-tag"><strong>SAA:</strong> Eq 55 &middot; FI 20 &middot; Alt 24 &middot; Cash 1 = <strong>100%</strong></span>
+    <span class="gb-tag"><strong>TAA Q1&rsquo;26:</strong> Eq 50 &middot; FI 22 &middot; Alt 27 &middot; Cash 1 = <strong>100%</strong></span>
+    <span class="gb-tag"><strong>Benchmark:</strong> MSCI ACWI &middot; DM 87.9% / EM 12.1%</span>
   </div>
 </div>
 
@@ -167,18 +349,18 @@
 
   <div class="card">
     <div class="section-title">Key TAA Tilts</div>
-    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; US Equity (VTI) 34.5 &rarr; 27.5% (&ndash;20%)</div><div class="small" style="color:#555;margin-top:2px;">CAPE 37.6&times; &mdash; 29% above 10Y avg. AI concentration risk. Max DM underweight applied.</div></div>
-    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; Japan (EWJ) 2.8 &rarr; 2.2% (&ndash;20%)</div><div class="small" style="color:#555;margin-top:2px;">P/E 34% above 10Y avg. BoJ tightening risk.</div></div>
-    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; UK (EWU) 1.8 &rarr; 1.5% (&ndash;17%)</div><div class="small" style="color:#555;margin-top:2px;">P/E 46% above 10Y avg. Fiscal contraction; deflationary wages.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; India (INDA) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:#555;margin-top:2px;">Deepest value globally (&ndash;39% vs 10Y avg). RBI easing. Funded from IEMG core reduction.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; China (MCHI) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:#555;margin-top:2px;">Cheapest large market (&ndash;7% vs 10Y avg). Stimulus stabilizing. Funded from IEMG core.</div></div>
-    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; EM Core (IEMG) 6.0 &rarr; 4.0%</div><div class="small" style="color:#555;margin-top:2px;">Reduced to fund India + China tactical bets. Maintains broad EM diversification.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Gold (GLD) 13 &rarr; 16%</div><div class="small" style="color:#555;margin-top:2px;">~$5,000/oz structural bull. JPM $5k+. CB buying + de-dollarization. Max conviction.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; REITs (VNQ) 6 &rarr; 7%</div><div class="small" style="color:#555;margin-top:2px;">Rate cut beneficiary. Valuations normalizing post 2022&ndash;24.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; BNDX 5 &rarr; 6.5% (+30%)</div><div class="small" style="color:#555;margin-top:2px;">ECB dovish. European bonds attractive. Duration pickup.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; TIPS (TIP) 2 &rarr; 2.5% (+25%)</div><div class="small" style="color:#555;margin-top:2px;">Sticky CPI supports real yield. Inflation hedge.</div></div>
-    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; HYG 2 &rarr; 1.5% (&ndash;25%)</div><div class="small" style="color:#555;margin-top:2px;">Spreads at all-time tights. Poor convexity. Trim.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; DM Residual (URTH) 2.4 &rarr; 3.3%</div><div class="small" style="color:#555;margin-top:2px;">Absorbs freed DM weight from US/Japan/UK underweights.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; US Equity (VTI) 34.5 &rarr; 27.5% (&ndash;20%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">CAPE 37.6&times; &mdash; 29% above 10Y avg. AI concentration risk. Max DM underweight applied.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; Japan (EWJ) 2.8 &rarr; 2.2% (&ndash;20%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">P/E 34% above 10Y avg. BoJ tightening risk.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; UK (EWU) 1.8 &rarr; 1.5% (&ndash;17%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">P/E 46% above 10Y avg. Fiscal contraction; deflationary wages.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; India (INDA) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Deepest value globally (&ndash;39% vs 10Y avg). RBI easing. Funded from IEMG core reduction.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; China (MCHI) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Cheapest large market (&ndash;7% vs 10Y avg). Stimulus stabilizing. Funded from IEMG core.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; EM Core (IEMG) 6.0 &rarr; 4.0%</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Reduced to fund India + China tactical bets. Maintains broad EM diversification.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Gold (GLD) 13 &rarr; 16%</div><div class="small" style="color:var(--ink-60);margin-top:2px;">~$5,000/oz structural bull. JPM $5k+. CB buying + de-dollarization. Max conviction.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; REITs (VNQ) 6 &rarr; 7%</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Rate cut beneficiary. Valuations normalizing post 2022&ndash;24.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; BNDX 5 &rarr; 6.5% (+30%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">ECB dovish. European bonds attractive. Duration pickup.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; TIPS (TIP) 2 &rarr; 2.5% (+25%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Sticky CPI supports real yield. Inflation hedge.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; HYG 2 &rarr; 1.5% (&ndash;25%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Spreads at all-time tights. Poor convexity. Trim.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; DM Residual (URTH) 2.4 &rarr; 3.3%</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Absorbs freed DM weight from US/Japan/UK underweights.</div></div>
   </div>
 </div>
 
@@ -186,38 +368,38 @@
 <div id="tab-table" class="tab-content">
   <div class="card" style="overflow-x:auto;">
     <div class="section-title">Complete Allocation Table</div>
-    <div class="small" style="color:#777;margin-bottom:8px;">DM equity via region ETFs. EM core via IEMG + tactical single-country overlays (INDA, MCHI).</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:8px;">DM equity via region ETFs. EM core via IEMG + tactical single-country overlays (INDA, MCHI).</div>
     <table>
       <thead><tr><th>Asset</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes / Rationale</th></tr></thead>
       <tbody>
         <tr class="section-row"><td colspan="7">EQUITY &mdash; DM (SAA 49.0% &rarr; TAA 42.0%) &middot; Region ETFs + Japan / Australia</td></tr>
-        <tr><td><b>United States</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">VTI</td><td>34.5</td><td><b>27.5</b></td><td class="minus">&ndash;7.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;20%. CAPE 37.6&times;, 29% above 10Y avg. AI concentration. Max DM underweight.</td></tr>
-        <tr><td><b>Europe ex-UK</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">VGK</td><td>6.5</td><td><b>6.5</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Neutral. ECB dovish + fiscal expansion. FR/DE expensive but structural tailwinds.</td></tr>
-        <tr><td><b>Japan</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">EWJ</td><td>2.8</td><td><b>2.2</b></td><td class="minus">&ndash;0.6</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;20%. BoJ tightening + yen appreciation headwind.</td></tr>
-        <tr><td><b>United Kingdom</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">EWU</td><td>1.8</td><td><b>1.5</b></td><td class="minus">&ndash;0.3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;17%. P/E 46% above 10Y avg. Fiscal tightening.</td></tr>
-        <tr><td><b>Australia</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">EWA</td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Neutral. Mining priced. At ACWI weight.</td></tr>
-        <tr><td><b>DM Residual</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">URTH</td><td>2.4</td><td><b>3.3</b></td><td class="plus">+0.9</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Absorbs freed weight from US/JP/UK UW. Captures CA, HK, SG, IL, NZ, DK, IE.</td></tr>
+        <tr><td><b>United States</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">VTI</td><td>34.5</td><td><b>27.5</b></td><td class="minus">&ndash;7.0</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">UW &ndash;20%. CAPE 37.6&times;, 29% above 10Y avg. AI concentration. Max DM underweight.</td></tr>
+        <tr><td><b>Europe ex-UK</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">VGK</td><td>6.5</td><td><b>6.5</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">Neutral. ECB dovish + fiscal expansion. FR/DE expensive but structural tailwinds.</td></tr>
+        <tr><td><b>Japan</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">EWJ</td><td>2.8</td><td><b>2.2</b></td><td class="minus">&ndash;0.6</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">UW &ndash;20%. BoJ tightening + yen appreciation headwind.</td></tr>
+        <tr><td><b>United Kingdom</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">EWU</td><td>1.8</td><td><b>1.5</b></td><td class="minus">&ndash;0.3</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">UW &ndash;17%. P/E 46% above 10Y avg. Fiscal tightening.</td></tr>
+        <tr><td><b>Australia</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">EWA</td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">Neutral. Mining priced. At ACWI weight.</td></tr>
+        <tr><td><b>DM Residual</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">URTH</td><td>2.4</td><td><b>3.3</b></td><td class="plus">+0.9</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Absorbs freed weight from US/JP/UK UW. Captures CA, HK, SG, IL, NZ, DK, IE.</td></tr>
 
         <tr class="section-row"><td colspan="7">EQUITY &mdash; EM (SAA 6.0% &rarr; TAA 8.0%) &middot; IEMG core + tactical overlays</td></tr>
-        <tr><td><b>EM Broad Core</b> <span class="badge badge-em">EM</span></td><td style="font-weight:700;">IEMG</td><td>6.0</td><td><b>4.0</b></td><td class="minus">&ndash;2.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Reduced to fund India + China. Captures KR, TW, BR, MX, SA, ASEAN.</td></tr>
-        <tr><td><b>India</b> <span class="badge badge-em">EM</span> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">INDA</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deepest value (&ndash;39% vs 10Y avg). RBI easing. Structural growth. From IEMG.</td></tr>
-        <tr><td><b>China / HK</b> <span class="badge badge-em">EM</span> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">MCHI</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Cheapest large market (&ndash;7% vs 10Y avg). Stimulus stabilizing. From IEMG.</td></tr>
+        <tr><td><b>EM Broad Core</b> <span class="badge badge-em">EM</span></td><td style="font-weight:500;">IEMG</td><td>6.0</td><td><b>4.0</b></td><td class="minus">&ndash;2.0</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Reduced to fund India + China. Captures KR, TW, BR, MX, SA, ASEAN.</td></tr>
+        <tr><td><b>India</b> <span class="badge badge-em">EM</span> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:500;">INDA</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Deepest value (&ndash;39% vs 10Y avg). RBI easing. Structural growth. From IEMG.</td></tr>
+        <tr><td><b>China / HK</b> <span class="badge badge-em">EM</span> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:500;">MCHI</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Cheapest large market (&ndash;7% vs 10Y avg). Stimulus stabilizing. From IEMG.</td></tr>
 
         <tr class="section-row"><td colspan="7">FIXED INCOME (SAA 20% &rarr; TAA 22%) &middot; DM 16/16.5 &middot; EM 4/5.5</td></tr>
-        <tr><td><b>US Agg Bond</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">AGG</td><td>7</td><td><b>6</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;14%. Sticky US inflation 2.5&ndash;3%. Core but trim.</td></tr>
-        <tr><td><b>Int&rsquo;l DM Bond (Hdg)</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">BNDX</td><td>5</td><td><b>6.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +30%. ECB dovish. European bonds attractive.</td></tr>
-        <tr><td><b>TIPS</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">TIP</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +25%. Inflation hedge. Sticky CPI.</td></tr>
-        <tr><td><b>High Yield</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:700;">HYG</td><td>2</td><td><b>1.5</b></td><td class="minus">&ndash;0.5</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;25%. Spreads at all-time tights.</td></tr>
-        <tr><td><b>EM USD Bonds</b> <span class="badge badge-em">EM</span></td><td style="font-weight:700;">EMB</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +25%. Yield 6.9%. EM fiscal discipline.</td></tr>
-        <tr><td><b>EM Local Bonds</b> <span class="badge badge-em">EM</span></td><td style="font-weight:700;">EMLC</td><td>2</td><td><b>3</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +50%*. FX upside on USD weakness. *Conviction breach noted.</td></tr>
+        <tr><td><b>US Agg Bond</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">AGG</td><td>7</td><td><b>6</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">UW &ndash;14%. Sticky US inflation 2.5&ndash;3%. Core but trim.</td></tr>
+        <tr><td><b>Int&rsquo;l DM Bond (Hdg)</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">BNDX</td><td>5</td><td><b>6.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">OW +30%. ECB dovish. European bonds attractive.</td></tr>
+        <tr><td><b>TIPS</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">TIP</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">OW +25%. Inflation hedge. Sticky CPI.</td></tr>
+        <tr><td><b>High Yield</b> <span class="badge badge-dm">DM</span></td><td style="font-weight:500;">HYG</td><td>2</td><td><b>1.5</b></td><td class="minus">&ndash;0.5</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">UW &ndash;25%. Spreads at all-time tights.</td></tr>
+        <tr><td><b>EM USD Bonds</b> <span class="badge badge-em">EM</span></td><td style="font-weight:500;">EMB</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">OW +25%. Yield 6.9%. EM fiscal discipline.</td></tr>
+        <tr><td><b>EM Local Bonds</b> <span class="badge badge-em">EM</span></td><td style="font-weight:500;">EMLC</td><td>2</td><td><b>3</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">OW +50%*. FX upside on USD weakness. *Conviction breach noted.</td></tr>
 
         <tr class="section-row"><td colspan="7">ALTERNATIVES (SAA 24% &rarr; TAA 27%) &middot; Range 10&ndash;30%</td></tr>
-        <tr><td><b>Gold</b></td><td style="font-weight:700;">GLD</td><td>13</td><td><b>16</b></td><td class="plus">+3</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +23%. ~$5k/oz. JPM $5k+, GS $5.4k, WF $6.1&ndash;6.3k. Structural bull.</td></tr>
-        <tr><td><b>Broad Commodities</b></td><td style="font-weight:700;">GSG</td><td>5</td><td><b>4</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">UW &ndash;20%. Energy soft. Metals/agri mixed.</td></tr>
-        <tr><td><b>Global REITs</b></td><td style="font-weight:700;">VNQ</td><td>6</td><td><b>7</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">OW +17%. Rate cut beneficiary. Valuations normalizing.</td></tr>
+        <tr><td><b>Gold</b></td><td style="font-weight:500;">GLD</td><td>13</td><td><b>16</b></td><td class="plus">+3</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">OW +23%. ~$5k/oz. JPM $5k+, GS $5.4k, WF $6.1&ndash;6.3k. Structural bull.</td></tr>
+        <tr><td><b>Broad Commodities</b></td><td style="font-weight:500;">GSG</td><td>5</td><td><b>4</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">UW &ndash;20%. Energy soft. Metals/agri mixed.</td></tr>
+        <tr><td><b>Global REITs</b></td><td style="font-weight:500;">VNQ</td><td>6</td><td><b>7</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">OW +17%. Rate cut beneficiary. Valuations normalizing.</td></tr>
 
-        <tr style="background:#fafafa;"><td><b>Cash</b></td><td style="font-weight:700;">SHV</td><td>1</td><td><b>1</b></td><td class="neutral">&mdash;</td><td class="badge-n">Const</td><td class="small" style="color:#555;">Constant 1%. T-Bill proxy; 5%+ yield.</td></tr>
-        <tr class="total-row"><td colspan="2"><b>TOTAL</b></td><td><b>100%</b></td><td><b>100%</b></td><td colspan="3" style="font-weight:400;font-size:10px;color:#555;">Both SAA and TAA sum to 100%</td></tr>
+        <tr style="background:var(--cream);"><td><b>Cash</b></td><td style="font-weight:500;">SHV</td><td>1</td><td><b>1</b></td><td class="neutral">&mdash;</td><td class="badge-n">Const</td><td class="small" style="color:var(--ink-60);">Constant 1%. T-Bill proxy; 5%+ yield.</td></tr>
+        <tr class="total-row"><td colspan="2"><b>TOTAL</b></td><td><b>100%</b></td><td><b>100%</b></td><td colspan="3" style="font-weight:400;font-size:12px;color:var(--ink-60);">Both SAA and TAA sum to 100%</td></tr>
       </tbody>
     </table>
   </div>
@@ -227,24 +409,24 @@
 <div id="tab-equity" class="tab-content">
   <div class="card" style="overflow-x:auto;">
     <div class="section-title">Equity &mdash; Structure &amp; Valuation Detail</div>
-    <div class="small" style="color:#777;margin-bottom:8px;">DM: Region ETFs (VTI, VGK, EWJ, EWU, EWA, URTH). EM: IEMG core + INDA/MCHI tactical. &plusmn;20% DM / &plusmn;30% EM tilts.</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:8px;">DM: Region ETFs (VTI, VGK, EWJ, EWU, EWA, URTH). EM: IEMG core + INDA/MCHI tactical. &plusmn;20% DM / &plusmn;30% EM tilts.</div>
     <table>
       <thead><tr><th>Market</th><th>ETF</th><th>Type</th><th>ACWI %</th><th>P/E</th><th>10Y Avg</th><th>Dev %</th><th>Valuation</th><th>SAA</th><th>TAA</th><th>&Delta;</th><th>Tilt</th><th style="min-width:100px;">Rationale</th></tr></thead>
       <tbody>
         <tr class="section-row"><td colspan="13">DM EQUITY &mdash; Region ETFs (SAA 49.0% &rarr; TAA 42.0%)</td></tr>
-        <tr><td><b>United States</b></td><td style="font-weight:700;">VTI</td><td><span class="badge badge-dm">Region</span></td><td>63.0</td><td>25.86</td><td>19.97</td><td class="minus">+29%</td><td><span class="badge val-exp">Expensive</span></td><td>34.5</td><td><b>27.5</b></td><td class="minus">&ndash;7.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">CAPE 37.6&times;. Max UW. AI risk.</td></tr>
-        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:700;">VGK</td><td><span class="badge badge-dm">Region</span></td><td>~12.5</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.5</td><td><b>6.5</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">ECB dovish + fiscal expansion.</td></tr>
-        <tr><td><b>Japan</b></td><td style="font-weight:700;">EWJ</td><td><span class="badge badge-dm">Country</span></td><td>5.0</td><td>19.11</td><td>14.29</td><td class="minus">+34%</td><td><span class="badge val-exp">Expensive</span></td><td>2.8</td><td><b>2.2</b></td><td class="minus">&ndash;0.6</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">BoJ tightening. Yen headwind.</td></tr>
-        <tr><td><b>United Kingdom</b></td><td style="font-weight:700;">EWU</td><td><span class="badge badge-dm">Country</span></td><td>3.3</td><td>19.47</td><td>13.38</td><td class="minus">+46%</td><td><span class="badge val-exp">Expensive</span></td><td>1.8</td><td><b>1.5</b></td><td class="minus">&ndash;0.3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Fiscal tightening. Banks priced.</td></tr>
-        <tr><td><b>Australia</b></td><td style="font-weight:700;">EWA</td><td><span class="badge badge-dm">Country</span></td><td>1.8</td><td>22.30</td><td>16.53</td><td class="minus">+35%</td><td><span class="badge val-exp">Expensive</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Mining priced. At weight.</td></tr>
-        <tr><td><b>DM Residual</b></td><td style="font-weight:700;">URTH</td><td><span class="badge badge-dm">Region</span></td><td>~4.4</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>2.4</td><td><b>3.3</b></td><td class="plus">+0.9</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Absorbs freed DM weight.</td></tr>
+        <tr><td><b>United States</b></td><td style="font-weight:500;">VTI</td><td><span class="badge badge-dm">Region</span></td><td>63.0</td><td>25.86</td><td>19.97</td><td class="minus">+29%</td><td><span class="badge val-exp">Expensive</span></td><td>34.5</td><td><b>27.5</b></td><td class="minus">&ndash;7.0</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">CAPE 37.6&times;. Max UW. AI risk.</td></tr>
+        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:500;">VGK</td><td><span class="badge badge-dm">Region</span></td><td>~12.5</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.5</td><td><b>6.5</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">ECB dovish + fiscal expansion.</td></tr>
+        <tr><td><b>Japan</b></td><td style="font-weight:500;">EWJ</td><td><span class="badge badge-dm">Country</span></td><td>5.0</td><td>19.11</td><td>14.29</td><td class="minus">+34%</td><td><span class="badge val-exp">Expensive</span></td><td>2.8</td><td><b>2.2</b></td><td class="minus">&ndash;0.6</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">BoJ tightening. Yen headwind.</td></tr>
+        <tr><td><b>United Kingdom</b></td><td style="font-weight:500;">EWU</td><td><span class="badge badge-dm">Country</span></td><td>3.3</td><td>19.47</td><td>13.38</td><td class="minus">+46%</td><td><span class="badge val-exp">Expensive</span></td><td>1.8</td><td><b>1.5</b></td><td class="minus">&ndash;0.3</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Fiscal tightening. Banks priced.</td></tr>
+        <tr><td><b>Australia</b></td><td style="font-weight:500;">EWA</td><td><span class="badge badge-dm">Country</span></td><td>1.8</td><td>22.30</td><td>16.53</td><td class="minus">+35%</td><td><span class="badge val-exp">Expensive</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">Mining priced. At weight.</td></tr>
+        <tr><td><b>DM Residual</b></td><td style="font-weight:500;">URTH</td><td><span class="badge badge-dm">Region</span></td><td>~4.4</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>2.4</td><td><b>3.3</b></td><td class="plus">+0.9</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Absorbs freed DM weight.</td></tr>
 
         <tr class="section-row"><td colspan="13">EM EQUITY &mdash; Core + Tactical (SAA 6.0% &rarr; TAA 8.0%)</td></tr>
-        <tr><td><b>EM Broad Core</b></td><td style="font-weight:700;">IEMG</td><td><span class="badge badge-em">Core</span></td><td>12.1</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.0</td><td><b>4.0</b></td><td class="minus">&ndash;2.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Reduced for tactical funding.</td></tr>
-        <tr><td><b>India</b> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">INDA</td><td><span class="badge badge-em">Country</span></td><td>2.0</td><td>12.59</td><td>20.73</td><td class="plus" style="color:#16a34a;">&ndash;39%</td><td><span class="badge val-cheap">Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deepest value. RBI easing.</td></tr>
-        <tr><td><b>China / HK</b> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:700;">MCHI</td><td><span class="badge badge-em">Country</span></td><td>3.1</td><td>10.44</td><td>11.17</td><td class="plus" style="color:#16a34a;">&ndash;7%</td><td><span class="badge val-cheap">Fair-Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Cheapest large market. Stimulus.</td></tr>
+        <tr><td><b>EM Broad Core</b></td><td style="font-weight:500;">IEMG</td><td><span class="badge badge-em">Core</span></td><td>12.1</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.0</td><td><b>4.0</b></td><td class="minus">&ndash;2.0</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Reduced for tactical funding.</td></tr>
+        <tr><td><b>India</b> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:500;">INDA</td><td><span class="badge badge-em">Country</span></td><td>2.0</td><td>12.59</td><td>20.73</td><td class="plus" style="color:var(--green);">&ndash;39%</td><td><span class="badge val-cheap">Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Deepest value. RBI easing.</td></tr>
+        <tr><td><b>China / HK</b> <span class="badge badge-tac">TACTICAL</span></td><td style="font-weight:500;">MCHI</td><td><span class="badge badge-em">Country</span></td><td>3.1</td><td>10.44</td><td>11.17</td><td class="plus" style="color:var(--green);">&ndash;7%</td><td><span class="badge val-cheap">Fair-Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Cheapest large market. Stimulus.</td></tr>
 
-        <tr style="background:#f5f5f5;font-weight:700;"><td colspan="8">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:#777;font-weight:400;">DM 42.0 + EM 8.0</td></tr>
+        <tr style="background:var(--sand);font-weight:500;"><td colspan="8">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:var(--ink-40);font-weight:400;">DM 42.0 + EM 8.0</td></tr>
       </tbody>
     </table>
   </div>
@@ -257,10 +439,10 @@
     <table>
       <thead><tr><th>Name</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><b>US Aggregate Bond</b></td><td style="font-weight:700;">AGG</td><td>7</td><td><b>6</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:#555;">Sticky inflation may push yields higher.</td></tr>
-        <tr><td><b>Int&rsquo;l DM Bond (Hdg)</b></td><td style="font-weight:700;">BNDX</td><td>5</td><td><b>6.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">ECB dovish. European bonds attractive.</td></tr>
-        <tr><td><b>TIPS</b></td><td style="font-weight:700;">TIP</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td style="color:#555;">Inflation hedge. Sticky CPI.</td></tr>
-        <tr><td><b>High Yield</b></td><td style="font-weight:700;">HYG</td><td>2</td><td><b>1.5</b></td><td class="minus">&ndash;0.5</td><td class="badge-uw">UW</td><td style="color:#555;">Spreads at tights. Poor convexity.</td></tr>
+        <tr><td><b>US Aggregate Bond</b></td><td style="font-weight:500;">AGG</td><td>7</td><td><b>6</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:var(--ink-60);">Sticky inflation may push yields higher.</td></tr>
+        <tr><td><b>Int&rsquo;l DM Bond (Hdg)</b></td><td style="font-weight:500;">BNDX</td><td>5</td><td><b>6.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">ECB dovish. European bonds attractive.</td></tr>
+        <tr><td><b>TIPS</b></td><td style="font-weight:500;">TIP</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Inflation hedge. Sticky CPI.</td></tr>
+        <tr><td><b>High Yield</b></td><td style="font-weight:500;">HYG</td><td>2</td><td><b>1.5</b></td><td class="minus">&ndash;0.5</td><td class="badge-uw">UW</td><td style="color:var(--ink-60);">Spreads at tights. Poor convexity.</td></tr>
       </tbody>
     </table>
   </div>
@@ -269,8 +451,8 @@
     <table>
       <thead><tr><th>Name</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:700;">EMB</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td style="color:#555;">Yield 6.9%. EM fiscal discipline. USD weakness.</td></tr>
-        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:700;">EMLC</td><td>2</td><td><b>3</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:#555;">FX upside on USD weakness. *+50% conviction breach noted.</td></tr>
+        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:500;">EMB</td><td>2</td><td><b>2.5</b></td><td class="plus">+0.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Yield 6.9%. EM fiscal discipline. USD weakness.</td></tr>
+        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:500;">EMLC</td><td>2</td><td><b>3</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">FX upside on USD weakness. *+50% conviction breach noted.</td></tr>
       </tbody>
     </table>
   </div>
@@ -279,9 +461,9 @@
     <table>
       <thead><tr><th>Name</th><th>ETF</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><b>Gold</b></td><td style="font-weight:700;">GLD</td><td>13</td><td><b>16</b></td><td class="plus">+3</td><td class="badge-ow">OW</td><td style="color:#555;">~$5k/oz. JPM $5k+. Structural bull. CB buying.</td></tr>
-        <tr><td><b>Broad Commodities</b></td><td style="font-weight:700;">GSG</td><td>5</td><td><b>4</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:#555;">Energy soft. Metals/agri supported but mixed.</td></tr>
-        <tr><td><b>Global REITs</b></td><td style="font-weight:700;">VNQ</td><td>6</td><td><b>7</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:#555;">Rate cut beneficiary. Valuations normalizing.</td></tr>
+        <tr><td><b>Gold</b></td><td style="font-weight:500;">GLD</td><td>13</td><td><b>16</b></td><td class="plus">+3</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">~$5k/oz. JPM $5k+. Structural bull. CB buying.</td></tr>
+        <tr><td><b>Broad Commodities</b></td><td style="font-weight:500;">GSG</td><td>5</td><td><b>4</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:var(--ink-60);">Energy soft. Metals/agri supported but mixed.</td></tr>
+        <tr><td><b>Global REITs</b></td><td style="font-weight:500;">VNQ</td><td>6</td><td><b>7</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Rate cut beneficiary. Valuations normalizing.</td></tr>
       </tbody>
     </table>
   </div>
@@ -291,33 +473,33 @@
 <div id="tab-results" class="tab-content">
   <div class="card">
     <div class="section-title">5-Year Results: GTAA vs 60/40 Benchmark</div>
-    <div class="small" style="color:#777;margin-bottom:10px;">March 2021 &ndash; February 2026 &middot; Monthly rebalancing &middot; Growth of $100 &middot; Approximate using asset class returns and TAA signals</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:10px;">March 2021 &ndash; February 2026 &middot; Monthly rebalancing &middot; Growth of $100 &middot; Approximate using asset class returns and TAA signals</div>
   </div>
 
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-title" style="color:#1a56db;">GTAA Strategy</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#1a56db;">13.6%</span></div>
-      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#1a56db;">10.2%</span></div>
-      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#1a56db;">0.89</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#1a56db;">&ndash;12.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">Calmar Ratio</span><span class="stat-val" style="color:#1a56db;">1.06</span></div>
-      <div class="stat-row"><span style="color:#666;">$100 &rarr;</span><span class="stat-val" style="color:#1a56db;">$189.50</span></div>
+      <div class="stat-title" style="color:var(--ink);">GTAA Strategy</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--ink);">13.6%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Volatility</span><span class="stat-val" style="color:var(--ink);">10.2%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Sharpe Ratio</span><span class="stat-val" style="color:var(--ink);">0.89</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--ink);">&ndash;12.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Calmar Ratio</span><span class="stat-val" style="color:var(--ink);">1.06</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">$100 &rarr;</span><span class="stat-val" style="color:var(--ink);">$189.50</span></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title" style="color:#666;">60/40 ACWI / AGG</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#666;">7.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#666;">12.4%</span></div>
-      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#666;">0.27</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#666;">&ndash;19.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">Calmar Ratio</span><span class="stat-val" style="color:#666;">0.39</span></div>
-      <div class="stat-row"><span style="color:#666;">$100 &rarr;</span><span class="stat-val" style="color:#666;">$145.80</span></div>
+      <div class="stat-title" style="color:var(--ink-60);">60/40 ACWI / AGG</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--ink-60);">7.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Volatility</span><span class="stat-val" style="color:var(--ink-60);">12.4%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Sharpe Ratio</span><span class="stat-val" style="color:var(--ink-60);">0.27</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--ink-60);">&ndash;19.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Calmar Ratio</span><span class="stat-val" style="color:var(--ink-60);">0.39</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">$100 &rarr;</span><span class="stat-val" style="color:var(--ink-60);">$145.80</span></div>
     </div>
   </div>
 
   <div class="card">
     <div class="sub-title">Commentary</div>
-    <p style="font-size:13px;color:#333;line-height:1.6;">
+    <p style="font-family:'Ubuntu',sans-serif;font-weight:300;font-size:14px;color:var(--ink-60);line-height:1.75;letter-spacing:-0.3px;">
       The GTAA strategy&rsquo;s outperformance was driven by three factors: <b>(1) Gold allocation (13&ndash;16%)</b> captured the $1,800&rarr;$5,000/oz rally through 2024&ndash;2025, contributing approximately 5% annualised alpha; <b>(2) 2022 defensive positioning</b> &mdash; lower equity (50&ndash;55% vs 60%), higher gold, and TIPS cushioned the simultaneous equity/bond drawdown, reducing max drawdown to &ndash;12.8% vs &ndash;19.8%; <b>(3) EM tactical bets</b> &mdash; adding India and China single-country overlays during 2023&ndash;2025 at valuation troughs captured recovery returns while the IEMG core maintained diversification.
     </p>
   </div>
@@ -325,10 +507,14 @@
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
+<div class="gb-footer">
   For informational purposes only. Not investment advice. Consult a qualified financial advisor.<br>
   Data: MSCI ACWI factsheet (Jan 2026), WorldPERatio.com (13 Mar 2026), Siblis/Barclays CAPE, BlackRock / JPM / MS / GS Q1 2026 outlooks.
 </div>
+
+
+
+</div><!-- /page-wrap -->
 
 <script>
 function showTab(id, el) {
@@ -337,7 +523,26 @@ function showTab(id, el) {
   document.getElementById('tab-' + id).classList.add('active');
   el.classList.add('active');
 }
+// Scroll reveal
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el) { el.style.opacity = '1'; });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el) {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+})();
 </script>
-
 </body>
 </html>

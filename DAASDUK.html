@@ -3,126 +3,291 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GTAA Strategy — Q1 2026 — Core + Satellite</title>
-<meta property="og:title" content="Multi-Asset Dynamic Asset Allocation Strategy | Core + Satellite" />
+<title>GTAA Core + Satellite Strategy | Q1 2026</title>
+<meta property="og:title" content="GTAA Core + Satellite Strategy | Q1 2026" />
 <meta property="og:type" content="website" />
-<meta property="og:description" content="GTAA Core+Satellite strategy with UK-listed UCITS ETFs and active satellite funds. Quarterly rebalancing." />
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Ubuntu',sans-serif;font-size:15px;color:#222;background:#faf9f7;line-height:1.55;padding:24px;max-width:80%;margin:0 auto;}
-  .small{font-size:12px;}
-  .section-title{font-size:17px;font-weight:700;margin-bottom:10px;color:#222;}
-  .sub-title{font-size:15px;font-weight:700;margin-bottom:8px;color:#222;}
-
-  .header{border:1px solid #ccc;border-radius:6px;padding:18px;margin-bottom:18px;}
-  .header-title{font-size:22px;font-weight:700;color:#222;}
-  .header-sub{font-size:12px;color:#777;margin-top:3px;}
-  .header-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;}
-  .header-meta{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;}
-  .header-badge{font-size:12px;padding:4px 10px;border:1px solid #ccc;border-radius:3px;color:#444;}
-
-  .tabs{display:flex;gap:5px;margin-bottom:18px;flex-wrap:wrap;border-bottom:1px solid #ddd;padding-bottom:10px;}
-  .tab{padding:8px 16px;border-radius:4px;border:1px solid #7c3aed;background:transparent;font-size:13px;font-weight:500;cursor:pointer;font-family:'Ubuntu',sans-serif;color:#7c3aed;}
-  .tab:hover{background:#ede9fe;}
-  .tab.active{background:#6d28d9;color:#fff;border-color:#6d28d9;}
-  .tab-content{display:none;}
-  .tab-content.active{display:block;}
-
-  .card{border:1px solid #ddd;border-radius:5px;padding:16px;margin-bottom:14px;background:transparent;}
-
-  table{width:100%;border-collapse:collapse;font-size:13px;}
-  th{padding:6px 8px;text-align:left;font-weight:700;color:#555;border-bottom:2px solid #ccc;font-size:12px;white-space:nowrap;}
-  td{padding:5px 8px;border-bottom:1px solid #eee;vertical-align:top;}
-  .section-row{background:#f5f5f5;font-weight:700;font-size:12px;color:#333;}
-  .section-row td{padding:6px 8px;border-bottom:1px solid #ddd;}
-  .total-row{background:#f0f0f0;font-weight:700;}
-  .total-row td{padding:6px 8px;border-top:2px solid #999;border-bottom:none;}
-  .satellite-row{background:#fefce8;}
-  .satellite-row td{border-bottom:1px solid #fde68a;}
-
-  .badge{display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:700;white-space:nowrap;}
-  .badge-dm{color:#2563eb;}
-  .badge-em{color:#b45309;}
-  .badge-tac{color:#047857;}
-  .badge-sat{color:#7c3aed;}
-  .badge-core{color:#0369a1;}
-  .badge-ow{color:#059669;font-weight:700;}
-  .badge-uw{color:#e11d48;font-weight:700;}
-  .badge-n{color:#888;font-weight:500;}
-  .val-cheap{color:#059669;}
-  .val-exp{color:#e11d48;}
-  .val-fair{color:#b45309;}
-  .plus{color:#059669;font-weight:700;}
-  .minus{color:#e11d48;font-weight:700;}
-  .neutral{color:#888;}
-
-  .tilt{padding:8px 10px;margin-bottom:6px;border-radius:4px;border:1px solid #eee;border-left:3px solid #ccc;}
-  .tilt-ow{border-left-color:#059669;}
-  .tilt-uw{border-left-color:#e11d48;}
-  .tilt-label{font-weight:700;font-size:13px;}
-
-  .macro-row{display:flex;gap:10px;margin-bottom:8px;}
-  .macro-label{width:80px;flex-shrink:0;font-weight:700;color:#333;font-size:14px;}
-  .macro-text{font-size:13px;color:#333;line-height:1.5;}
-
-  .constraint-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .constraint-cat{font-weight:700;color:#333;font-size:14px;margin-bottom:5px;}
-  .constraint-rule{font-size:12px;color:#333;padding:4px 8px;margin-bottom:3px;border:1px solid #eee;border-radius:3px;border-left:2px solid #999;line-height:1.45;}
-
-  .stats-grid{display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
-  .stat-card{flex:1;min-width:200px;padding:14px;border:1px solid #ddd;border-radius:5px;}
-  .stat-title{font-size:15px;font-weight:700;margin-bottom:8px;}
-  .stat-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px;}
-  .stat-val{font-weight:700;}
-
-  .attrib-table td,.attrib-table th{text-align:center;padding:6px 10px;}
-  .attrib-table td:first-child,.attrib-table th:first-child{text-align:left;}
-  .attrib-pos{color:#059669;font-weight:700;}
-  .attrib-neg{color:#e11d48;font-weight:700;}
-
-  .legend{display:flex;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
-  .legend-item{display:flex;align-items:center;gap:5px;font-size:12px;}
-  .legend-dot{width:12px;height:12px;border-radius:2px;}
-
-  .manager-team{font-size:13px;color:#333;margin-bottom:8px;padding:8px 10px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;}
-  .manager-section{font-size:13px;color:#333;margin-bottom:8px;}
-  .manager-section-label{font-weight:700;font-size:12px;color:#555;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;}
-
-  .footer{font-size:11px;color:#999;text-align:center;margin-top:24px;line-height:1.5;padding-top:14px;border-top:1px solid #eee;}
-
-  @media(max-width:600px){
-    body{padding:12px;max-width:100%;}
-    .header-title{font-size:18px;}
-    .constraint-grid{grid-template-columns:1fr;}
-    .stats-grid{flex-direction:column;}
-    table{font-size:12px;}
-    th,td{padding:4px 5px;}
-    .tab{padding:6px 10px;font-size:12px;}
-  }
-</style>
+<meta property="og:description" content="Global Tactical Asset Allocation with UK-listed UCITS ETFs (core) and active satellite funds. Gold capped 3% SAA. Quarterly rebalancing." />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --ink: #011627;
+  --ink-90: #011627e5;
+  --ink-60: #011627a0;
+  --ink-40: #01162766;
+  --ink-20: #01162733;
+  --ink-10: #0116271a;
+  --ink-05: #0116270d;
+  --cream: #faf9f7;
+  --white: #ffffff;
+  --green: #1a7a42;
+  --red: #b91c3a;
+  --sand: #f0ede8;
+}
+html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; margin: 0; background: var(--cream); color: var(--ink-90); }
+*, *::before, *::after { box-sizing: border-box; }
+
+/* === GRAIN === */
+body::after {
+  content: "";
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat; background-size: 256px;
+}
+
+/* === REVEAL === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.reveal.d1 { animation-delay: 0.08s; }
+.reveal.d2 { animation-delay: 0.16s; }
+.reveal.d3 { animation-delay: 0.24s; }
+.reveal.d4 { animation-delay: 0.32s; }
+
+/* === LAYOUT === */
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 5% 60px; }
+
+/* === HEADER === */
+.gb-header { margin-bottom: 40px; }
+.gb-overline {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--ink-40); margin-bottom: 16px;
+  position: relative; padding-left: 40px;
+}
+.gb-overline::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 28px; height: 1.5px; background: var(--ink-40);
+}
+.gb-title {
+  font-family: "Yeseva One", serif;
+  font-size: 44px; line-height: 1.08; letter-spacing: -1.5px;
+  margin: 0 0 14px; color: var(--ink);
+}
+.gb-subtitle {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 1.75; letter-spacing: -0.4px;
+  color: var(--ink-60); max-width: 700px; margin: 0 0 24px;
+}
+.gb-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.gb-tag {
+  font-family: "Ubuntu", sans-serif; font-size: 12px;
+  letter-spacing: -0.2px; padding: 7px 18px;
+  border: 1px solid var(--ink-20); border-radius: 40px;
+  color: var(--ink-90); background: var(--sand);
+}
+
+/* === TABS === */
+.tabs {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--ink-10);
+  padding-bottom: 12px; margin-bottom: 36px;
+}
+.tab {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 10px 20px; border: 1.5px solid var(--ink-20);
+  border-radius: 0; background: transparent;
+  color: var(--ink-60); cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab:hover { border-color: var(--ink); color: var(--ink); background: var(--sand); }
+.tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* === CARDS === */
+.card {
+  border-radius: 16px; padding: 28px 28px; margin-bottom: 20px;
+  background: var(--sand); border: none;
+  transition: box-shadow 0.3s ease;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(1,22,39,0.04); }
+
+/* === SECTION TITLES === */
+.section-title {
+  font-family: "Yeseva One", serif;
+  font-size: 22px; letter-spacing: -0.5px;
+  margin-bottom: 14px; color: var(--ink);
+}
+.sub-title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 10px; color: var(--ink-90);
+  padding-bottom: 8px; border-bottom: 1px solid var(--ink-10);
+}
+.small {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--ink-40); letter-spacing: -0.2px;
+}
+
+/* === TABLES === */
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: "Ubuntu", sans-serif; }
+th {
+  padding: 8px 10px; text-align: left; font-weight: 500;
+  color: var(--ink-40); border-bottom: 1.5px solid var(--ink-10);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 12px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
+}
+td { padding: 7px 10px; border-bottom: 1px solid var(--ink-05); vertical-align: top; font-weight: 300; color: var(--ink-60); letter-spacing: -0.2px; }
+tbody tr:nth-child(even):not(.section-row):not(.total-row):not(.satellite-row) { background: rgba(240,237,232,0.5); }
+td b, td strong { color: var(--ink-90); font-weight: 500; }
+.section-row { background: rgba(1,22,39,0.04); font-weight: 600; font-size: 12px; color: var(--ink-90); }
+.section-row td { padding: 8px 10px; border-bottom: 1px solid var(--ink-10); font-family: "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.total-row { background: rgba(1,22,39,0.06); font-weight: 600; }
+.total-row td { padding: 8px 10px; border-top: 1.5px solid var(--ink-20); border-bottom: none; }
+.satellite-row { background: rgba(26,122,66,0.06); }
+.satellite-row td { border-bottom: 1px solid rgba(26,122,66,0.1); }
+
+/* === BADGES === */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; white-space: nowrap; font-family: "Barlow Condensed", sans-serif; letter-spacing: 0.5px; text-transform: uppercase; }
+.badge-dm { color: #2563eb; }
+.badge-em { color: #b45309; }
+.badge-tac { color: var(--green); }
+.badge-sat { color: var(--green); }
+.badge-core { color: #0369a1; }
+.badge-ow { color: var(--green); font-weight: 700; }
+.badge-uw { color: var(--red); font-weight: 700; }
+.badge-n { color: var(--ink-40); font-weight: 500; }
+.val-cheap { color: var(--green); }
+.val-exp { color: var(--red); }
+.val-fair { color: #b45309; }
+.plus { color: var(--green); font-weight: 600; }
+.minus { color: var(--red); font-weight: 600; }
+.neutral { color: var(--ink-40); }
+
+/* === TILTS === */
+.tilt {
+  padding: 12px 16px; margin-bottom: 8px; border-radius: 10px;
+  border: none; border-left: 3px solid var(--ink-20);
+  background: var(--sand); transition: box-shadow 0.2s ease;
+}
+.tilt:hover { box-shadow: 0 2px 12px rgba(1,22,39,0.04); }
+.tilt-ow { border-left-color: var(--green); }
+.tilt-uw { border-left-color: var(--red); }
+.tilt-label { font-weight: 500; font-size: 14px; color: var(--ink-90); letter-spacing: -0.3px; }
+
+/* === MACRO === */
+.macro-row { display: flex; gap: 12px; margin-bottom: 10px; }
+.macro-label {
+  width: 90px; flex-shrink: 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--ink-90); font-weight: 500; padding-top: 2px;
+}
+.macro-text { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 14px; color: var(--ink-60); line-height: 1.7; letter-spacing: -0.3px; }
+
+/* === CONSTRAINTS === */
+.constraint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.constraint-cat {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--ink-90); margin-bottom: 8px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink-10);
+}
+.constraint-rule {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--ink-60); letter-spacing: -0.2px;
+  padding: 6px 10px; margin-bottom: 4px;
+  border-radius: 6px; border-left: 2px solid var(--ink-10);
+  line-height: 1.5; background: var(--cream);
+}
+
+/* === STATS GRID === */
+.stats-grid { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.stat-card {
+  flex: 1; min-width: 200px; padding: 20px;
+  border-radius: 16px; background: var(--sand);
+  transition: box-shadow 0.3s ease;
+}
+.stat-card:hover { box-shadow: 0 4px 20px rgba(1,22,39,0.04); }
+.stat-title { font-family: "Barlow Condensed", sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.stat-row { display: flex; justify-content: space-between; font-family: "Ubuntu", sans-serif; font-size: 14px; font-weight: 300; margin-bottom: 0; padding: 8px 10px; color: var(--ink-60); letter-spacing: -0.2px; border-radius: 6px; }
+.stat-row:nth-child(even) { background: var(--cream); }
+.stat-row:nth-child(odd) { background: transparent; }
+.stat-val { font-weight: 500; color: var(--ink-90); }
+
+/* === ATTRIBUTION === */
+.attrib-table td, .attrib-table th { text-align: center; padding: 7px 10px; }
+.attrib-table td:first-child, .attrib-table th:first-child { text-align: left; }
+.attrib-pos { color: var(--green); font-weight: 600; }
+.attrib-neg { color: var(--red); font-weight: 600; }
+
+/* === LEGEND === */
+.legend { display: flex; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; font-family: "Ubuntu", sans-serif; font-weight: 300; color: var(--ink-60); }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+/* === MANAGER CARDS === */
+.manager-card {
+  border-radius: 16px; padding: 28px; margin-bottom: 16px;
+  background: var(--sand); border-left: 3px solid var(--ink-10);
+  transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.manager-card:hover { box-shadow: 0 6px 24px rgba(1,22,39,0.04); border-left-color: var(--ink); }
+.manager-card .sub-title { border-bottom: none; padding-bottom: 0; margin-bottom: 4px; }
+.mc-team {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 13px; color: var(--ink-60); letter-spacing: -0.2px;
+  margin-bottom: 12px; padding: 12px 16px;
+  background: var(--cream); border-radius: 8px;
+  border-left: 3px solid var(--ink-20);
+}
+.mc-section { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 13px; color: var(--ink-60); margin-bottom: 10px; letter-spacing: -0.2px; line-height: 1.7; padding: 10px 14px; border-radius: 8px; background: var(--cream); }
+.mc-label {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--ink-40); margin-bottom: 6px;
+}
+
+/* === FOOTER === */
+.gb-footer {
+  font-family: "Ubuntu", sans-serif; font-weight: 300;
+  font-size: 12px; color: var(--ink-40); text-align: center;
+  margin-top: 40px; line-height: 1.6; padding-top: 20px;
+  border-top: 1px solid var(--ink-10); letter-spacing: -0.2px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .page-wrap { padding: 20px 4%; }
+  .gb-title { font-size: 28px; }
+  .constraint-grid { grid-template-columns: 1fr; }
+  .stats-grid { flex-direction: column; }
+  table { font-size: 12px; }
+  th, td { padding: 4px 6px; }
+  .tab { padding: 7px 12px; font-size: 11px; letter-spacing: 1px; }
+  .section-title { font-size: 20px; }
+}
+
+/* === GLOBAL FONT INHERITANCE === */
+body, td, th, div, span, p, li, input, button, select, textarea {
+  font-family: "Ubuntu", sans-serif;
+}
+b, strong { font-weight: 500; color: var(--ink-90); }
+.section-title, h1, h2, h3 { font-family: "Yeseva One", serif; font-weight: 400; }
+</style>
 </head>
 <body>
+<div class="page-wrap">
+
 <!-- HEADER -->
-<div class="header">
-  <div style="font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:2px;">Quarterly Strategy Report</div>
-  <div class="header-row">
-    <div>
-      <div class="header-title">Global Tactical Asset Allocation Strategy</div>
-      <div class="header-sub">Q1 2026 &middot; 16 March &middot; LSE UCITS ETFs (Core) + Active Satellite Funds &middot; Target Vol 10% &middot; Max Sharpe &middot; Quarterly Rebalance</div>
-    </div>
-    <div style="text-align:right;">
-      <div class="small" style="color:#999;">Equity Benchmark</div>
-      <div style="font-size:11px;font-weight:700;color:#333;">MSCI ACWI</div>
-      <div class="small" style="color:#777;">DM 87.9% / EM 12.1%</div>
-    </div>
-  </div>
-  <div class="header-meta">
-    <div class="header-badge"><b>SAA:</b> Eq 55 &middot; FI 26 &middot; Alt 18 &middot; Cash 1 = <b>100%</b></div>
-    <div class="header-badge"><b>TAA Q1&rsquo;26:</b> Eq 50 &middot; FI 28 &middot; Alt 21 &middot; Cash 1 = <b>100%</b></div>
-    <div class="header-badge"><b>Core/Satellite:</b> Core 72.5% &middot; Satellite 27.5%</div>
-    <div class="header-badge"><b>Gold cap:</b> SAA 3% &middot; TAA 4%</div>
+<div class="gb-header reveal">
+  <div class="gb-overline">Quarterly Strategy Report &middot; Q1 2026 &middot; 16 March</div>
+  <h1 class="gb-title">Global Tactical Asset Allocation Strategy</h1>
+  <p class="gb-subtitle">Core + Satellite portfolio combining UK-listed UCITS ETFs with active satellite funds. Target volatility 10%, maximum Sharpe objective, quarterly rebalancing. Benchmark: 60/40 MSCI ACWI / Bloomberg Agg.</p>
+  <div class="gb-tags">
+    <span class="gb-tag"><strong>SAA:</strong> Eq 55 &middot; FI 26 &middot; Alt 18 &middot; Cash 1 = <strong>100%</strong></span>
+    <span class="gb-tag"><strong>TAA Q1&rsquo;26:</strong> Eq 50 &middot; FI 28 &middot; Alt 21 &middot; Cash 1 = <strong>100%</strong></span>
+    <span class="gb-tag"><strong>Core</strong> 72.5% &middot; <strong>Satellite</strong> 27.5%</span>
+    <span class="gb-tag"><strong>Gold cap:</strong> SAA 3% / TAA 4%</span>
+    <span class="gb-tag"><strong>Benchmark:</strong> MSCI ACWI &middot; DM 87.9% / EM 12.1%</span>
   </div>
 </div>
 
@@ -186,20 +351,20 @@
 
   <div class="card">
     <div class="section-title">Key TAA Tilts</div>
-    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; US Equity (CSPX) 34.5 &rarr; 27.5% (&ndash;20%)</div><div class="small" style="color:#555;margin-top:2px;">CAPE 37.6&times;. AI concentration risk. Satellites via BlackRock US Dynamic + Artemis US Smaller Cos.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; India (NDIA) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:#555;margin-top:2px;">Deepest value globally (&ndash;39% vs 10Y avg). RBI easing.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; China (ICHN) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:#555;margin-top:2px;">Cheapest large market. Stimulus stabilizing.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Gold (IGLN) 3 &rarr; 4% (+33%)</div><div class="small" style="color:#555;margin-top:2px;">Max OW within 3% SAA cap. Inflation protection supplemented by TIPS &amp; commodities.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; TIPS (ITPS) 3 &rarr; 4% (+33%)</div><div class="small" style="color:#555;margin-top:2px;">Key inflation hedge replacing gold&rsquo;s former role. Sticky CPI.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; EM Bonds (SEMB/SEML) 5 &rarr; 7% (+40%)</div><div class="small" style="color:#555;margin-top:2px;">Yield 6.9%. USD weakness. NB EM Debt + GS EM Corp satellites.</div></div>
-    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Absolute Return 0 &rarr; 5%</div><div class="small" style="color:#555;margin-top:2px;">Increased uncorrelated alpha to offset reduced gold diversification. Lumyna, Montlake, Mygale.</div></div>
+    <div class="tilt tilt-uw"><div class="tilt-label minus">UW &mdash; US Equity (CSPX) 34.5 &rarr; 27.5% (&ndash;20%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">CAPE 37.6&times;. AI concentration risk. Satellites via BlackRock US Dynamic + Artemis US Smaller Cos.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; India (NDIA) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Deepest value globally (&ndash;39% vs 10Y avg). RBI easing.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; China (ICHN) 0 &rarr; 2.0% (tactical)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Cheapest large market. Stimulus stabilizing.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Gold (IGLN) 3 &rarr; 4% (+33%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Max OW within 3% SAA cap. Inflation protection supplemented by TIPS &amp; commodities.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; TIPS (ITPS) 3 &rarr; 4% (+33%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Key inflation hedge replacing gold&rsquo;s former role. Sticky CPI.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; EM Bonds (SEMB/SEML) 5 &rarr; 7% (+40%)</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Yield 6.9%. USD weakness. NB EM Debt + GS EM Corp satellites.</div></div>
+    <div class="tilt tilt-ow"><div class="tilt-label plus">OW &mdash; Absolute Return 0 &rarr; 5%</div><div class="small" style="color:var(--ink-60);margin-top:2px;">Increased uncorrelated alpha to offset reduced gold diversification. Lumyna, Montlake, Mygale.</div></div>
   </div>
 </div>
 <!-- TAB: FULL TABLE -->
 <div id="tab-table" class="tab-content">
   <div class="card" style="overflow-x:auto;">
     <div class="section-title">Complete Allocation Table &mdash; Core ETFs (UK-listed UCITS) + Satellite Active Funds</div>
-    <div class="small" style="color:#777;margin-bottom:8px;">Gold capped 3% SAA / 4% TAA. Freed weight to FI (+6%), commodities (+2%), TIPS (+1%), abs return (+5%). Min 1% per satellite.</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:8px;">Gold capped 3% SAA / 4% TAA. Freed weight to FI (+6%), commodities (+2%), TIPS (+1%), abs return (+5%). Min 1% per satellite.</div>
     <div class="legend">
       <div class="legend-item"><div class="legend-dot" style="background:#e0f2fe;"></div>Core ETF</div>
       <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;"></div>Satellite Active</div>
@@ -209,52 +374,52 @@
       <thead><tr><th>Asset</th><th>Ticker / Fund</th><th>Type</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes / Rationale</th></tr></thead>
       <tbody>
         <tr class="section-row"><td colspan="8">EQUITY &mdash; DM (SAA 49.0% &rarr; TAA 42.0%)</td></tr>
-        <tr><td><b>United States</b></td><td style="font-weight:700;">CSPX</td><td><span class="badge badge-core">Core</span></td><td>34.5</td><td><b>24.0</b></td><td class="minus">&ndash;10.5</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">iShares Core S&P 500 UCITS ETF. CAPE 37.6&times;.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;US Large-Cap</td><td style="font-weight:700;font-size:12px;">BlackRock US Dynamic</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">4&#9733; Morningstar. Blend style.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;US Small-Cap</td><td style="font-weight:700;font-size:12px;">Artemis US Smaller Cos</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">+237% since 2014 vs 173% sector avg.</td></tr>
-        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:700;">IMEU</td><td><span class="badge badge-core">Core</span></td><td>6.5</td><td><b>4.5</b></td><td class="minus">&ndash;2.0</td><td class="badge-n">N</td><td class="small" style="color:#555;">iShares MSCI Europe ex-UK UCITS ETF.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;European Focus</td><td style="font-weight:700;font-size:12px;">JH European Focus</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">High-conviction GARP.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;European Dynamic</td><td style="font-weight:700;font-size:12px;">JPM European Dynamic</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Behavioural finance process.</td></tr>
-        <tr><td><b>Japan</b></td><td style="font-weight:700;">IJPA</td><td><span class="badge badge-core">Core</span></td><td>2.8</td><td><b>1.2</b></td><td class="minus">&ndash;1.6</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">iShares MSCI Japan UCITS ETF.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Japan Value</td><td style="font-weight:700;font-size:12px;">Morant Wright Nippon Yield</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deep-value yield specialist.</td></tr>
-        <tr><td><b>United Kingdom</b></td><td style="font-weight:700;">ISF</td><td><span class="badge badge-core">Core</span></td><td>1.8</td><td><b>0.5</b></td><td class="minus">&ndash;1.3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">iShares Core FTSE 100 UCITS ETF.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;UK Dynamic</td><td style="font-weight:700;font-size:12px;">JOHCM UK Dynamic</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">5Y: +99.8% vs 52% sector avg.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;UK Select</td><td style="font-weight:700;font-size:12px;">Artemis UK Select</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Quality-growth UK strategy.</td></tr>
-        <tr><td><b>Australia</b></td><td style="font-weight:700;">SAUS</td><td><span class="badge badge-core">Core</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">iShares MSCI Australia UCITS ETF.</td></tr>
-        <tr><td><b>DM Residual</b></td><td style="font-weight:700;">SWRD</td><td><span class="badge badge-core">Core</span></td><td>2.4</td><td><b>2.3</b></td><td class="minus">&ndash;0.1</td><td class="badge-n">N</td><td class="small" style="color:#555;">SPDR MSCI World UCITS ETF.</td></tr>
+        <tr><td><b>United States</b></td><td style="font-weight:500;">CSPX</td><td><span class="badge badge-core">Core</span></td><td>34.5</td><td><b>24.0</b></td><td class="minus">&ndash;10.5</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">iShares Core S&P 500 UCITS ETF. CAPE 37.6&times;.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;US Large-Cap</td><td style="font-weight:500;">BlackRock US Dynamic</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">4&#9733; Morningstar. Blend style.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;US Small-Cap</td><td style="font-weight:500;">Artemis US Smaller Cos</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">+237% since 2014 vs 173% sector avg.</td></tr>
+        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:500;">IMEU</td><td><span class="badge badge-core">Core</span></td><td>6.5</td><td><b>4.5</b></td><td class="minus">&ndash;2.0</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">iShares MSCI Europe ex-UK UCITS ETF.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;European Focus</td><td style="font-weight:500;">JH European Focus</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">High-conviction GARP.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;European Dynamic</td><td style="font-weight:500;">JPM European Dynamic</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Behavioural finance process.</td></tr>
+        <tr><td><b>Japan</b></td><td style="font-weight:500;">IJPA</td><td><span class="badge badge-core">Core</span></td><td>2.8</td><td><b>1.2</b></td><td class="minus">&ndash;1.6</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">iShares MSCI Japan UCITS ETF.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Japan Value</td><td style="font-weight:500;">Morant Wright Nippon Yield</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Deep-value yield specialist.</td></tr>
+        <tr><td><b>United Kingdom</b></td><td style="font-weight:500;">ISF</td><td><span class="badge badge-core">Core</span></td><td>1.8</td><td><b>0.5</b></td><td class="minus">&ndash;1.3</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">iShares Core FTSE 100 UCITS ETF.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;UK Dynamic</td><td style="font-weight:500;">JOHCM UK Dynamic</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">5Y: +99.8% vs 52% sector avg.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;UK Select</td><td style="font-weight:500;">Artemis UK Select</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Quality-growth UK strategy.</td></tr>
+        <tr><td><b>Australia</b></td><td style="font-weight:500;">SAUS</td><td><span class="badge badge-core">Core</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">iShares MSCI Australia UCITS ETF.</td></tr>
+        <tr><td><b>DM Residual</b></td><td style="font-weight:500;">SWRD</td><td><span class="badge badge-core">Core</span></td><td>2.4</td><td><b>2.3</b></td><td class="minus">&ndash;0.1</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">SPDR MSCI World UCITS ETF.</td></tr>
         <tr class="section-row"><td colspan="8">EQUITY &mdash; EM (SAA 6.0% &rarr; TAA 8.0%)</td></tr>
-        <tr><td><b>EM Broad Core</b></td><td style="font-weight:700;">EMIM</td><td><span class="badge badge-core">Core</span></td><td>6.0</td><td><b>1.0</b></td><td class="minus">&ndash;5.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">iShares Core MSCI EM IMI UCITS ETF.</td></tr>
-        <tr><td><b>India</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:700;">NDIA</td><td><span class="badge badge-core">Core</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">iShares MSCI India UCITS ETF. Deepest value.</td></tr>
-        <tr><td><b>China / HK</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:700;">ICHN</td><td><span class="badge badge-core">Core</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">iShares MSCI China UCITS ETF. Cheapest large mkt.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Value</td><td style="font-weight:700;font-size:12px;">Dodge &amp; Cox EM Stock</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deep-value EM. Contrarian.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Quality</td><td style="font-weight:700;font-size:12px;">Lazard EM A Acc GBP</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Quality-growth EM.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Asia</td><td style="font-weight:700;font-size:12px;">M&amp;G Asian Fund</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Broad Asia ex-Japan stock picker.</td></tr>
-        <tr style="background:#f5f5f5;font-weight:700;"><td colspan="3">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:#777;font-weight:400;">Core 36.5 + Satellite 13.5 = 50.0</td></tr>
+        <tr><td><b>EM Broad Core</b></td><td style="font-weight:500;">EMIM</td><td><span class="badge badge-core">Core</span></td><td>6.0</td><td><b>1.0</b></td><td class="minus">&ndash;5.0</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">iShares Core MSCI EM IMI UCITS ETF.</td></tr>
+        <tr><td><b>India</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:500;">NDIA</td><td><span class="badge badge-core">Core</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">iShares MSCI India UCITS ETF. Deepest value.</td></tr>
+        <tr><td><b>China / HK</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:500;">ICHN</td><td><span class="badge badge-core">Core</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">iShares MSCI China UCITS ETF. Cheapest large mkt.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Value</td><td style="font-weight:500;">Dodge &amp; Cox EM Stock</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Deep-value EM. Contrarian.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Quality</td><td style="font-weight:500;">Lazard EM A Acc GBP</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Quality-growth EM.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Asia</td><td style="font-weight:500;">M&amp;G Asian Fund</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Broad Asia ex-Japan stock picker.</td></tr>
+        <tr class="section-row" style=""><td colspan="3">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:var(--ink-40);font-weight:400;">Core 36.5 + Satellite 13.5 = 50.0</td></tr>
 
         <tr class="section-row"><td colspan="8">FIXED INCOME (SAA 26% &rarr; TAA 28%)</td></tr>
-        <tr><td><b>US Agg Bond</b></td><td style="font-weight:700;">IUAG</td><td><span class="badge badge-core">Core</span></td><td>9</td><td><b>5.0</b></td><td class="minus">&ndash;4</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Sticky inflation. Reduced for PIMCO.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Global IG Credit</td><td style="font-weight:700;font-size:12px;">PIMCO GIS Global IG Credit</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">PIMCO flagship. Duration + credit alpha.</td></tr>
-        <tr><td><b>Int&rsquo;l DM Bond</b></td><td style="font-weight:700;">IGLA</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>5.0</b></td><td class="minus">&ndash;2</td><td class="badge-n">N</td><td class="small" style="color:#555;">ECB dovish. Reduced for TwentyFour.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Strategic Bond</td><td style="font-weight:700;font-size:12px;">TwentyFour Dynamic Bond</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Flexible FI. Active sector rotation.</td></tr>
-        <tr><td><b>TIPS</b></td><td style="font-weight:700;">ITPS</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4.0</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Key inflation hedge (replaces gold role).</td></tr>
-        <tr><td><b>High Yield</b></td><td style="font-weight:700;">IHYG</td><td><span class="badge badge-core">Core</span></td><td>2</td><td><b>1.0</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Spreads tight.</td></tr>
-        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:700;">SEMB</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>2.0</b></td><td class="minus">&ndash;0.5</td><td class="badge-n">N</td><td class="small" style="color:#555;">Reduced for active EM satellites.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;EM HC Debt</td><td style="font-weight:700;font-size:12px;">NB EM Debt Hard Ccy</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Neuberger Berman. EM sovereign credit.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Corp Bonds</td><td style="font-weight:700;font-size:12px;">GS EM Corp Bond</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">GS EM corporate yield pickup.</td></tr>
-        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:700;">SEML</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>4.0</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">FX upside on USD weakness.</td></tr>
-        <tr style="background:#f5f5f5;font-weight:700;"><td colspan="3">Total Fixed Income</td><td>26.0</td><td><b>28.0</b></td><td colspan="3" class="small" style="color:#777;font-weight:400;">Core 21.0 + Satellite 7.0 = 28.0</td></tr>
+        <tr><td><b>US Agg Bond</b></td><td style="font-weight:500;">IUAG</td><td><span class="badge badge-core">Core</span></td><td>9</td><td><b>5.0</b></td><td class="minus">&ndash;4</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Sticky inflation. Reduced for PIMCO.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Global IG Credit</td><td style="font-weight:500;">PIMCO GIS Global IG Credit</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">PIMCO flagship. Duration + credit alpha.</td></tr>
+        <tr><td><b>Int&rsquo;l DM Bond</b></td><td style="font-weight:500;">IGLA</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>5.0</b></td><td class="minus">&ndash;2</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">ECB dovish. Reduced for TwentyFour.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Strategic Bond</td><td style="font-weight:500;">TwentyFour Dynamic Bond</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Flexible FI. Active sector rotation.</td></tr>
+        <tr><td><b>TIPS</b></td><td style="font-weight:500;">ITPS</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4.0</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Key inflation hedge (replaces gold role).</td></tr>
+        <tr><td><b>High Yield</b></td><td style="font-weight:500;">IHYG</td><td><span class="badge badge-core">Core</span></td><td>2</td><td><b>1.0</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Spreads tight.</td></tr>
+        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:500;">SEMB</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>2.0</b></td><td class="minus">&ndash;0.5</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">Reduced for active EM satellites.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;EM HC Debt</td><td style="font-weight:500;">NB EM Debt Hard Ccy</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Neuberger Berman. EM sovereign credit.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Corp Bonds</td><td style="font-weight:500;">GS EM Corp Bond</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">GS EM corporate yield pickup.</td></tr>
+        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:500;">SEML</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>4.0</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">FX upside on USD weakness.</td></tr>
+        <tr class="section-row" style=""><td colspan="3">Total Fixed Income</td><td>26.0</td><td><b>28.0</b></td><td colspan="3" class="small" style="color:var(--ink-40);font-weight:400;">Core 21.0 + Satellite 7.0 = 28.0</td></tr>
 
         <tr class="section-row"><td colspan="8">ALTERNATIVES (SAA 18% &rarr; TAA 21%) &middot; Gold capped 3%/4%</td></tr>
-        <tr><td><b>Gold</b></td><td style="font-weight:700;">IGLN</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">iShares Physical Gold ETC. SAA cap 3%. OW +33%.</td></tr>
-        <tr><td><b>Broad Commodities</b></td><td style="font-weight:700;">ICOM</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>7</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">Primary real asset hedge (ex-gold).</td></tr>
-        <tr><td><b>Global REITs</b></td><td style="font-weight:700;">IWDP</td><td><span class="badge badge-core">Core</span></td><td>6</td><td><b>3.0</b></td><td class="minus">&ndash;3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Reduced for active property satellite.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Property Active</td><td style="font-weight:700;font-size:12px;">JH Global Property Equities</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Active property equity selection.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Market Neutral</td><td style="font-weight:700;font-size:12px;">Lumyna MW TOPS</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Near-zero beta. Replaces gold diversification.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;L/S Credit</td><td style="font-weight:700;font-size:12px;">Montlake Ironshield L/S</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Long/short credit. Low correlation.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Event Driven</td><td style="font-weight:700;font-size:12px;">Mygale Event Driven</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">M&amp;A / special situations.</td></tr>
-        <tr style="background:#f5f5f5;font-weight:700;"><td colspan="3">Total Alternatives</td><td>18.0</td><td><b>21.0</b></td><td colspan="3" class="small" style="color:#777;font-weight:400;">Core 14.0 + Satellite 7.0 = 21.0</td></tr>
-        <tr style="background:#fafafa;"><td><b>Cash</b></td><td style="font-weight:700;">CSH2</td><td><span class="badge badge-core">Core</span></td><td>1</td><td><b>1</b></td><td class="neutral">&mdash;</td><td class="badge-n">Const</td><td class="small" style="color:#555;">iShares $ Treasury Bond 0-1yr UCITS ETF.</td></tr>
-        <tr class="total-row"><td colspan="3"><b>TOTAL</b></td><td><b>100%</b></td><td><b>100%</b></td><td colspan="3" style="font-weight:400;font-size:12px;color:#555;">Core 72.5% + Satellite 27.5% = 100%</td></tr>
+        <tr><td><b>Gold</b></td><td style="font-weight:500;">IGLN</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">iShares Physical Gold ETC. SAA cap 3%. OW +33%.</td></tr>
+        <tr><td><b>Broad Commodities</b></td><td style="font-weight:500;">ICOM</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>7</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">Primary real asset hedge (ex-gold).</td></tr>
+        <tr><td><b>Global REITs</b></td><td style="font-weight:500;">IWDP</td><td><span class="badge badge-core">Core</span></td><td>6</td><td><b>3.0</b></td><td class="minus">&ndash;3</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Reduced for active property satellite.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Property Active</td><td style="font-weight:500;">JH Global Property Equities</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Active property equity selection.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Market Neutral</td><td style="font-weight:500;">Lumyna MW TOPS</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Near-zero beta. Replaces gold diversification.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;L/S Credit</td><td style="font-weight:500;">Montlake Ironshield L/S</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Long/short credit. Low correlation.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Event Driven</td><td style="font-weight:500;">Mygale Event Driven</td><td><span class="badge badge-sat">Satellite</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">M&amp;A / special situations.</td></tr>
+        <tr class="section-row" style=""><td colspan="3">Total Alternatives</td><td>18.0</td><td><b>21.0</b></td><td colspan="3" class="small" style="color:var(--ink-40);font-weight:400;">Core 14.0 + Satellite 7.0 = 21.0</td></tr>
+        <tr style="background:transparent;"><td><b>Cash</b></td><td style="font-weight:500;">CSH2</td><td><span class="badge badge-core">Core</span></td><td>1</td><td><b>1</b></td><td class="neutral">&mdash;</td><td class="badge-n">Const</td><td class="small" style="color:var(--ink-60);">iShares $ Treasury Bond 0-1yr UCITS ETF.</td></tr>
+        <tr class="total-row"><td colspan="3"><b>TOTAL</b></td><td><b>100%</b></td><td><b>100%</b></td><td colspan="3" style="font-weight:400;font-size:12px;color:var(--ink-60);">Core 72.5% + Satellite 27.5% = 100%</td></tr>
       </tbody>
     </table>
   </div>
@@ -264,33 +429,33 @@
 <div id="tab-core-sat" class="tab-content">
   <div class="card">
     <div class="section-title">Core + Satellite Structure</div>
-    <div class="small" style="color:#777;margin-bottom:10px;">Core provides low-cost beta via UK-listed UCITS ETFs. Satellites target alpha via active managers. Gold capped 3% SAA; freed weight to FI (+6%), TIPS (+1%), commodities (+2%), abs return (+5%).</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:10px;">Core provides low-cost beta via UK-listed UCITS ETFs. Satellites target alpha via active managers. Gold capped 3% SAA; freed weight to FI (+6%), TIPS (+1%), commodities (+2%), abs return (+5%).</div>
   </div>
   <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-title" style="color:#0369a1;">Core ETFs &mdash; 72.5%</div>
-      <div class="stat-row"><span style="color:#666;">DM Equity ETFs</span><span class="stat-val">33.5%</span></div>
-      <div class="stat-row"><span style="color:#666;">EM Equity ETFs</span><span class="stat-val">5.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">DM Bond ETFs</span><span class="stat-val">15.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">EM Bond ETFs</span><span class="stat-val">6.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">Alternatives ETFs</span><span class="stat-val">14.0%</span></div>
-      <div style="border-top:1px solid #ddd;padding-top:4px;margin-top:4px;"><div class="stat-row"><span style="color:#666;font-weight:700;">Est. TER</span><span class="stat-val" style="color:#0369a1;">0.19%</span></div></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">DM Equity ETFs</span><span class="stat-val">33.5%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">EM Equity ETFs</span><span class="stat-val">5.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">DM Bond ETFs</span><span class="stat-val">15.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">EM Bond ETFs</span><span class="stat-val">6.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Alternatives ETFs</span><span class="stat-val">14.0%</span></div>
+      <div style="border-top:1.5px solid var(--ink-10);padding-top:8px;margin-top:8px;"><div class="stat-row"><span style="color:var(--ink-60);font-weight:500;">Est. TER</span><span class="stat-val">0.19%</span></div></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title" style="color:#6d28d9;">Satellite Funds &mdash; 27.5%</div>
-      <div class="stat-row"><span style="color:#666;">DM Equity Active</span><span class="stat-val">9.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">EM / Asia Active</span><span class="stat-val">3.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">Bond Active</span><span class="stat-val">7.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">Property Active</span><span class="stat-val">2.0%</span></div>
-      <div class="stat-row"><span style="color:#666;">Absolute Return</span><span class="stat-val">5.0%</span></div>
-      <div style="border-top:1px solid #ddd;padding-top:4px;margin-top:4px;"><div class="stat-row"><span style="color:#666;font-weight:700;">Est. OCF</span><span class="stat-val" style="color:#6d28d9;">0.84%</span></div></div>
+      <div class="stat-title" style="color:var(--ink);">Satellite Funds &mdash; 27.5%</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">DM Equity Active</span><span class="stat-val">9.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">EM / Asia Active</span><span class="stat-val">3.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Bond Active</span><span class="stat-val">7.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Property Active</span><span class="stat-val">2.0%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Absolute Return</span><span class="stat-val">5.0%</span></div>
+      <div style="border-top:1.5px solid var(--ink-10);padding-top:8px;margin-top:8px;"><div class="stat-row"><span style="color:var(--ink-60);font-weight:500;">Est. OCF</span><span class="stat-val" style="color:var(--ink);">0.84%</span></div></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title" style="color:#333;">Blended Portfolio</div>
-      <div class="stat-row"><span style="color:#666;">Core Positions</span><span class="stat-val">15</span></div>
-      <div class="stat-row"><span style="color:#666;">Satellite Funds</span><span class="stat-val">17</span></div>
-      <div class="stat-row"><span style="color:#666;">Excluded Funds</span><span class="stat-val">4</span></div>
-      <div style="border-top:1px solid #ddd;padding-top:4px;margin-top:4px;"><div class="stat-row"><span style="color:#666;font-weight:700;">Blended Cost</span><span class="stat-val" style="color:#333;">0.37%</span></div></div>
+      <div class="stat-title" style="color:var(--ink-90);">Blended Portfolio</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Core Positions</span><span class="stat-val">15</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Satellite Funds</span><span class="stat-val">17</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Excluded Funds</span><span class="stat-val">4</span></div>
+      <div style="border-top:1.5px solid var(--ink-10);padding-top:8px;margin-top:8px;"><div class="stat-row"><span style="color:var(--ink-60);font-weight:500;">Blended Cost</span><span class="stat-val" style="color:var(--ink-90);">0.37%</span></div></div>
     </div>
   </div>
 </div>
@@ -299,28 +464,28 @@
 <div id="tab-equity" class="tab-content">
   <div class="card" style="overflow-x:auto;">
     <div class="section-title">Equity &mdash; Structure &amp; Valuation Detail</div>
-    <div class="small" style="color:#777;margin-bottom:8px;">DM: UCITS ETFs. EM: EMIM core + NDIA/ICHN tactical + active satellites. &plusmn;20% DM / &plusmn;30% EM tilts.</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:8px;">DM: UCITS ETFs. EM: EMIM core + NDIA/ICHN tactical + active satellites. &plusmn;20% DM / &plusmn;30% EM tilts.</div>
     <table>
       <thead><tr><th>Market</th><th>ETF/Fund</th><th>Type</th><th>ACWI %</th><th>P/E</th><th>10Y Avg</th><th>Dev %</th><th>Valuation</th><th>SAA</th><th>TAA</th><th>&Delta;</th><th>Tilt</th><th style="min-width:90px;">Rationale</th></tr></thead>
       <tbody>
         <tr class="section-row"><td colspan="13">DM EQUITY (SAA 49.0% &rarr; TAA 42.0%)</td></tr>
-        <tr><td><b>United States</b></td><td style="font-weight:700;">CSPX</td><td><span class="badge badge-core">Core</span></td><td>63.0</td><td>25.86</td><td>19.97</td><td class="minus">+29%</td><td><span class="badge val-exp">Expensive</span></td><td>34.5</td><td><b>24.0</b></td><td class="minus">&ndash;10.5</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">CAPE 37.6&times;. Max UW.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>BLK US Dynamic</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>24.25</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Blend. P/E 24.25.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>Artemis US SC</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">RoE 17.8% vs R2000 5.7%.</td></tr>
-        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:700;">IMEU</td><td><span class="badge badge-core">Core</span></td><td>~12.5</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.5</td><td><b>4.5</b></td><td class="minus">&ndash;2.0</td><td class="badge-n">N</td><td class="small" style="color:#555;">ECB dovish + fiscal.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>JH Euro + JPM Euro</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Conviction + behavioural.</td></tr>
-        <tr><td><b>Japan</b></td><td style="font-weight:700;">IJPA</td><td><span class="badge badge-core">Core</span></td><td>5.0</td><td>19.11</td><td>14.29</td><td class="minus">+34%</td><td><span class="badge val-exp">Expensive</span></td><td>2.8</td><td><b>1.2</b></td><td class="minus">&ndash;1.6</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">BoJ tightening.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>Morant Wright</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deep-value yield.</td></tr>
-        <tr><td><b>United Kingdom</b></td><td style="font-weight:700;">ISF</td><td><span class="badge badge-core">Core</span></td><td>3.3</td><td>19.47</td><td>13.38</td><td class="minus">+46%</td><td><span class="badge val-exp">Expensive</span></td><td>1.8</td><td><b>0.5</b></td><td class="minus">&ndash;1.3</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Satellite-led UK alloc.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>JOHCM + Artemis UK</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>2.5</b></td><td class="plus">+2.5</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Top-decile + quality.</td></tr>
-        <tr><td><b>Australia</b></td><td style="font-weight:700;">SAUS</td><td><span class="badge badge-core">Core</span></td><td>1.8</td><td>22.30</td><td>16.53</td><td class="minus">+35%</td><td><span class="badge val-exp">Expensive</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:#555;">At weight.</td></tr>
-        <tr><td><b>DM Residual</b></td><td style="font-weight:700;">SWRD</td><td><span class="badge badge-core">Core</span></td><td>~4.4</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>2.4</td><td><b>2.3</b></td><td class="minus">&ndash;0.1</td><td class="badge-n">N</td><td class="small" style="color:#555;">Residual DM.</td></tr>
+        <tr><td><b>United States</b></td><td style="font-weight:500;">CSPX</td><td><span class="badge badge-core">Core</span></td><td>63.0</td><td>25.86</td><td>19.97</td><td class="minus">+29%</td><td><span class="badge val-exp">Expensive</span></td><td>34.5</td><td><b>24.0</b></td><td class="minus">&ndash;10.5</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">CAPE 37.6&times;. Max UW.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>BLK US Dynamic</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>24.25</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Blend. P/E 24.25.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>Artemis US SC</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">RoE 17.8% vs R2000 5.7%.</td></tr>
+        <tr><td><b>Europe ex-UK</b></td><td style="font-weight:500;">IMEU</td><td><span class="badge badge-core">Core</span></td><td>~12.5</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.5</td><td><b>4.5</b></td><td class="minus">&ndash;2.0</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">ECB dovish + fiscal.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>JH Euro + JPM Euro</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Conviction + behavioural.</td></tr>
+        <tr><td><b>Japan</b></td><td style="font-weight:500;">IJPA</td><td><span class="badge badge-core">Core</span></td><td>5.0</td><td>19.11</td><td>14.29</td><td class="minus">+34%</td><td><span class="badge val-exp">Expensive</span></td><td>2.8</td><td><b>1.2</b></td><td class="minus">&ndash;1.6</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">BoJ tightening.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>Morant Wright</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>1.0</b></td><td class="plus">+1.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Deep-value yield.</td></tr>
+        <tr><td><b>United Kingdom</b></td><td style="font-weight:500;">ISF</td><td><span class="badge badge-core">Core</span></td><td>3.3</td><td>19.47</td><td>13.38</td><td class="minus">+46%</td><td><span class="badge val-exp">Expensive</span></td><td>1.8</td><td><b>0.5</b></td><td class="minus">&ndash;1.3</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Satellite-led UK alloc.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>JOHCM + Artemis UK</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>2.5</b></td><td class="plus">+2.5</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Top-decile + quality.</td></tr>
+        <tr><td><b>Australia</b></td><td style="font-weight:500;">SAUS</td><td><span class="badge badge-core">Core</span></td><td>1.8</td><td>22.30</td><td>16.53</td><td class="minus">+35%</td><td><span class="badge val-exp">Expensive</span></td><td>1.0</td><td><b>1.0</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">At weight.</td></tr>
+        <tr><td><b>DM Residual</b></td><td style="font-weight:500;">SWRD</td><td><span class="badge badge-core">Core</span></td><td>~4.4</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>2.4</td><td><b>2.3</b></td><td class="minus">&ndash;0.1</td><td class="badge-n">N</td><td class="small" style="color:var(--ink-60);">Residual DM.</td></tr>
         <tr class="section-row"><td colspan="13">EM EQUITY (SAA 6.0% &rarr; TAA 8.0%)</td></tr>
-        <tr><td><b>EM Broad</b></td><td style="font-weight:700;">EMIM</td><td><span class="badge badge-core">Core</span></td><td>12.1</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.0</td><td><b>1.0</b></td><td class="minus">&ndash;5.0</td><td class="badge-uw">UW</td><td class="small" style="color:#555;">Reduced for tactical.</td></tr>
-        <tr><td><b>India</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:700;">NDIA</td><td><span class="badge badge-core">Core</span></td><td>2.0</td><td>12.59</td><td>20.73</td><td class="plus">&ndash;39%</td><td><span class="badge val-cheap">Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Deepest value. RBI.</td></tr>
-        <tr><td><b>China/HK</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:700;">ICHN</td><td><span class="badge badge-core">Core</span></td><td>3.1</td><td>10.44</td><td>11.17</td><td class="plus">&ndash;7%</td><td><span class="badge val-cheap">Fair-Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Cheapest large mkt.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>D&amp;C + Lazard + M&amp;G</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>3.0</b></td><td class="plus">+3.0</td><td class="badge-ow">OW</td><td class="small" style="color:#555;">Value + quality + Asia.</td></tr>
-        <tr style="background:#f5f5f5;font-weight:700;"><td colspan="8">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:#777;font-weight:400;">Core 36.5 + Sat 13.5</td></tr>
+        <tr><td><b>EM Broad</b></td><td style="font-weight:500;">EMIM</td><td><span class="badge badge-core">Core</span></td><td>12.1</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><span class="badge val-fair">Mixed</span></td><td>6.0</td><td><b>1.0</b></td><td class="minus">&ndash;5.0</td><td class="badge-uw">UW</td><td class="small" style="color:var(--ink-60);">Reduced for tactical.</td></tr>
+        <tr><td><b>India</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:500;">NDIA</td><td><span class="badge badge-core">Core</span></td><td>2.0</td><td>12.59</td><td>20.73</td><td class="plus">&ndash;39%</td><td><span class="badge val-cheap">Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Deepest value. RBI.</td></tr>
+        <tr><td><b>China/HK</b> <span class="badge badge-tac">TAC</span></td><td style="font-weight:500;">ICHN</td><td><span class="badge badge-core">Core</span></td><td>3.1</td><td>10.44</td><td>11.17</td><td class="plus">&ndash;7%</td><td><span class="badge val-cheap">Fair-Cheap</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Cheapest large mkt.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;<i>D&amp;C + Lazard + M&amp;G</i></td><td style="font-size:12px;">Active</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><b>3.0</b></td><td class="plus">+3.0</td><td class="badge-ow">OW</td><td class="small" style="color:var(--ink-60);">Value + quality + Asia.</td></tr>
+        <tr class="section-row" style=""><td colspan="8">Total Equity</td><td>55.0</td><td><b>50.0</b></td><td colspan="3" class="small" style="color:var(--ink-40);font-weight:400;">Core 36.5 + Sat 13.5</td></tr>
       </tbody>
     </table>
   </div>
@@ -333,12 +498,12 @@
     <table>
       <thead><tr><th>Name</th><th>ETF / Fund</th><th>Type</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><b>US Aggregate Bond</b></td><td style="font-weight:700;">IUAG</td><td><span class="badge badge-core">Core</span></td><td>9</td><td><b>5.0</b></td><td class="minus">&ndash;4</td><td class="badge-uw">UW</td><td style="color:#555;">Sticky inflation. Reduced for PIMCO.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Global IG Credit</td><td style="font-weight:700;font-size:12px;">PIMCO GIS Global IG Credit</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:#555;">PIMCO flagship.</td></tr>
-        <tr><td><b>Int&rsquo;l DM Bond</b></td><td style="font-weight:700;">IGLA</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>5.0</b></td><td class="minus">&ndash;2</td><td class="badge-n">N</td><td style="color:#555;">ECB dovish.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Strategic Bond</td><td style="font-weight:700;font-size:12px;">TwentyFour Dynamic Bond</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:#555;">Flexible FI.</td></tr>
-        <tr><td><b>TIPS</b></td><td style="font-weight:700;">ITPS</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4.0</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:#555;">Key inflation hedge (gold role).</td></tr>
-        <tr><td><b>High Yield</b></td><td style="font-weight:700;">IHYG</td><td><span class="badge badge-core">Core</span></td><td>2</td><td><b>1.0</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:#555;">Spreads tight.</td></tr>
+        <tr><td><b>US Aggregate Bond</b></td><td style="font-weight:500;">IUAG</td><td><span class="badge badge-core">Core</span></td><td>9</td><td><b>5.0</b></td><td class="minus">&ndash;4</td><td class="badge-uw">UW</td><td style="color:var(--ink-60);">Sticky inflation. Reduced for PIMCO.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Global IG Credit</td><td style="font-weight:500;">PIMCO GIS Global IG Credit</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">PIMCO flagship.</td></tr>
+        <tr><td><b>Int&rsquo;l DM Bond</b></td><td style="font-weight:500;">IGLA</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>5.0</b></td><td class="minus">&ndash;2</td><td class="badge-n">N</td><td style="color:var(--ink-60);">ECB dovish.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Strategic Bond</td><td style="font-weight:500;">TwentyFour Dynamic Bond</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Flexible FI.</td></tr>
+        <tr><td><b>TIPS</b></td><td style="font-weight:500;">ITPS</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4.0</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Key inflation hedge (gold role).</td></tr>
+        <tr><td><b>High Yield</b></td><td style="font-weight:500;">IHYG</td><td><span class="badge badge-core">Core</span></td><td>2</td><td><b>1.0</b></td><td class="minus">&ndash;1</td><td class="badge-uw">UW</td><td style="color:var(--ink-60);">Spreads tight.</td></tr>
       </tbody>
     </table>
   </div>
@@ -347,10 +512,10 @@
     <table>
       <thead><tr><th>Name</th><th>ETF / Fund</th><th>Type</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:700;">SEMB</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>2.0</b></td><td class="minus">&ndash;0.5</td><td class="badge-n">N</td><td style="color:#555;">Reduced for satellites.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Debt HC</td><td style="font-weight:700;font-size:12px;">NB EM Debt Hard Ccy</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">Neuberger Berman.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Corp</td><td style="font-weight:700;font-size:12px;">GS EM Corp Bond</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">GS EM corporate.</td></tr>
-        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:700;">SEML</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>4.0</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">FX upside on USD weakness.</td></tr>
+        <tr><td><b>EM USD Bonds</b></td><td style="font-weight:500;">SEMB</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>2.0</b></td><td class="minus">&ndash;0.5</td><td class="badge-n">N</td><td style="color:var(--ink-60);">Reduced for satellites.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Debt HC</td><td style="font-weight:500;">NB EM Debt Hard Ccy</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Neuberger Berman.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;EM Corp</td><td style="font-weight:500;">GS EM Corp Bond</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">GS EM corporate.</td></tr>
+        <tr><td><b>EM Local Bonds</b></td><td style="font-weight:500;">SEML</td><td><span class="badge badge-core">Core</span></td><td>2.5</td><td><b>4.0</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">FX upside on USD weakness.</td></tr>
       </tbody>
     </table>
   </div>
@@ -359,13 +524,13 @@
     <table>
       <thead><tr><th>Name</th><th>ETF / Fund</th><th>Type</th><th>SAA %</th><th>TAA %</th><th>&Delta;</th><th>Tilt</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><b>Gold</b></td><td style="font-weight:700;">IGLN</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:#555;">SAA cap 3%. +33% OW within cap.</td></tr>
-        <tr><td><b>Broad Commodities</b></td><td style="font-weight:700;">ICOM</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>7</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td style="color:#555;">Primary real asset hedge (ex-gold).</td></tr>
-        <tr><td><b>Global REITs</b></td><td style="font-weight:700;">IWDP</td><td><span class="badge badge-core">Core</span></td><td>6</td><td><b>3.0</b></td><td class="minus">&ndash;3</td><td class="badge-uw">UW</td><td style="color:#555;">Reduced for active satellite.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Property</td><td style="font-weight:700;font-size:12px;">JH Global Property Equities</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:#555;">Active property selection.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Mkt Neutral</td><td style="font-weight:700;font-size:12px;">Lumyna MW TOPS</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:#555;">Replaces gold diversification role.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;L/S Credit</td><td style="font-weight:700;font-size:12px;">Montlake Ironshield</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">Long/short credit.</td></tr>
-        <tr class="satellite-row"><td>&nbsp;&nbsp;Event Driven</td><td style="font-weight:700;font-size:12px;">Mygale Event Driven</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:#555;">M&amp;A / special sits.</td></tr>
+        <tr><td><b>Gold</b></td><td style="font-weight:500;">IGLN</td><td><span class="badge badge-core">Core</span></td><td>3</td><td><b>4</b></td><td class="plus">+1</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">SAA cap 3%. +33% OW within cap.</td></tr>
+        <tr><td><b>Broad Commodities</b></td><td style="font-weight:500;">ICOM</td><td><span class="badge badge-core">Core</span></td><td>7</td><td><b>7</b></td><td class="neutral">&mdash;</td><td class="badge-n">N</td><td style="color:var(--ink-60);">Primary real asset hedge (ex-gold).</td></tr>
+        <tr><td><b>Global REITs</b></td><td style="font-weight:500;">IWDP</td><td><span class="badge badge-core">Core</span></td><td>6</td><td><b>3.0</b></td><td class="minus">&ndash;3</td><td class="badge-uw">UW</td><td style="color:var(--ink-60);">Reduced for active satellite.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Property</td><td style="font-weight:500;">JH Global Property Equities</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Active property selection.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Mkt Neutral</td><td style="font-weight:500;">Lumyna MW TOPS</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>2.0</b></td><td class="plus">+2.0</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Replaces gold diversification role.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;L/S Credit</td><td style="font-weight:500;">Montlake Ironshield</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">Long/short credit.</td></tr>
+        <tr class="satellite-row"><td>&nbsp;&nbsp;Event Driven</td><td style="font-weight:500;">Mygale Event Driven</td><td><span class="badge badge-sat">SAT</span></td><td>&mdash;</td><td><b>1.5</b></td><td class="plus">+1.5</td><td class="badge-ow">OW</td><td style="color:var(--ink-60);">M&amp;A / special sits.</td></tr>
       </tbody>
     </table>
   </div>
@@ -374,82 +539,82 @@
 <div id="tab-results" class="tab-content">
   <div class="card">
     <div class="section-title">5-Year Results: GTAA Core+Satellite vs 60/40 &amp; IA Mixed Investment Sectors</div>
-    <div class="small" style="color:#777;margin-bottom:10px;">March 2021 &ndash; February 2026 &middot; Monthly rebalancing &middot; Growth of &pound;100 &middot; Gold capped at 3% SAA throughout</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:10px;">March 2021 &ndash; February 2026 &middot; Monthly rebalancing &middot; Growth of &pound;100 &middot; Gold capped at 3% SAA throughout</div>
   </div>
 
   <!-- 5-YEAR CHART -->
   <div class="card">
     <div class="section-title">Growth of &pound;100 &mdash; 5 Year (Mar 2021 &ndash; Feb 2026)</div>
-    <div class="small" style="color:#777;margin-bottom:10px;">GTAA Core+Satellite vs IA Mixed Investment sectors (0&ndash;35%, 20&ndash;60%, 40&ndash;85% Shares) &middot; Gold capped 3% SAA</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:10px;">GTAA Core+Satellite vs IA Mixed Investment sectors (0&ndash;35%, 20&ndash;60%, 40&ndash;85% Shares) &middot; Gold capped 3% SAA</div>
     <div style="position:relative;width:100%;max-height:420px;"><canvas id="fiveYearChart"></canvas></div>
-    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px solid #eee;">
-      <div style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="display:inline-block;width:24px;height:3px;background:#6d28d9;border-radius:1px;"></span><b>GTAA C+S</b> &pound;165.20 (10.6%)</div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="display:inline-block;width:24px;height:3px;background:#a78bfa;border-radius:1px;"></span><b>GTAA Core</b> &pound;156.80 (9.4%)</div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="display:inline-block;width:24px;height:3px;background:#e11d48;border-radius:1px;"></span><b>IA 40&ndash;85%</b> &pound;141.20 (7.1%)</div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="display:inline-block;width:24px;height:3px;background:#d97706;border-radius:1px;"></span><b>IA 20&ndash;60%</b> &pound;126.80 (4.9%)</div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="display:inline-block;width:24px;height:3px;background:#9ca3af;border-radius:1px;"></span><b>IA 0&ndash;35%</b> &pound;111.40 (2.2%)</div>
-      <div style="display:flex;align-items:center;gap:5px;font-size:12px;"><span style="display:inline-block;width:24px;height:3px;background:#888;border-radius:1px;"></span><b>60/40</b> &pound;145.80 (7.8%)</div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;padding-top:10px;border-top:1px solid var(--ink-05);">
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:300;letter-spacing:-0.2px;"><span style="display:inline-block;width:24px;height:3px;background:var(--ink);border-radius:1px;"></span><b>GTAA C+S</b> &pound;165.20 (10.6%)</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:300;letter-spacing:-0.2px;"><span style="display:inline-block;width:24px;height:3px;background:var(--ink-40);border-radius:1px;"></span><b>GTAA Core</b> &pound;156.80 (9.4%)</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:300;letter-spacing:-0.2px;"><span style="display:inline-block;width:24px;height:3px;background:var(--red);border-radius:1px;"></span><b>IA 40&ndash;85%</b> &pound;141.20 (7.1%)</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:300;letter-spacing:-0.2px;"><span style="display:inline-block;width:24px;height:3px;background:#b45309;border-radius:1px;"></span><b>IA 20&ndash;60%</b> &pound;126.80 (4.9%)</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:300;letter-spacing:-0.2px;"><span style="display:inline-block;width:24px;height:3px;background:var(--ink-20);border-radius:1px;"></span><b>IA 0&ndash;35%</b> &pound;111.40 (2.2%)</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:300;letter-spacing:-0.2px;"><span style="display:inline-block;width:24px;height:3px;background:var(--ink-40);border-radius:1px;"></span><b>60/40</b> &pound;145.80 (7.8%)</div>
     </div>
   </div>
 
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-title" style="color:#6d28d9;">GTAA Core+Satellite</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#6d28d9;">10.6%</span></div>
-      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#6d28d9;">10.4%</span></div>
-      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#6d28d9;">0.59</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#6d28d9;">&ndash;15.2%</span></div>
-      <div class="stat-row"><span style="color:#666;">Calmar Ratio</span><span class="stat-val" style="color:#6d28d9;">0.70</span></div>
-      <div class="stat-row"><span style="color:#666;">&pound;100 &rarr;</span><span class="stat-val" style="color:#6d28d9;">&pound;165.20</span></div>
+      <div class="stat-title" style="color:var(--ink);">GTAA Core+Satellite</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--ink);">10.6%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Volatility</span><span class="stat-val" style="color:var(--ink);">10.4%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Sharpe Ratio</span><span class="stat-val" style="color:var(--ink);">0.59</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--ink);">&ndash;15.2%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Calmar Ratio</span><span class="stat-val" style="color:var(--ink);">0.70</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">&pound;100 &rarr;</span><span class="stat-val" style="color:var(--ink);">&pound;165.20</span></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title" style="color:#8b5cf6;">GTAA Core-Only</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#8b5cf6;">9.4%</span></div>
-      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#8b5cf6;">10.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#8b5cf6;">0.45</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#8b5cf6;">&ndash;16.4%</span></div>
-      <div class="stat-row"><span style="color:#666;">Calmar Ratio</span><span class="stat-val" style="color:#8b5cf6;">0.57</span></div>
-      <div class="stat-row"><span style="color:#666;">&pound;100 &rarr;</span><span class="stat-val" style="color:#8b5cf6;">&pound;156.80</span></div>
+      <div class="stat-title" style="color:var(--ink-60);">GTAA Core-Only</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--ink-60);">9.4%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Volatility</span><span class="stat-val" style="color:var(--ink-60);">10.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Sharpe Ratio</span><span class="stat-val" style="color:var(--ink-60);">0.45</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--ink-60);">&ndash;16.4%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Calmar Ratio</span><span class="stat-val" style="color:var(--ink-60);">0.57</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">&pound;100 &rarr;</span><span class="stat-val" style="color:var(--ink-60);">&pound;156.80</span></div>
     </div>
     <div class="stat-card">
-      <div class="stat-title" style="color:#666;">60/40 ACWI / AGG</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#666;">7.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">Ann. Volatility</span><span class="stat-val" style="color:#666;">12.4%</span></div>
-      <div class="stat-row"><span style="color:#666;">Sharpe Ratio</span><span class="stat-val" style="color:#666;">0.27</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#666;">&ndash;19.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">&pound;100 &rarr;</span><span class="stat-val" style="color:#666;">&pound;145.80</span></div>
+      <div class="stat-title" style="color:var(--ink-60);">60/40 ACWI / AGG</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--ink-60);">7.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Volatility</span><span class="stat-val" style="color:var(--ink-60);">12.4%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Sharpe Ratio</span><span class="stat-val" style="color:var(--ink-60);">0.27</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--ink-60);">&ndash;19.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">&pound;100 &rarr;</span><span class="stat-val" style="color:var(--ink-60);">&pound;145.80</span></div>
     </div>
   </div>
   <div class="stats-grid">
-    <div class="stat-card" style="border-top:2px solid #e11d48;">
-      <div class="stat-title" style="color:#e11d48;">IA Mixed 40&ndash;85%</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#e11d48;">7.1%</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#e11d48;">&ndash;16.5%</span></div>
-      <div class="stat-row"><span style="color:#666;">&pound;100 &rarr;</span><span class="stat-val" style="color:#e11d48;">&pound;141.20</span></div>
+    <div class="stat-card" style="border-top:2px solid var(--red);">
+      <div class="stat-title" style="color:var(--red);">IA Mixed 40&ndash;85%</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--red);">7.1%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--red);">&ndash;16.5%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">&pound;100 &rarr;</span><span class="stat-val" style="color:var(--red);">&pound;141.20</span></div>
     </div>
     <div class="stat-card" style="border-top:2px solid #b45309;">
       <div class="stat-title" style="color:#d97706;">IA Mixed 20&ndash;60%</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#d97706;">4.9%</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#d97706;">&ndash;14.2%</span></div>
-      <div class="stat-row"><span style="color:#666;">&pound;100 &rarr;</span><span class="stat-val" style="color:#d97706;">&pound;126.80</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:#d97706;">4.9%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:#d97706;">&ndash;14.2%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">&pound;100 &rarr;</span><span class="stat-val" style="color:#d97706;">&pound;126.80</span></div>
     </div>
-    <div class="stat-card" style="border-top:2px solid #9ca3af;">
-      <div class="stat-title" style="color:#6b7280;">IA Mixed 0&ndash;35%</div>
-      <div class="stat-row"><span style="color:#666;">Ann. Return</span><span class="stat-val" style="color:#6b7280;">2.2%</span></div>
-      <div class="stat-row"><span style="color:#666;">Max Drawdown</span><span class="stat-val" style="color:#6b7280;">&ndash;12.8%</span></div>
-      <div class="stat-row"><span style="color:#666;">&pound;100 &rarr;</span><span class="stat-val" style="color:#6b7280;">&pound;111.40</span></div>
+    <div class="stat-card" style="border-top:2px solid var(--ink-20);">
+      <div class="stat-title" style="color:var(--ink-40);">IA Mixed 0&ndash;35%</div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Ann. Return</span><span class="stat-val" style="color:var(--ink-40);">2.2%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">Max Drawdown</span><span class="stat-val" style="color:var(--ink-40);">&ndash;12.8%</span></div>
+      <div class="stat-row"><span style="color:var(--ink-60);">&pound;100 &rarr;</span><span class="stat-val" style="color:var(--ink-40);">&pound;111.40</span></div>
     </div>
   </div>
 
   <!-- IDP ATTRIBUTION -->
   <div class="card">
     <div class="section-title">IDP Attribution Model &mdash; Brinson-Fachler Decomposition</div>
-    <div class="small" style="color:#777;margin-bottom:10px;">5-Year annualised &middot; GTAA C+S vs 60/40 &middot; Gold capped 3% SAA &middot; Selection now dominant alpha source</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:10px;">5-Year annualised &middot; GTAA C+S vs 60/40 &middot; Gold capped 3% SAA &middot; Selection now dominant alpha source</div>
     <div class="stats-grid" style="margin-bottom:12px;">
-      <div class="stat-card" style="border-left:3px solid #7c3aed;"><div class="stat-title">Total Active Return</div><div style="font-size:24px;font-weight:700;color:#6d28d9;">+2.8% p.a.</div><div class="small" style="color:#777;">GTAA 10.6% &ndash; BM 7.8%</div></div>
-      <div class="stat-card" style="border-left:3px solid #059669;"><div class="stat-title">Allocation Effect</div><div style="font-size:24px;font-weight:700;color:#059669;">+0.7% p.a.</div><div class="small" style="color:#777;">TAA tilts vs benchmark</div></div>
-      <div class="stat-card" style="border-left:3px solid #7c3aed;"><div class="stat-title">Selection Effect</div><div style="font-size:24px;font-weight:700;color:#6d28d9;">+1.9% p.a.</div><div class="small" style="color:#777;">Manager alpha (dominant)</div></div>
-      <div class="stat-card" style="border-left:3px solid #b45309;"><div class="stat-title">Interaction Effect</div><div style="font-size:24px;font-weight:700;color:#d97706;">+0.2% p.a.</div><div class="small" style="color:#777;">Allocation &times; selection</div></div>
+      <div class="stat-card" style="border-left:3px solid var(--ink);"><div class="stat-title">Total Active Return</div><div style="font-family:\'Yeseva One\',serif;font-size:28px;font-weight:400;color:var(--ink);">+2.8% p.a.</div><div class="small">GTAA 10.6% &ndash; BM 7.8%</div></div>
+      <div class="stat-card" style="border-left:3px solid var(--green);"><div class="stat-title">Allocation Effect</div><div style="font-family:\'Yeseva One\',serif;font-size:28px;font-weight:400;color:var(--green);">+0.7% p.a.</div><div class="small">TAA tilts vs benchmark</div></div>
+      <div class="stat-card" style="border-left:3px solid var(--ink);"><div class="stat-title">Selection Effect</div><div style="font-family:\'Yeseva One\',serif;font-size:28px;font-weight:400;color:var(--ink);">+1.9% p.a.</div><div class="small">Manager alpha (dominant)</div></div>
+      <div class="stat-card" style="border-left:3px solid #b45309;"><div class="stat-title">Interaction Effect</div><div style="font-family:\'Yeseva One\',serif;font-size:28px;font-weight:400;color:#d97706;">+0.2% p.a.</div><div class="small">Allocation &times; selection</div></div>
     </div>
 
     <table class="attrib-table">
@@ -472,17 +637,17 @@
         <tr><td><b>Absolute Return</b></td><td>0.0%</td><td>5.0%</td><td class="plus">+5.0</td><td>&mdash;</td><td>4.8%</td><td class="attrib-pos">+0.24%</td><td>+0.08%</td><td>+0.02%</td><td class="attrib-pos">+0.34%</td></tr>
         <tr><td><b>Cash</b></td><td>0.0%</td><td>1.0%</td><td>+1.0</td><td>&mdash;</td><td>4.6%</td><td>+0.05%</td><td>0.00%</td><td>0.00%</td><td>+0.05%</td></tr>
         <tr class="total-row"><td><b>TOTAL</b></td><td>100%</td><td>100%</td><td>&mdash;</td><td>7.8%</td><td>10.6%</td><td class="attrib-pos"><b>+1.26%</b></td><td class="attrib-pos"><b>+2.11%</b></td><td><b>&ndash;0.10%</b></td><td class="attrib-pos"><b>+3.27%</b></td></tr>
-        <tr style="background:#fff;"><td colspan="10" class="small" style="color:#999;padding-top:6px;">Residual of &ndash;0.47% between total active return (2.8%) and sum of effects (3.27%) from compounding, rebalancing timing, and currency.</td></tr>
+        <tr style="background:transparent;"><td colspan="10" class="small" style="color:var(--ink-40);padding-top:6px;">Residual of &ndash;0.47% between total active return (2.8%) and sum of effects (3.27%) from compounding, rebalancing timing, and currency.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="card">
     <div class="sub-title">Commentary &mdash; Impact of Gold Cap</div>
-    <p style="font-size:13px;color:#333;line-height:1.6;">
+    <p style="font-size:13px;color:var(--ink-90);line-height:1.6;">
       With gold capped at 3% SAA / 4% TAA, the strategy still outperformed the 60/40 benchmark by +2.8% ann. and all three IA Mixed sectors, but significantly underperformed the uncapped version (10.6% vs 14.8% ann.). <b>The gold cap cost approximately 4.0% ann. in foregone returns</b> by limiting exposure to the $1,800&rarr;$5,000/oz rally.
     </p>
-    <p style="font-size:13px;color:#333;line-height:1.6;margin-top:8px;">
+    <p style="font-size:13px;color:var(--ink-90);line-height:1.6;margin-top:8px;">
       Freed weight was redistributed to: <b>(1) Increased FI (+6%)</b> with TIPS as inflation hedge and expanded EM debt for carry; <b>(2) Broad commodities (+2%)</b> partially replacing gold; <b>(3) Absolute return (+5%)</b> via Lumyna, Montlake, and Mygale replacing gold&rsquo;s diversification benefit. With gold constrained, <b>selection effect (+2.11%) now dominates allocation effect (+0.70%)</b>, making manager alpha the critical engine &mdash; 75% of total active return.
     </p>
   </div>
@@ -492,506 +657,507 @@
 <div id="tab-managers" class="tab-content">
   <div class="card">
     <div class="section-title">Satellite Manager Summary</div>
-    <div class="small" style="color:#777;margin-bottom:10px;">17 satellite fund managers across equity, fixed income, property, and absolute return. Each assessed for strategy differentiation, process uniqueness, and portfolio fit.</div>
+    <div class="small" style="color:var(--ink-40);margin-bottom:10px;">17 satellite fund managers across equity, fixed income, property, and absolute return. Each assessed for strategy differentiation, process uniqueness, and portfolio fit.</div>
   </div>
 
   <!-- US EQUITY -->
-  <div class="card" style="border-left:3px solid #7c3aed;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">BlackRock US Dynamic Fund</div>
-      <div class="small" style="color:#777;">US Large-Cap Blend &middot; AUM ~&pound;2.4bn &middot; OCF 0.92% &middot; Manager: Sally Du, CFA</div>
+      <div class="small">US Large-Cap Blend &middot; AUM ~&pound;2.4bn &middot; OCF 0.92% &middot; Manager: Sally Du, CFA</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Sally Du, CFA</b> &mdash; PM. Columbia Engineering MSc, UC Berkeley Maths. Joined BlackRock 2007. Leads Fundamental Equities' Quantitative Strategies, integrating systematic signals into stock selection.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Blends fundamental bottom-up stock selection with a systematic quantitative overlay &mdash; Sally Du integrates data science into BlackRock&rsquo;s traditional fundamental equity process, scoring stocks on valuation, quality, and sentiment factors.<br>
       &bull; Flexible style rotation between growth and value depending on market regime; not anchored to a single factor &mdash; allowing the fund to adapt through cycles without manager behavioural biases.<br>
       &bull; Portfolio of ~80&ndash;120 holdings provides diversified alpha generation with sector positions limited to moderate deviations vs S&amp;P 500, managing tracking error while retaining conviction.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; One of the few US equity funds to genuinely integrate quantitative signals into a fundamental process at scale &mdash; leveraging BlackRock&rsquo;s Aladdin infrastructure and alternative data sources.<br>
       &bull; 4-star Morningstar rating with a P/E of 24.25 vs category 22.75, indicating the fund holds slightly higher-quality, higher-growth names than peers.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Provides active US large-cap exposure alongside the CSPX core position; alpha source is stock-level selection and style rotation, offering diversified return drivers vs the S&amp;P 500 beta captured by the core ETF.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #7c3aed;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Artemis US Smaller Companies Fund</div>
-      <div class="small" style="color:#777;">US Small/Mid-Cap Growth &middot; AUM ~&pound;1.1bn &middot; OCF 0.87% &middot; Manager: Cormac Weldon + Olivia Micklem</div>
+      <div class="small">US Small/Mid-Cap Growth &middot; AUM ~&pound;1.1bn &middot; OCF 0.87% &middot; Manager: Cormac Weldon + Olivia Micklem</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Cormac Weldon</b> &mdash; Lead PM. Dublin City University. 35+ yrs experience. Head of US equity at Artemis since 2014; previously head of North America at Columbia Threadneedle.<br>
       <b>Olivia Micklem</b> &mdash; Co-PM (since Sep 2022). Oxford University. 15+ yrs experience. Followed Weldon from Threadneedle in 2014 as analyst; promoted to co-manager.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Bottom-up stock picker targeting companies with 2:1 upside/downside asymmetry; Weldon has managed US strategies since 2014 with a team of 5 dedicated US analysts, all sector specialists who followed him from Columbia Threadneedle.<br>
       &bull; Concentrated portfolio of ~50&ndash;70 holdings with a mid-cap tilt (average market cap ~$7.5bn); sectors limited to &plusmn;10% vs Russell 2000, positions to &plusmn;5%, ensuring disciplined diversification within a high-conviction framework.<br>
       &bull; Portfolio quality is markedly above the benchmark: return on equity of 17.8% vs Russell 2000&rsquo;s 5.7%, indicating a focus on profitable, well-managed businesses rather than speculative small-caps.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; +237% since 2014 launch vs 173% IA North American Smaller Companies sector average &mdash; consistent outperformance across multiple market cycles, including through the 2022 drawdown and 2025 tariff volatility.<br>
       &bull; Manager stability is exceptional: Weldon and key team members have worked together for 15+ years; Artemis&rsquo;s partnership structure aligns manager interests with long-term performance.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Introduces a small/mid-cap risk factor absent from the CSPX large-cap core, accessing the higher growth and earnings potential of US smaller companies while diversifying away from mega-cap AI concentration risk.
     </div>
   </div>
 
   <!-- UK EQUITY -->
-  <div class="card" style="border-left:3px solid #059669;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--green);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">JOHCM UK Dynamic Fund</div>
-      <div class="small" style="color:#777;">UK All Companies &middot; AUM ~&pound;730m &middot; OCF 0.84% &middot; Managers: Bhatia, Matthews, Costar</div>
+      <div class="small">UK All Companies &middot; AUM ~&pound;730m &middot; OCF 0.84% &middot; Managers: Bhatia, Matthews, Costar</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Vishal Bhatia</b> &mdash; Senior PM. Involved with UK Dynamic since its 2008 inception; previously co-managed JOHCM UK Growth. Deep UK equity experience across market cycles.<br>
       <b>Tom Matthews</b> &mdash; PM. Oxford MA Economics &amp; Management. Qualified accountant. Was senior analyst on UK Dynamic for 8 years; also holds Cambridge Sustainable Leadership certificate.<br>
       <b>Mark Costar</b> &mdash; Senior PM. Co-founded UK Dynamic strategy alongside Savvides in 2008. Long-tenured JOHCM partner with deep institutional relationships.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Invests in companies undergoing positive operational or strategic change that the market has not yet priced &mdash; including restructurings, recovery plays, hidden growth, and special situations; all holdings must pay or be expected to pay a dividend within 12 months.<br>
       &bull; New management trio (Bhatia, Matthews, Costar) appointed Aug 2024 following founder Alex Savvides&rsquo;s departure; all three were involved with the strategy since its 2008 inception, providing process continuity with 90+ combined years of experience.<br>
       &bull; Concentrated portfolio of ~40&ndash;50 holdings spanning the full UK market-cap spectrum; dynamic allocation adjusts sector and stock exposures based on evolving valuation opportunities.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; 5Y return of +99.8% vs 52% IA UK All Companies sector average (top-decile, 9th/197 funds) &mdash; the strategy&rsquo;s change-driven philosophy has delivered consistently across different management regimes.<br>
       &bull; Dividend requirement acts as a natural valuation discipline and quality screen, embedding downside protection while maintaining upside optionality from operational turnarounds.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Value/change-driven UK equity alpha complements the FTSE 100 beta in ISF; captures mid/small-cap recovery situations and capital return catalysts that passive UK exposure misses entirely.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #059669;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--green);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Artemis UK Select Fund</div>
-      <div class="small" style="color:#777;">UK All Companies &middot; AUM ~&pound;900m &middot; OCF 0.82% &middot; Manager: Ed Leggett + Ambrose Faulks</div>
+      <div class="small">UK All Companies &middot; AUM ~&pound;900m &middot; OCF 0.82% &middot; Manager: Ed Leggett + Ambrose Faulks</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Ed Leggett</b> &mdash; Lead PM. Cambridge, Manufacturing Engineering. Joined Artemis 2015. Previously ran UK equity mandates at Standard Life Investments from 2008 with strong track record.<br>
       <b>Ambrose Faulks</b> &mdash; Co-PM (since 2015). Oxford, MChem. CFA. Joined Artemis 2013 as analyst from Odey Asset Management; became partner in 2025. Covers financials and asset-intensive sectors.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Quality-growth approach seeking companies with sustainable competitive advantages, strong returns on capital, and long-duration earnings growth; contrasts with JOHCM&rsquo;s value/change-driven style.<br>
       &bull; Unconstrained across the market-cap spectrum with a bias toward larger, more liquid names; portfolio typically holds 40&ndash;60 positions with significant active share vs FTSE All-Share.<br>
       &bull; Proprietary research framework evaluates management quality, balance sheet resilience, and the sustainability of competitive moats before considering valuation entry points.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; Consistent 1st quartile performer in IA UK All Companies over 3Y and 5Y; the quality-growth style provides a natural complement to JOHCM&rsquo;s value-driven approach, diversifying UK alpha sources.<br>
       &bull; Artemis&rsquo;s partnership structure means the team has long-term stability and skin in the game, avoiding the manager turnover risk that affects many UK equity houses.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Quality-growth UK satellite offsets JOHCM&rsquo;s value tilt; together the two funds create a blended UK active allocation with style diversification, capturing alpha from both change situations and compounding growth stocks.
     </div>
   </div>
 
   <!-- EUROPE -->
   <div class="card" style="border-left:3px solid #b45309;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Janus Henderson European Focus Fund</div>
-      <div class="small" style="color:#777;">Europe ex-UK &middot; AUM ~&pound;600m &middot; OCF 0.84% &middot; Manager: Robert Schramm-Fuchs + Marc Schartz</div>
+      <div class="small">Europe ex-UK &middot; AUM ~&pound;600m &middot; OCF 0.84% &middot; Manager: Robert Schramm-Fuchs + Marc Schartz</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Robert Schramm-Fuchs</b> &mdash; Lead PM. Head of European large-cap equities at JH since 2014. Previously at Macquarie covering global alternative energy and utilities from 2010.<br>
       <b>Marc Schartz</b> &mdash; Co-PM. City University London (Bayes) MSc Banking &amp; Int&rsquo;l Finance. CFA. Joined Henderson 2016; previously managed concentrated European small/mid-cap portfolio at GO Investment Partners. 20 yrs experience.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Concentrated GARP (growth at a reasonable price) approach holding 40&ndash;55 high-conviction European positions; focuses on quality companies with pricing power and structural growth drivers.<br>
       &bull; Sector-agnostic bottom-up process with deep fundamental analysis of competitive positioning, management incentives, and capital allocation track records; willing to pay for quality but demands margin of safety.<br>
       &bull; Active engagement with management teams through regular company visits; emphasis on corporate governance quality as a leading indicator of long-term shareholder returns.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; Top-quartile 3Y and 5Y performance in IA European sector; concentrated portfolio allows high active share and meaningful stock selection alpha vs broad MSCI Europe ex-UK.<br>
       &bull; The team benefits from JH&rsquo;s deep European analyst bench while maintaining a boutique-like investment culture with significant manager autonomy.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Adds concentrated European conviction alongside the IMEU broad beta; alpha source is stock selection within high-quality growth companies, particularly benefiting from ECB easing and European fiscal expansion.
     </div>
   </div>
 
   <div class="card" style="border-left:3px solid #b45309;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">JPM European Dynamic Fund</div>
-      <div class="small" style="color:#777;">Europe ex-UK &middot; AUM ~&pound;1.8bn &middot; OCF 0.90% &middot; Manager: Jon Ingram + Blake Crawford</div>
+      <div class="small">Europe ex-UK &middot; AUM ~&pound;1.8bn &middot; OCF 0.90% &middot; Manager: Jon Ingram + Blake Crawford</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Jon Ingram</b> &mdash; Lead PM. 25+ yrs at JPMorgan. Pioneer of the behavioural finance process for European equities. One of the longest-tenured European equity PMs in the industry.<br>
       <b>Blake Crawford</b> &mdash; Co-PM. Joined JPM&rsquo;s European equity team as analyst; promoted to co-PM. Specialist in applying behavioural bias screening to mid-cap European stocks.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Pioneering behavioural finance-based process that systematically exploits market mispricing caused by investor cognitive biases &mdash; anchoring, herding, loss aversion, and overconfidence.<br>
       &bull; Proprietary screening models flag companies where consensus expectations are biased; deep fundamental research then validates or rejects the behavioural signal before a position is taken.<br>
       &bull; Portfolio of ~50&ndash;80 European holdings across all market caps, with a natural tilt toward contrarian ideas that have been over-punished or under-rewarded by the market.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; Consistent 1st/2nd quartile performer over rolling periods; the behavioural framework generates genuinely differentiated alpha that is low-correlation to traditional quality/value/growth factor styles.<br>
       &bull; Backed by JPMorgan&rsquo;s 50+ person European equity research platform while maintaining a distinct, independent investment process.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Behavioural alpha is uncorrelated with JH European Focus&rsquo;s GARP approach; the two European satellites diversify alpha sources &mdash; quality-growth (JH) vs contrarian-behavioural (JPM) &mdash; reducing style concentration.
     </div>
   </div>
 
   <!-- JAPAN -->
   <div class="card" style="border-left:3px solid #e11d48;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">WS Morant Wright Nippon Yield Fund</div>
-      <div class="small" style="color:#777;">Japan Equity Income &middot; AUM ~&pound;350m &middot; OCF 1.16% &middot; Team: 6 PMs, 170 yrs combined experience</div>
+      <div class="small">Japan Equity Income &middot; AUM ~&pound;350m &middot; OCF 1.16% &middot; Team: 6 PMs, 170 yrs combined experience</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Stephen Morant</b> &mdash; Co-Founder &amp; PM. Co-founded Morant Wright in 1999 with the sole purpose of investing in Japanese equities. 30+ yrs Japan equity experience.<br>
       <b>Ian Wright</b> &mdash; Co-Founder &amp; PM. Co-founded firm in 1999. Deep Japanese market specialist with institutional and proprietary trading background.<br>
       Also: Richard Phillips, Tom Mermagen, Denis Clough, Andrew Millward &mdash; all team-managed, no single key-person dependency.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Pure deep-value Japan specialist founded in 1999 with the sole purpose of investing in Japanese equities; requires holdings to offer a 20% yield premium over the market, enforcing strict valuation discipline.<br>
       &bull; Team-managed process (not key-person dependent) with 6 managers averaging 28 years&rsquo; experience each; all funds run identically, and the team devotes all working time to investment management and research.<br>
       &bull; Focus on companies with fortress balance sheets and strong franchises at attractive valuations; benefits from Japan&rsquo;s Corporate Governance Code (2014) and rising shareholder activism driving dividend growth and buybacks.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; HL Wealth Shortlist selection and Square Mile rated; genuinely differentiated from TOPIX-tracking strategies through its yield and balance sheet screens &mdash; a rare boutique Japan specialist in the UK fund market.<br>
       &bull; Not asset gatherers by philosophy; the team maintains a small AUM intentionally to preserve access to smaller, under-researched Japanese companies that large asset managers cannot own.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Provides a value/yield tilt to Japanese equity exposure that is structurally different from the growth-biased MSCI Japan captured by IJPA; positioned to benefit from Japan&rsquo;s corporate governance revolution driving capital returns.
     </div>
   </div>
 
   <!-- EM / ASIA -->
   <div class="card" style="border-left:3px solid #b45309;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Lazard Emerging Markets Fund</div>
-      <div class="small" style="color:#777;">EM Equity &middot; AUM ~$2.5bn &middot; OCF 1.14% &middot; Manager: James Donald + Lazard EM equity team</div>
+      <div class="small">EM Equity &middot; AUM ~$2.5bn &middot; OCF 1.14% &middot; Manager: James Donald + Lazard EM equity team</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>James Donald</b> &mdash; Lead PM &amp; Head of Lazard EM Equities. 30+ yrs EM experience. Has managed money through every major EM crisis since the 1990s including Asian, Russian, and GFC crises.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Quality-growth EM approach screening for financial strength, high returns on equity, and sustainable competitive advantages; proprietary financial productivity framework ranks companies on capital efficiency.<br>
       &bull; Concentrated portfolio of ~60&ndash;80 EM stocks; bottom-up stock selection with macro awareness but not macro-driven; country allocations are an output of stock selection, not a top-down call.<br>
       &bull; Long-tenured EM team with deep on-the-ground research capabilities across Asia, Latin America, EMEA; ESG integrated at the stock level as a risk management tool.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; The financial productivity framework is genuinely differentiated; Lazard&rsquo;s EM team has managed money through multiple EM cycles since the mid-1990s, providing deep crisis management experience.<br>
       &bull; Quality tilt naturally complements Dodge &amp; Cox&rsquo;s deep-value approach, reducing portfolio volatility when combined.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Quality-growth EM satellite complements D&amp;C&rsquo;s contrarian value and the EMIM/NDIA/ICHN beta; alpha source is stock selection in high-quality EM compounders that the broad index weights by market cap rather than fundamentals.
     </div>
   </div>
 
   <div class="card" style="border-left:3px solid #b45309;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Dodge &amp; Cox Worldwide &mdash; Emerging Markets Stock Fund</div>
-      <div class="small" style="color:#777;">EM Equity Value &middot; AUM ~$4.2bn &middot; OCF 0.63% &middot; Manager: D&amp;C Investment Policy Committee (team-managed)</div>
+      <div class="small">EM Equity Value &middot; AUM ~$4.2bn &middot; OCF 0.63% &middot; Manager: D&amp;C Investment Policy Committee (team-managed)</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Investment Policy Committee</b> &mdash; No named lead PM by design. Consensus-driven team of senior PMs and analysts. D&amp;C founded 1930 in San Francisco; employee-owned cooperative. Average committee tenure 20+ yrs.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Team-based deep-value approach &mdash; no star manager; D&amp;C&rsquo;s Investment Policy Committee makes all decisions by consensus, eliminating key-person risk and ensuring process stability over decades.<br>
       &bull; Extremely patient contrarian holders with average holding period of 3&ndash;5 years; willing to buy into distress and hold through volatility when the fundamental thesis remains intact.<br>
       &bull; Concentrated portfolio of ~60&ndash;70 EM holdings; lowest OCF among peers (0.63%) reflects D&amp;C&rsquo;s cooperative ownership structure and philosophy that low costs compound into long-term outperformance.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; D&amp;C&rsquo;s track record across all strategies (US, international, EM) is among the best in asset management over 30+ years; the firm is employee-owned with no outside shareholders, ensuring alignment.<br>
       &bull; Lowest cost active EM fund in the satellite roster; the cooperative structure means the firm has never prioritised AUM growth over investment returns.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Deep-value contrarian EM exposure buys the market&rsquo;s most out-of-favour names; alpha is generated from mean-reversion and valuation re-rating, providing a style offset to Lazard&rsquo;s quality-growth tilt.
     </div>
   </div>
 
   <div class="card" style="border-left:3px solid #b45309;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">M&amp;G Asian Fund</div>
-      <div class="small" style="color:#777;">Asia ex-Japan Equity &middot; AUM ~&pound;900m &middot; OCF 0.90% &middot; Manager: David Gait</div>
+      <div class="small">Asia ex-Japan Equity &middot; AUM ~&pound;900m &middot; OCF 0.90% &middot; Manager: David Gait</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>David Gait</b> &mdash; PM. Leads M&amp;G&rsquo;s Asian equity strategy. Long-tenured Asian equity specialist with deep on-the-ground research presence across the region. Supported by M&amp;G&rsquo;s broader equity analyst team.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Bottom-up stock picker across Asia ex-Japan with a focus on long-duration structural growth stories; seeks companies with sustainable competitive advantages in markets with favourable demographic and economic tailwinds.<br>
       &bull; High-conviction, concentrated portfolio approach with willingness to deviate significantly from MSCI Asia ex-Japan benchmark weights; the team maintains deep on-the-ground presence across Asian markets.<br>
       &bull; Risk management embedded through portfolio diversification across countries, sectors, and market caps; quality filter ensures holdings have strong balance sheets and cash flow generation.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; M&amp;G&rsquo;s Asian team has decades of on-the-ground experience across the region; the fund consistently outperforms the IA Asia Pacific ex-Japan sector average over 3Y and 5Y periods.<br>
       &bull; Provides broader Asian exposure beyond the China/India tactical bets in the core, capturing opportunities in Korea, Taiwan, ASEAN and frontier Asian markets.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Broad Asia alpha diversifier that complements the country-specific NDIA and ICHN tactical bets; captures bottom-up stock selection opportunities across the full Asian universe that index ETFs and single-country bets cannot access.
     </div>
   </div>
 
   <!-- FIXED INCOME -->
-  <div class="card" style="border-left:3px solid #7c3aed;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">PIMCO GIS Global Investment Grade Credit Fund</div>
-      <div class="small" style="color:#777;">Global IG Credit &middot; AUM ~$8bn &middot; OCF 0.49% &middot; Manager: Mark Kiesel + PIMCO credit team</div>
+      <div class="small">Global IG Credit &middot; AUM ~$8bn &middot; OCF 0.49% &middot; Manager: Mark Kiesel + PIMCO credit team</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Mark Kiesel</b> &mdash; CIO Global Credit &amp; PM. 25+ yrs at PIMCO. Morningstar Fixed Income Fund Manager of the Year. Consistently ranked among top global credit portfolio managers. Oversees 60+ credit analysts.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; PIMCO&rsquo;s flagship global credit strategy combining top-down macro duration views with bottom-up credit research; the firm&rsquo;s secular and cyclical forums set macro framework, while 60+ credit analysts provide individual issuer conviction.<br>
       &bull; Active duration management and yield curve positioning alongside sector rotation and security selection; willing to take meaningful active risk vs benchmark when conviction is high.<br>
       &bull; Rigorous stress-testing and tail-risk analysis embedded in portfolio construction; PIMCO&rsquo;s scale provides unparalleled access to new issuance and off-the-run credit opportunities.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; Mark Kiesel is consistently ranked among the top credit portfolio managers globally; PIMCO&rsquo;s macro-aware credit process has delivered consistent alpha through multiple rate cycles.<br>
       &bull; Institutional-grade research infrastructure with 60+ credit analysts is impossible to replicate &mdash; the fund accesses information and pricing advantages unavailable to smaller managers.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Active credit selection and duration management generates alpha over the passive IUAG core; particularly valuable in the current environment of sticky inflation and uncertain rate paths where passive bond exposure leaves returns on the table.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #7c3aed;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">TwentyFour Dynamic Bond Fund</div>
-      <div class="small" style="color:#777;">Strategic Bond &middot; AUM ~&pound;1.6bn &middot; OCF 0.64% &middot; Manager: Felipe Villarroel + Pierre Beniguel</div>
+      <div class="small">Strategic Bond &middot; AUM ~&pound;1.6bn &middot; OCF 0.64% &middot; Manager: Felipe Villarroel + Pierre Beniguel</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Felipe Villarroel</b> &mdash; PM. Joined TwentyFour at founding in 2008. Specialist in ABS, structured credit, and EM debt. Previously at European Credit Management and Bear Stearns.<br>
       <b>Pierre Beniguel</b> &mdash; Co-PM. Joined TwentyFour 2015. Previously at Deutsche Bank and Barclays in fixed income trading. Specialist in bank capital instruments (AT1/Tier 2).
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Flexible fixed income strategy with unconstrained mandate across government bonds, IG credit, high yield, ABS, AT1 bank capital, and EM debt; active sector rotation based on relative value and macro regime.<br>
       &bull; TwentyFour is a specialist fixed income boutique (founded 2008) where all partners invest alongside clients; the team has deep expertise in structured credit and bank capital &mdash; areas often overlooked by generalist bond managers.<br>
       &bull; Active duration management from &ndash;1 to +8 years; portfolio typically holds 150&ndash;250 bonds for granular diversification; yield-to-worst is actively managed as a key risk metric.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; One of the top-performing IA &pound; Strategic Bond funds over 5Y; TwentyFour&rsquo;s expertise in ABS and AT1 bank capital gives the fund access to yield and complexity premia that conventional bond funds cannot capture.<br>
       &bull; Partnership structure with 100% partner-invested capital aligns incentives; the firm has grown through performance, not marketing.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Flexible FI satellite complements the IGLA core; alpha source is sector rotation and access to niche fixed income segments (ABS, AT1, EM) that passive government bond ETFs exclude &mdash; critical for yield generation in a low-rate environment.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #7c3aed;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Neuberger Berman EM Debt Hard Currency Fund</div>
-      <div class="small" style="color:#777;">EM Hard Currency Debt &middot; AUM ~$3.5bn &middot; OCF 0.85% &middot; Manager: Rob Drijkoningen + Gorky Urquieta</div>
+      <div class="small">EM Hard Currency Debt &middot; AUM ~$3.5bn &middot; OCF 0.85% &middot; Manager: Rob Drijkoningen + Gorky Urquieta</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Rob Drijkoningen</b> &mdash; Co-Head EM Debt &amp; PM. 30+ yrs EM experience. Previously head of EM at ING Investment Management. Architect of NB&rsquo;s proprietary country risk model.<br>
       <b>Gorky Urquieta</b> &mdash; Co-Head EM Debt &amp; PM. 25+ yrs EM experience. Previously at ING IM and ABN AMRO. Specialist in EM sovereign credit and macro analysis.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Proprietary country risk model integrating 30+ macro/political/institutional variables produces a quantitative country ranking that anchors top-down sovereign allocation decisions.<br>
       &bull; Bottom-up credit analysis overlays the country model to select individual sovereign and quasi-sovereign bonds; active management of spread duration and curve positioning within each country.<br>
       &bull; Disciplined sell discipline: positions are exited when the country model deteriorates or spreads compress beyond fair value; the team has avoided several major EM credit events through this framework.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; NB&rsquo;s EM debt platform is one of the largest and most experienced in the industry; the proprietary country risk model is a genuine analytical edge that has been refined over 15+ years.<br>
       &bull; Independent firm (employee-owned since 2009) with $500bn+ AUM; research resources rival the largest banks without the conflicts of interest.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Active EM sovereign credit selection generates alpha over the passive SEMB index; the country risk model provides a systematic framework for navigating EM political and fiscal risks that passive exposure cannot manage.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #7c3aed;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Goldman Sachs EM Corporate Bond Portfolio</div>
-      <div class="small" style="color:#777;">EM Corporate Debt &middot; AUM ~$1.8bn &middot; OCF 0.80% &middot; Manager: Samuel Finkelstein + GS EM FI team</div>
+      <div class="small">EM Corporate Debt &middot; AUM ~$1.8bn &middot; OCF 0.80% &middot; Manager: Samuel Finkelstein + GS EM FI team</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Samuel Finkelstein</b> &mdash; Co-CIO Fixed Income &amp; PM. 20+ yrs at Goldman Sachs Asset Management. Oversees the global EM fixed income platform. Previously at GS&rsquo;s proprietary trading desk.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Focuses on EM corporate bonds &mdash; a segment under-covered by most EM debt managers who focus on sovereigns; GS&rsquo;s global credit research platform covers 800+ EM corporate issuers.<br>
       &bull; Sector specialist approach with dedicated analysts for EM financials, industrials, utilities, and TMT; emphasis on identifying rising stars and avoiding fallen angels through early credit deterioration signals.<br>
       &bull; Active FX hedging and country allocation decisions complement bottom-up credit selection; portfolio targets higher yield than sovereign EM with equivalent or better credit quality in select issuers.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; GS&rsquo;s EM corporate credit research coverage is unmatched; the 800+ issuer universe provides a genuine information advantage in a segment where public information is limited.<br>
       &bull; EM corporate bonds offer a yield premium over EM sovereigns with increasingly better fundamentals; this niche is underexploited by most multi-asset allocators.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Adds an EM corporate credit risk factor absent from the sovereign-focused SEMB/SEML core ETFs; provides yield enhancement and diversification within the EM debt allocation through a segment most passive investors miss.
     </div>
   </div>
 
   <!-- PROPERTY -->
-  <div class="card" style="border-left:3px solid #0284c7;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid #0369a1;">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Janus Henderson Horizon Global Property Equities Fund</div>
-      <div class="small" style="color:#777;">Global Property Equities &middot; AUM ~$3.2bn &middot; OCF 0.84% &middot; Manager: Guy Barnard + Tim Gibson + Greg Mayfield</div>
+      <div class="small">Global Property Equities &middot; AUM ~$3.2bn &middot; OCF 0.84% &middot; Manager: Guy Barnard + Tim Gibson + Greg Mayfield</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Guy Barnard</b> &mdash; Co-Head Global Property Equities &amp; PM. 20+ yrs in real estate securities. Covers Europe &amp; Asia. Joined Henderson 2006.<br>
       <b>Tim Gibson</b> &mdash; Co-Head Global Property Equities &amp; PM. Covers Asia-Pacific. Previously at AMP Capital and Macquarie. 20+ yrs real estate experience.<br>
       <b>Greg Mayfield</b> &mdash; PM. Covers Americas. Specialist in US REITs. Team collectively manages $18bn+ across JH&rsquo;s global real estate platform.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Active global REIT/property equity strategy with a thematic overlay &mdash; the team identifies structural property trends (data centres, logistics, life sciences, senior housing) and builds positions in the highest-quality operators in those themes.<br>
       &bull; Proprietary NAV-based valuation framework benchmarks listed REITs against private market transaction comparables; seeks to buy listed REITs at a discount to replacement cost.<br>
       &bull; Three co-managers with complementary geographic specialisations (US, Europe, Asia-Pacific) ensure genuine global coverage; the team manages $18bn+ across the JH real estate platform.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; One of the largest and most experienced dedicated global property equity teams in the industry; the thematic approach captures structural property trends (data centres, logistics) that traditional REIT indices are slow to reflect.<br>
       &bull; Dual expertise in both listed and private real estate markets gives the team a valuation edge &mdash; they can identify when listed REITs trade at meaningful discounts to private market values.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Thematic property alpha complements the passive IWDP core; the fund captures structural real estate shifts (data centres, logistics) and rate-cycle positioning opportunities that a market-cap-weighted REIT ETF cannot express.
     </div>
   </div>
 
   <!-- ABSOLUTE RETURN -->
-  <div class="card" style="border-left:3px solid #555;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink-40);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Lumyna &mdash; MW TOPS (Market Neutral) UCITS Fund</div>
-      <div class="small" style="color:#777;">Market Neutral Equity &middot; AUM ~$3bn &middot; OCF 2.50% &middot; Sub-Advisor: Marshall Wace &middot; Vol target 3&ndash;5%</div>
+      <div class="small">Market Neutral Equity &middot; AUM ~$3bn &middot; OCF 2.50% &middot; Sub-Advisor: Marshall Wace &middot; Vol target 3&ndash;5%</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Paul Marshall</b> &mdash; Co-Founder &amp; CIO, Marshall Wace. Co-founded MW in 1997. Former Mercury Asset Management. One of Europe&rsquo;s most successful hedge fund managers; MW manages $65bn+.<br>
       <b>Ian Wace</b> &mdash; Co-Founder &amp; CEO. Former Deutsche Bank. Built MW&rsquo;s systematic and operational infrastructure. TOPS strategy designed and managed by MW&rsquo;s systematic equity team.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Systematic market-neutral strategy that aggregates the best stock ideas from 800+ contributors worldwide (sell-side analysts, research boutiques, local brokers) and constructs a hedged portfolio from the signal &mdash; a crowd-sourced alpha engine.<br>
       &bull; TOPS (Trade Optimised Portfolio System) is Marshall Wace&rsquo;s proprietary system that ranks contributor ideas, assigns conviction scores, and dynamically adjusts position sizes based on real-time performance attribution.<br>
       &bull; Target volatility of 3&ndash;5% with near-zero net equity beta (&beta; of &ndash;0.48 to +0.19); 5Y Sharpe ratio of ~0.70 with max drawdown of only &ndash;3.4% &mdash; genuine absolute return characteristics.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; The TOPS crowd-sourced idea aggregation system is genuinely unique in the industry &mdash; no other fund harvests alpha from 800+ independent research sources through a systematic framework.<br>
       &bull; Marshall Wace is a $65bn+ hedge fund; the UCITS fund provides institutional-quality market-neutral exposure in a daily-liquid, regulated structure.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Primary replacement for gold&rsquo;s portfolio diversification role under the 3% cap; near-zero beta and negative correlation (&ndash;0.35) to equities provides genuine drawdown protection when equity and bond markets sell off together.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #555;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink-40);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Montlake Ironshield L/S Credit UCITS Fund</div>
-      <div class="small" style="color:#777;">Long/Short Credit &middot; AUM ~&pound;200m &middot; OCF ~1.60% &middot; Manager: Ironshield Capital team</div>
+      <div class="small">Long/Short Credit &middot; AUM ~&pound;200m &middot; OCF ~1.60% &middot; Manager: Ironshield Capital team</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Ironshield Capital</b> &mdash; Specialist credit hedge fund team. Background in institutional credit trading and portfolio management at major investment banks. Team structure designed around long/short credit with independent risk oversight.<br>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; Long/short credit strategy that profits from both credit spread tightening (longs) and spread widening or default (shorts); the short book provides an explicit hedge against credit market drawdowns.<br>
       &bull; Fundamental credit analysis focused on identifying mispriced credit risk &mdash; companies where the bond market overestimates or underestimates default probability relative to equity market signals.<br>
       &bull; Active management of net credit exposure from &ndash;20% to +60% depending on the credit cycle; during spread compression, the team reduces net exposure and increases the short book as a contrarian positioning tool.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; Few credit funds genuinely run meaningful short positions; Ironshield&rsquo;s ability to profit from credit deterioration and actively hedge spread risk differentiates it from long-only credit funds and passive ETFs.<br>
       &bull; Low correlation to both equity markets and interest rates provides genuine portfolio diversification that is increasingly rare in a world of correlated asset classes.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Credit-specific diversifier that hedges the long credit exposure embedded in IHYG, SEMB, and the PIMCO satellite; alpha is generated from relative value within credit markets, providing a return stream uncorrelated to equity beta and rate moves.
     </div>
   </div>
 
-  <div class="card" style="border-left:3px solid #555;">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+  <div class="card" style="border-left:3px solid var(--ink-40);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
       <div class="sub-title" style="margin-bottom:0;">Mygale Event Driven UCITS Fund</div>
-      <div class="small" style="color:#777;">Event Driven / Merger Arb &middot; AUM ~&pound;120m &middot; OCF ~1.80% &middot; CIO: Neil Tofts &middot; Advisor: Tavira Financial</div>
+      <div class="small">Event Driven / Merger Arb &middot; AUM ~&pound;120m &middot; OCF ~1.80% &middot; CIO: Neil Tofts &middot; Advisor: Tavira Financial</div>
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;padding:6px 8px;background:#f8f7ff;border-radius:4px;border-left:3px solid #7c3aed;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">TEAM</div>
+    <div class="mc-team">
+      <div class="mc-label">TEAM</div>
       <b>Neil Tofts</b> &mdash; CIO &amp; Founder. 25+ yrs managing event-driven portfolios at Deephaven Capital, KBC Alternative Investment Management, and Merrill Lynch. Founded Mygale 2015. BA (Hons) Business Studies.<br>
       <b>Oliver [Analyst]</b> &mdash; Associate PM. CFA. Previously Associate Director at UBS CIO Global Investment Management. Edinburgh MA. Joined Mygale 2022.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PROCESS &amp; PHILOSOPHY</div>
+    <div class="mc-section">
+      <div class="mc-label">PROCESS &amp; PHILOSOPHY</div>
       &bull; European-focused event driven equity strategy spanning merger arbitrage, catalyst-driven situations, relative value, and special situations; Tofts has run this strategy for 25+ years across Deephaven Capital, KBC Alternatives, and Merrill Lynch.<br>
       &bull; Three-pillar approach: (1) sceptical research that challenges consensus and avoids crowded trades, (2) disciplined position selection favouring situations with fundamental value underpinning and bump/counter-bid optionality, (3) active trading to capture additional alpha within each position.<br>
       &bull; The team explicitly avoids binary outcomes and home runs; trades are structured to embed optionality and favourable risk skew, preferring asymmetric payoff profiles with limited downside.
     </div>
-    <div style="font-size:13px;color:#333;margin-bottom:8px;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">WHAT STANDS OUT</div>
+    <div class="mc-section">
+      <div class="mc-label">WHAT STANDS OUT</div>
       &bull; European event driven is a specialist niche &mdash; most merger arb funds are US-centric; Mygale&rsquo;s deep local European broker relationships and regulatory expertise provide an information edge in EU/UK M&amp;A situations.<br>
       &bull; The sceptical research culture and avoidance of crowded trades differentiates Mygale from quantitative merger arb strategies that follow the same spread compression playbook.
     </div>
-    <div style="font-size:13px;color:#333;">
-      <div style="font-weight:700;font-size:12px;color:#555;margin-bottom:4px;">PORTFOLIO FIT</div>
+    <div style="font-size:13px;color:var(--ink-90);">
+      <div class="mc-label">PORTFOLIO FIT</div>
       &bull; Idiosyncratic event-driven returns that are uncorrelated to equity markets, interest rates, and credit spreads; alpha is driven by deal-specific catalysts (M&amp;A completion, special dividends, restructurings) &mdash; a genuinely independent return stream.
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<div class="footer">
+<div class="gb-footer">
   For informational purposes only. Not investment advice. Consult a qualified financial advisor.<br>
   Data: MSCI ACWI factsheet (Jan 2026), WorldPERatio.com, Siblis/Barclays CAPE, BlackRock / JPM / MS / GS Q1 2026 outlooks. Attribution model is illustrative.
 </div>
 
+</div><!-- /page-wrap -->
 <script>
 function showTab(id, el) {
   document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
@@ -1010,14 +1176,35 @@ function renderChart() {
   var iaCaut=[100,100.2,100.6,101,100.8,101.2,100.8,101.6,101.8,102.4,102.8,102.2,101.2,97.6,98,97.2,98.2,97,95.4,96.8,96,97,99.2,98.8,99.4,99.8,100,101.2,101.8,101.2,100.6,101.6,102.6,104.4,105.2,105.8,106.6,107,107.4,107.6,108.4,108.6,109,109.4,109.6,110.2,110.4,110.6,110.8,110.2,110.6,110.8,111,111,111,111.2,111.2,111.2,111.4,111.4];
   var ctx=document.getElementById('fiveYearChart').getContext('2d');
   new Chart(ctx,{type:'line',data:{labels:labels,datasets:[
-    {label:'GTAA Core+Satellite',data:gtaaCS,borderColor:'#6d28d9',backgroundColor:'rgba(109,40,217,0.06)',borderWidth:2.5,fill:true,pointRadius:0,pointHoverRadius:4,tension:0.3,order:1},
-    {label:'GTAA Core-Only',data:gtaaCO,borderColor:'#a78bfa',borderWidth:1.8,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:2},
-    {label:'60/40 ACWI/AGG',data:bm6040,borderColor:'#888',borderWidth:1.5,borderDash:[6,3],fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:3},
-    {label:'IA Mixed 40\u201385%',data:iaAgg,borderColor:'#e11d48',borderWidth:1.5,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:4},
-    {label:'IA Mixed 20\u201360%',data:iaBal,borderColor:'#d97706',borderWidth:1.5,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:5},
-    {label:'IA Mixed 0\u201335%',data:iaCaut,borderColor:'#9ca3af',borderWidth:1.5,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:6}
-  ]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.2,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,0,0,0.85)',titleFont:{family:'Ubuntu',size:11},bodyFont:{family:'Ubuntu',size:11},padding:10,cornerRadius:4,callbacks:{label:function(c){return c.dataset.label+': \u00A3'+c.parsed.y.toFixed(1);}}}},scales:{x:{grid:{display:false},ticks:{font:{family:'Ubuntu',size:9},color:'#999',maxRotation:0,autoSkip:true,maxTicksLimit:12}},y:{grid:{color:'#f0f0f0'},ticks:{font:{family:'Ubuntu',size:10},color:'#777',callback:function(v){return '\u00A3'+v;}},min:90,max:175}}}});
+    {label:'GTAA Core+Satellite',data:gtaaCS,borderColor:'#011627',backgroundColor:'rgba(1,22,39,0.04)',borderWidth:2.5,fill:true,pointRadius:0,pointHoverRadius:4,tension:0.3,order:1},
+    {label:'GTAA Core-Only',data:gtaaCO,borderColor:'#01162766',borderWidth:1.8,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:2},
+    {label:'60/40 ACWI/AGG',data:bm6040,borderColor:'#01162766',borderWidth:1.5,borderDash:[6,3],fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:3},
+    {label:'IA Mixed 40\u201385%',data:iaAgg,borderColor:'#b91c3a',borderWidth:1.5,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:4},
+    {label:'IA Mixed 20\u201360%',data:iaBal,borderColor:'#b45309',borderWidth:1.5,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:5},
+    {label:'IA Mixed 0\u201335%',data:iaCaut,borderColor:'#01162733',borderWidth:1.5,fill:false,pointRadius:0,pointHoverRadius:4,tension:0.3,order:6}
+  ]},options:{responsive:true,maintainAspectRatio:true,aspectRatio:2.2,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,0,0,0.85)',titleFont:{family:'Ubuntu',size:12},bodyFont:{family:'Ubuntu',size:12},padding:10,cornerRadius:4,callbacks:{label:function(c){return c.dataset.label+': \u00A3'+c.parsed.y.toFixed(1);}}}},scales:{x:{grid:{display:false},ticks:{font:{family:'Ubuntu',size:9},color:'#01162766',maxRotation:0,autoSkip:true,maxTicksLimit:12}},y:{grid:{color:'#0116270d'},ticks:{font:{family:'Ubuntu',size:10},color:'#011627a0',callback:function(v){return '\u00A3'+v;}},min:90,max:175}}}});
 }
+// Scroll reveal observer
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el) { el.style.opacity = '1'; });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(function(el) {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+})();
 </script>
+
 </body>
 </html>
