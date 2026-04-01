@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crabel Multi-Product 1x — IC Note</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Open Sans',sans-serif;background:#fff;color:#011627;line-height:1.55;font-size:12px}
+.c{max-width:1080px;margin:0 auto;padding:28px 24px}
+.top-bar{background:#0a1628;color:#fff;padding:5px 24px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;text-align:center;font-weight:600}
+.hdr{padding:20px 0 16px;border-bottom:2px solid #0a1628;margin-bottom:20px}
+.hdr-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.hdr-tag{font-size:11px;font-weight:700;color:#0a1628;text-transform:uppercase}
+.hdr-date{font-size:11px;color:#888}
+.hdr h1{font-size:22px;font-weight:700;color:#0a1628;margin-bottom:2px}
+.hdr .sub{font-size:13px;color:#666}
+.rec{background:#f8f8f8;border:1px solid #ddd;border-left:4px solid #0a1628;padding:16px 20px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.rec label{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;display:block;margin-bottom:2px}
+.rec .v{font-size:18px;font-weight:700;color:#0a1628}
+.rec .v.inv{color:#2d8a4e}
+.sec{margin-bottom:24px}
+h2{font-size:14px;font-weight:700;color:#0a1628;padding-bottom:6px;border-bottom:1px solid #eee;margin-bottom:12px}
+h3{font-size:12px;font-weight:700;color:#333;margin:14px 0 6px}
+p{margin-bottom:8px}
+.mu{color:#888;font-size:11px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.stat{background:#fff;border:1px solid #e8e8e8;padding:10px 12px}
+.stat .sl{font-size:10px;font-weight:600;color:#666;margin-bottom:3px}
+.stat .sv{font-size:18px;font-weight:700;color:#0a1628}
+.stat .sv.pos{color:#2d8a4e}
+.stat .sv.neg{color:#d32f2f}
+.sr{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+.sr-col h4{font-size:11px;font-weight:700;margin-bottom:6px;padding-bottom:4px;border-bottom:2px solid}
+.sr-col.str h4{color:#2d8a4e;border-color:#2d8a4e}
+.sr-col.rsk h4{color:#d32f2f;border-color:#d32f2f}
+.sr-item{display:flex;gap:6px;margin-bottom:6px;font-size:11px;line-height:1.45}
+.sr-item .d{width:5px;height:5px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.str .d{background:#2d8a4e}
+.rsk .d{background:#d32f2f}
+.cc{background:#fff;border:1px solid #e8e8e8;padding:16px;margin:12px 0;border-radius:4px}
+.cc .ct{font-size:13px;font-weight:700;color:#0a1628;margin-bottom:10px}
+.cc canvas{width:100%!important;max-height:50vh!important}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}
+thead th{background:#f8f8f8;color:#0a1628;padding:7px 8px;text-align:left;font-weight:700;font-size:10px;border-bottom:2px solid #ddd}
+tbody td{padding:6px 8px;border-bottom:1px solid #f0f0f0}
+tbody tr:nth-child(even){background:#fafafa}
+.nc{text-align:right;font-size:11px}
+.pos{color:#2d8a4e;font-weight:600}
+.neg{color:#d32f2f;font-weight:600}
+.rt{overflow-x:auto}
+.rt table{min-width:1020px;font-size:10px}
+.rt thead th{padding:5px 3px;font-size:9px;text-align:center;white-space:nowrap;background:#f5f5f5;border-bottom:1.5px solid #ddd}
+.rt tbody td{padding:4px 2px;text-align:center;font-size:10px;line-height:1.3}
+.rt .yc{font-weight:700;text-align:left;background:#f5f5f5;min-width:38px;padding-left:6px}
+.rt .qc{font-weight:700;background:#f0f4f0}
+/* PCA Cards */
+.pcg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.pcc{background:#fff;border:1px solid #e8e8e8;padding:12px;text-align:center;border-radius:4px}
+.pcc .pl{font-size:9px;font-weight:600;color:#888;margin-bottom:2px}
+.pcc .pv{font-size:16px;font-weight:700}
+
+.sf{display:flex;align-items:center;gap:20px;background:#0a1628;color:#fff;padding:16px 22px;margin:16px 0;border-radius:4px}
+.sf .bs{font-size:40px;font-weight:700;line-height:1}
+.sf .sl2{font-size:9px;text-transform:uppercase;opacity:.6;font-weight:600}
+.sf .sd{font-size:12px;opacity:.9}
+.ds{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.dsc{background:#fff;border:1px solid #e8e8e8;padding:14px;text-align:center;border-radius:4px}
+.dsc .dl{font-size:9px;font-weight:600;color:#888}
+.dsc .dv{font-size:22px;font-weight:700;color:#0a1628}
+.dsc .dd{font-size:10px;color:#888}
+.ftr{border-top:2px solid #0a1628;margin-top:28px;padding-top:12px;font-size:10px;color:#888}
+</style>
+</head>
+<body>
+<div class="top-bar">Strictly Private and Confidential — For Investment Committee Use Only</div>
+<div class="c">
+
+<div class="hdr">
+<div class="hdr-row"><span class="hdr-tag">Hedge Fund Manager Research — IC Note</span><span class="hdr-date">31 March 2026 · Data through Feb 2026</span></div>
+<h1>Crabel Multi-Product 1x</h1>
+<div class="sub">Systematic Short-Term Trading (Futures &amp; FX) · Crabel Capital Management, LLC, Los Angeles</div>
+</div>
+
+<div class="rec">
+<div><label>Decision</label><div class="v inv">INVEST</div></div>
+<div><label>Composite Score</label><div class="v">78.5 / 100</div></div>
+<div><label>Suggested Allocation</label><div class="v">5 – 8%</div></div>
+</div>
+
+<div class="sec"><h2>Executive Summary</h2>
+<p>Crabel Multi-Product 1x is a highly diversified portfolio of uncorrelated, predominantly short-term systematic trading strategies across ~250 global futures and FX markets. Founded in 1987 by Toby Crabel, a pioneer in short-term price pattern research, the firm manages $4.92bn across multiple programs. The Multi-Product flagship ($1.39bn strategy AUM) targets 8% annualised volatility and has delivered a 7.59% CAGR net of fees since March 1998 — a 28-year live track record.</p>
+<div class="sr">
+<div class="sr-col str"><h4>Key Strengths</h4>
+<div class="sr-item"><span class="d"></span><span>28-year live track record with 7.59% CAGR, near-zero equity correlation (0.06 to S&amp;P 500), genuine portfolio diversifier.</span></div>
+<div class="sr-item"><span class="d"></span><span>Exceptional institutional infrastructure: Deloitte audit, BNY Mellon custody, 7 tier-1 counterparties, 60 staff.</span></div>
+<div class="sr-item"><span class="d"></span><span>Highly liquid: monthly redemptions, 5-day notice, no lock-up. ~250 markets traded with ~1-day avg holding period.</span></div>
+</div>
+<div class="sr-col rsk"><h4>Key Risks</h4>
+<div class="sr-item"><span class="d"></span><span>Recent performance weakness: -6.24% in 2025, 5Y CAGR only 2.42% vs 7.59% SI — alpha erosion concerns.</span></div>
+<div class="sr-item"><span class="d"></span><span>Expensive fee structure: 2/30 quarterly — among the highest in systematic/CTA space.</span></div>
+<div class="sr-item"><span class="d"></span><span>Key-man dependency on Toby Crabel (founder/CIO), though mitigated by co-PM structure (Pomada, Wisdom).</span></div>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><div class="sl">Annual Return</div><div class="sv pos">7.59 %</div></div>
+<div class="stat"><div class="sl">Standard Deviation</div><div class="sv">12.26 %</div></div>
+<div class="stat"><div class="sl">Max Drawdown</div><div class="sv neg">-16.27 %</div></div>
+<div class="stat"><div class="sl">Sharpe Ratio</div><div class="sv">0.62</div></div>
+<div class="stat"><div class="sl">Sortino Ratio</div><div class="sv pos">1.18</div></div>
+<div class="stat"><div class="sl">Calmar Ratio</div><div class="sv">0.47</div></div>
+<div class="stat"><div class="sl">Hit Ratio</div><div class="sv">61.0 %</div></div>
+<div class="stat"><div class="sl">Beta (S&amp;P)</div><div class="sv pos">0.052</div></div>
+</div></div>
+
+<div class="sec"><h2>Strategy &amp; Edge</h2>
+<p><b>Return Driver:</b> Systematic capture of persistent short-term price anomalies (momentum and mean-reversion) across ~250 global futures and FX markets. Strategies are evidence-based, symmetric (long/short), and predominantly held 1-2 days. Volatility allocation: Momentum 45%, Mean Reversion 30%, Trend Participation 12%, Unique 13%.</p>
+<p><b>Edge:</b> Technological and analytical. Proprietary low-latency infrastructure with global co-location (Asia, NA, Europe), proprietary execution algorithms, and a 30-year research library of short-term price patterns. Machine learning layer for factor recombination. Edge is structural — execution speed and research depth are difficult to replicate.</p>
+<p><b>Process:</b> Sector allocation targets: Equities 41%, Fixed Income 23%, Commodities 21%, FX 15%. Risk controlled via position-level stops, time exits, VaR/co-variance capping, dynamic portfolio sizing, and a 2.5% intraday max-loss stop. All trades symmetrical long/short.</p>
+</div>
+
+<div class="sec"><h2>Performance</h2>
+<div class="cc"><div class="ct">Cumulative Performance — Indexed to 100 (Mar 1998)</div><canvas id="ch1" height="280"></canvas></div>
+<div class="cc"><div class="ct">Performance Timeline with Key Events</div><canvas id="ch2" height="280"></canvas></div>
+<div class="cc"><div class="ct">Rolling 12-Month Returns</div><canvas id="ch3" height="200"></canvas></div>
+
+<h3>Performance Summary</h3>
+<table><thead><tr><th>Metric</th><th class="nc">Crabel MP 1x</th><th class="nc">AI Managed Futures</th><th class="nc">S&amp;P 500</th></tr></thead><tbody>
+<tr><td>CAGR (SI)</td><td class="nc pos">7.59%</td><td class="nc">~4.5%</td><td class="nc">~10%</td></tr>
+<tr><td>5Y CAGR</td><td class="nc">2.42%</td><td class="nc">~3%</td><td class="nc">~12%</td></tr>
+<tr><td>Volatility (SI)</td><td class="nc">12.26%</td><td class="nc">~8%</td><td class="nc">~16%</td></tr>
+<tr><td>Sharpe</td><td class="nc">0.62</td><td class="nc">~0.56</td><td class="nc">~0.62</td></tr>
+<tr><td>Max Drawdown</td><td class="nc neg">-16.27%</td><td class="nc">~-12%</td><td class="nc">~-34%</td></tr>
+<tr><td>Correlation (S&amp;P)</td><td class="nc pos">0.123</td><td class="nc">~0.1</td><td class="nc">1.00</td></tr>
+<tr><td>Correlation (MF Index)</td><td class="nc">0.333</td><td class="nc">1.00</td><td class="nc">—</td></tr>
+</tbody></table>
+
+<h3>Discrete Performance</h3>
+<table><thead><tr><th></th><th class="nc">1 Mo</th><th class="nc">3 Mo</th><th class="nc">6 Mo</th><th class="nc">1 Yr</th><th class="nc">3 Yr</th><th class="nc">5 Yr</th><th class="nc">Inception</th><th class="nc">Annualised</th></tr></thead><tbody id="dtb"></tbody></table>
+<p class="mu">Benchmark: AlternativesInsight Managed Futures Index (AIMFUI). SI benchmarks over common period (Feb 2008 – Feb 2026, 217 months). Fund SI: full track record (Mar 1998, 336 months).</p>
+
+</div>
+
+<div class="sec"><h2>Monthly Returns</h2>
+<div class="rt" id="mrt"></div>
+</div>
+
+<div class="sec"><h2>Variance Decomposition</h2>
+<p>5-factor PCA on AlternativesInsight indices. Fund regressed on orthogonal PCs. Feb 2008 – Feb 2026 (217 obs).</p>
+<div class="pcg">
+<div class="pcc"><div class="pl">R² (Factor Model)</div><div class="pv" style="color:#2d8a4e">7.55%</div></div>
+<div class="pcc"><div class="pl">Residual / Alpha</div><div class="pv" style="color:#0a1628">92.45%</div></div>
+<div class="pcc"><div class="pl">Monthly Alpha</div><div class="pv" style="color:#2d8a4e">+0.3%</div></div>
+<div class="pcc"><div class="pl">Ann. Alpha</div><div class="pv" style="color:#2d8a4e">+3.62%</div></div>
+</div>
+<div class="cc"><div class="ct">Absolute Variance Decomposition</div><canvas id="ch7" height="220"></canvas></div>
+<div class="cc"><div class="ct">Relative Variance Decomposition</div><canvas id="ch8" height="220"></canvas></div>
+<p><b>Allocator Takeaway:</b> ~92.45% of variance is idiosyncratic. Regression alpha ~+3.62% ann. Near-zero equity beta (0.052) and low MF correlation (0.333) confirm this is a genuine alpha generator, not a repackaged factor exposure.</p>
+</div>
+
+<div class="sec"><h2>Performance by Sector (Monthly Attribution)</h2>
+<div class="cc"><div class="ct">Sector Performance Attribution — Cumulative (Jan 2003 – Feb 2026)</div><canvas id="ch4" height="260"></canvas></div>
+</div>
+
+<div class="sec"><h2>Performance by Strategy (Monthly Attribution)</h2>
+<div class="cc"><div class="ct">Strategy Performance Attribution — Cumulative (Jan 2010 – Feb 2026)</div><canvas id="ch5" height="260"></canvas></div>
+</div>
+
+<div class="sec"><h2>Distribution of Returns</h2>
+<div class="cc" style="position:relative"><div class="ct">Distribution of Returns</div><canvas id="ch6" height="240"></canvas>
+<div style="position:absolute;top:16px;right:16px;display:flex;flex-direction:column;gap:8px">
+<div class="dsc" style="margin:0;min-width:120px"><div class="dl">Skewness</div><div class="dv">4.18</div><div class="dd">Positive Skew</div></div>
+<div class="dsc" style="margin:0;min-width:120px"><div class="dl">Kurtosis</div><div class="dv">46.24</div><div class="dd">Leptokurtic</div></div>
+</div>
+</div>
+</div>
+
+<div class="sec"><h2>Portfolio Exposure (MSCI Tier I, Dec 2025)</h2>
+<table><thead><tr><th>Asset Class</th><th class="nc">Long (%NAV)</th><th class="nc">Short (%NAV)</th><th class="nc">Net</th><th class="nc">Gross</th></tr></thead><tbody>
+<tr><td>Equity</td><td class="nc">65.28</td><td class="nc">-3.69</td><td class="nc">61.59</td><td class="nc">68.97</td></tr>
+<tr><td>Fixed Income</td><td class="nc">19.19</td><td class="nc">-19.34</td><td class="nc">-0.15</td><td class="nc">38.52</td></tr>
+<tr><td>Commodity</td><td class="nc">20.31</td><td class="nc">-15.21</td><td class="nc">5.10</td><td class="nc">35.52</td></tr>
+<tr><td>FX</td><td class="nc">2.06</td><td class="nc">12.46</td><td class="nc">14.51</td><td class="nc">14.51</td></tr>
+<tr><td><b>Total</b></td><td class="nc"><b>106.84</b></td><td class="nc"><b>-25.78</b></td><td class="nc"><b>81.05</b></td><td class="nc"><b>157.52</b></td></tr>
+</tbody></table>
+<p class="mu">Source: MSCI OPERA report (Dec 31, 2025). 1,027 positions. NAV $101.9MM. 95% 1-Day VaR: 57.45 bps. 99% 1-Day VaR: 77.79 bps.</p>
+
+<h3>VaR by Risk Type (95%, 1-Day, bps)</h3>
+<table><thead><tr><th>Total</th><th class="nc">Equity</th><th class="nc">FX</th><th class="nc">Commodity</th><th class="nc">Int Rates</th><th class="nc">Spread</th><th class="nc">Vol</th></tr></thead><tbody>
+<tr><td><b>57.45</b></td><td class="nc">38.47</td><td class="nc">7.84</td><td class="nc">31.22</td><td class="nc">3.39</td><td class="nc">0.48</td><td class="nc">0.47</td></tr>
+</tbody></table>
+
+<h3>Historical Stress Test (% of NAV)</h3>
+<table><thead><tr><th>Scenario</th><th class="nc">Impact</th></tr></thead><tbody>
+<tr><td>Post-Lehman (Sep-Oct 2008)</td><td class="nc neg">-16.77%</td></tr>
+<tr><td>Subprime Crisis (Jul-Aug 2007)</td><td class="nc neg">-8.20%</td></tr>
+<tr><td>Sep 2011</td><td class="nc neg">-5.74%</td></tr>
+<tr><td>May 2010</td><td class="nc neg">-6.48%</td></tr>
+<tr><td>Gulf War 2 (Mar 2003)</td><td class="nc pos">+4.62%</td></tr>
+<tr><td>Bond Rally (May-Jun 2003)</td><td class="nc pos">+4.46%</td></tr>
+<tr><td>Black Monday 1987 (Predictive)</td><td class="nc neg">-17.18%</td></tr>
+</tbody></table>
+</div>
+
+<div class="sec"><h2>Team &amp; Organisation</h2>
+<p><b>Toby Crabel</b> — Founder, Chairman &amp; CIO. Pioneer in short-term systematic trading since 1987. Author of foundational research on opening range breakouts. 39 years of experience.</p>
+<p><b>Michael Pomada</b> — President &amp; CEO, Portfolio Manager (Gemini, Advanced Trend). Joined 2008 ex-UBS/Manchester Trading. Led infrastructure overhaul 2009-2011.</p>
+<p><b>Steve Wisdom</b> — Senior Partner &amp; Portfolio Manager (Gemini). Ex-Manchester Trading, Deephaven, Société Générale. Harvard BA.</p>
+<p><b>Rick Rusin</b> — COO. Ex-Chesapeake Capital, AlphaTerra. <b>Connie Wick</b> — General Counsel &amp; CCO. NFA Board member. <b>Alden Melbourne</b> — Senior Partner, Risk &amp; Strategy Oversight. Longest-tenured employee (since 1993).</p>
+<p>60 staff total. ~50% dedicated to R&amp;D. LA (global HQ) + Milwaukee (ops). AUM by client: 48% Institutions, 44% Intermediaries, 5% UCITS, 2% Employees.</p>
+</div>
+
+<div class="sec"><h2>Key Risks</h2>
+<table><thead><tr><th style="width:18%">Risk</th><th>Commentary</th></tr></thead><tbody>
+<tr><td><b>Alpha Decay</b></td><td>5Y CAGR (2.42%) significantly below SI CAGR (7.59%). 2025 was -6.24%. Short-term anomalies may be eroding as markets become more efficient and HFT competition increases.</td></tr>
+<tr><td><b>Fees</b></td><td>2% mgmt + 30% incentive (quarterly) is expensive for a systematic strategy. Net 5Y Sharpe of 0.40 may not justify fee level. Competitors (e.g. Gemini at 2/0, Advanced Trend at 1/0) offer cheaper access.</td></tr>
+<tr><td><b>Key-Man</b></td><td>Toby Crabel (age 65+) is the intellectual founder. Mitigated by Pomada (CEO/PM), Wisdom (PM), and Melbourne (Risk). Succession appears planned but untested.</td></tr>
+<tr><td><b>Capacity</b></td><td>$1.39bn strategy AUM. Short-term strategies face capacity constraints from market impact. ~8,600 annual roundturns/$1mm suggests high activity.</td></tr>
+<tr><td><b>Drawdown</b></td><td>Max DD -16.27% (2001). Black Monday predictive stress: -17.18%. Post-Lehman historical stress: -16.77%. Tail risk is material despite vol targeting.</td></tr>
+<tr><td><b>Regime Risk</b></td><td>Strategy thrives in volatile, trending environments (2007: +32.9%, 2002: +27.4%). Struggles in low-vol, range-bound markets (2020: -0.3%, 2021: +0.1%).</td></tr>
+</tbody></table></div>
+
+<div class="sec"><h2>Scoring Model</h2>
+<table><thead><tr><th>Category</th><th class="nc">Score</th><th class="nc">Weight</th><th class="nc">Weighted</th><th>Comment</th></tr></thead><tbody>
+<tr><td>Strategy &amp; Edge</td><td class="nc">4.5</td><td class="nc">20%</td><td class="nc">0.90</td><td>Genuine structural edge in short-term systematic; 28-year evidence</td></tr>
+<tr><td>Investment Process</td><td class="nc">4.5</td><td class="nc">15%</td><td class="nc">0.68</td><td>Best-in-class systematic process, ML integration, 250 markets</td></tr>
+<tr><td>Performance &amp; Risk</td><td class="nc">3.5</td><td class="nc">20%</td><td class="nc">0.70</td><td>Strong SI metrics but recent 5Y underperformance</td></tr>
+<tr><td>Portfolio Char.</td><td class="nc">4.0</td><td class="nc">10%</td><td class="nc">0.40</td><td>Excellent diversification; near-zero equity beta; well-balanced</td></tr>
+<tr><td>Team &amp; Org</td><td class="nc">4.0</td><td class="nc">10%</td><td class="nc">0.40</td><td>Deep, experienced team; co-PM structure; 60 staff</td></tr>
+<tr><td>Risk Mgmt</td><td class="nc">4.5</td><td class="nc">10%</td><td class="nc">0.45</td><td>Multi-layer automated risk controls; VaR/covariance; intraday stops</td></tr>
+<tr><td>Terms</td><td class="nc">3.0</td><td class="nc">5%</td><td class="nc">0.15</td><td>2/30 expensive; monthly liquidity, no lock-up are positive</td></tr>
+<tr><td>Operational DD</td><td class="nc">5.0</td><td class="nc">5%</td><td class="nc">0.25</td><td>Deloitte audit, BNY Mellon, 7 tier-1 PBs. Best-in-class ODD</td></tr>
+<tr><td>Capacity</td><td class="nc">3.5</td><td class="nc">5%</td><td class="nc">0.18</td><td>Short-term strategies face inherent capacity limits</td></tr>
+</tbody></table>
+<div class="sf">
+<div><div class="sl2">Composite Score</div><div class="bs">78.5</div></div>
+<div><div class="sl2">Decision</div><div class="sd" style="font-size:17px;font-weight:700;color:#90ee90">INVEST</div><div class="sd">Allocation: 5–8% as portfolio diversifier / uncorrelated alpha</div></div>
+</div>
+<p class="mu">Score: (4.5×20 + 4.5×15 + 3.5×20 + 4.0×10 + 4.0×10 + 4.5×10 + 3.0×5 + 5.0×5 + 3.5×5) / 5 = 78.5/100</p>
+</div>
+
+<div class="ftr">
+<p>Data: manager factsheets, MSCI OPERA (Dec 2025), AlternativesInsight indices. Net of 2/30 fees. Not investment advice.</p>
+</div>
+</div>
+
+<script>
+const P='#0a1628';
+Chart.defaults.font.family="'Open Sans',sans-serif";Chart.defaults.font.size=11;Chart.defaults.color='#666';
+const L=["1998-03", "1998-04", "1998-05", "1998-06", "1998-07", "1998-08", "1998-09", "1998-10", "1998-11", "1998-12", "1999-01", "1999-02", "1999-03", "1999-04", "1999-05", "1999-06", "1999-07", "1999-08", "1999-09", "1999-10", "1999-11", "1999-12", "2000-01", "2000-02", "2000-03", "2000-04", "2000-05", "2000-06", "2000-07", "2000-08", "2000-09", "2000-10", "2000-11", "2000-12", "2001-01", "2001-02", "2001-03", "2001-04", "2001-05", "2001-06", "2001-07", "2001-08", "2001-09", "2001-10", "2001-11", "2001-12", "2002-01", "2002-02", "2002-03", "2002-04", "2002-05", "2002-06", "2002-07", "2002-08", "2002-09", "2002-10", "2002-11", "2002-12", "2003-01", "2003-02", "2003-03", "2003-04", "2003-05", "2003-06", "2003-07", "2003-08", "2003-09", "2003-10", "2003-11", "2003-12", "2004-01", "2004-02", "2004-03", "2004-04", "2004-05", "2004-06", "2004-07", "2004-08", "2004-09", "2004-10", "2004-11", "2004-12", "2005-01", "2005-02", "2005-03", "2005-04", "2005-05", "2005-06", "2005-07", "2005-08", "2005-09", "2005-10", "2005-11", "2005-12", "2006-01", "2006-02", "2006-03", "2006-04", "2006-05", "2006-06", "2006-07", "2006-08", "2006-09", "2006-10", "2006-11", "2006-12", "2007-01", "2007-02", "2007-03", "2007-04", "2007-05", "2007-06", "2007-07", "2007-08", "2007-09", "2007-10", "2007-11", "2007-12", "2008-01", "2008-02", "2008-03", "2008-04", "2008-05", "2008-06", "2008-07", "2008-08", "2008-09", "2008-10", "2008-11", "2008-12", "2009-01", "2009-02", "2009-03", "2009-04", "2009-05", "2009-06", "2009-07", "2009-08", "2009-09", "2009-10", "2009-11", "2009-12", "2010-01", "2010-02", "2010-03", "2010-04", "2010-05", "2010-06", "2010-07", "2010-08", "2010-09", "2010-10", "2010-11", "2010-12", "2011-01", "2011-02", "2011-03", "2011-04", "2011-05", "2011-06", "2011-07", "2011-08", "2011-09", "2011-10", "2011-11", "2011-12", "2012-01", "2012-02", "2012-03", "2012-04", "2012-05", "2012-06", "2012-07", "2012-08", "2012-09", "2012-10", "2012-11", "2012-12", "2013-01", "2013-02", "2013-03", "2013-04", "2013-05", "2013-06", "2013-07", "2013-08", "2013-09", "2013-10", "2013-11", "2013-12", "2014-01", "2014-02", "2014-03", "2014-04", "2014-05", "2014-06", "2014-07", "2014-08", "2014-09", "2014-10", "2014-11", "2014-12", "2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12", "2016-01", "2016-02", "2016-03", "2016-04", "2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02"];
+const FM=[1.97, 0.22, -0.24, -1.87, -6.65, -8.37, 39.36, 3.36, -4.45, -1.03, -1.59, -6.8, -0.7, 0.59, 0.51, -2.44, 18.18, 8.0, -1.52, 2.55, -3.13, 2.47, 2.02, 5.99, 1.55, 7.5, 5.14, 3.39, 0.21, 4.08, 4.78, -8.44, -6.12, 5.69, 11.08, -1.37, 4.25, 6.64, 5.27, -0.02, 1.62, -0.73, -9.81, -2.58, -1.8, 2.02, 1.25, -2.36, 3.01, 2.9, -0.14, 7.14, 9.98, 1.6, 1.07, -3.89, 4.34, 0.3, -1.5, 1.66, -4.05, 1.87, 1.41, 2.75, -0.86, 1.48, 1.79, -1.3, 0.21, -1.4, -0.92, 2.01, -1.89, 2.25, 1.29, -1.38, 0.54, 0.23, 0.16, 1.73, 1.35, 0.81, -0.55, 1.4, 0.79, 3.25, 1.96, -1.05, -2.97, 1.72, 0.61, -2.21, 3.06, 0.6, 2.04, 2.59, 2.72, 0.6, 2.7, 0.55, 0.54, -4.43, -2.58, 2.65, 1.73, -0.72, 2.91, 3.04, -0.45, -1.34, -2.7, 4.33, 6.47, 3.58, 2.12, 3.16, 3.98, 4.06, 2.72, 0.52, 2.95, -0.93, 0.56, 0.64, 1.54, -3.71, 4.75, -3.48, -2.57, -3.51, 2.74, -0.15, -0.02, 1.06, 2.02, 0.53, -2.96, 1.34, -0.66, -1.08, -1.59, -1.42, -0.34, 1.33, -0.5, 1.48, 1.18, -0.51, 1.76, 3.15, 0.79, -1.08, -1.5, 3.5, 1.8, 0.39, -1.46, -1.31, 2.4, 0.75, 0.25, -2.5, 2.79, -0.14, -4.58, 0.4, 1.98, -1.05, 2.14, -0.28, 1.85, 0.62, 3.37, -1.89, 0.11, 2.06, 3.8, 1.63, 6.62, 3.53, 1.81, 1.59, -3.65, -1.77, -2.89, 0.46, -7.13, 0.7, 1.5, 2.04, 6.74, -3.49, 0.79, -2.14, 1.53, 0.86, 0.48, 1.17, 1.45, -0.48, 1.79, 0.65, -0.05, -0.22, 1.56, -0.75, 1.17, -3.45, 1.03, -5.45, 2.15, 0.19, 2.88, 0.31, 2.96, 3.51, 0.91, 1.77, 0.26, 2.47, 0.23, -3.95, -0.97, -2.7, -1.41, 1.96, -3.8, -2.2, 0.92, -1.03, -0.07, 0.98, 1.28, -0.32, 1.4, 1.94, -1.81, 0.52, 8.98, -2.31, 0.24, 1.33, 0.57, -0.39, -0.8, 1.23, -0.25, 1.97, -0.43, -0.75, -0.83, -2.44, 3.46, -0.83, -1.72, 3.91, 0.3, 3.73, -0.99, 2.88, 0.83, 0.05, 2.08, -0.98, 0.66, -0.04, -0.06, 0.45, 0.14, -4.01, 0.02, -0.7, 1.13, 1.16, -0.24, 1.95, -0.67, 0.62, -0.12, -0.24, 0.21, -1.28, 0.12, 1.06, -1.9, 0.68, -0.55, 0.07, 4.78, 1.52, -0.0, 1.53, 0.09, -0.64, -1.72, 2.59, -1.67, 0.02, 2.96, -2.14, 0.1, -0.58, 0.1, 0.89, -0.64, -1.68, -0.17, -1.85, 2.3, 2.65, -3.13, 2.84, 1.13, 0.46, 2.52, -0.29, 0.52, 2.64, 2.16, -1.65, 0.93, -0.48, -0.65, 1.66, 0.5, 0.12, -1.83, -4.64, 0.93, -1.05, -0.57, 1.85, -3.1, 0.55, 2.2, 2.8];
+const CUM=[101.97, 102.2, 101.95, 100.04, 93.39, 85.57, 119.25, 123.27, 117.78, 116.57, 114.72, 106.92, 106.17, 106.8, 107.35, 104.73, 123.77, 133.66, 131.64, 135.0, 130.78, 134.01, 136.72, 144.9, 147.14, 158.18, 166.31, 171.95, 172.31, 179.34, 187.92, 172.05, 161.53, 170.72, 189.64, 187.03, 194.99, 207.93, 218.89, 218.85, 222.4, 220.78, 199.12, 193.98, 190.49, 194.34, 196.77, 192.13, 197.93, 203.67, 203.39, 217.91, 239.65, 243.48, 246.08, 236.5, 246.77, 247.52, 243.8, 247.85, 237.8, 242.24, 245.66, 252.41, 250.23, 253.94, 258.5, 255.13, 255.66, 252.08, 249.76, 254.78, 249.97, 255.58, 258.88, 255.32, 256.7, 257.29, 257.71, 262.17, 265.7, 267.86, 266.39, 270.13, 272.27, 281.11, 286.63, 283.62, 275.21, 279.93, 281.65, 275.44, 283.87, 285.58, 291.39, 298.95, 307.08, 308.92, 317.26, 318.99, 320.73, 306.53, 298.63, 306.54, 311.83, 309.59, 318.59, 328.26, 326.78, 322.39, 313.7, 327.29, 348.45, 360.94, 368.61, 380.26, 395.41, 411.47, 422.67, 424.86, 437.4, 433.32, 435.73, 438.54, 445.29, 428.78, 449.15, 433.53, 422.4, 407.58, 418.73, 418.12, 418.04, 422.48, 431.0, 433.3, 420.47, 426.12, 423.31, 418.72, 412.06, 406.2, 404.8, 410.18, 408.12, 414.16, 419.03, 416.9, 424.22, 437.59, 441.05, 436.3, 429.75, 444.79, 452.81, 454.59, 447.98, 442.12, 452.75, 456.13, 457.27, 445.85, 458.28, 457.63, 436.68, 438.43, 447.1, 442.42, 451.88, 450.6, 458.95, 461.78, 477.33, 468.33, 468.86, 478.53, 496.73, 504.84, 538.27, 557.26, 567.35, 576.35, 555.3, 545.46, 529.69, 532.14, 494.21, 497.69, 505.17, 515.46, 550.2, 531.01, 535.22, 523.79, 531.8, 536.38, 538.97, 545.26, 553.15, 550.48, 560.33, 563.95, 563.68, 562.43, 571.19, 566.88, 573.54, 553.74, 559.46, 528.97, 540.32, 541.33, 556.91, 558.63, 575.17, 595.33, 600.74, 611.36, 612.96, 628.11, 629.53, 604.65, 598.78, 582.61, 574.38, 585.64, 563.39, 550.97, 556.07, 550.36, 549.98, 555.36, 562.49, 560.71, 568.56, 579.61, 569.1, 572.06, 623.44, 609.04, 610.5, 618.64, 622.15, 619.73, 614.77, 622.34, 620.75, 632.97, 630.23, 625.48, 620.27, 605.15, 626.07, 620.87, 610.19, 634.06, 635.96, 659.68, 653.13, 671.94, 677.48, 677.83, 691.93, 685.12, 689.63, 689.35, 688.93, 692.04, 693.04, 665.22, 665.33, 660.7, 668.15, 675.93, 674.33, 687.48, 682.87, 687.11, 686.25, 684.61, 686.07, 677.28, 678.11, 685.31, 672.32, 676.93, 673.19, 673.67, 705.89, 716.63, 716.62, 727.58, 728.26, 723.6, 711.14, 729.57, 717.37, 717.49, 738.74, 722.9, 723.65, 719.45, 720.16, 726.55, 721.92, 709.81, 708.59, 695.47, 711.46, 730.28, 707.39, 727.51, 735.71, 739.1, 757.75, 755.53, 759.45, 779.5, 796.31, 783.14, 790.42, 786.66, 781.57, 794.51, 798.52, 799.49, 784.84, 748.41, 755.41, 747.45, 743.19, 756.97, 733.52, 737.57, 753.81, 774.88];
+const R12=[null, null, null, null, null, null, null, null, null, null, null, 6.92, 4.12, 4.5, 5.29, 4.68, 32.52, 56.2, 10.38, 9.52, 11.03, 14.96, 19.17, 35.53, 38.59, 48.11, 54.92, 64.19, 39.22, 34.18, 42.76, 27.45, 23.51, 27.4, 38.71, 29.07, 32.52, 31.46, 31.62, 27.27, 29.07, 23.1, 5.96, 12.74, 17.93, 13.84, 3.76, 2.73, 1.51, -2.05, -7.08, -0.43, 7.75, 10.28, 23.58, 21.92, 29.55, 27.36, 23.9, 29.0, 20.14, 18.94, 20.78, 15.83, 4.42, 4.3, 5.05, 7.88, 3.6, 1.84, 2.44, 2.8, 5.12, 5.51, 5.38, 1.15, 2.59, 1.32, -0.3, 2.76, 3.93, 6.26, 6.66, 6.03, 8.92, 9.99, 10.72, 11.08, 7.21, 8.8, 9.29, 5.06, 6.84, 6.62, 9.38, 10.67, 12.79, 9.89, 10.69, 12.47, 16.54, 9.5, 6.03, 11.29, 9.85, 8.41, 9.33, 9.81, 6.41, 4.36, -1.12, 2.6, 8.65, 17.75, 23.43, 24.05, 26.8, 32.91, 32.67, 29.43, 33.85, 34.41, 38.9, 33.99, 27.79, 18.8, 21.85, 14.01, 6.83, -0.95, -0.93, -1.59, -4.43, -2.5, -1.08, -1.19, -5.57, -0.62, -5.75, -3.42, -2.45, -0.34, -3.33, -1.9, -2.37, -1.97, -2.78, -3.79, 0.89, 2.69, 4.19, 4.2, 4.29, 9.5, 11.86, 10.83, 9.77, 6.75, 8.05, 9.41, 7.79, 1.89, 3.91, 4.89, 1.61, -1.43, -1.26, -2.68, 0.87, 1.92, 1.37, 1.24, 4.39, 5.04, 2.31, 4.57, 13.75, 15.15, 20.39, 25.96, 25.55, 27.91, 20.99, 18.12, 10.97, 13.62, 5.41, 4.0, 1.7, 2.1, 2.22, -4.71, -5.66, -9.12, -4.23, -1.67, 1.75, 2.47, 11.93, 10.61, 10.92, 9.41, 2.45, 5.92, 6.72, 8.23, 7.85, 3.24, 3.8, -2.99, -2.32, -1.66, -0.61, -0.94, 2.04, 5.85, 5.17, 7.85, 6.87, 13.43, 12.52, 14.31, 10.82, 7.63, 3.14, 4.83, -2.05, -7.45, -7.44, -9.98, -10.27, -11.58, -10.65, -7.27, -5.05, -0.52, -0.92, -2.32, 10.66, 10.54, 9.79, 12.41, 13.12, 11.59, 9.3, 10.99, 9.18, 9.21, 10.74, 9.34, -0.51, -0.64, 2.55, 0.36, -1.92, 2.31, 3.45, 6.0, 5.22, 6.16, 7.5, 8.37, 11.55, 13.21, 10.15, 11.03, 12.9, 9.14, 8.98, 0.84, 1.87, -1.67, -1.38, -0.28, -2.54, 0.34, -0.98, -0.32, -0.39, -1.07, -1.01, 1.81, 1.92, 3.73, 0.63, 0.15, -0.17, -2.01, 3.37, 4.3, 4.43, 6.28, 6.15, 6.84, 4.87, 6.46, 6.7, 5.99, 9.74, 7.31, 2.52, 0.39, 0.49, -0.14, -0.87, -1.9, -0.36, -4.67, -0.82, 1.78, -4.24, 0.64, 1.67, 2.73, 5.22, 3.99, 5.2, 9.82, 12.38, 12.6, 11.1, 7.72, 10.49, 9.21, 8.54, 8.17, 3.58, -0.94, -0.53, -4.11, -6.67, -3.34, -7.2, -6.24, -3.55, -2.47];
+const SP={"2008-02": 0.88, "2008-03": -3.84, "2008-04": 5.76, "2008-05": 0.68, "2008-06": -8.71, "2008-07": 0.46, "2008-08": -0.11, "2008-09": -13.75, "2008-10": -13.77, "2008-11": -6.06, "2008-12": -0.62, "2009-01": -7.27, "2009-02": -10.99, "2009-03": 7.13, "2009-04": 10.93, "2009-05": 5.21, "2009-06": 0.88, "2009-07": 6.42, "2009-08": 4.27, "2009-09": 3.08, "2009-10": -2.3, "2009-11": 5.34, "2009-12": 3.2, "2010-01": -4.67, "2010-02": 2.85, "2010-03": 6.23, "2010-04": 2.86, "2010-05": -9.73, "2010-06": -4.42, "2010-07": 5.8, "2010-08": -4.78, "2010-09": 9.13, "2010-10": 3.37, "2010-11": 0.38, "2010-12": 5.9, "2011-01": 1.47, "2011-02": 3.41, "2011-03": 0.63, "2011-04": 2.66, "2011-05": -2.38, "2011-06": -1.78, "2011-07": -1.16, "2011-08": -6.14, "2011-09": -4.33, "2011-10": 10.75, "2011-11": -7.0, "2011-12": 5.22, "2012-01": 4.41, "2012-02": 4.51, "2012-03": 2.64, "2012-04": -0.36, "2012-05": -6.42, "2012-06": 3.72, "2012-07": 1.7, "2012-08": 1.02, "2012-09": 2.94, "2012-10": -1.99, "2012-11": 0.28, "2012-12": -0.95, "2013-01": 7.1, "2013-02": 0.93, "2013-03": 3.51, "2013-04": 1.56, "2013-05": 3.82, "2013-06": -2.91, "2013-07": 4.96, "2013-08": -3.14, "2013-09": 3.6, "2013-10": 4.23, "2013-11": 2.41, "2013-12": 1.95, "2014-01": -2.55, "2014-02": 3.35, "2014-03": 0.18, "2014-04": 1.11, "2014-05": 2.41, "2014-06": 1.94, "2014-07": 0.46, "2014-08": 1.69, "2014-09": -1.28, "2014-10": 0.85, "2014-11": 3.66, "2014-12": 0.62, "2015-01": -4.1, "2015-02": 5.49, "2015-03": -0.87, "2015-04": 0.99, "2015-05": 0.03, "2015-06": -2.36, "2015-07": 2.48, "2015-08": -5.68, "2015-09": -5.27, "2015-10": 10.36, "2015-11": 0.52, "2015-12": -1.28, "2016-01": -5.97, "2016-02": 0.4, "2016-03": 5.95, "2016-04": 0.07, "2016-05": 1.63, "2016-06": -1.35, "2016-07": 4.97, "2016-08": 0.12, "2016-09": -1.15, "2016-10": -1.15, "2016-11": 3.68, "2016-12": 1.55, "2017-01": 1.88, "2017-02": 3.9, "2017-03": -0.07, "2017-04": 0.68, "2017-05": 1.2, "2017-06": 0.28, "2017-07": 2.17, "2017-08": -0.59, "2017-09": 2.51, "2017-10": 2.12, "2017-11": 2.07, "2017-12": 1.81, "2018-01": 5.57, "2018-02": -2.77, "2018-03": -3.77, "2018-04": 1.1, "2018-05": 2.03, "2018-06": -0.21, "2018-07": 3.1, "2018-08": 3.52, "2018-09": 0.44, "2018-10": -7.94, "2018-11": 2.06, "2018-12": -9.21, "2019-01": 7.86, "2019-02": 4.15, "2019-03": 1.5, "2019-04": 3.83, "2019-05": -5.24, "2019-06": 5.48, "2019-07": 2.43, "2019-08": -2.88, "2019-09": 1.21, "2019-10": 2.87, "2019-11": 3.09, "2019-12": 2.56, "2020-01": 1.94, "2020-02": -10.03, "2020-03": -11.09, "2020-04": 11.91, "2020-05": 3.57, "2020-06": 0.29, "2020-07": 6.32, "2020-08": 8.06, "2020-09": -4.92, "2020-10": -1.96, "2020-11": 11.27, "2020-12": 2.58, "2021-01": -0.48, "2021-02": 2.61, "2021-03": 3.87, "2021-04": 6.39, "2021-05": -0.17, "2021-06": 2.09, "2021-07": 2.41, "2021-08": 3.04, "2021-09": -3.74, "2021-10": 5.64, "2021-11": 1.08, "2021-12": 2.65, "2022-01": -7.26, "2022-02": -1.07, "2022-03": 4.97, "2022-04": -10.22, "2022-05": 0.64, "2022-06": -8.16, "2022-07": 8.16, "2022-08": -3.49, "2022-09": -8.67, "2022-10": 7.16, "2022-11": 1.45, "2022-12": -2.98, "2023-01": 4.64, "2023-02": -0.88, "2023-03": 1.72, "2023-04": 2.93, "2023-05": 0.86, "2023-06": 4.54, "2023-07": 4.23, "2023-08": -1.47, "2023-09": -5.02, "2023-10": -2.83, "2023-11": 9.21, "2023-12": 4.82, "2024-01": 3.25, "2024-02": 2.94, "2024-03": 3.64, "2024-04": -2.63, "2024-05": 2.33, "2024-06": 4.3, "2024-07": -0.44, "2024-08": 3.9, "2024-09": 1.59, "2024-10": 1.32, "2024-11": 3.76, "2024-12": -2.08, "2025-01": 2.78, "2025-02": -3.45, "2025-03": -4.79, "2025-04": -0.36, "2025-05": 6.31, "2025-06": 4.42, "2025-07": 3.08, "2025-08": 1.53, "2025-09": 3.11, "2025-10": 2.42, "2025-11": 0.39, "2025-12": 0.69, "2026-01": 0.62, "2026-02": -0.87}
+const MF={"2008-02": 6.61, "2008-03": -0.53, "2008-04": -2.15, "2008-05": 1.44, "2008-06": 4.79, "2008-07": -4.2, "2008-08": -2.48, "2008-09": -0.57, "2008-10": 4.96, "2008-11": 3.22, "2008-12": 2.37, "2009-01": -0.56, "2009-02": -0.16, "2009-03": -2.18, "2009-04": -3.24, "2009-05": 0.85, "2009-06": -2.32, "2009-07": -0.43, "2009-08": 0.92, "2009-09": 2.97, "2009-10": -2.17, "2009-11": 4.94, "2009-12": -5.0, "2010-01": -3.81, "2010-02": 1.81, "2010-03": 4.25, "2010-04": 1.89, "2010-05": -4.03, "2010-06": 0.42, "2010-07": -1.5, "2010-08": 4.87, "2010-09": 2.77, "2010-10": 4.29, "2010-11": -4.11, "2010-12": 5.42, "2011-01": -0.82, "2011-02": 2.6, "2011-03": -2.76, "2011-04": 5.4, "2011-05": -4.44, "2011-06": -3.07, "2011-07": 4.03, "2011-08": 0.25, "2011-09": -0.78, "2011-10": -5.06, "2011-11": 0.18, "2011-12": 0.79, "2012-01": 1.15, "2012-02": 1.21, "2012-03": -2.96, "2012-04": 0.43, "2012-05": 2.38, "2012-06": -3.56, "2012-07": 4.68, "2012-08": -1.55, "2012-09": -1.37, "2012-10": -4.64, "2012-11": 0.58, "2012-12": 1.08, "2013-01": 2.67, "2013-02": -0.77, "2013-03": 1.74, "2013-04": 3.5, "2013-05": -4.98, "2013-06": -5.42, "2013-07": -1.06, "2013-08": -2.77, "2013-09": -0.15, "2013-10": 2.96, "2013-11": 2.09, "2013-12": 0.1, "2014-01": -3.42, "2014-02": 0.94, "2014-03": -1.82, "2014-04": 0.42, "2014-05": 3.09, "2014-06": 1.54, "2014-07": -1.03, "2014-08": 5.02, "2014-09": 1.72, "2014-10": 1.81, "2014-11": 7.5, "2014-12": 1.67, "2015-01": 6.02, "2015-02": -1.15, "2015-03": 2.4, "2015-04": -4.29, "2015-05": -0.84, "2015-06": -5.81, "2015-07": 4.33, "2015-08": -2.76, "2015-09": 2.87, "2015-10": -2.48, "2015-11": 3.73, "2015-12": -2.19, "2016-01": 4.02, "2016-02": 3.23, "2016-03": -2.83, "2016-04": -3.04, "2016-05": -3.2, "2016-06": 4.19, "2016-07": 1.61, "2016-08": -3.09, "2016-09": -1.72, "2016-10": -4.17, "2016-11": -1.74, "2016-12": 0.2, "2017-01": -1.45, "2017-02": 2.39, "2017-03": -1.91, "2017-04": -0.54, "2017-05": 0.43, "2017-06": -3.29, "2017-07": 1.29, "2017-08": 2.77, "2017-09": -2.66, "2017-10": 4.99, "2017-11": -0.09, "2017-12": 1.64, "2018-01": 4.66, "2018-02": -7.5, "2018-03": -0.27, "2018-04": -0.6, "2018-05": -1.1, "2018-06": 1.43, "2018-07": -1.13, "2018-08": 2.5, "2018-09": -0.71, "2018-10": -3.48, "2018-11": -0.99, "2018-12": 0.8, "2019-01": -1.84, "2019-02": 0.55, "2019-03": 4.57, "2019-04": 2.68, "2019-05": -0.61, "2019-06": 2.62, "2019-07": 3.53, "2019-08": 4.2, "2019-09": -4.04, "2019-10": -3.0, "2019-11": 0.21, "2019-12": 0.22, "2020-01": 1.25, "2020-02": -1.47, "2020-03": 0.27, "2020-04": -0.88, "2020-05": -0.58, "2020-06": -1.45, "2020-07": 2.83, "2020-08": -1.54, "2020-09": -2.19, "2020-10": -0.15, "2020-11": 0.73, "2020-12": 5.27, "2021-01": -1.2, "2021-02": 3.12, "2021-03": 0.36, "2021-04": 2.69, "2021-05": 1.76, "2021-06": -0.56, "2021-07": 0.86, "2021-08": 0.04, "2021-09": 0.94, "2021-10": 3.87, "2021-11": -3.95, "2021-12": 0.21, "2022-01": 1.43, "2022-02": 2.1, "2022-03": 8.49, "2022-04": 4.43, "2022-05": -0.06, "2022-06": 1.14, "2022-07": -2.45, "2022-08": 3.07, "2022-09": 3.46, "2022-10": 0.28, "2022-11": -4.65, "2022-12": 1.0, "2023-01": -2.62, "2023-02": 1.82, "2023-03": -6.11, "2023-04": 2.1, "2023-05": 1.73, "2023-06": 1.25, "2023-07": -0.7, "2023-08": -0.26, "2023-09": 3.77, "2023-10": 0.06, "2023-11": -2.95, "2023-12": -0.49, "2024-01": 1.23, "2024-02": 5.03, "2024-03": 3.58, "2024-04": 1.21, "2024-05": -2.12, "2024-06": -1.38, "2024-07": -2.7, "2024-08": -3.76, "2024-09": 1.67, "2024-10": -3.46, "2024-11": 2.65, "2024-12": 1.35, "2025-01": 0.65, "2025-02": -1.19, "2025-03": -1.18, "2025-04": -4.66, "2025-05": -1.19, "2025-06": 0.87, "2025-07": 0.18, "2025-08": 1.2, "2025-09": 4.41, "2025-10": 1.01, "2025-11": 0.73, "2025-12": 1.68, "2026-01": 4.8, "2026-02": 3.84}
+const SEC_L=["2003-01", "2003-02", "2003-03", "2003-04", "2003-05", "2003-06", "2003-07", "2003-08", "2003-09", "2003-10", "2003-11", "2003-12", "2004-01", "2004-02", "2004-03", "2004-04", "2004-05", "2004-06", "2004-07", "2004-08", "2004-09", "2004-10", "2004-11", "2004-12", "2005-01", "2005-02", "2005-03", "2005-04", "2005-05", "2005-06", "2005-07", "2005-08", "2005-09", "2005-10", "2005-11", "2005-12", "2006-01", "2006-02", "2006-03", "2006-04", "2006-05", "2006-06", "2006-07", "2006-08", "2006-09", "2006-10", "2006-11", "2006-12", "2007-01", "2007-02", "2007-03", "2007-04", "2007-05", "2007-06", "2007-07", "2007-08", "2007-09", "2007-10", "2007-11", "2007-12", "2008-01", "2008-02", "2008-03", "2008-04", "2008-05", "2008-06", "2008-07", "2008-08", "2008-09", "2008-10", "2008-11", "2008-12", "2009-01", "2009-02", "2009-03", "2009-04", "2009-05", "2009-06", "2009-07", "2009-08", "2009-09", "2009-10", "2009-11", "2009-12", "2010-01", "2010-02", "2010-03", "2010-04", "2010-05", "2010-06", "2010-07", "2010-08", "2010-09", "2010-10", "2010-11", "2010-12", "2011-01", "2011-02", "2011-03", "2011-04", "2011-05", "2011-06", "2011-07", "2011-08", "2011-09", "2011-10", "2011-11", "2011-12", "2012-01", "2012-02", "2012-03", "2012-04", "2012-05", "2012-06", "2012-07", "2012-08", "2012-09", "2012-10", "2012-11", "2012-12", "2013-01", "2013-02", "2013-03", "2013-04", "2013-05", "2013-06", "2013-07", "2013-08", "2013-09", "2013-10", "2013-11", "2013-12", "2014-01", "2014-02", "2014-03", "2014-04", "2014-05", "2014-06", "2014-07", "2014-08", "2014-09", "2014-10", "2014-11", "2014-12", "2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12", "2016-01", "2016-02", "2016-03", "2016-04", "2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02"];
+const SEC_EQ=[0.23, 1.82, -0.61, 2.36, 0.33, 0.48, -0.54, -1.51, -0.21, 0.39, -1.01, 0.33, -0.97, 0.11, -1.95, -0.27, -1.14, -0.9, -0.1, 0.79, -0.53, -0.02, -0.91, 0.49, 0.24, 0.19, -0.77, 2.05, -0.8, -0.61, -2.1, 0.32, -0.04, -0.99, -1.21, -0.27, 0.43, 2.42, -0.94, 0.88, 3.08, -0.38, 1.15, -1.61, -0.62, -0.17, 2.51, -0.99, -0.41, 1.12, 0.08, -0.76, -0.07, 3.1, 2.08, 3.55, 1.39, 1.94, 2.45, 1.59, 3.04, -0.81, 2.42, -0.52, 0.14, 1.37, 1.02, -0.61, 5.33, -0.44, -0.17, -1.29, 1.89, 1.12, -1.02, 0.49, 0.52, -0.3, -3.99, 1.09, -2.3, -1.03, -0.36, -0.61, -0.18, -0.35, -0.16, -0.04, -0.18, -0.09, 0.66, 1.97, -0.33, -0.17, -1.05, 0.8, 1.07, 0.8, -2.13, -0.39, 1.24, 0.93, -2.29, -0.62, 2.18, 1.48, -3.17, 0.11, 0.06, 0.29, 4.61, -0.18, -2.9, 2.75, 2.66, -0.7, 3.54, 1.6, 1.85, 0.57, 0.48, 1.68, 1.32, 1.83, -1.44, -0.29, -1.36, 1.28, -4.03, 1.26, 1.27, 1.49, 2.62, -2.51, 0.7, 0.91, -0.22, -0.06, 1.29, -0.4, 0.42, -0.21, 0.73, -0.91, -2.55, 0.7, 1.08, 0.72, 0.57, -0.9, -0.35, -4.1, 1.49, 0.81, 0.81, 0.07, 1.28, 0.86, 1.51, 1.2, 0.59, -0.43, 0.24, -0.09, 0.07, -2.55, -0.78, 1.29, -1.42, -0.75, 0.88, -0.2, 0.47, -0.67, 0.16, 0.02, 1.36, 1.46, -0.12, -0.12, 5.45, -1.86, 0.97, 0.07, -0.07, -0.3, 0.61, 0.89, -0.46, 0.94, -0.73, -0.41, 0.61, 1.25, 1.2, 0.82, -3.99, 1.77, -0.03, 0.43, 0.67, 1.94, 0.95, 0.66, -0.83, -2.3, -0.18, 0.58, 1.11, 0.22, 0.87, -1.94, -0.12, -0.38, 0.95, 1.19, 0.18, 0.9, -0.77, 0.97, 0.84, -0.39, 0.21, -0.5, 0.23, -0.01, -0.91, 2.5, -2.93, -0.09, 1.08, -0.2, 0.49, 0.4, 1.49, -0.47, -2.02, 1.38, 1.17, 0.28, 3.15, -2.79, 0.85, -0.26, -1.32, 2.11, -0.88, -1.81, -0.86, -2.01, 1.73, 1.51, -0.14, 1.97, 0.59, -1.61, 1.32, -0.27, 0.85, 2.83, 1.01, -2.48, 0.63, -0.43, 0.53, 0.66, 0.41, -0.76, -0.43, -1.46, 0.66, 1.29, 0.82, 1.9, -1.68, 0.03, 0.22, 1.4];
+const SEC_FI=[0.12, -1.14, -1.33, 0.37, 0.12, 3.07, 0.21, 0.7, 0.07, -2.18, 2.01, -1.19, 0.62, 0.85, 1.42, -0.86, 0.82, -0.21, 1.37, 1.58, 1.38, 1.05, 0.91, 0.0, -0.13, 0.18, 1.81, 0.76, 1.86, -0.9, -0.02, 1.2, 0.72, -0.08, 2.98, -1.32, 0.64, 1.07, 2.49, 0.95, -0.96, 0.29, -0.1, -1.01, -1.53, -0.72, -2.69, 0.32, 0.44, 0.69, -1.35, 0.09, -1.94, -0.24, 2.41, 0.68, 0.93, 0.55, 1.02, 1.12, 0.21, 0.08, -1.56, 0.02, 0.74, -0.57, 0.67, -0.99, -0.02, -2.12, -0.76, -2.02, -0.59, 0.23, 1.24, 0.12, 0.79, 0.26, 0.84, 0.28, -0.59, 0.34, -0.19, -0.6, -0.94, 1.07, 0.12, 1.15, 0.61, 0.86, -0.16, 1.59, 0.64, -0.92, 0.21, 0.89, 0.53, 0.1, -0.26, 0.27, 1.74, 0.99, 3.09, 1.03, 1.03, 0.05, -0.52, 1.06, 2.11, -0.13, -1.2, 0.24, 2.57, -3.76, 1.26, -1.4, -2.2, -0.24, 0.56, 0.47, 2.5, 0.66, 0.9, -1.82, 0.09, -0.72, -0.7, -0.3, -2.25, 0.43, -0.25, 0.06, 1.71, -0.18, -0.46, -0.78, 1.67, -0.16, 0.04, 1.21, -0.61, -0.12, 0.05, 0.49, 2.12, -0.57, 0.81, -0.38, -1.35, -0.33, 0.33, 0.39, 1.09, -0.11, -0.04, -0.23, 1.86, 0.89, -0.58, -1.12, 0.22, 1.96, -0.4, -2.22, 0.85, -0.31, -0.88, -0.04, -0.65, -0.2, -0.21, 0.03, 0.57, 0.83, -0.04, -0.29, -0.17, 0.52, -0.59, 0.19, 0.31, 0.69, -0.28, 0.33, 0.71, -0.23, -0.63, 0.42, -0.14, 1.17, 0.56, 0.28, -0.44, -1.52, 2.73, -0.93, 1.11, 1.24, 0.04, 1.88, -1.04, 0.17, 0.13, -0.78, 1.93, 0.65, 0.27, 0.01, -0.53, 0.51, 0.0, -0.84, -0.24, -0.02, 0.04, -0.22, 0.24, 0.45, -0.11, -0.55, -0.9, -0.17, 0.85, -0.42, -0.68, 0.48, 0.08, -0.56, 0.38, 0.41, 1.06, 0.59, -1.05, 0.86, -0.61, -0.24, -0.2, 0.07, -0.5, 0.53, -0.79, 1.07, -0.74, -0.46, 0.42, -0.87, 0.07, 0.12, 0.52, 0.4, 0.47, 0.97, -0.56, 0.16, -0.66, 0.7, 0.26, 0.15, 0.02, 1.35, 0.21, 0.57, -0.11, 0.19, 0.54, 0.63, 0.38, 0.65, 0.28, -0.76, -0.23, -0.75, -0.19, 0.06, -0.57, 0.1, -0.9, 1.65];
+const SEC_FX=[-1.16, 0.47, -0.61, -1.05, 0.66, -0.54, -0.14, 1.89, 1.84, 0.02, -0.92, -0.32, -0.09, 0.61, 0.02, 3.08, 1.77, -1.06, -0.91, -0.74, -1.01, -0.18, 1.1, 0.22, -0.79, 1.09, -0.83, 0.15, 0.65, -0.02, -0.4, 0.69, 0.51, -0.4, 1.45, 1.8, 1.05, 0.24, 0.85, 0.98, -0.12, 1.2, 0.9, -1.52, -0.17, 1.73, 2.42, -0.44, 0.39, 1.6, 1.04, -0.16, -1.23, 1.17, 1.86, -1.02, 0.47, -0.68, 0.18, 1.01, 0.53, 0.82, 0.76, -0.34, 0.07, 0.19, 0.2, -0.41, -0.72, -0.63, -1.08, -0.73, 1.05, -0.99, 0.59, 1.01, 0.57, 0.48, -0.02, -0.56, 1.73, -0.27, -0.96, -0.08, 1.09, 0.34, -0.76, 0.35, 1.11, -1.0, 1.31, -0.19, 0.26, -0.15, -1.06, 1.09, -0.39, -0.59, 1.68, -1.46, -0.3, -0.72, 0.95, -2.06, -0.54, -1.7, -0.84, -0.12, 0.47, -1.17, -0.55, 0.18, 0.33, 0.48, 0.57, -0.93, -1.15, 0.41, 1.31, 0.56, 3.88, 1.56, 1.63, 0.81, -1.01, 0.23, -0.33, -0.47, -0.19, -0.17, 0.25, 0.06, 2.4, -1.36, 0.68, -2.44, -0.03, 0.61, -0.24, 0.99, 1.1, -0.04, 0.68, 0.62, -0.36, 0.05, 0.12, -1.26, 1.58, -1.26, 0.52, -1.61, -0.18, -0.4, 1.16, 0.55, -0.14, 1.39, 0.12, 1.01, 0.04, 0.88, -0.25, -0.36, -1.28, 0.29, -0.06, 0.51, -0.62, -0.2, -0.09, -0.43, -0.13, 0.98, 0.88, -0.54, -0.02, 0.69, -0.08, 0.09, 2.37, -0.41, 0.01, 0.43, 0.06, -0.49, -0.46, 0.02, 0.36, 0.23, -0.07, -0.52, 0.13, -1.72, 0.78, -1.26, 0.06, 0.6, 0.17, 0.92, 0.29, 1.49, -0.39, 0.1, 0.27, 0.19, -0.03, -0.74, -0.34, -0.03, -0.15, -0.65, 0.17, 0.23, -0.06, 0.05, -0.7, -0.55, 0.33, -0.08, -0.2, 0.35, -1.13, -0.56, -0.26, 0.88, -0.44, -0.78, 0.28, -0.29, 1.46, 0.52, 0.22, 0.43, -0.04, 0.38, 0.59, 0.98, -1.37, -0.31, 0.04, 0.54, -0.61, 0.05, 0.16, 1.02, -0.39, 0.3, -0.16, -0.29, 0.05, -0.09, -1.11, 0.65, 0.55, 0.66, 0.3, -0.13, 0.0, -0.85, 0.06, 0.68, 0.68, 0.61, -1.73, 0.29, -0.75, 0.05, -0.09, -1.01, 0.02, -0.89, -1.13, -0.57, -0.12, -0.23, 0.82, 0.47];
+const SEC_CM=[-0.69, 0.51, -1.51, 0.18, 0.3, -0.26, -0.4, 0.41, 0.09, 0.47, 0.14, -0.21, -0.48, 0.44, -1.37, 0.3, -0.16, 0.79, 0.18, -1.4, 0.32, 0.88, 0.25, 0.1, 0.13, -0.05, 0.58, 0.29, 0.25, 0.48, -0.45, -0.49, -0.58, -0.74, -0.16, 0.39, -0.08, -1.13, 0.32, -2.22, 0.7, -0.57, -1.41, -0.29, -0.26, 1.82, -0.52, 0.39, 2.48, -0.37, -0.22, -0.51, 0.55, 0.3, 0.11, 0.38, -0.66, 1.34, 0.34, 0.34, -1.06, 0.42, 1.34, -0.09, -0.4, -0.35, -0.34, -1.69, 0.16, -0.29, -0.57, 0.54, 0.39, -0.51, -0.83, -0.57, 0.14, 0.1, 0.21, 0.53, 0.5, -0.12, -0.09, -0.14, -0.32, 0.27, 0.3, 0.03, -0.37, -0.28, -0.05, -0.22, 0.23, 0.16, 0.4, 0.71, 0.59, 0.09, -0.75, 0.28, -0.28, -0.46, -1.5, -0.84, 0.12, 0.03, -0.06, -0.65, -0.67, -0.03, -0.73, -0.53, 1.85, 1.14, -1.12, 1.14, -0.08, 0.3, 0.08, 0.04, -0.24, -0.38, -2.03, 0.77, -1.29, -1.0, -0.5, -0.06, -0.66, -0.81, 0.23, 0.42, 0.0, 0.57, -0.13, 0.18, 0.1, 0.47, -0.61, -0.63, 0.54, -0.1, 0.32, 0.44, 0.74, -0.4, -0.45, 0.16, 0.37, -0.96, 0.53, -0.13, -0.25, -0.12, 0.94, -0.08, -0.03, 0.37, -0.15, 0.68, -0.59, 0.05, 0.64, -1.29, -0.62, -0.13, 0.31, 0.2, -1.11, -1.05, 0.34, -0.43, -0.98, -0.16, 0.28, 0.49, 0.23, -0.73, -1.02, 0.37, 0.85, -0.73, -0.46, 0.51, -0.14, 0.64, -0.32, -0.1, -0.01, -0.37, -0.19, -0.1, -1.14, -0.45, -1.25, 0.54, 1.1, 0.3, 0.12, 0.5, -0.92, -0.73, 0.14, 0.07, 0.71, 0.47, 0.6, 0.11, -0.29, -0.24, -0.58, -0.58, 0.21, -0.53, 0.2, 0.15, 0.05, 1.15, -0.11, 0.28, 0.14, -0.02, 0.28, 0.2, 0.83, -0.29, -0.64, -0.47, 1.72, 0.04, 1.19, 0.62, 0.34, -0.16, -0.75, -0.31, -0.09, 0.16, -0.97, -0.49, 0.57, -0.96, 0.6, 0.08, 0.83, -1.38, 0.56, -0.28, 0.33, 0.05, 0.05, 0.26, -1.32, 0.06, 0.64, 0.7, 0.64, -0.04, -0.35, -0.69, 0.88, -0.41, -0.28, -0.84, 0.01, 0.07, 0.47, 0.19, -1.59, -1.41, 0.49, -0.69, -0.07, 0.47, -0.73, 0.65, 2.06, -0.72];
+const STR_L=["2010-01", "2010-02", "2010-03", "2010-04", "2010-05", "2010-06", "2010-07", "2010-08", "2010-09", "2010-10", "2010-11", "2010-12", "2011-01", "2011-02", "2011-03", "2011-04", "2011-05", "2011-06", "2011-07", "2011-08", "2011-09", "2011-10", "2011-11", "2011-12", "2012-01", "2012-02", "2012-03", "2012-04", "2012-05", "2012-06", "2012-07", "2012-08", "2012-09", "2012-10", "2012-11", "2012-12", "2013-01", "2013-02", "2013-03", "2013-04", "2013-05", "2013-06", "2013-07", "2013-08", "2013-09", "2013-10", "2013-11", "2013-12", "2014-01", "2014-02", "2014-03", "2014-04", "2014-05", "2014-06", "2014-07", "2014-08", "2014-09", "2014-10", "2014-11", "2014-12", "2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12", "2016-01", "2016-02", "2016-03", "2016-04", "2016-05", "2016-06", "2016-07", "2016-08", "2016-09", "2016-10", "2016-11", "2016-12", "2017-01", "2017-02", "2017-03", "2017-04", "2017-05", "2017-06", "2017-07", "2017-08", "2017-09", "2017-10", "2017-11", "2017-12", "2018-01", "2018-02", "2018-03", "2018-04", "2018-05", "2018-06", "2018-07", "2018-08", "2018-09", "2018-10", "2018-11", "2018-12", "2019-01", "2019-02", "2019-03", "2019-04", "2019-05", "2019-06", "2019-07", "2019-08", "2019-09", "2019-10", "2019-11", "2019-12", "2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10", "2020-11", "2020-12", "2021-01", "2021-02", "2021-03", "2021-04", "2021-05", "2021-06", "2021-07", "2021-08", "2021-09", "2021-10", "2021-11", "2021-12", "2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02"];
+const STR_MOM=[-0.88, 1.11, -0.1, -0.53, 1.91, -0.71, 1.53, 0.75, 0.89, -2.51, -1.3, 1.07, 1.11, -0.18, -0.1, 0.4, 0.96, 0.55, -0.23, 0.06, 1.34, -0.12, -2.8, -1.19, -0.16, -1.22, 3.58, -1.6, 2.01, 0.77, 3.69, -1.47, 0.53, 2.75, 2.58, 1.35, 4.28, 1.91, 0.63, 2.55, -1.41, -0.94, -3.63, 0.22, -4.25, 0.12, 0.36, 1.06, 6.29, -3.4, 0.13, -2.5, 0.33, -0.33, 1.19, -0.45, 0.75, 1.67, 0.47, 0.31, -0.81, -0.23, 1.34, 2.18, 2.0, -3.75, 0.22, 5.39, -0.58, 0.8, 1.52, 0.18, 0.93, 1.55, 0.94, 1.94, 0.29, 1.15, 0.16, -3.39, -1.77, -0.94, -0.09, 1.27, -2.34, -1.86, 0.94, -0.63, 0.4, 0.16, 0.36, -0.99, 1.69, 0.62, -1.27, 0.13, 6.54, 1.9, -0.57, 1.17, 2.84, -0.64, -1.07, 0.87, 0.08, 3.15, 0.15, -0.26, -0.39, -2.4, 1.84, -0.87, -0.83, 1.92, -0.36, 2.92, 0.23, 2.8, 0.33, 0.63, 1.44, 2.9, 1.67, 0.08, -0.19, 1.09, -0.79, -3.86, 0.05, 0.27, 0.76, -0.26, 0.39, 1.6, -0.73, -0.38, -0.82, 0.12, 1.07, -0.89, 0.74, 0.23, -0.66, -0.42, 2.18, 0.16, 5.07, 2.68, -0.8, 3.48, -0.31, -0.03, -0.61, 1.23, -0.97, 0.58, 1.39, -1.95, -0.18, -1.24, 1.09, -0.51, -0.65, -0.9, 0.72, -1.55, 1.36, 1.54, -2.97, 1.17, 0.03, 0.87, 1.57, -0.55, 0.4, 1.64, 1.7, -0.24, 0.09, 0.04, -1.41, 1.03, 0.33, 0.69, -2.0, -5.07, 0.26, -1.08, -1.51, 1.46, -2.82, 0.1, 1.61, 0.74];
+const STR_MR=[0.91, -0.09, -0.72, 1.68, -1.22, 0.13, 0.11, 1.07, -0.01, 0.7, 0.32, 1.33, 0.73, 0.05, -0.24, -3.07, 3.09, 1.31, -0.74, -2.97, 1.02, 1.47, -1.04, 1.08, 1.15, 0.21, -2.49, 0.84, -2.2, 1.23, -0.7, -0.24, -0.33, 0.21, 0.94, 0.27, 1.44, 1.67, 1.13, -1.74, -0.95, 0.65, 0.49, 0.46, -2.14, 0.57, 0.64, 1.01, 0.9, -0.55, 1.42, 0.57, 1.22, 1.23, -0.72, 1.34, 0.11, -2.64, 0.53, -0.74, -1.21, 0.42, -0.02, -0.5, -0.4, 1.53, 0.11, -12.68, 2.08, 0.4, 0.74, 0.64, 0.88, 1.0, 1.17, 0.52, 0.52, 0.2, 0.01, 0.54, 0.91, -0.38, 0.41, 0.35, -0.05, -0.25, 0.17, -0.02, -0.08, 0.66, 0.3, 0.49, -0.19, 0.65, -0.93, 0.16, 0.85, -2.28, 0.54, 0.27, -2.38, -0.09, 0.67, -0.14, -0.25, 0.25, -0.72, -0.39, -0.87, -0.03, 0.53, -0.5, -0.71, 0.83, 0.17, 0.04, -0.9, 0.47, 0.43, -0.28, 0.08, -4.08, -0.91, 0.03, 0.37, -0.42, 0.66, -0.2, 0.23, -0.01, -0.08, 0.56, 0.05, 0.65, 0.39, 0.17, 0.1, -0.16, -0.92, -0.47, 0.27, 0.01, -0.34, 0.57, -1.42, 0.27, -0.69, -0.72, 0.92, -1.64, 0.25, 0.13, -0.7, 0.98, -0.2, -0.03, 0.58, 0.65, 0.21, 0.2, -0.68, -0.13, -0.27, -0.23, -0.15, -0.14, -0.34, -0.16, -0.28, 0.21, 0.17, 0.3, 0.22, -0.07, 0.04, 1.32, 0.09, -0.6, 0.24, -0.27, 0.13, 0.66, -0.24, -0.42, 0.57, -0.36, 0.26, -0.45, -0.03, -0.07, -0.56, -0.26, -0.93, 0.89];
+const STR_TP=[-0.71, 0.18, 0.41, 0.22, 0.42, 0.13, -0.11, 0.92, -0.17, 0.54, -0.61, 0.93, -0.14, 0.17, -0.58, 1.04, -1.3, -1.08, 0.99, 0.84, 0.25, -1.53, -0.16, 0.09, 0.16, 0.15, 0.16, -0.17, 1.98, -1.58, 0.47, -0.5, -0.4, -0.76, -0.06, 0.18, 0.81, 0.02, 0.11, 0.83, -0.36, -1.34, -0.09, -0.45, -0.5, 0.26, 0.61, -0.05, -0.41, 0.65, -0.43, -0.21, 0.35, 0.22, -0.33, 0.69, 0.49, 0.67, 1.12, 0.53, 1.76, 0.04, 0.38, -1.19, 0.02, -1.19, 0.44, 0.04, 0.9, -0.85, 0.35, -0.13, 0.83, 0.87, -1.08, -0.35, -0.57, 0.88, 0.03, -0.74, -0.28, -1.57, -1.04, 0.58, -0.67, 0.43, -0.16, -0.43, 0.01, -0.11, 0.25, 0.09, -0.13, 0.47, 0.27, 0.17, 1.03, -1.25, 0.16, -0.0, -0.34, -0.08, -0.03, 0.24, -0.16, -0.52, 0.02, 0.11, -0.59, -0.08, 0.38, 0.09, 0.04, 0.15, 0.16, 0.32, -0.22, -0.36, 0.07, -0.09, 0.15, 0.07, 0.51, -0.2, -0.3, -0.27, 0.15, 0.08, -0.34, -0.12, 0.26, 0.61, -0.19, 0.26, 0.06, 0.33, 0.13, -0.28, -0.18, -0.0, -0.36, 0.45, -0.82, 0.17, -0.36, 0.08, 0.38, 0.42, 0.29, 0.04, -0.45, -0.01, 0.65, -0.05, -0.53, -0.16, 0.06, -0.12, -0.56, 0.14, 0.07, 0.53, -0.05, -0.44, -0.01, -0.22, -0.02, 0.04, 0.12, 1.18, 0.61, -0.25, 0.08, 0.05, -0.47, -0.83, 0.2, -0.65, 0.08, -0.18, 0.1, -0.42, 0.21, -0.38, -0.5, -0.16, 0.14, 0.07, 0.44, 0.16, 0.01, 0.32, 1.17, 0.67];
+const STR_UN=[0.34, 0.13, -0.09, 0.11, 0.07, -0.05, 0.23, 0.42, 0.08, 0.2, 0.09, 0.17, 0.11, 0.36, -0.53, 0.33, -0.34, -0.04, 0.23, -0.44, 0.17, 0.04, -0.58, 0.42, 0.82, -0.18, 0.88, 0.64, 0.05, 0.19, -0.09, 0.32, 0.31, -0.14, 0.35, -0.17, 0.08, -0.07, -0.06, -0.06, -0.94, -0.14, 0.34, 0.23, -0.24, -0.25, -0.11, 0.02, -0.05, -0.19, -0.32, 0.0, -0.36, -0.25, 0.34, -0.41, 0.1, -0.19, -0.33, 0.55, 0.21, -0.45, -0.15, -1.25, -0.44, -0.04, 0.26, 1.8, -0.25, -0.16, 0.28, -0.39, 0.32, 0.08, -0.12, -0.34, 0.02, 0.24, 0.02, -0.36, 0.17, 0.18, -0.7, -0.24, -0.73, -0.53, -0.03, 0.05, -0.39, 0.27, 0.37, 0.09, 0.02, 0.2, 0.11, 0.06, 0.57, -0.68, 0.1, -0.1, 0.44, 0.42, -0.37, 0.25, 0.08, -0.92, 0.12, -0.21, 1.02, 0.07, 0.71, 0.45, -0.21, 1.01, 0.33, 0.45, -0.1, -0.03, 0.0, -0.21, 0.41, 0.12, -0.6, 0.04, 0.06, 0.04, 0.13, -0.03, 0.08, -0.84, 0.18, 0.26, -0.48, -0.55, -0.4, 0.49, 0.47, 0.09, 0.25, 0.08, -0.53, 0.37, -0.07, 0.36, -0.96, -0.43, 0.02, -0.86, -0.4, -0.34, 0.6, -0.73, -1.05, 0.44, 0.03, -0.37, 0.93, -0.72, 0.63, 0.33, -0.38, 1.0, 0.34, -0.1, -0.73, 0.07, 1.3, 1.23, -0.01, 0.29, 0.32, -0.45, 0.65, 0.27, 0.55, 0.5, 0.16, -0.15, 0.53, -0.06, 0.54, 0.39, 0.2, 0.23, 0.1, 0.95, 0.27, 0.4, 0.54, 0.31, 0.26, 0.39, 0.35, 0.49];
+
+const O={responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false}};
+const xA={ticks:{maxTicksLimit:16,font:{size:9}},grid:{display:false}};
+const yA=t=>({title:t?{display:true,text:t,font:{size:10}}:undefined,grid:{color:'#f0f0f0'}});
+
+// SP cumulative rebased
+let spC=[],spV=null;L.forEach((l,i)=>{if(SP[l]!=null){if(!spV)spV=CUM[i]/(1+SP[l]/100);spV*=(1+SP[l]/100);spC.push(spV)}else spC.push(null)});
+// MF cumulative rebased
+let mfC=[],mfV=null;L.forEach((l,i)=>{if(MF[l]!=null){if(!mfV)mfV=CUM[i]/(1+MF[l]/100);mfV*=(1+MF[l]/100);mfC.push(mfV)}else mfC.push(null)});
+
+// CH1: Cumulative
+new Chart(document.getElementById('ch1'),{type:'line',data:{labels:L,datasets:[
+{label:'Crabel MP 1x',data:CUM,borderColor:'#1a3a6b',backgroundColor:'rgba(26,58,107,.05)',fill:true,borderWidth:2.2,pointRadius:0,tension:.12},
+{label:'S&P 500 TR',data:spC,borderColor:'#bbb',borderWidth:1.2,pointRadius:0,borderDash:[5,3],tension:.12},
+{label:'AI Managed Futures',data:mfC,borderColor:'#999',borderWidth:1.2,pointRadius:0,borderDash:[2,2],tension:.12}
+]},options:{...O,scales:{x:xA,y:yA('Index (100)')},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14,font:{size:10}}}}}});
+
+// CH2: Events
+const evts=[
+{i:L.indexOf('1998-09'),t:'LTCM +39.4%',c:'#2d8a4e',y:.92},
+{i:L.indexOf('2000-04'),t:'Dot-com Profits',c:'#2d8a4e',y:.7},
+{i:L.indexOf('2001-09'),t:'9/11 -9.81%',c:'#d32f2f',y:.15},
+{i:L.indexOf('2002-07'),t:'Bear Mkt +9.98%',c:'#2d8a4e',y:.6},
+{i:L.indexOf('2007-07'),t:'2007: +32.9%',c:'#2d8a4e',y:.5},
+{i:L.indexOf('2008-08'),t:'GFC Losses',c:'#d32f2f',y:.35},
+{i:L.indexOf('2013-09'),t:'Sep 13: -7.13%',c:'#d32f2f',y:.25},
+{i:L.indexOf('2015-08'),t:'Aug 15: -5.45%',c:'#d32f2f',y:.4},
+{i:L.indexOf('2018-01'),t:'2018: +9.34%',c:'#2d8a4e',y:.55},
+{i:L.indexOf('2020-08'),t:'Aug 20: -4.01%',c:'#d32f2f',y:.3},
+{i:L.indexOf('2025-06'),t:'Jun 25: -4.64%',c:'#d32f2f',y:.2},
+];
+const evP={id:'ev',afterDraw(ch){const ctx=ch.ctx,xS=ch.scales.x,yS=ch.scales.y;
+evts.forEach(e=>{if(e.i<0)return;const x=xS.getPixelForValue(e.i),yt=yS.top,yb=yS.bottom;
+ctx.save();ctx.setLineDash([4,3]);ctx.strokeStyle=e.c;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,yt);ctx.lineTo(x,yb);ctx.stroke();ctx.setLineDash([]);
+const ty=yt+(yb-yt)*e.y;ctx.font="700 9px 'Open Sans'";
+const tw=ctx.measureText(e.t).width;let px=x+6;if(px+tw+8>ch.chartArea.right)px=x-tw-10;
+ctx.fillStyle=e.c;ctx.globalAlpha=.92;ctx.fillRect(px-3,ty-10,tw+8,15);
+ctx.fillStyle='#fff';ctx.globalAlpha=1;ctx.fillText(e.t,px+1,ty+1);
+ctx.beginPath();ctx.arc(x,ty-2,3,0,Math.PI*2);ctx.fillStyle=e.c;ctx.fill();
+ctx.restore()})}};
+new Chart(document.getElementById('ch2'),{type:'line',data:{labels:L,datasets:[{data:CUM,borderColor:'#1a3a6b',backgroundColor:'rgba(26,58,107,.04)',fill:true,borderWidth:2,pointRadius:0,tension:.12}]},options:{...O,scales:{x:xA,y:yA('Index (100)')},plugins:{legend:{display:false}}},plugins:[evP]});
+
+// CH3: Rolling 12M
+new Chart(document.getElementById('ch3'),{type:'line',data:{labels:L,datasets:[{data:R12,borderColor:'#43a047',backgroundColor:'rgba(67,160,71,.12)',fill:true,borderWidth:1.5,pointRadius:0,tension:.15,spanGaps:true}]},options:{...O,scales:{x:xA,y:yA('%')},plugins:{legend:{display:false}}}});
+
+// CH4: Sector attribution (cumulative)
+const sC=['#43a047','#42a5f5','#f0c75e','#e76f51'];
+function cumSum(arr){let s=0;return arr.map(v=>{s+=v;return +s.toFixed(2)})}
+const cEQ=cumSum(SEC_EQ),cFI=cumSum(SEC_FI),cFX=cumSum(SEC_FX),cCM=cumSum(SEC_CM);
+new Chart(document.getElementById('ch4'),{type:'line',data:{labels:SEC_L,datasets:[
+{label:'Equities',data:cEQ,borderColor:sC[0],backgroundColor:sC[0]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15},
+{label:'Fixed Income',data:cFI,borderColor:sC[1],backgroundColor:sC[1]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15},
+{label:'FX',data:cFX,borderColor:sC[2],backgroundColor:sC[2]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15},
+{label:'Commodities',data:cCM,borderColor:sC[3],backgroundColor:sC[3]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15}
+]},options:{...O,scales:{x:{ticks:{maxTicksLimit:18,font:{size:8}},grid:{display:false}},y:{title:{display:true,text:'Cumulative Return (%)',font:{size:10}},grid:{color:'#f0f0f0'}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:10}}}}}});
+// CH5: Strategy attribution (cumulative)
+const stC=['#1a3a6b','#5ab5aa','#f0c75e','#8e6fbf'];
+const cMOM=cumSum(STR_MOM),cMR=cumSum(STR_MR),cTP=cumSum(STR_TP),cUN=cumSum(STR_UN);
+new Chart(document.getElementById('ch5'),{type:'line',data:{labels:STR_L,datasets:[
+{label:'Momentum',data:cMOM,borderColor:stC[0],backgroundColor:stC[0]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15},
+{label:'Mean Reversion',data:cMR,borderColor:stC[1],backgroundColor:stC[1]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15},
+{label:'Trend Partic.',data:cTP,borderColor:stC[2],backgroundColor:stC[2]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15},
+{label:'Unique',data:cUN,borderColor:stC[3],backgroundColor:stC[3]+'22',fill:true,borderWidth:1.8,pointRadius:0,tension:.15}
+]},options:{...O,scales:{x:{ticks:{maxTicksLimit:18,font:{size:8}},grid:{display:false}},y:{title:{display:true,text:'Cumulative Return (%)',font:{size:10}},grid:{color:'#f0f0f0'}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:10}}}}}});
+// CH6: Distribution
+const bn=[];for(let b=-10;b<40;b+=.5)bn.push({lo:b,c:0});FM.forEach(v=>{const i=bn.findIndex(b=>v>=b.lo&&v<b.lo+.5);if(i>=0)bn[i].c++});
+new Chart(document.getElementById('ch6'),{type:'line',data:{labels:bn.map(b=>b.lo.toFixed(1)+'%'),datasets:[{data:bn.map(b=>b.c),borderColor:'#43a047',backgroundColor:'rgba(67,160,71,.18)',fill:true,borderWidth:1.5,pointRadius:0,tension:.3}]},options:{...O,scales:{x:{title:{display:true,text:'Monthly Return',font:{size:10}},ticks:{maxTicksLimit:18,font:{size:8}},grid:{display:false}},y:{title:{display:true,text:'Frequency',font:{size:10}},grid:{color:'#f0f0f0'}}},plugins:{legend:{display:false}}}});
+
+// Monthly Returns Table with benchmarks
+(function(){const mo=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+let h='<table><thead><tr><th>Year</th>';mo.forEach(m=>h+='<th>'+m+'</th>');
+h+='<th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Year</th></tr></thead><tbody>';
+for(let yr=1998;yr<=2026;yr++){h+='<tr><td class="yc">'+yr+'</td>';
+for(let mi=0;mi<12;mi++){const k=yr+'-'+(mi+1<10?'0':'')+(mi+1);const idx=L.indexOf(k);
+if(idx>=0){const v=FM[idx];let cell='<span class="'+(v>=0?'pos':'neg')+'">'+v.toFixed(2)+'</span>';
+const s=SP[k],m=MF[k];
+if(s!=null||m!=null){cell+='<span style="font-size:8px;color:#999;display:block;line-height:1.15;margin-top:1px">';
+if(m!=null)cell+=(m>=0?'+':'')+m.toFixed(1)+' MF';
+if(s!=null)cell+=' '+(s>=0?'+':'')+s.toFixed(0)+' SP';
+cell+='</span>'}
+h+='<td class="nc">'+cell+'</td>'}
+else h+='<td class="nc">\u2014</td>'}
+for(let q=0;q<4;q++){let p=1,ok=0;for(let mi=q*3;mi<q*3+3;mi++){const k=yr+'-'+(mi+1<10?'0':'')+(mi+1);const idx=L.indexOf(k);if(idx>=0){p*=(1+FM[idx]/100);ok=1}}
+if(ok){const v=(p-1)*100;h+='<td class="nc qc '+(v>=0?'pos':'neg')+'">'+v.toFixed(2)+'</td>'}else h+='<td class="nc">\u2014</td>'}
+let yp=1,yo=0;for(let mi=0;mi<12;mi++){const k=yr+'-'+(mi+1<10?'0':'')+(mi+1);const idx=L.indexOf(k);if(idx>=0){yp*=(1+FM[idx]/100);yo=1}}
+if(yo){const v=(yp-1)*100;h+='<td class="nc qc '+(v>=0?'pos':'neg')+'" style="font-weight:700">'+v.toFixed(2)+'</td>'}else h+='<td class="nc">\u2014</td>';
+h+='</tr>'}h+='</tbody></table>';document.getElementById('mrt').innerHTML=h})();
+
+// CH7 & CH8: PCA (matching Ironshield template: horizontal bars, same colors)
+const pN=["Crabel MP 1x", "AI Composite HF", "AI Managed Futures", "AI Global Macro", "AI L/S Equity", "AI Multi-Strat"];
+const pC=['#f0c75e','#8e6fbf','#2b4a7e','#5ab5aa','#8bc34a','#4a90d9'];
+const aD=[[2.07, 3.94, 0.51, 0.34, 0.69, 92.45], [19.15, 0.37, 0.0, 0.04, 0.44, 0], [3.78, 14.03, 2.18, 0.0, 0.0, 0], [12.17, 3.41, 4.32, 0.07, 0.03, 0], [14.65, 2.7, 0.65, 1.88, 0.12, 0], [15.31, 1.48, 0.08, 3.08, 0.05, 0]];
+const fN=['PC1','PC2','PC3','PC4','PC5','Idiosyncratic'];
+new Chart(document.getElementById('ch7'),{type:'bar',data:{labels:pN,datasets:fN.map((n,i)=>({label:n,data:aD.map(r=>r[i]),backgroundColor:pC[i]}))
+},options:{...O,indexAxis:'y',scales:{x:{stacked:true,title:{display:true,text:'Variance (%)',font:{size:10}},grid:{color:'#f0f0f0'}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:10}}}}}});
+const rD=aD.map(r=>{const s=r.reduce((a,b)=>a+b);return r.map(v=>v/s*100)});
+new Chart(document.getElementById('ch8'),{type:'bar',data:{labels:pN,datasets:fN.map((n,i)=>({label:n,data:rD.map(r=>r[i]),backgroundColor:pC[i]}))
+},options:{...O,indexAxis:'y',scales:{x:{stacked:true,max:100,title:{display:true,text:'% of Total',font:{size:10}},grid:{color:'#f0f0f0'}},y:{stacked:true,grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:10}}}}}});
+
+// Discrete (matching Ironshield template: JS builder with dtb tbody)
+(function(){const d={'Crabel MP 1x':[2.8, 5.64, 3.67, -2.47, 7.19, 12.71, 674.88, 7.59],'AI Managed Futures':[3.84, 10.65, 17.55, 11.9, 12.26, 40.8, 81.11, 3.34],'S&P 500 TR':[-0.87, 0.43, 6.48, 17.36, 72.74, 80.49, 407.36, 9.4]};
+let h='';for(const[n,v]of Object.entries(d)){h+='<tr><td style="font-weight:600">'+n+'</td>';v.forEach(x=>{h+='<td class="nc '+(x>=0?'pos':'neg')+'">'+x.toFixed(2)+'</td>'});h+='</tr>'}
+const f=d['Crabel MP 1x'],e=d['AI Managed Futures'];h+='<tr style="background:#f5f5f5;font-weight:600"><td>Diff vs MF</td>';f.forEach((v,i)=>{const x=v-e[i];h+='<td class="nc '+(x>=0?'pos':'neg')+'">'+x.toFixed(2)+'</td>'});h+='</tr>';
+document.getElementById('dtb').innerHTML=h})();
+</script>
+</body></html>
