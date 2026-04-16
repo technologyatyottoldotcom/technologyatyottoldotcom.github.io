@@ -450,8 +450,3 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
     </div>
 </div>
 <div id="footer"><div class="footer-container-1"><div class="cont1-text1"><div>&copy; GreatBear Capital</div></div></div></div>
-(function(){
-    var els=document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.style.opacity='1'});return}
-    var obs=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){if(entry.isIntersecting){entry.target.style.animationPlayState='running';obs.unobser
