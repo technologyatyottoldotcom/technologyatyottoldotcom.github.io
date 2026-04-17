@@ -9,7 +9,7 @@
 :root{--ink:#011627;--ink-90:#011627e5;--ink-60:#011627a0;--ink-40:#01162766;--ink-20:#01162733;--ink-10:#0116271a;--cream:#faf9f7;--white:#fff;--green:#1a7a42;--red:#b91c3a;--sand:#f0ede8;--sand2:#e5e2dc}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}html,body{overflow-x:hidden;background:var(--cream);color:var(--ink-90);font-family:"Ubuntu",sans-serif}
 body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.pw{max-width:1100px;margin:0 auto;padding:40px 5% 60px}.go{font-family:"Barlow Condensed",sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-40);margin-bottom:16px;position:relative;padding-left:40px}.go::before{content:"";position:absolute;left:0;top:50%;width:28px;height:1.5px;background:var(--ink-40)}
+.pw{max-width:75%;margin:0 auto;padding:40px 5% 60px}.go{font-family:"Barlow Condensed",sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-40);margin-bottom:16px;position:relative;padding-left:40px}.go::before{content:"";position:absolute;left:0;top:50%;width:28px;height:1.5px;background:var(--ink-40)}
 .gt{font-family:"Yeseva One",serif;font-size:42px;margin:0 0 14px;color:var(--ink);line-height:1.15}.gs{font-weight:300;font-size:15px;line-height:1.75;color:var(--ink-60);max-width:800px;margin:0 0 24px}.tg{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}.tgi{font-size:12px;padding:7px 18px;border:1px solid var(--ink-20);border-radius:40px;background:var(--sand)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--ink-10);padding-bottom:12px;margin-bottom:36px}.tab{font-family:"Barlow Condensed",sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;padding:10px 20px;border:1.5px solid var(--ink-20);background:transparent;color:var(--ink-60);cursor:pointer;transition:all .3s}.tab:hover{border-color:var(--ink);color:var(--ink);background:var(--sand)}.tab.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 .tc{display:none}.tc.active{display:block}.card{border-radius:16px;padding:28px;margin-bottom:20px;background:var(--sand)}.st{font-family:"Yeseva One",serif;font-size:22px;margin-bottom:14px;color:var(--ink)}
@@ -98,14 +98,14 @@ function showTab(id, el) {
 <tr><td style="padding:10px 12px">10Y Treasury</td><td style="text-align:center;color:#1a7a42;font-weight:600;padding:10px 8px">+12.42%</td><td style="text-align:center;padding:10px 8px">0.127</td><td style="text-align:center;padding:10px 8px">0.022</td></tr>
 <tr style="background:#e5e2dc;font-weight:600;border-top:2px solid #01162766"><td style="padding:10px 12px">Multi-Factor</td><td style="text-align:center;color:#1a7a42;padding:10px 8px">+12.35%</td><td style="text-align:center;padding:10px 8px">—</td><td style="text-align:center;padding:10px 8px">0.069</td></tr>
 </tbody></table></div></div>
-<div class="card"><div class="st">Multi-Factor Decomposition</div><div style="overflow-x:auto"><table class="d"><thead><tr><th style="text-align:left">Factor</th><th>Beta / Value</th></tr></thead><tbody><tr><td style="padding:10px 12px">AICHFI</td><td style="text-align:center;padding:10px 8px">-0.1761</td></tr>
+<!-- <div class="card"><div class="st">Multi-Factor Decomposition</div><div style="overflow-x:auto"><table class="d"><thead><tr><th style="text-align:left">Factor</th><th>Beta / Value</th></tr></thead><tbody><tr><td style="padding:10px 12px">AICHFI</td><td style="text-align:center;padding:10px 8px">-0.1761</td></tr>
 <tr><td style="padding:10px 12px">S&P 500</td><td style="text-align:center;padding:10px 8px">0.0640</td></tr>
 <tr><td style="padding:10px 12px">VIX</td><td style="text-align:center;padding:10px 8px">0.0047</td></tr>
 <tr><td style="padding:10px 12px">DXY</td><td style="text-align:center;padding:10px 8px">-0.2080</td></tr>
 <tr><td style="padding:10px 12px">10Y Treasury</td><td style="text-align:center;padding:10px 8px">-0.0740</td></tr>
 <tr style="background:#e5e2dc;font-weight:600"><td style="padding:10px 12px">Alpha (Ann.)</td><td style="text-align:center;color:#1a7a42;padding:10px 8px">+12.35%</td></tr>
 <tr style="background:#e5e2dc;font-weight:600"><td style="padding:10px 12px">R²</td><td style="text-align:center;padding:10px 8px">0.069</td></tr>
-</tbody></table></div></div>
+</tbody></table></div></div> -->
 <div class="card"><div class="st">Variance Decomposition (PCA)</div>
 <div style="font-weight:300;color:var(--ink-60);margin-bottom:16px;font-size:14px">5-factor PCA on AICHFI, AIMUSI, S&amp;P 500, DXY, 10Y Treasury. Portfolio regressed on orthogonal principal components. 60 obs.</div>
 <div class="pcg">
