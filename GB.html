@@ -418,8 +418,3 @@ body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointe
 </div>
 <div class="disc"><p>Stock investments are subject to market risks. Please read the IPS information and other related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing an advisor, or designing a portfolio that suits your needs. The value of investments can go down in value as well as up, so you could get back less than you invest.</p></div>
 <div id="footer"><div class="footer-container-1"><div class="cont1-text1"><div>&copy; GreatBear Capital</div></div></div></div>
-(function(){
-    var els=document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.style.opacity='1'});return}
-    var obs=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){if(entry.isIntersecting){entry.target.style.animationPlayState='running';obs.unobser
