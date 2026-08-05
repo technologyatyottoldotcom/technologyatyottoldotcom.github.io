@@ -1,422 +1,292 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GreatBear Global Brands — Managed Accounts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Global Brands Equity | GreatBear Capital</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap">
+<meta name="theme-color" content="#faf9f7">
+<meta name="description" content="Investing in cash flow generating global sustainable innovations through managed accounts.">
 <meta property="og:title" content="GreatBear Global Brands — Managed Accounts">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.greatbearcapital.com/images/gblogo.png">
 <meta property="og:description" content="Investing in cash flow generating global sustainable innovations.">
 <meta property="og:site_name" content="GreatBear Capital">
 <meta property="og:locale" content="en_GB">
-<style>
-:root {
-    --ink:#011627;
-    --ink-90:#011627e5;
-    --ink-60:#011627a0;
-    --ink-40:#01162766;
-    --ink-20:#01162733;
-    --ink-10:#0116271a;
-    --ink-05:#0116270d;
-    --cream:#faf9f7;
-    --white:#ffffff;
-    --green:#1a7a42;
-    --sand:#f0ede8;
-    --heading:'Yeseva One',serif;
-    --body:'Ubuntu',sans-serif;
-}
-html{scroll-behavior:smooth;font-size:16px}
-html,body{overflow-x:hidden;margin:0;background:var(--cream);color:var(--ink-90)}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-::selection{background:var(--ink);color:var(--cream)}
-a{color:var(--ink);text-decoration:none;transition:opacity .2s}
-a:hover{opacity:.65}
-h1,h2,h3,h4,.sec-title{font-family:var(--heading)}
-p{font-family:var(--body);font-size:.9rem;line-height:1.9;font-weight:400;color:var(--ink-60);margin-bottom:1rem}
-p:last-child{margin-bottom:0}
-strong{font-weight:700;color:var(--ink-90)}
-
-body::after{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;animation:fadeUp .65s ease forwards}
-.reveal.d1{animation-delay:.1s}.reveal.d2{animation-delay:.2s}.reveal.d3{animation-delay:.3s}.reveal.d4{animation-delay:.4s}
-
-/* NAV */
-.nav-bar{padding:20px 5% 0;display:flex;justify-content:space-between;align-items:center}
-.nav-bar .logo img{height:110px;width:110px}
-.nav-bar .nav-cta{font-family:"Barlow Condensed",sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--ink);padding:9px 22px;border:1.5px solid var(--ink);transition:all .3s ease}
-.nav-bar .nav-cta:hover{background:var(--ink);color:var(--cream)}
-
-/* HERO */
-.hero{text-align:center;padding:70px 5% 60px}
-.hero-overline{font-family:"Barlow Condensed",sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-40);margin-bottom:16px;position:relative;display:inline-block;padding:0 40px}
-.hero-overline::before,.hero-overline::after{content:"";position:absolute;top:50%;width:28px;height:1px;background:var(--ink-40)}
-.hero-overline::before{left:0}
-.hero-overline::after{right:0}
-.hero h1{font-family:var(--heading);font-size:clamp(2.2rem,4.5vw,3.6rem);line-height:1.1;letter-spacing:-2px;font-weight:500;margin:0 auto 18px;max-width:700px}
-.hero-sub{font-family:var(--body);font-weight:300;font-size:.95rem;line-height:1.8;color:var(--ink-60);max-width:520px;margin:0 auto}
-.hero-tag{display:inline-block;margin-top:24px;font-family:"Barlow Condensed",sans-serif;font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-40);padding:6px 18px;border:1px solid var(--ink-20);border-radius:30px}
-
-/* SECTION */
-.sec{position:relative;padding:60px 5% 50px}
-.container{width:80%;max-width:1000px;margin:0 auto}
-.sec .container{width:100%}
-
-.sec-num{font-family:"Barlow Condensed",sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--ink-40);position:relative;z-index:1;margin-bottom:10px}
-.sec-title{font-weight:500;font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.2;letter-spacing:-1.5px;position:relative;z-index:1;margin:0 0 14px}
-.sec-sub{font-family:var(--body);font-weight:300;font-size:.95rem;line-height:1.8;color:var(--ink-60);max-width:640px;position:relative;z-index:1;margin:0 0 1.5rem}
-
-/* DIVIDER */
-.gb-div{display:flex;align-items:center;gap:8px;padding:0 5%}
-.gb-div p{position:relative;display:inline-block;font-size:26px;font-family:"Barlow Condensed",sans-serif;letter-spacing:-.6px;white-space:nowrap;color:var(--ink-90);margin:0}
-.gb-div p::after{display:none}
-
-.gb-div .div-line{flex:1;height:1px;background:linear-gradient(90deg,var(--ink-20) 0%,transparent 100%)}
-
-/* CARDS */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;position:relative;z-index:1}
-.card{border-radius:16px;padding:32px 28px;transition:box-shadow .3s ease;position:relative;overflow:hidden}
-.card:hover{box-shadow:0 6px 24px rgba(1,22,39,.04)}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
-.card:hover::before{transform:scaleX(1)}
-.card h3{font-size:1.1rem;letter-spacing:-1px;font-weight:500;margin-bottom:10px;color:var(--ink-90)}
-.card h4{font-family:var(--body);font-size:.95rem;font-weight:500;letter-spacing:-.3px;margin-bottom:8px;color:var(--ink-90)}
-.card ul{font-family:var(--body);list-style:none;padding:0}
-.card li{font-family:var(--body);font-size:.85rem;color:var(--ink-60);line-height:1.85;padding:3px 0 3px 16px;position:relative}
-.card li::before{content:"\2022";position:absolute;left:0;color:var(--ink-20);font-size:.7rem}
-
-/* QUOTE */
-.quote-block{margin-top:30px;padding:20px 0;border-top:1px solid var(--ink-10);border-bottom:1px solid var(--ink-10);position:relative;z-index:1}
-.quote-block p{font-style:italic;font-weight:300;font-size:.95rem;color:var(--ink-90);margin-bottom:6px}
-.quote-block cite{font-style:normal;font-size:.78rem;color:var(--ink-40)}
-
-/* PRINCIPLES */
-.principles{margin-top:20px;position:relative;z-index:1}
-.pr{padding:14px 0 14px 40px;border-bottom:1px solid var(--ink-05);position:relative}
-.pr:first-child{border-top:1px solid var(--ink-05)}
-.pr .pr-n{position:absolute;left:0;top:16px;font-family:var(--heading);font-size:.9rem;color:var(--ink-20)}
-.pr p{font-family:var(--body);margin:0;font-size:.87rem}
-
-/* CALLOUT */
-.callout{margin-top:14px;padding:14px 18px;background:rgba(1,22,39,.03);border:1px solid var(--ink-10);border-radius:8px}
-.callout p{font-family:var(--body);margin:0;font-size:.88rem;color:var(--ink-90)}
-
-/* STEPS */
-.steps{counter-reset:step;margin-top:12px}
-.stp{counter-increment:step;padding:14px 0 14px 60px;border-bottom:1px solid var(--ink-05);position:relative}
-.stp:first-child{border-top:1px solid var(--ink-05)}
-.stp::before{content:'Step ' counter(step);position:absolute;left:0;top:16px;font-family:"Barlow Condensed",sans-serif;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40)}
-.stp p{font-family:var(--body);margin:0;font-size:.87rem}
-
-/* CHECKLIST */
-.chk{display:flex;gap:8px;margin-bottom:8px;align-items:baseline}
-.chk::before{content:"\2014";color:var(--ink-20);font-size:.8rem;flex-shrink:0}
-.chk p{font-family:var(--body);margin:0;font-size:.85rem}
-
-/* SVG CYCLE */
-.cycle-wrap{margin:28px auto 0;max-width:90%;position:relative;z-index:1}
-.cycle-wrap svg{width:100%;height:auto}
-.cycle-note{text-align:center;margin-top:12px;font-size:.78rem;color:var(--ink-40);font-style:italic}
-
-/* STATS */
-.stats-row{display:flex;gap:40px;margin:24px 0;flex-wrap:wrap;position:relative;z-index:1}
-.st .big{font-family:var(--heading);font-size:2.5rem;color:var(--ink-90);line-height:1.1}
-.st .lab{font-size:.72rem;color:var(--ink-40);margin-top:3px;font-family:var(--body);font-weight:300;letter-spacing:-.2px}
-
-/* POSITIONS GRID */
-.pos-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:20px;position:relative;z-index:1}
-.pos-card{border-radius:14px;padding:24px 22px;transition:box-shadow .3s}
-.pos-card:hover{box-shadow:0 6px 20px rgba(1,22,39,.04)}
-.pos-card h4{font-family:var(--body);font-size:.92rem;font-weight:500;margin-bottom:6px;color:var(--ink-90)}
-.pos-card p{font-size:.82rem;margin:0}
-
-/* ADV LIST */
-.adv-list{margin-top:20px;position:relative;z-index:1}
-.adv{padding:16px 0;border-bottom:1px solid var(--ink-05)}
-.adv:first-child{border-top:1px solid var(--ink-05)}
-.adv h4{font-family:var(--body);font-size:.9rem;font-weight:500;color:var(--ink-90);margin-bottom:4px}
-.adv p{font-family:var(--body);margin:0;font-size:.85rem}
-
-/* BIO */
-.bio-sec{margin-top:36px;padding-top:28px;border-top:1px solid var(--ink-10);position:relative;z-index:1}
-.bio-sec h3{font-size:1.2rem;letter-spacing:-1px;font-weight:500;margin-bottom:2px}
-.bio-sec .role{font-family:"Barlow Condensed",sans-serif;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);margin-bottom:18px}
-.bio-entry{margin-bottom:12px}
-.bio-entry .yr{font-family:"Barlow Condensed",sans-serif;font-size:.6rem;letter-spacing:1px;color:var(--ink-40);margin-bottom:2px;text-transform:uppercase}
-.bio-entry p{font-family:var(--body);font-size:.84rem;margin:0}
-.bio-badge{margin-top:14px;font-size:.73rem;color:var(--ink-40);font-style:italic}
-
-/* TERMS */
-.terms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;position:relative;z-index:1}
-.tm{border-radius:14px;padding:24px 20px;text-align:center;transition:box-shadow .3s}
-.tm:hover{box-shadow:0 6px 20px rgba(1,22,39,.04)}
-.tm .tm-label{font-family:"Barlow Condensed",sans-serif;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);margin-bottom:4px}
-.tm .tm-val{font-family:var(--heading);font-size:1.3rem;color:var(--ink-90)}
-.tm .tm-note{font-size:.7rem;color:var(--ink-40);margin-top:4px;line-height:1.5;font-family:var(--body)}
-
-/* DATA TABLE */
-.dtable{width:100%;border-collapse:collapse;margin-top:12px}
-.dtable th{text-align:left;font-family:"Barlow Condensed",sans-serif;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);font-weight:400;padding:8px 0;border-bottom:1px solid var(--ink-10)}
-.dtable th:last-child{text-align:right}
-.dtable td{font-family:var(--body);font-size:.86rem;padding:8px 0;border-bottom:1px solid var(--ink-05);color:var(--ink-60)}
-.dtable td:last-child{text-align:right;font-weight:500;color:var(--ink-90)}
-.dtable tr:last-child td{border-bottom:1px solid var(--ink-10)}
-
-/* REV ITEMS */
-.rev-items{margin-top:20px;position:relative;z-index:1}
-.rev-item{margin-bottom:16px}
-.rev-item h4{font-family:var(--body);font-size:.9rem;font-weight:500;color:var(--ink-90);margin-bottom:3px}
-.rev-item p{font-family:var(--body);font-size:.85rem;margin:0}
-
-/* CONTACT */
-.contact-sec{display:flex;justify-content:space-between;align-items:flex-end;padding:70px 5% 80px;gap:40px}
-.contact-title{font-family:var(--heading);font-weight:500;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.1;letter-spacing:-1px;max-width:450px;margin:0 0 20px}
-.contact-links{display:flex;gap:18px;flex-wrap:wrap}
-.contact-links a{font-family:"Barlow Condensed",sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:2px;color:var(--ink);padding:11px 24px;border:1.5px solid var(--ink);transition:all .3s ease}
-.contact-links a:hover{background:var(--ink);color:var(--cream)}
-
-/* DISCLAIMER */
-.disc{padding:0 5% 40px;position:relative;z-index:1}
-.disc p{font-size:.7rem;color:var(--ink-40);line-height:1.7;max-width:800px}
-
-/* FOOTER */
-#footer{width:90%;display:flex;flex-direction:column;padding-top:16px;border-top:1px solid var(--ink-20);margin:0 5% 30px}
-.footer-container-1{display:flex;justify-content:space-between;align-items:center}
-.cont1-text1 div{font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:-.3px;color:var(--ink-40);margin:0}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-.two-col{grid-template-columns:1fr}
-.pos-grid{grid-template-columns:1fr}
-.terms-grid{grid-template-columns:1fr}
-.contact-sec{flex-direction:column;align-items:flex-start}
-}
-@media(max-width:768px){
-.nav-bar .logo img{height:80px;width:80px}
-.nav-bar .nav-cta{font-size:10px;padding:7px 16px}
-.hero{padding:50px 5% 40px}
-.hero h1{font-size:clamp(1.8rem,5vw,2.4rem)}
-.sec{padding:50px 5% 35px}
-.sec-title{font-size:clamp(1.3rem,4vw,1.8rem)}
-.gb-div p{font-size:18px}
-.stats-row{flex-direction:column;gap:20px}
-.contact-title{font-size:1.6rem}
-.contact-links{flex-direction:column}
-.contact-links a{text-align:center}
-#footer{padding:20px 0;margin:0 5% 20px}
-}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Yeseva+One&display=swap">
+<link rel="stylesheet" href="gb.css">
+<noscript><style>.r{opacity:1;transform:none;}</style></noscript>
 </head>
 <body>
-<div class="nav-bar">
-    <div class="logo"><a href="index.html"><img src="./images/gblogo.png" alt="GreatBear"></a></div>
-    <a href="index.html" class="nav-cta">GreatBear Capital &rarr;</a>
-</div>
-<div class="hero">
-    <div class="hero-overline reveal">Managed Accounts</div>
-    <h1 class="reveal d1">GreatBear Global Brands</h1>
-    <p class="hero-sub reveal d2">Investing in cash flow generating global sustainable innovations</p>
-    <div class="hero-tag reveal d3">Managed Accounts</div>
-</div>
-<div class="gb-div"><p>INVESTMENT OBJECTIVE</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">01 &mdash; Objective</div>
-    <div class="sec-title reveal d1">Long-Term Growth</div>
-    <div class="two-col">
-        <div class="card reveal d1">
-            <h4>Objective</h4>
-            <p>Long-term growth of your investment.</p>
-            <p>The investment team believes that high quality companies with dominant market positions, underpinned by powerful intangible assets, can generate attractive returns over the long term.</p>
-        </div>
-        <div class="card reveal d2">
-            <h4>Approach</h4>
-            <p>We invest in businesses, not a ticker. We believe the largest potential value exists in cash flow generating, innovation-driven businesses making earth a more sustainable place for future generations.</p>
-            <p>We also believe in &lsquo;responsible capitalism&rsquo; &mdash; capitalism in which stakeholder interests are largely aligned with shareholder interests, and profit maximization is directly proportional to human value maximisation.</p>
-        </div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="mark"><img src="./images/gblogo.png" alt="GreatBear Capital" onerror="this.parentNode.classList.add('fallback');this.remove();"></span>
+      <span class="wordmark">GreatBear Capital</span>
+    </a>
+    <nav class="nav-links">
+      <a href="stewardship.html">Stewardship</a>
+      <a href="index.html">Home &rarr;</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="wrap hero">
+    <p class="eyebrow r">Managed account &middot; Global &middot; Equity</p>
+    <h1 class="h1 r" style="--d:.08s">Global Brands Equity</h1>
+    <p class="lede r" style="--d:.14s">Investing in cash flow generating global sustainable innovations. High quality companies with dominant market positions, underpinned by powerful intangible assets.</p>
+
+    <div class="facts stats cols-3 r" style="--d:.2s">
+      <div class="stat"><div class="stat-val">Long only</div><div class="stat-lab">No leverage, no shorting</div></div>
+      <div class="stat"><div class="stat-val">5 years+</div><div class="stat-lab">Minimum analysis horizon</div></div>
+      <div class="stat"><div class="stat-val">$1 Mn</div><div class="stat-lab">Minimum, individuals</div></div>
     </div>
-</div>
-<div class="gb-div"><p>WHO WE ARE</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">02 &mdash; About</div>
-    <div class="sec-title reveal d1">About GreatBear</div>
-    <div class="two-col">
-        <div class="card reveal d1">
-            <h3>Our Story</h3>
-            <p>GreatBear began operations when Mr. Saptarshi Das shifted base back from London, UK to India in 2015. The essence of GreatBear is built on the cognizance that investing is not just an act but a way of life.</p>
-            <p>GreatBear brings to the fore, in every act of its investment operations, simple life principles of prudence, humility, continuous learning, hard work, deep research, patience, and foremost, persistence.</p>
-            <p>We want to allocate capital to those companies which display similar attributes, have sustainable innovation, and with very high shareholder alignment.</p>
-            <p>We think long term and do extensive on-ground due diligence to identify opportunities.</p>
+  </section>
+
+  <!-- STEWARDSHIP REFERENCE -->
+  <section class="wrap">
+    <div class="band r">
+      <div class="band-inner">
+        <div>
+          <p class="band-eyebrow">Before anything else</p>
+          <p class="band-title">We take stewardship of your capital</p>
+          <p class="band-body">Nine commitments govern how this strategy is run: partnership, transparency, bad news first, and no agreement whose incentives are misaligned with yours.</p>
         </div>
-        <div class="card reveal d2">
-            <h3>Stewardship</h3>
-            <p>Stewardship is a word that means taking care of something. It&rsquo;s overseeing something on behalf of someone else and acting in a way that keeps the owner&rsquo;s best interests at heart.</p>
-            <p>When you entrust GreatBear with your capital to invest for your future, we take stewardship of your investment &mdash; and so it is our duty to look after it with the utmost care.</p>
-            <p>When it comes to investments, there may be short-term ups and downs in the markets from time to time. But our responsibility is to help your investment grow over time, while supporting long-term benefits for the economy, the environment, and society more broadly.</p>
+        <a class="band-link" href="stewardship.html">Read the code <span>&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVE -->
+  <section class="wrap sec" id="objective">
+    <p class="eyebrow r">Investment objective</p>
+    <h2 class="h2 r" style="--d:.06s">Long-term growth</h2>
+    <div class="grid grid-2 body-block">
+      <div class="panel r">
+        <p class="panel-label">Objective</p>
+        <div class="prose">
+          <p>Long-term growth of your investment.</p>
+          <p>The investment team believes that high quality companies with dominant market positions, underpinned by powerful intangible assets, can generate attractive returns over the long term.</p>
         </div>
-    </div>
-    <div class="quote-block reveal d3">
-        <p>We broadly follow a natural ESG framework and avoid sin stocks.</p>
-        <cite>&mdash; Saptarshi Das, CFA, Portfolio Manager</cite>
-    </div>
-</div>
-<div class="gb-div"><p>PRINCIPLES</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">03 &mdash; Values</div>
-    <div class="sec-title reveal d1">Code of Conduct</div>
-    <div class="principles">
-        <div class="pr reveal"><span class="pr-n">1</span><p>We will always operate a culture of true partnership. Our investor clients will be our partners and our fortunes will always be directly proportional to theirs. Most of our personal wealth will also be invested along with them.</p></div>
-        <div class="pr reveal d1"><span class="pr-n">2</span><p>Our effort is to survive the vicissitudes of financial markets and economic conditions and not collide head-on with it. Our intention is to make decent returns for our investors, not enter a roulette game together.</p></div>
-        <div class="pr reveal d1"><span class="pr-n">3</span><p>We are not in the business of buying into a company just to sell it later. We would like to grow our wealth with the fortunes of a good company held long term.</p></div>
-        <div class="pr reveal d2"><span class="pr-n">4</span><p>We will take immediate action when we have made an error about the prospects of the business because of error in information processing, new information or plain simple oversight.</p></div>
-        <div class="pr reveal d2"><span class="pr-n">5</span><p>We will be always fully transparent about our operations. Each investor, however small or large, has equal right to all information and service.</p></div>
-        <div class="pr reveal d3"><span class="pr-n">6</span><p>We will always communicate the bad news first. Good news can always wait. If there are no suitable capital allocations, we will happily use money market instruments to wait.</p></div>
-        <div class="pr reveal d3"><span class="pr-n">7</span><p>We will never enter into agreements with third parties which have incentives misaligned with the incentives of our investors however strong or fair the incentive might be.</p></div>
-        <div class="pr reveal d4"><span class="pr-n">8</span><p>We want us to be a happy bunch of people, both our investors and the management team. We will treat everyone with dignity, respect and care in all our dealings.</p></div>
-    </div>
-</div>
-<div class="gb-div"><p>INVESTMENT APPROACH</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">04 &mdash; Philosophy</div>
-    <div class="sec-title reveal d1">Investment Philosophy</div>
-    <div class="two-col">
-        <div class="card reveal d1">
-            <h4>Global Brands Focus</h4>
-            <p>We invest with a global remit in companies which have cash flow generating innovative businesses and significant &lsquo;moat&rsquo; in what they do.</p>
-            <p>Companies in our portfolio will typically be market leaders in their respective niches with a long runway left in their innovation cycle.</p>
-            <p>High quality companies with dominant market positions, underpinned by powerful intangible assets &mdash; brands, networks, intellectual property &mdash; can compound value over decades.</p>
+      </div>
+      <div class="panel r" style="--d:.08s">
+        <p class="panel-label">Approach</p>
+        <div class="prose">
+          <p>We invest in businesses, not a ticker. The largest potential value sits in cash-flow-generating, innovation-driven businesses making the earth a more sustainable place for future generations.</p>
+          <p>We also believe in <strong>responsible capitalism</strong>: capitalism in which stakeholder interests are largely aligned with shareholder interests, and profit maximisation is directly proportional to human value maximisation.</p>
         </div>
-        <div class="card reveal d2">
-            <h4>Strategy Synthesis</h4>
-            <p>GreatBear is a long-only investor. We feel that market irrationality about the price of a business may have no upper bound &mdash; we don&rsquo;t particularly like that exposure.</p>
-            <p>We look at a business with a private equity approach. Buying stock is essentially an opportunity for us to grow with the fortunes of a company. Our time frame for analysis is never less than 5 years.</p>
-            <p>Effort to be broadly correct than precisely wrong.</p>
-            <div class="callout"><p><strong>Capital allocation is our main job.</strong></p></div>
-        </div>
+      </div>
     </div>
-</div>
-<div class="gb-div"><p>PERFORMANCE</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">05 &mdash; Track Record</div>
-    <div class="sec-title reveal d1">Track Record</div>
-    <div class="stats-row reveal d1">
-        <div class="st"><div class="big">16.53%</div><div class="lab">Annualised Since Jan 2023</div></div>
-        <div class="st"><div class="big">69.78%</div><div class="lab">Total Return Since Jan 2023</div></div>
-        <div class="st"><div class="big">5.15%</div><div class="lab">1 Year Return</div></div>
-    </div>
-</div>
-<div class="gb-div"><p>PORTFOLIO</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">06 &mdash; Holdings</div>
-    <div class="sec-title reveal d1">Portfolio</div>
-    <div class="two-col">
-        <div class="card reveal d1">
-            <h4>Top 10 Positions</h4>
-            <table class="dtable">
-                <thead><tr><th>#</th><th>Stock</th><th>Weight</th></tr></thead>
-                <tbody>
-                    <tr><td>1</td><td>NVIDIA</td><td>11.08%</td></tr>
-                    <tr><td>2</td><td>Apple</td><td>11.01%</td></tr>
-                    <tr><td>3</td><td>Micron Technology</td><td>9.24%</td></tr>
-                    <tr><td>4</td><td>Berkshire Hathaway Class B</td><td>9.01%</td></tr>
-                    <tr><td>5</td><td>Alphabet Class C</td><td>8.95%</td></tr>
-                    <tr><td>6</td><td>Taiwan Semiconductor Mfg Co</td><td>7.20%</td></tr>
-                    <tr><td>7</td><td>Tesla</td><td>7.02%</td></tr>
-                    <tr><td>8</td><td>Eli Lilly and Co</td><td>5.22%</td></tr>
-                    <tr><td>9</td><td>Mastercard</td><td>5.17%</td></tr>
-                </tbody>
-            </table>
+    <blockquote class="quote r" style="--d:.12s">
+      <p>We broadly follow a natural ESG framework and avoid sin stocks.</p>
+      <cite>Saptarshi Das, CFA &middot; Portfolio Manager</cite>
+    </blockquote>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="wrap sec" id="philosophy">
+    <p class="eyebrow r">Investment approach</p>
+    <h2 class="h2 r" style="--d:.06s">Investment philosophy</h2>
+    <div class="grid grid-2 body-block">
+      <div class="panel r">
+        <p class="panel-label">Global brands focus</p>
+        <div class="prose">
+          <p>We invest with a global remit in companies which have cash flow generating innovative businesses and a significant moat in what they do.</p>
+          <p>Companies in our portfolio are typically market leaders in their respective niches with a long runway left in their innovation cycle.</p>
+          <p>Dominant market positions underpinned by powerful intangible assets, whether brands, networks or intellectual property, can compound value over decades.</p>
         </div>
-        <div class="card reveal d2">
-            <h4>Sector Allocation</h4>
-            <table class="dtable">
-                <thead><tr><th>Sector</th><th>Weight</th></tr></thead>
-                <tbody>
-                    <tr><td>Technology</td><td>41.10%</td></tr>
-                    <tr><td>Semiconductor</td><td>16.44%</td></tr>
-                    <tr><td>Financials</td><td>15.09%</td></tr>
-                    <tr><td>Diversified</td><td>9.01%</td></tr>
-                    <tr><td>Industrials</td><td>7.02%</td></tr>
-                    <tr><td>Pharmaceuticals</td><td>5.22%</td></tr>
-                    <tr><td>Real Estate</td><td>5.01%</td></tr>
-                </tbody>
-            </table>
-            <div style="margin-top:18px">
-                <h4>Characteristics</h4>
-                <p>The portfolio is concentrated and conviction-driven &mdash; the top positions span technology, semiconductors, diversified holdings, financials, and pharmaceuticals.</p>
-                <p>Holdings are unified by dominant market positions, powerful intangible assets (brands, networks, IP), strong free cash flow generation, and long innovation runways.</p>
-            </div>
+      </div>
+      <div class="panel r" style="--d:.08s">
+        <p class="panel-label">Strategy synthesis</p>
+        <div class="prose">
+          <p>GreatBear is a long-only investor. Market irrationality about the price of a business may have no upper bound, and we do not like that exposure.</p>
+          <p>We look at a business with a private equity approach. Buying stock is an opportunity to grow with the fortunes of a company. Our time frame for analysis is never less than five years.</p>
+          <p>Effort to be broadly correct rather than precisely wrong.</p>
         </div>
+        <div class="callout"><p>Capital allocation is our main job.</p></div>
+      </div>
     </div>
-</div>
-<div class="gb-div"><p>LEADERSHIP</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">07 &mdash; Team</div>
-    <div class="sec-title reveal d1">Portfolio Manager</div>
-    <div class="bio-sec reveal d1">
-        <h3>Saptarshi Das, CFA</h3>
-        <div class="role">Director, GreatBear Capital</div>
-        <div class="bio-entry"><div class="yr">2015 &ndash; Present</div><p>GreatBear Capital &mdash; Private Wealth Management for HNI entrepreneurs and family offices. Discretionary fund advisory across India equity and global strategies.</p></div>
-        <div class="bio-entry"><div class="yr">2009 &ndash; 2015</div><p>Octopus Investments ($7 Bn AUM), FQS Capital, Visiongain Global &mdash; London, UK. Portfolio management of a $75 Mn absolute return fund. Overseeing $300&ndash;500 Mn allocation to Emerging and Asian markets.</p></div>
-        <div class="bio-entry"><div class="yr">2008 &ndash; 2009</div><p>Masters in Management &mdash; Imperial College London</p></div>
-        <div class="bio-entry"><div class="yr">2002 &ndash; 2006</div><p>Mechanical Engineering &mdash; Gujarat University, India</p></div>
-        <div class="bio-badge">Asia Hedge 2018 Nominated &middot; AUM ~$20 Mn</div>
+  </section>
+
+  <!-- TRACK RECORD -->
+  <section class="wrap sec" id="performance">
+    <p class="eyebrow r">Performance</p>
+    <h2 class="h2 r" style="--d:.06s">Track record</h2>
+    <div class="stats cols-3 body-block r" style="--d:.1s">
+      <div class="stat"><div class="stat-val">16.53%</div><div class="stat-lab">Annualised since Jan 2023</div></div>
+      <div class="stat"><div class="stat-val">69.78%</div><div class="stat-lab">Total return since Jan 2023</div></div>
+      <div class="stat"><div class="stat-val">5.15%</div><div class="stat-lab">One year return</div></div>
     </div>
-</div>
-<div class="gb-div"><p>TERMS</p><div class="div-line"></div></div>
-<div class="sec">
-    
-    <div class="sec-num reveal">08 &mdash; Structure</div>
-    <div class="sec-title reveal d1">Terms</div>
-    <div class="sec-sub reveal d2">Interactive Brokers Managed Account</div>
-    <div class="two-col" style="margin-top:24px">
-        <div class="card reveal d1">
-            <h4>Individual</h4>
-            <table class="dtable">
-                <tbody>
-                    <tr><td>Minimum Investment</td><td>$1,000,000</td></tr>
-                    <tr><td>AUM Fee</td><td>1.5%</td></tr>
-                    <tr><td>Performance Fee</td><td>20%</td></tr>
-                    <tr><td>Hurdle Rate</td><td>8%</td></tr>
-                    <tr><td>High Watermark</td><td>Yes</td></tr>
-                </tbody>
-            </table>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="wrap sec" id="portfolio">
+    <p class="eyebrow r">Portfolio</p>
+    <h2 class="h2 r" style="--d:.06s">Holdings and allocation</h2>
+    <div class="grid grid-2 body-block">
+
+      <div class="panel r">
+        <p class="panel-label">Top positions</p>
+        <div class="table-wrap">
+          <table class="gb">
+            <thead><tr><th>#</th><th>Company</th><th class="num">Weight</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><b>NVIDIA</b></td><td class="num">11.08%</td></tr>
+              <tr><td>2</td><td><b>Apple</b></td><td class="num">11.01%</td></tr>
+              <tr><td>3</td><td><b>Micron Technology</b></td><td class="num">9.24%</td></tr>
+              <tr><td>4</td><td><b>Berkshire Hathaway B</b></td><td class="num">9.01%</td></tr>
+              <tr><td>5</td><td><b>Alphabet C</b></td><td class="num">8.95%</td></tr>
+              <tr><td>6</td><td><b>Taiwan Semiconductor</b></td><td class="num">7.20%</td></tr>
+              <tr><td>7</td><td><b>Tesla</b></td><td class="num">7.02%</td></tr>
+              <tr><td>8</td><td><b>Eli Lilly</b></td><td class="num">5.22%</td></tr>
+              <tr><td>9</td><td><b>Mastercard</b></td><td class="num">5.17%</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="card reveal d2">
-            <h4>Institutional</h4>
-            <table class="dtable">
-                <tbody>
-                    <tr><td>Minimum Investment</td><td>$5,000,000</td></tr>
-                    <tr><td>AUM Fee</td><td>1.5%</td></tr>
-                    <tr><td>Performance Fee</td><td>20%</td></tr>
-                    <tr><td>Hurdle Rate</td><td>8%</td></tr>
-                    <tr><td>High Watermark</td><td>Yes</td></tr>
-                </tbody>
-            </table>
+      </div>
+
+      <div class="panel r" style="--d:.08s">
+        <p class="panel-label">Sector allocation</p>
+        <div class="table-wrap">
+          <table class="gb">
+            <thead><tr><th>Sector</th><th class="num">Weight</th></tr></thead>
+            <tbody>
+              <tr><td><b>Technology</b></td><td class="num">41.10%</td></tr>
+              <tr><td><b>Semiconductor</b></td><td class="num">16.44%</td></tr>
+              <tr><td><b>Financials</b></td><td class="num">15.09%</td></tr>
+              <tr><td><b>Diversified</b></td><td class="num">9.01%</td></tr>
+              <tr><td><b>Industrials</b></td><td class="num">7.02%</td></tr>
+              <tr><td><b>Pharmaceuticals</b></td><td class="num">5.22%</td></tr>
+              <tr><td><b>Real Estate</b></td><td class="num">5.01%</td></tr>
+            </tbody>
+          </table>
         </div>
-    </div>
-</div>
-<div class="gb-div"><p>GET IN TOUCH</p><div class="div-line"></div></div>
-<div class="contact-sec">
-    <div class="reveal">
-        <div class="contact-title">Stewardship</div>
-        <p style="font-size:.9rem;margin-bottom:20px">Saptarshi Das, CFA</p>
-        <div class="contact-links">
-            <a href="mailto:s.das@greatbearcapital.com">Email</a>
-            <a href="tel:+918160080658">+91 8160 080 658</a>
-            
-            <a href="https://www.greatbearcapital.com" target="_blank">greatbearcapital.com</a>
+        <div class="prose" style="margin-top:24px">
+          <p>The portfolio is concentrated and conviction driven, spanning technology, semiconductors, diversified holdings, financials and pharmaceuticals.</p>
+          <p>Holdings are unified by dominant market positions, powerful intangible assets, strong free cash flow generation, and long innovation runways.</p>
         </div>
-        <p style="margin-top:14px;font-size:.75rem;color:var(--ink-40)">Ahmedabad, India</p>
+      </div>
+
     </div>
-</div>
-<div class="disc"><p>Stock investments are subject to market risks. Please read the IPS information and other related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing an advisor, or designing a portfolio that suits your needs. The value of investments can go down in value as well as up, so you could get back less than you invest.</p></div>
-<div id="footer"><div class="footer-container-1"><div class="cont1-text1"><div>&copy; GreatBear Capital</div></div></div></div>
+  </section>
+
+  <!-- MANAGER -->
+  <section class="wrap sec" id="manager">
+    <p class="eyebrow r">Leadership</p>
+    <h2 class="h2 r" style="--d:.06s">Portfolio manager</h2>
+    <div class="grid grid-2 body-block">
+      <div class="r">
+        <p class="h3" style="font-size:1.6rem">Saptarshi Das, CFA</p>
+        <p class="eyebrow" style="margin-top:10px">Director, GreatBear Capital</p>
+        <div class="chips">
+          <span class="chip">Asia Hedge 2018 nominated</span>
+          <span class="chip">AUM ~$20 Mn</span>
+        </div>
+      </div>
+      <div class="cv r" style="--d:.08s">
+        <div class="cv-row"><div class="cv-yr">2015 &ndash; now</div><p>GreatBear Capital. Private wealth management for HNI entrepreneurs and family offices. Discretionary fund advisory across India equity and global strategies.</p></div>
+        <div class="cv-row"><div class="cv-yr">2009 &ndash; 2015</div><p>Octopus Investments ($7 Bn AUM), FQS Capital, Visiongain Global, London. Portfolio management of a $75 Mn absolute return fund, overseeing $300&ndash;500 Mn allocation to emerging and Asian markets.</p></div>
+        <div class="cv-row"><div class="cv-yr">2008 &ndash; 2009</div><p>Masters in Management, Imperial College London.</p></div>
+        <div class="cv-row"><div class="cv-yr">2002 &ndash; 2006</div><p>Mechanical Engineering, Gujarat University, India.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMS -->
+  <section class="wrap sec" id="terms">
+    <p class="eyebrow r">Terms</p>
+    <h2 class="h2 r" style="--d:.06s">Structure and terms</h2>
+    <p class="sub r" style="--d:.1s">Held in a segregated Interactive Brokers managed account. You always own the underlying holdings directly.</p>
+    <div class="grid grid-2 body-block">
+      <div class="r">
+        <p class="panel-label">Individual</p>
+        <div class="dl">
+          <div class="dl-row"><span class="dl-lab">Minimum investment</span><span class="dl-val">$1,000,000</span></div>
+          <div class="dl-row"><span class="dl-lab">AUM fee</span><span class="dl-val">1.5%</span></div>
+          <div class="dl-row"><span class="dl-lab">Performance fee</span><span class="dl-val">20%</span></div>
+          <div class="dl-row"><span class="dl-lab">Hurdle rate</span><span class="dl-val">8%</span></div>
+          <div class="dl-row"><span class="dl-lab">High watermark</span><span class="dl-val">Yes</span></div>
+        </div>
+      </div>
+      <div class="r" style="--d:.08s">
+        <p class="panel-label">Institutional</p>
+        <div class="dl">
+          <div class="dl-row"><span class="dl-lab">Minimum investment</span><span class="dl-val">$5,000,000</span></div>
+          <div class="dl-row"><span class="dl-lab">AUM fee</span><span class="dl-val">1.5%</span></div>
+          <div class="dl-row"><span class="dl-lab">Performance fee</span><span class="dl-val">20%</span></div>
+          <div class="dl-row"><span class="dl-lab">Hurdle rate</span><span class="dl-val">8%</span></div>
+          <div class="dl-row"><span class="dl-lab">High watermark</span><span class="dl-val">Yes</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEWARDSHIP REPRISE -->
+  <section class="wrap">
+    <div class="band r">
+      <div class="band-inner">
+        <div>
+          <p class="band-eyebrow">The terms behind the terms</p>
+          <p class="band-title">The Stewardship Code</p>
+          <p class="band-body">Fees and minimums are the commercial terms. The code is the one that matters: how we behave when a thesis breaks, when news is bad, and when there is nothing worth buying.</p>
+        </div>
+        <a class="band-link" href="stewardship.html">Read the code <span>&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="wrap contact">
+    <p class="eyebrow r">Get in touch</p>
+    <p class="contact-title r" style="--d:.06s">Reach out for a meaningful conversation.</p>
+    <div class="contact-links r" style="--d:.1s">
+      <a href="mailto:s.das@greatbearcapital.com">s.das@greatbearcapital.com</a>
+      <a href="https://www.greatbearcapital.com" target="_blank" rel="noopener">greatbearcapital.com</a>
+    </div>
+    <p class="contact-place r" style="--d:.14s">Saptarshi Das, CFA &middot; Ahmedabad, India</p>
+  </section>
+
+  <div class="wrap">
+    <div class="disc">
+      <p>Stock investments are subject to market risks. Please read the IPS information and other related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing an advisor, or designing a portfolio that suits your needs. The value of investments can go down as well as up, so you could get back less than you invest.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <nav class="foot-links">
+      <a href="index.html">Home</a>
+      <span class="sep"></span>
+      <a href="stewardship.html">Stewardship</a>
+      <span class="sep"></span>
+      <a href="IV.html">India Value</a>
+      <span class="sep"></span>
+      <a href="AllSeasonsStrategy.html">All Seasons</a>
+    </nav>
+    <p class="legal">&copy; GreatBear Capital</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.r');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(el){el.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+
+</body>
+</html>
