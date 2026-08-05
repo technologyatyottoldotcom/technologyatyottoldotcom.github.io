@@ -2,421 +2,345 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All Seasons Strategy | Q2 2026</title>
-<meta property="og:title" content="Multi-Asset Dynamic Asset Allocation Strategy | GreatBear Capital" />
-<meta property="og:type" content="website" />
-<meta property="og:description" content="Multi-asset portfolio management. Institutional-grade execution via Interactive Brokers, quarterly rebalancing." />
-<meta property="og:site_name" content="GreatBear Capital" />
-<meta property="og:locale" content="en_GB" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" />
-<style>
-:root {
-  --ink: #011627;
-  --ink-90: #011627e5;
-  --ink-60: #011627a0;
-  --ink-40: #01162766;
-  --ink-20: #01162733;
-  --ink-10: #0116271a;
-  --ink-05: #0116270d;
-  --cream: #faf9f7;
-  --white: #ffffff;
-  --green: #1a7a42;
-  --red: #b91c3a;
-  --sand: #f0ede8;
-}
-html { scroll-behavior: smooth; }
-html, body { overflow-x: hidden; margin: 0; background: var(--cream); color: var(--ink-90); }
-*, *::before, *::after { box-sizing: border-box; }
-
-/* === GRAIN === */
-body::after {
-  content: "";
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 9999; opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat; background-size: 256px;
-}
-
-/* === REVEAL === */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.reveal { opacity: 0; animation: fadeUp 0.6s ease forwards; }
-
-/* === LAYOUT === */
-.page-wrap { max-width: 85%; margin: 0 auto; padding: 40px 5% 60px; }
-
-/* === HEADER === */
-.gb-header { margin-bottom: 36px; }
-.gb-overline {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 13px; text-transform: uppercase; letter-spacing: 3px;
-  color: var(--ink-40); margin-bottom: 16px;
-  position: relative; padding-left: 40px;
-}
-.gb-overline::before {
-  content: ""; position: absolute; left: 0; top: 50%;
-  width: 28px; height: 1.5px; background: var(--ink-40);
-}
-.gb-title {
-  font-family: "Yeseva One", serif;
-  font-size: 44px; line-height: 1.08; letter-spacing: -1.5px;
-  margin: 0 0 14px; color: var(--ink);
-}
-.gb-subtitle {
-  font-family: "Ubuntu", sans-serif; font-weight: 300;
-  font-size: 16px; line-height: 1.75; letter-spacing: -0.4px;
-  color: var(--ink-60); max-width: 720px; margin: 0 0 24px;
-}
-.gb-tags { display: flex; gap: 10px; flex-wrap: wrap; }
-.gb-tag {
-  font-family: "Ubuntu", sans-serif; font-size: 12px;
-  letter-spacing: -0.2px; padding: 7px 18px;
-  border: 1px solid var(--ink-20); border-radius: 40px;
-  color: var(--ink-90); background: var(--sand);
-}
-
-/* === SECTION HEADING === */
-.block { margin-bottom: 44px; }
-.block-label {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 13px; text-transform: uppercase; letter-spacing: 2px;
-  color: var(--ink-40); margin-bottom: 6px;
-  position: relative; padding-left: 40px;
-}
-.block-label::before {
-  content: ""; position: absolute; left: 0; top: 50%;
-  width: 28px; height: 1.5px; background: var(--ink-20);
-}
-.block-title {
-  font-family: "Yeseva One", serif;
-  font-size: 28px; letter-spacing: -0.8px;
-  margin: 0 0 20px; color: var(--ink);
-}
-
-/* === CARDS === */
-.card {
-  border-radius: 16px; padding: 30px 32px; margin-bottom: 20px;
-  background: var(--sand); border: none;
-}
-
-/* === NARRATIVE === */
-.lead {
-  font-family: "Ubuntu", sans-serif; font-weight: 300;
-  font-size: 16px; line-height: 1.85; letter-spacing: -0.3px;
-  color: var(--ink-90); margin: 0 0 18px;
-}
-.lead:last-child { margin-bottom: 0; }
-.lead b { font-weight: 500; color: var(--ink); }
-
-/* === TABLES === */
-table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: "Ubuntu", sans-serif; }
-th {
-  padding: 8px 10px; text-align: left; font-weight: 500;
-  color: var(--ink-40); border-bottom: 1.5px solid var(--ink-10);
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 12px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
-}
-td { padding: 8px 10px; border-bottom: 1px solid var(--ink-05); vertical-align: top; font-weight: 300; color: var(--ink-60); letter-spacing: -0.2px; }
-tbody tr:nth-child(even):not(.section-row):not(.total-row) { background: rgba(240,237,232,0.5); }
-td b, td strong { color: var(--ink-90); font-weight: 500; }
-.section-row { background: rgba(1,22,39,0.04); font-weight: 600; font-size: 12px; color: var(--ink-90); }
-.section-row td { padding: 9px 10px; border-bottom: 1px solid var(--ink-10); font-family: "Barlow Condensed", sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-.total-row { background: rgba(1,22,39,0.06); font-weight: 600; }
-.total-row td { padding: 9px 10px; border-top: 1.5px solid var(--ink-20); border-bottom: none; }
-
-.pos-over { color: var(--green); font-weight: 600; }
-.pos-under { color: var(--red); font-weight: 600; }
-.pos-neutral { color: var(--ink-40); font-weight: 500; }
-.plus { color: var(--green); font-weight: 600; }
-.minus { color: var(--red); font-weight: 600; }
-.neutral { color: var(--ink-40); }
-.note { color: var(--ink-60); font-size: 12.5px; line-height: 1.5; }
-.table-note { font-family: "Ubuntu", sans-serif; font-weight: 300; font-size: 13px; color: var(--ink-40); letter-spacing: -0.2px; margin-bottom: 14px; }
-
-/* === STATS GRID === */
-.stats-grid { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-.stat-card {
-  flex: 1; min-width: 220px; padding: 24px;
-  border-radius: 16px; background: var(--sand);
-}
-.stat-title { font-family: "Barlow Condensed", sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
-.stat-row { display: flex; justify-content: space-between; font-family: "Ubuntu", sans-serif; font-size: 14px; font-weight: 300; padding: 9px 10px; color: var(--ink-60); letter-spacing: -0.2px; border-radius: 6px; }
-.stat-row:nth-child(even) { background: var(--cream); }
-.stat-val { font-weight: 500; color: var(--ink-90); }
-
-.sub-title {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
-  margin-bottom: 12px; color: var(--ink-90);
-  padding-bottom: 8px; border-bottom: 1px solid var(--ink-10);
-}
-
-/* === FOOTER === */
-.gb-footer {
-  font-family: "Ubuntu", sans-serif; font-weight: 300;
-  font-size: 12px; color: var(--ink-40); text-align: center;
-  margin-top: 40px; line-height: 1.6; padding-top: 20px;
-  border-top: 1px solid var(--ink-10); letter-spacing: -0.2px;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .page-wrap { padding: 20px 1%; max-width: 95%; }
-  .gb-title { font-size: 28px; }
-  .block-title { font-size: 22px; }
-  .stats-grid { flex-direction: column; }
-  .lead { font-size: 15px; }
-  table { font-size: 12px; }
-
-  /* Allocation table becomes cards on mobile */
-  .scroll-x { overflow-x: visible; }
-  table thead { display: none; }
-  table, tbody { display: block; width: 100%; }
-
-  tbody tr.section-row { display: block; }
-  tbody tr.section-row td { display: block; padding: 9px 10px; }
-
-  tbody tr.total-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "label label"
-      "lt tq"
-      "note note";
-    gap: 8px;
-    padding: 16px;
-    margin-top: 6px;
-    border-radius: 12px;
-    background: rgba(1,22,39,0.06);
-  }
-  tbody tr.total-row td { display: block; padding: 0 !important; border: none !important; }
-  tbody tr.total-row td:nth-child(1) {
-    grid-area: label; font-family: "Barlow Condensed", sans-serif;
-    font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink-90);
-  }
-  tbody tr.total-row td:nth-child(2) { grid-area: lt; }
-  tbody tr.total-row td:nth-child(3) { grid-area: tq; }
-  tbody tr.total-row td:nth-child(2), tbody tr.total-row td:nth-child(3) {
-    text-align: center; background: var(--cream); border-radius: 8px; padding: 8px 4px !important;
-  }
-  tbody tr.total-row td:nth-child(2)::before, tbody tr.total-row td:nth-child(3)::before {
-    content: attr(data-label); display: block;
-    font-family: "Barlow Condensed", sans-serif; font-size: 9px;
-    text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-40); margin-bottom: 3px;
-  }
-  tbody tr.total-row td:nth-child(4) {
-    grid-area: note; padding-top: 8px !important; border-top: 1px solid var(--ink-20) !important;
-  }
-
-  tbody tr:not(.section-row):not(.total-row) {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-      "asset asset asset"
-      "fund fund fund"
-      "lt tq chg"
-      "pos pos pos"
-      "notes notes notes";
-    gap: 6px 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-    border-radius: 12px;
-    background: var(--sand);
-    border-bottom: none;
-  }
-  tbody tr:not(.section-row):not(.total-row) td {
-    display: block;
-    padding: 0;
-    border-bottom: none;
-  }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(1) {
-    grid-area: asset;
-    font-family: "Yeseva One", serif;
-    font-size: 16px;
-    letter-spacing: -0.3px;
-    color: var(--ink);
-  }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(1) b { font-weight: 400; }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(2) {
-    grid-area: fund;
-    font-family: "Barlow Condensed", sans-serif;
-    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
-    color: var(--ink-40); margin-bottom: 2px;
-  }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(3) { grid-area: lt; }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(4) { grid-area: tq; }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(5) { grid-area: chg; }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(3),
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(4),
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(5) {
-    text-align: center; background: var(--cream); border-radius: 8px; padding: 6px 4px !important;
-  }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(3)::before,
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(4)::before,
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(5)::before {
-    content: attr(data-label); display: block;
-    font-family: "Barlow Condensed", sans-serif; font-size: 9px;
-    text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-40); margin-bottom: 3px;
-  }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(6) {
-    grid-area: pos; text-align: center; border-radius: 6px; padding: 5px !important;
-    font-family: "Barlow Condensed", sans-serif; font-size: 11px;
-    text-transform: uppercase; letter-spacing: 1.5px;
-  }
-  tbody tr:not(.section-row):not(.total-row) td.pos-over { background: rgba(26,122,66,0.08); }
-  tbody tr:not(.section-row):not(.total-row) td.pos-under { background: rgba(185,28,58,0.08); }
-  tbody tr:not(.section-row):not(.total-row) td.pos-neutral { background: rgba(1,22,39,0.05); }
-  tbody tr:not(.section-row):not(.total-row) td:nth-child(7) {
-    grid-area: notes; margin-top: 4px; padding-top: 10px !important;
-    border-top: 1px solid var(--ink-10); font-size: 12.5px; line-height: 1.55;
-  }
-
-}
-
-body, td, th, div, span, p, li { font-family: "Ubuntu", sans-serif; }
-b, strong { font-weight: 500; color: var(--ink-90); }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>All Seasons Strategy | Q2 2026 Report</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta name="theme-color" content="#faf9f7">
+<meta name="description" content="Quarterly strategy report for the GreatBear All Seasons multi-asset strategy, Q2 2026: macro view, full allocation and results.">
+<meta property="og:title" content="All Seasons Strategy | Q2 2026 Report">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.greatbearcapital.com/images/gblogo.png">
+<meta property="og:description" content="Multi-asset portfolio management. Institutional-grade execution via Interactive Brokers, quarterly rebalancing.">
+<meta property="og:site_name" content="GreatBear Capital">
+<meta property="og:locale" content="en_GB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Yeseva+One&display=swap">
+<link rel="stylesheet" href="gb.css">
+<noscript><style>.r{opacity:1;transform:none;}</style></noscript>
 </head>
 <body>
-<div class="page-wrap">
 
-<!-- HEADER -->
-<div class="gb-header reveal">
-  <div class="gb-overline">Quarterly Strategy Report &middot; Q2 2026 &middot; 15 June</div>
-  <h1 class="gb-title">GreatBear All Seasons Strategy</h1>
-  <p class="gb-subtitle">A dynamic, multi-asset portfolio spanning global equities, fixed income and alternatives. Built from listed ETFs, adjusted each quarter, and run to a target of around 10% annual volatility.</p>
-  <div class="gb-tags">
-    <span class="gb-tag"><strong>Long-term mix:</strong> Equity 55 &middot; Bonds 23 &middot; Alternatives 21 &middot; Cash 1</span>
-    <span class="gb-tag"><strong>This quarter:</strong> Equity 50 &middot; Bonds 28 &middot; Alternatives 21 &middot; Cash 1</span>
-    <span class="gb-tag"><strong>Benchmark:</strong> 60/40 ACWI / Aggregate Bonds</span>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="mark"><img src="./images/gblogo.png" alt="GreatBear Capital" onerror="this.parentNode.classList.add('fallback');this.remove();"></span>
+      <span class="wordmark">GreatBear Capital</span>
+    </a>
+    <nav class="nav-links">
+      <a href="stewardship.html">Stewardship</a>
+      <a href="AllSeasonsStrategy.html" class="opt">The strategy</a>
+      <a href="index.html">Home &rarr;</a>
+    </nav>
   </div>
-</div>
+</header>
 
-<!-- 1. MACRO & POSITIONING -->
-<div class="block reveal">
-  <div class="block-label">Where we stand</div>
-  <h2 class="block-title">Macro View and Positioning</h2>
-  <div class="card">
-    <p class="lead">The backdrop has turned since March. Israel and the US opened military operations against Iran in late February, and the contest over the Strait of Hormuz sent Brent well above $100 before it settled back into the low $80s. That single shock has reset the policy path almost everywhere: US inflation reaccelerated rather than cooled, and the Federal Reserve has now held at 3.50 to 3.75% for five straight meetings, with three members dissenting in favour of a hike and markets pricing tightening rather than cuts into year end. The European Central Bank reversed its own easing cycle and hiked in June, its first increase since 2023, on an energy-driven inflation shock. The Bank of Japan kept tightening as planned, taking its rate to 1%, though the yen has weakened to a 40-year low regardless. The Reserve Bank of India has held steady through the year rather than easing. The dollar has strengthened rather than softened, rebounding off a multi-year low.</p>
+<main>
 
-    <p class="lead">The US still looks expensive, so we hold the largest underweight the mandate allows. Japan is the one call we're reversing: despite the Bank of Japan's tightening, the Nikkei has been the best-performing major market this year on exporter earnings and the AI capex trade, so we've moved the position back to neutral rather than staying underweight into strength. India remains the cheapest major market we follow, and the valuation gap has widened further, but foreign investors have kept pulling out through the first half of the year and the rupee has weakened past 95 to the dollar; we're holding the position as a valuation call with that flow risk explicitly noted, not as a Reserve Bank easing call. China is the next cheapest large market and keeps a similar overweight. Gold has corrected 26 to 28% from January's $5,595 record to around $4,000 to $4,100 an ounce as real yields rose, and we've now trimmed it back to its long-term weight; the structural case, central bank buying and record global debt, is intact, but we no longer see the case for holding it overweight while real yields stay elevated. We've moved the inflation-hedging role of the portfolio increasingly onto inflation-linked bonds instead, which benefit directly from an energy-driven inflation shock without gold's sensitivity to the rate path.</p>
+  <!-- HERO -->
+  <section class="wrap hero">
+    <p class="eyebrow r">Quarterly strategy report &middot; Q2 2026 &middot; 15 June</p>
+    <h1 class="h1 r" style="--d:.08s">All Seasons Global Multi-Asset</h1>
+    <p class="lede r" style="--d:.14s">A dynamic, multi-asset portfolio spanning global equities, fixed income and alternatives. Built from listed ETFs, adjusted each quarter, and run to a target of around 10% annual volatility.</p>
 
-    <p class="lead">Overall we still run slightly less equity, 50% against a long-term 55%, while lifting bonds to 28% and holding alternatives at their long-term weight of 21%. Within bonds we've raised core US exposure back to neutral, since yields near 4.7% on the ten-year now pay you to hold duration rather than acting purely as ballast, and inflation-linked bonds have become our preferred inflation hedge over gold, whose case weakens as real yields rise. We've also shifted our emerging market debt preference toward hard-currency bonds over local-currency, since the weaker-dollar case behind the local-currency overweight didn't hold up. We stay light on high yield, where spreads are tight and offer little cushion against a geopolitical or inflation surprise. The portfolio still targets around 10% annual volatility, though we'd flag that an inflation-shock regime is one where stocks and bonds can fall together rather than offsetting each other, so realised risk may run above target if that correlation stays elevated.</p>
-  </div>
-</div>
-
-<!-- 2. FULL ALLOCATION -->
-<div class="block reveal">
-  <div class="block-label">The portfolio</div>
-  <h2 class="block-title">Full Allocation</h2>
-  <div class="card scroll-x">
-    <p class="table-note">Long-term % is the strategic baseline. This quarter % is the current tactical weight. Developed market equity is held through region funds; emerging markets through a broad core fund plus single-country positions in India and China.</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Asset</th><th>Fund</th><th>Long-term %</th><th>This quarter %</th><th>Change</th><th>Position</th><th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="section-row"><td colspan="7">Developed market equity &mdash; long-term 49.0%, now 42.0%</td></tr>
-        <tr><td data-label="Asset"><b>United States</b></td><td data-label="Fund">VTI</td><td data-label="Long-term %">34.5</td><td data-label="This quarter %"><b>27.5</b></td><td class="minus" data-label="Change">&ndash;7.0</td><td class="pos-under" data-label="Position">Under</td><td class="note" data-label="Notes">Still the most expensive major market and the most concentrated in a handful of large technology names. Held at the largest underweight the mandate allows.</td></tr>
-        <tr><td data-label="Asset"><b>Europe ex-UK</b></td><td data-label="Fund">VGK</td><td data-label="Long-term %">6.5</td><td data-label="This quarter %"><b>6.5</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Neutral</td><td class="note" data-label="Notes">The European Central Bank's June hike removes the easing tailwind we'd expected, but fiscal spending still roughly offsets full valuations. Held at benchmark weight.</td></tr>
-        <tr><td data-label="Asset"><b>Japan</b></td><td data-label="Fund">EWJ</td><td data-label="Long-term %">2.8</td><td data-label="This quarter %"><b>2.8</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Neutral</td><td class="note" data-label="Notes">Reset to neutral. Despite Bank of Japan tightening to 1%, the Nikkei has been the best-performing major market this year on exporter earnings and the AI trade; the underweight case hasn't held up.</td></tr>
-        <tr><td data-label="Asset"><b>United Kingdom</b></td><td data-label="Fund">EWU</td><td data-label="Long-term %">1.8</td><td data-label="This quarter %"><b>1.5</b></td><td class="minus" data-label="Change">&ndash;0.3</td><td class="pos-under" data-label="Position">Under</td><td class="note" data-label="Notes">Trading above its ten-year average with fiscal tightening still in train.</td></tr>
-        <tr><td data-label="Asset"><b>Australia</b></td><td data-label="Fund">EWA</td><td data-label="Long-term %">1.0</td><td data-label="This quarter %"><b>1.0</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Neutral</td><td class="note" data-label="Notes">Mining strength already priced in. Held at benchmark weight.</td></tr>
-        <tr><td data-label="Asset"><b>Rest of developed world</b></td><td data-label="Fund">URTH</td><td data-label="Long-term %">2.4</td><td data-label="This quarter %"><b>2.7</b></td><td class="plus" data-label="Change">+0.3</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">The flexible sleeve, covering Canada, Hong Kong, Singapore and others; trimmed slightly this quarter to help fund Japan's move back to neutral.</td></tr>
-
-        <tr class="section-row"><td colspan="7">Emerging market equity &mdash; long-term 6.0%, now 8.0%</td></tr>
-        <tr><td data-label="Asset"><b>Broad emerging core</b></td><td data-label="Fund">IEMG</td><td data-label="Long-term %">6.0</td><td data-label="This quarter %"><b>4.0</b></td><td class="minus" data-label="Change">&ndash;2.0</td><td class="pos-under" data-label="Position">Under</td><td class="note" data-label="Notes">Trimmed to fund the India and China positions. Still covers Korea, Taiwan, Brazil, Mexico and others.</td></tr>
-        <tr><td data-label="Asset"><b>India</b></td><td data-label="Fund">INDA</td><td data-label="Long-term %">&mdash;</td><td data-label="This quarter %"><b>2.0</b></td><td class="plus" data-label="Change">+2.0</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">The cheapest major market we follow, and the valuation gap has widened further this year. We hold this as a valuation call: foreign investors have been persistent net sellers through the first half of 2026 and the rupee has weakened past 95 to the dollar, with the Reserve Bank holding rates steady rather than easing. Flow risk noted; funded from the core.</td></tr>
-        <tr><td data-label="Asset"><b>China and Hong Kong</b></td><td data-label="Fund">MCHI</td><td data-label="Long-term %">&mdash;</td><td data-label="This quarter %"><b>2.0</b></td><td class="plus" data-label="Change">+2.0</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">The next-cheapest large market. Stimulus continues to stabilise the economy. Funded from the core.</td></tr>
-
-        <tr class="section-row"><td colspan="7">Bonds &mdash; long-term 23%, now 28%</td></tr>
-        <tr><td data-label="Asset"><b>US aggregate bonds</b></td><td data-label="Fund">AGG</td><td data-label="Long-term %">10</td><td data-label="This quarter %"><b>10</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Neutral</td><td class="note" data-label="Notes">Raised to neutral. With the Fed on hold and long yields at multi-year highs, core duration now pays a running yield near 4.7% rather than acting purely as ballast.</td></tr>
-        <tr><td data-label="Asset"><b>International developed bonds (hedged)</b></td><td data-label="Fund">BNDX</td><td data-label="Long-term %">5</td><td data-label="This quarter %"><b>6.5</b></td><td class="plus" data-label="Change">+1.5</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">The European Central Bank's June hike, its first since 2023, undercuts our original easing thesis, though hedged yields are still attractive after the move higher. Held above benchmark; under review next quarter.</td></tr>
-        <tr><td data-label="Asset"><b>Inflation-linked bonds</b></td><td data-label="Fund">TIP</td><td data-label="Long-term %">2</td><td data-label="This quarter %"><b>4.5</b></td><td class="plus" data-label="Change">+2.5</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">Increased further as our primary inflation hedge, alongside the trim in gold below, given the energy-driven inflation shock is showing no sign of fading.</td></tr>
-        <tr><td data-label="Asset"><b>High yield</b></td><td data-label="Fund">HYG</td><td data-label="Long-term %">2</td><td data-label="This quarter %"><b>1.5</b></td><td class="minus" data-label="Change">&ndash;0.5</td><td class="pos-under" data-label="Position">Under</td><td class="note" data-label="Notes">Spreads remain tight, with little cushion against a geopolitical or inflation surprise.</td></tr>
-        <tr><td data-label="Asset"><b>Emerging market dollar bonds</b></td><td data-label="Fund">EMB</td><td data-label="Long-term %">2</td><td data-label="This quarter %"><b>3.5</b></td><td class="plus" data-label="Change">+1.5</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">Yields close to 7%. Hard-currency EM debt is a cleaner way to hold EM credit risk now that the dollar has strengthened rather than weakened. Increased to absorb the EMLC trim below.</td></tr>
-        <tr><td data-label="Asset"><b>Emerging market local bonds</b></td><td data-label="Fund">EMLC</td><td data-label="Long-term %">2</td><td data-label="This quarter %"><b>2</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Neutral</td><td class="note" data-label="Notes">Reset to neutral, clearing last quarter's conviction breach. The original case rested on a weaker dollar, which has instead strengthened through the first half of the year.</td></tr>
-
-        <tr class="section-row"><td colspan="7">Alternatives &mdash; long-term 21%, now 21%</td></tr>
-        <tr><td data-label="Asset"><b>Gold</b></td><td data-label="Fund">GLD</td><td data-label="Long-term %">10</td><td data-label="This quarter %"><b>10</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Neutral</td><td class="note" data-label="Notes">Trimmed further, back to its long-term weight, as the correction from January's $5,595 record to around $4,000&ndash;4,100 has continued and real yields stay elevated. The structural case, central bank buying and record global debt, is intact, so we've held the line at neutral rather than going underweight.</td></tr>
-        <tr><td data-label="Asset"><b>Broad commodities</b></td><td data-label="Fund">GSG</td><td data-label="Long-term %">5</td><td data-label="This quarter %"><b>4</b></td><td class="minus" data-label="Change">&ndash;1</td><td class="pos-under" data-label="Position">Under</td><td class="note" data-label="Notes">Energy has been volatile on the Middle East conflict; metals and agriculture mixed.</td></tr>
-        <tr><td data-label="Asset"><b>Global property</b></td><td data-label="Fund">VNQ</td><td data-label="Long-term %">6</td><td data-label="This quarter %"><b>7</b></td><td class="plus" data-label="Change">+1</td><td class="pos-over" data-label="Position">Over</td><td class="note" data-label="Notes">A beneficiary of any eventual rate relief, though that looks further off than it did last quarter.</td></tr>
-
-        <tr><td data-label="Asset"><b>Cash</b></td><td data-label="Fund">SHV</td><td data-label="Long-term %">1</td><td data-label="This quarter %"><b>1</b></td><td class="neutral" data-label="Change">&mdash;</td><td class="pos-neutral" data-label="Position">Steady</td><td class="note" data-label="Notes">Held steady at 1%. A Treasury bill proxy yielding above 5%.</td></tr>
-        <tr class="total-row"><td colspan="2"><b>Total</b></td><td data-label="Long-term %"><b>100%</b></td><td data-label="This quarter %"><b>100%</b></td><td colspan="3" style="font-weight:400;font-size:12px;color:var(--ink-60);">Both the long-term mix and this quarter add to 100%.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- 3. RESULTS -->
-<div class="block reveal">
-  <div class="block-label">Track record</div>
-  <h2 class="block-title">Results</h2>
-  <div class="card">
-    <p class="table-note" style="margin-bottom:4px;">Five years and four months, March 2021 to June 2026. Quarterly rebalancing. Growth of $100.</p>
-  </div>
-
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-title" style="color:var(--ink);">All Seasons Strategy</div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Yearly return</span><span class="stat-val">13.0%</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Yearly volatility</span><span class="stat-val">10.4%</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Return per unit of risk</span><span class="stat-val">0.82</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Worst peak-to-trough fall</span><span class="stat-val">&ndash;12.8%</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">$100 grew to</span><span class="stat-val">$192.30</span></div>
+    <div class="facts stats cols-3 r" style="--d:.2s">
+      <div class="stat">
+        <div class="stat-val" style="font-size:1.15rem;line-height:1.4">55 &middot; 23 &middot; 21 &middot; 1</div>
+        <div class="stat-lab">Long-term mix &mdash; equity, bonds, alts, cash</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="font-size:1.15rem;line-height:1.4">50 &middot; 28 &middot; 21 &middot; 1</div>
+        <div class="stat-lab">This quarter</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="font-size:1.15rem;line-height:1.4">60 / 40 ACWI &amp; Agg</div>
+        <div class="stat-lab">Benchmark</div>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-title" style="color:var(--ink-60);">60/40 Benchmark</div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Yearly return</span><span class="stat-val" style="color:var(--ink-60);">7.9%</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Yearly volatility</span><span class="stat-val" style="color:var(--ink-60);">12.5%</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Return per unit of risk</span><span class="stat-val" style="color:var(--ink-60);">0.27</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">Worst peak-to-trough fall</span><span class="stat-val" style="color:var(--ink-60);">&ndash;19.8%</span></div>
-      <div class="stat-row"><span style="color:var(--ink-60);">$100 grew to</span><span class="stat-val" style="color:var(--ink-60);">$149.70</span></div>
+  </section>
+
+  <!-- MACRO -->
+  <section class="wrap sec" id="macro">
+    <p class="eyebrow r">Where we stand</p>
+    <h2 class="h2 r" style="--d:.06s">Macro view and positioning</h2>
+
+    <div class="prose body-block r" style="--d:.1s;max-width:76ch">
+      <p>The backdrop has turned since March. Israel and the US opened military operations against Iran in late February, and the contest over the Strait of Hormuz sent Brent well above $100 before it settled back into the low $80s. That single shock has reset the policy path almost everywhere: US inflation reaccelerated rather than cooled, and the Federal Reserve has now held at 3.50 to 3.75% for five straight meetings, with three members dissenting in favour of a hike and markets pricing tightening rather than cuts into year end. The European Central Bank reversed its own easing cycle and hiked in June, its first increase since 2023, on an energy-driven inflation shock. The Bank of Japan kept tightening as planned, taking its rate to 1%, though the yen has weakened to a 40-year low regardless. The Reserve Bank of India has held steady through the year rather than easing. The dollar has strengthened rather than softened, rebounding off a multi-year low.</p>
+
+      <p>The US still looks expensive, so we hold the largest underweight the mandate allows. Japan is the one call we are reversing: despite the Bank of Japan's tightening, the Nikkei has been the best-performing major market this year on exporter earnings and the AI capex trade, so we have moved the position back to neutral rather than staying underweight into strength. India remains the cheapest major market we follow, and the valuation gap has widened further, but foreign investors have kept pulling out through the first half of the year and the rupee has weakened past 95 to the dollar. We are holding the position as a valuation call with that flow risk explicitly noted, not as a Reserve Bank easing call. China is the next cheapest large market and keeps a similar overweight. Gold has corrected 26 to 28% from January's $5,595 record to around $4,000 to $4,100 an ounce as real yields rose, and we have now trimmed it back to its long-term weight. The structural case, central bank buying and record global debt, is intact, but we no longer see the case for holding it overweight while real yields stay elevated. We have moved the inflation-hedging role of the portfolio increasingly onto inflation-linked bonds instead, which benefit directly from an energy-driven inflation shock without gold's sensitivity to the rate path.</p>
+
+      <p>Overall we still run slightly less equity, 50% against a long-term 55%, while lifting bonds to 28% and holding alternatives at their long-term weight of 21%. Within bonds we have raised core US exposure back to neutral, since yields near 4.7% on the ten-year now pay you to hold duration rather than acting purely as ballast, and inflation-linked bonds have become our preferred inflation hedge over gold, whose case weakens as real yields rise. We have also shifted our emerging market debt preference toward hard-currency bonds over local-currency, since the weaker-dollar case behind the local-currency overweight did not hold up. We stay light on high yield, where spreads are tight and offer little cushion against a geopolitical or inflation surprise. The portfolio still targets around 10% annual volatility, though we would flag that an inflation-shock regime is one where stocks and bonds can fall together rather than offsetting each other, so realised risk may run above target if that correlation stays elevated.</p>
+    </div>
+  </section>
+
+  <!-- ALLOCATION -->
+  <section class="wrap sec" id="allocation">
+    <p class="eyebrow r">The portfolio</p>
+    <h2 class="h2 r" style="--d:.06s">Full allocation</h2>
+    <p class="table-note body-block r" style="--d:.1s">Long-term % is the strategic baseline. This quarter % is the current tactical weight. Developed market equity is held through region funds; emerging markets through a broad core fund plus single-country positions in India and China.</p>
+
+    <div class="table-wrap r" style="--d:.12s">
+      <table class="gb stack">
+        <thead>
+          <tr>
+            <th>Asset</th><th>Fund</th><th class="num">Long-term %</th><th class="num">This quarter %</th>
+            <th class="num">Change</th><th>Position</th><th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="section-row"><td colspan="7">Developed market equity &mdash; long-term 49.0%, now 42.0%</td></tr>
+          <tr>
+            <td data-label="Asset"><b>United States</b></td><td data-label="Fund">VTI</td>
+            <td class="num" data-label="Long-term %">34.5</td><td class="num" data-label="This quarter %"><b>27.5</b></td>
+            <td class="num" data-label="Change"><span class="delta minus">&ndash;7.0</span></td>
+            <td data-label="Position"><span class="pos pos-under">Under</span></td>
+            <td class="note" data-label="Notes">Still the most expensive major market and the most concentrated in a handful of large technology names. Held at the largest underweight the mandate allows.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Europe ex-UK</b></td><td data-label="Fund">VGK</td>
+            <td class="num" data-label="Long-term %">6.5</td><td class="num" data-label="This quarter %"><b>6.5</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Neutral</span></td>
+            <td class="note" data-label="Notes">The European Central Bank's June hike removes the easing tailwind we had expected, but fiscal spending still roughly offsets full valuations. Held at benchmark weight.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Japan</b></td><td data-label="Fund">EWJ</td>
+            <td class="num" data-label="Long-term %">2.8</td><td class="num" data-label="This quarter %"><b>2.8</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Neutral</span></td>
+            <td class="note" data-label="Notes">Reset to neutral. Despite Bank of Japan tightening to 1%, the Nikkei has been the best-performing major market this year on exporter earnings and the AI trade; the underweight case has not held up.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>United Kingdom</b></td><td data-label="Fund">EWU</td>
+            <td class="num" data-label="Long-term %">1.8</td><td class="num" data-label="This quarter %"><b>1.5</b></td>
+            <td class="num" data-label="Change"><span class="delta minus">&ndash;0.3</span></td>
+            <td data-label="Position"><span class="pos pos-under">Under</span></td>
+            <td class="note" data-label="Notes">Trading above its ten-year average with fiscal tightening still in train.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Australia</b></td><td data-label="Fund">EWA</td>
+            <td class="num" data-label="Long-term %">1.0</td><td class="num" data-label="This quarter %"><b>1.0</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Neutral</span></td>
+            <td class="note" data-label="Notes">Mining strength already priced in. Held at benchmark weight.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Rest of developed world</b></td><td data-label="Fund">URTH</td>
+            <td class="num" data-label="Long-term %">2.4</td><td class="num" data-label="This quarter %"><b>2.7</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+0.3</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">The flexible sleeve, covering Canada, Hong Kong, Singapore and others; trimmed slightly this quarter to help fund Japan's move back to neutral.</td>
+          </tr>
+
+          <tr class="section-row"><td colspan="7">Emerging market equity &mdash; long-term 6.0%, now 8.0%</td></tr>
+          <tr>
+            <td data-label="Asset"><b>Broad emerging core</b></td><td data-label="Fund">IEMG</td>
+            <td class="num" data-label="Long-term %">6.0</td><td class="num" data-label="This quarter %"><b>4.0</b></td>
+            <td class="num" data-label="Change"><span class="delta minus">&ndash;2.0</span></td>
+            <td data-label="Position"><span class="pos pos-under">Under</span></td>
+            <td class="note" data-label="Notes">Trimmed to fund the India and China positions. Still covers Korea, Taiwan, Brazil, Mexico and others.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>India</b></td><td data-label="Fund">INDA</td>
+            <td class="num" data-label="Long-term %">&mdash;</td><td class="num" data-label="This quarter %"><b>2.0</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+2.0</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">The cheapest major market we follow, and the valuation gap has widened further this year. We hold this as a valuation call: foreign investors have been persistent net sellers through the first half of 2026 and the rupee has weakened past 95 to the dollar, with the Reserve Bank holding rates steady rather than easing. Flow risk noted; funded from the core.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>China and Hong Kong</b></td><td data-label="Fund">MCHI</td>
+            <td class="num" data-label="Long-term %">&mdash;</td><td class="num" data-label="This quarter %"><b>2.0</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+2.0</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">The next-cheapest large market. Stimulus continues to stabilise the economy. Funded from the core.</td>
+          </tr>
+
+          <tr class="section-row"><td colspan="7">Bonds &mdash; long-term 23%, now 28%</td></tr>
+          <tr>
+            <td data-label="Asset"><b>US aggregate bonds</b></td><td data-label="Fund">AGG</td>
+            <td class="num" data-label="Long-term %">10</td><td class="num" data-label="This quarter %"><b>10</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Neutral</span></td>
+            <td class="note" data-label="Notes">Raised to neutral. With the Fed on hold and long yields at multi-year highs, core duration now pays a running yield near 4.7% rather than acting purely as ballast.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>International developed bonds (hedged)</b></td><td data-label="Fund">BNDX</td>
+            <td class="num" data-label="Long-term %">5</td><td class="num" data-label="This quarter %"><b>6.5</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+1.5</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">The European Central Bank's June hike, its first since 2023, undercuts our original easing thesis, though hedged yields are still attractive after the move higher. Held above benchmark; under review next quarter.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Inflation-linked bonds</b></td><td data-label="Fund">TIP</td>
+            <td class="num" data-label="Long-term %">2</td><td class="num" data-label="This quarter %"><b>4.5</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+2.5</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">Increased further as our primary inflation hedge, alongside the trim in gold below, given the energy-driven inflation shock is showing no sign of fading.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>High yield</b></td><td data-label="Fund">HYG</td>
+            <td class="num" data-label="Long-term %">2</td><td class="num" data-label="This quarter %"><b>1.5</b></td>
+            <td class="num" data-label="Change"><span class="delta minus">&ndash;0.5</span></td>
+            <td data-label="Position"><span class="pos pos-under">Under</span></td>
+            <td class="note" data-label="Notes">Spreads remain tight, with little cushion against a geopolitical or inflation surprise.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Emerging market dollar bonds</b></td><td data-label="Fund">EMB</td>
+            <td class="num" data-label="Long-term %">2</td><td class="num" data-label="This quarter %"><b>3.5</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+1.5</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">Yields close to 7%. Hard-currency emerging debt is a cleaner way to hold that credit risk now the dollar has strengthened rather than weakened. Increased to absorb the EMLC trim below.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Emerging market local bonds</b></td><td data-label="Fund">EMLC</td>
+            <td class="num" data-label="Long-term %">2</td><td class="num" data-label="This quarter %"><b>2</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Neutral</span></td>
+            <td class="note" data-label="Notes">Reset to neutral, clearing last quarter's conviction breach. The original case rested on a weaker dollar, which has instead strengthened through the first half of the year.</td>
+          </tr>
+
+          <tr class="section-row"><td colspan="7">Alternatives &mdash; long-term 21%, now 21%</td></tr>
+          <tr>
+            <td data-label="Asset"><b>Gold</b></td><td data-label="Fund">GLD</td>
+            <td class="num" data-label="Long-term %">10</td><td class="num" data-label="This quarter %"><b>10</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Neutral</span></td>
+            <td class="note" data-label="Notes">Trimmed further, back to its long-term weight, as the correction from January's $5,595 record to around $4,000&ndash;4,100 has continued and real yields stay elevated. The structural case, central bank buying and record global debt, is intact, so we have held the line at neutral rather than going underweight.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Broad commodities</b></td><td data-label="Fund">GSG</td>
+            <td class="num" data-label="Long-term %">5</td><td class="num" data-label="This quarter %"><b>4</b></td>
+            <td class="num" data-label="Change"><span class="delta minus">&ndash;1</span></td>
+            <td data-label="Position"><span class="pos pos-under">Under</span></td>
+            <td class="note" data-label="Notes">Energy has been volatile on the Middle East conflict; metals and agriculture mixed.</td>
+          </tr>
+          <tr>
+            <td data-label="Asset"><b>Global property</b></td><td data-label="Fund">VNQ</td>
+            <td class="num" data-label="Long-term %">6</td><td class="num" data-label="This quarter %"><b>7</b></td>
+            <td class="num" data-label="Change"><span class="delta plus">+1</span></td>
+            <td data-label="Position"><span class="pos pos-over">Over</span></td>
+            <td class="note" data-label="Notes">A beneficiary of any eventual rate relief, though that looks further off than it did last quarter.</td>
+          </tr>
+
+          <tr class="section-row"><td colspan="7">Cash</td></tr>
+          <tr>
+            <td data-label="Asset"><b>Cash</b></td><td data-label="Fund">SHV</td>
+            <td class="num" data-label="Long-term %">1</td><td class="num" data-label="This quarter %"><b>1</b></td>
+            <td class="num" data-label="Change"><span class="delta flat">&mdash;</span></td>
+            <td data-label="Position"><span class="pos pos-neutral">Steady</span></td>
+            <td class="note" data-label="Notes">Held steady at 1%. A Treasury bill proxy yielding above 5%.</td>
+          </tr>
+
+          <tr class="total-row">
+            <td colspan="2"><b>Total</b></td>
+            <td class="num" data-label="Long-term %"><b>100%</b></td>
+            <td class="num" data-label="This quarter %"><b>100%</b></td>
+            <td colspan="3" class="note">Both the long-term mix and this quarter add to 100%.</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="wrap sec" id="results">
+    <p class="eyebrow r">Track record</p>
+    <h2 class="h2 r" style="--d:.06s">Results</h2>
+    <p class="table-note body-block r" style="--d:.1s">Five years and four months, March 2021 to June 2026. Quarterly rebalancing. Growth of $100.</p>
+
+    <div class="table-wrap r" style="--d:.12s">
+      <table class="gb">
+        <thead>
+          <tr><th>Measure</th><th class="num">All Seasons</th><th class="num">60/40 benchmark</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Yearly return</td><td class="num"><b>13.0%</b></td><td class="num">7.9%</td></tr>
+          <tr><td>Yearly volatility</td><td class="num"><b>10.4%</b></td><td class="num">12.5%</td></tr>
+          <tr><td>Return per unit of risk</td><td class="num"><b>0.82</b></td><td class="num">0.27</td></tr>
+          <tr><td>Worst peak-to-trough fall</td><td class="num"><b>&ndash;12.8%</b></td><td class="num">&ndash;19.8%</td></tr>
+          <tr><td>$100 grew to</td><td class="num"><b>$192.30</b></td><td class="num">$149.70</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid grid-2 body-block">
+      <div class="panel r">
+        <p class="panel-label">What drove the result</p>
+        <div class="prose">
+          <p>The outperformance came from three places. Gold was the biggest single contributor: holding 13 to 16% through the run from around $1,800 to $5,000 an ounce in 2024 and 2025 added roughly 5% a year.</p>
+          <p>Defensive positioning in 2022, with less equity and more gold and inflation-linked bonds, cushioned the rare year when both stocks and bonds fell together, holding the worst peak-to-trough loss to about 13% against nearly 20% for the benchmark. The tactical positions in India and China, added at their valuation lows between 2023 and 2025, then captured the recovery while the broad emerging market holding kept the portfolio diversified.</p>
+        </div>
+      </div>
+      <div class="panel r" style="--d:.08s">
+        <p class="panel-label">This quarter</p>
+        <div class="prose">
+          <p>March to June 2026 was a study in offsetting forces rather than a clean win. The Middle East-driven oil shock reversed gold's run, roughly a third of it unwound in three months, while US, Japanese and broader emerging market equity carried the period.</p>
+          <p>Net, the quarter added modestly to the five-year figures rather than detracting from them. It is a reminder that gold's ballast role can turn sharply when the rate-cut narrative it depends on reverses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEWARDSHIP -->
+  <section class="wrap">
+    <div class="band r">
+      <div class="band-inner">
+        <div>
+          <p class="band-eyebrow">Why we publish this</p>
+          <p class="band-title">Bad news first, always</p>
+          <p class="band-body">Full transparency and communicating bad news before good are two of the nine commitments in our code. This report is where both are tested each quarter.</p>
+        </div>
+        <a class="band-link" href="stewardship.html">Read the code <span>&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="wrap contact">
+    <p class="eyebrow r">Contact</p>
+    <p class="contact-title r" style="--d:.06s">Get in touch.</p>
+    <div class="contact-links r" style="--d:.1s">
+      <a href="mailto:info@greatbearcapital.com">info@greatbearcapital.com</a>
+      <a href="AllSeasonsStrategy.html">About the strategy</a>
+    </div>
+    <p class="contact-place r" style="--d:.14s">Saptarshi Das, CFA &middot; Ahmedabad, India</p>
+  </section>
+
+  <div class="wrap">
+    <div class="disc">
+      <p>This report is provided for information only and does not constitute investment advice or an offer to buy or sell any security. Allocations shown are as at the report date and are subject to change without notice. Investing involves risk, including possible loss of capital. Past performance is not indicative of future returns. The value of investments can go down as well as up, so you could get back less than you invest.</p>
     </div>
   </div>
 
-  <div class="card">
-    <div class="sub-title">What drove the result</div>
-    <p class="lead" style="font-size:15px;">The strategy's outperformance came from three places. Gold was the biggest single contributor: holding 13 to 16% through the run from around $1,800 to $5,000 an ounce in 2024 and 2025 added roughly 5% a year. Defensive positioning in 2022, with less equity, more gold and inflation-linked bonds, cushioned the rare year when both stocks and bonds fell together, holding the worst peak-to-trough loss to about 13% against nearly 20% for the benchmark. Finally, the tactical positions in India and China, added at their valuation lows between 2023 and 2025, captured the recovery while the broad emerging market holding kept the portfolio diversified.</p>
-    <p class="lead" style="font-size:15px;margin-top:10px;">The March to June 2026 quarter was a study in offsetting forces rather than a clean win: the Middle East-driven oil shock reversed gold's run, roughly a third of it unwound in three months, while US, Japanese and broader emerging market equity carried the period. Net, the quarter added modestly to the five-year figures rather than detracting from them, though it's a reminder that gold's ballast role can turn sharply when the rate-cut narrative it depends on reverses.</p>
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <nav class="foot-links">
+      <a href="index.html">Home</a>
+      <span class="sep"></span>
+      <a href="stewardship.html">Stewardship</a>
+      <span class="sep"></span>
+      <a href="AllSeasonsStrategy.html">The strategy</a>
+    </nav>
+    <p class="legal">&copy; GreatBear Ventures Private Limited</p>
   </div>
-</div>
-
-<!-- FOOTER -->
-<div class="gb-footer">
-  Copyright &copy; GreatBear Ventures Private Limited
-</div>
-
-</div><!-- /page-wrap -->
+</footer>
 
 <script>
-(function() {
-  var els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    els.forEach(function(el) { el.style.opacity = '1'; });
-    return;
+(function(){
+  var els=document.querySelectorAll('.r');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(el){el.classList.add('in');});return;
   }
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  els.forEach(function(el) {
-    el.style.animationPlayState = 'paused';
-    observer.observe(el);
-  });
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){io.observe(el);});
 })();
 </script>
+
 </body>
 </html>
