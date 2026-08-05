@@ -138,6 +138,15 @@ h1{
   margin-bottom:18px;
 }
 
+.steward-link{
+  display:inline-flex;align-items:center;gap:9px;margin-top:24px;
+  font-family:var(--util);font-size:13px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-60);
+  border-bottom:1px solid var(--ink-20);padding-bottom:5px;
+  transition:gap .35s ease,color .3s ease,border-color .3s ease;
+}
+.steward-link:hover{gap:16px;color:var(--ink);border-color:var(--ink);}
+
 /* ---------- strategies ledger ---------- */
 .label{
   font-family:var(--util);
@@ -309,10 +318,13 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
 
     <div class="intro">
       <h1 class="r" style="--d:.12s">Stewardship Led Capital Management</h1>
-      <p class="standfirst r" style="--d:.24s">
-        <span class="drop"></span>
-        GreatBear Capital is a private unregulated capital entity.
-      </p>
+      <div class="r" style="--d:.24s">
+        <p class="standfirst">
+          <span class="drop"></span>
+          GreatBear Capital is a private unregulated capital entity.
+        </p>
+        <a class="steward-link" href="stewardship.html">The Stewardship Code <span>&rarr;</span></a>
+      </div>
     </div>
 
     <section class="strategies">
@@ -344,6 +356,8 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
       <a href="mailto:info@greatbearcapital.com">info@greatbearcapital.com</a>
       <span class="sep"></span>
       <a href="https://saptarshiatgreatbear.substack.com/" target="_blank" rel="noopener">Publications on Substack</a>
+      <span class="sep"></span>
+      <a href="stewardship.html">Stewardship</a>
     </nav>
     <p class="legal">&copy; GreatBear Capital</p>
   </footer>
