@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>GreatBear Capital</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-<meta name="theme-color" content="#faf9f7" />
+<meta name="theme-color" content="#011627" />
 <meta name="description" content="GreatBear Capital — stewardship led capital management." />
 
 <meta property="og:title" content="GreatBear Capital" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.greatbearcapital.com/" />
-<meta property="og:image" content="https://www.greatbearcapital.com/images/gblogo.png" />
+<meta property="og:image" content="https://www.greatbearcapital.com/images/gblogow.png" />
 <meta property="og:description" content="GreatBear Capital — Stewardship." />
 <meta property="og:site_name" content="GreatBear Capital" />
 <meta property="og:locale" content="en_GB" />
@@ -39,7 +39,20 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+/* dark theme — deep navy ground, cream type */
+:root[data-theme="dark"]{
+  --cream:#011627;
+  --ink:#faf9f7;
+  --ink-90:#faf9f7ec;
+  --ink-60:#faf9f7b0;
+  --ink-40:#faf9f77a;
+  --ink-20:#faf9f73d;
+  --ink-08:#faf9f71f;
+}
+:root[data-theme="dark"]{color-scheme:dark;}
+:root[data-theme="dark"] body::after{opacity:.035;}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--cream);color-scheme:light;}
 body{
   background:var(--cream);
   color:var(--ink-90);
@@ -79,7 +92,6 @@ body::after{
   align-items:center;
   gap:16px;
   padding-bottom:clamp(16px,2.4vh,22px);
-  border-bottom:var(--rule);
 }
 .mark img{height:52px;width:52px;object-fit:contain;}
 .mark.fallback{
@@ -309,7 +321,7 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
 
   <header class="brand r" style="--d:0s">
     <span class="mark">
-      <img src="./images/gblogo.png" alt="" onerror="this.parentNode.classList.add('fallback');this.remove();" />
+      <img src="./images/gblogow.png" alt="" onerror="this.parentNode.classList.add('fallback');this.remove();" />
     </span>
     <span class="wordmark">GreatBear Capital</span>
   </header>
