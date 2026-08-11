@@ -250,6 +250,22 @@ table.gb tr.total-row td{border-bottom:none;border-top:var(--rule);color:var(--i
   table.gb.stack tr.section-row td::before,table.gb.stack tr.total-row td::before{content:none;}
 }
 
+/* holdings variant — card rows on mobile, for narrative tables with no numeric columns */
+@media (max-width:760px){
+  table.gb.stack.holdings tr{padding:26px 0;border-bottom:1px solid var(--ink-08);}
+  table.gb.stack.holdings tr:first-child{padding-top:6px;}
+  table.gb.stack.holdings tr:last-child{border-bottom:none;}
+  table.gb.stack.holdings td{display:block;padding:0;gap:0;text-align:left;}
+  table.gb.stack.holdings td::before{content:none;}
+  table.gb.stack.holdings td[data-label="Company"] b{display:block;font-size:16px;line-height:1.3;}
+  table.gb.stack.holdings td[data-label="Company"] .dl-sub{display:inline-block;margin-top:5px;
+    font-family:var(--util);font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-40);}
+  table.gb.stack.holdings td[data-label="Business"]{margin-top:12px;font-family:var(--util);
+    font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-60);}
+  table.gb.stack.holdings td.note{margin-top:8px;font-size:13.5px;line-height:1.65;}
+}
+
 /* ─── strategy ledger (shared with home) ─────── */
 .ledger{position:relative;border-top:var(--rule);}
 .row{position:relative;display:flex;align-items:baseline;justify-content:space-between;gap:20px;
