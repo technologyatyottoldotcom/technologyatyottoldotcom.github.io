@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>What We Do | GreatBear Capital</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta name="theme-color" content="#f5f5f5">
+<meta name="description" content="GreatBear Capital buys good businesses and keeps them: two long-only equity strategies, India Opportunities and Global Opportunities, run under one stewardship code.">
+<meta property="og:title" content="What We Do | GreatBear Capital">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.greatbearcapital.com/whatwedo">
+<meta property="og:image" content="https://www.greatbearcapital.com/images/gblogow.png">
+<meta property="og:description" content="Stewardship led capital management: India Opportunities and Global Opportunities.">
+<meta property="og:site_name" content="GreatBear Capital">
+<meta property="og:locale" content="en_GB">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&display=swap">
+<style>
+:root{
+  /* IKEA-style palette: flat grey ground, near-black type, blue for focus */
+  --bg:#f5f5f5;
+  --surface:#ebebeb;
+  --surface-hover:#dfdfdf;
+  --text:#111111;
+  --text-2:#484848;
+  --text-3:#767676;
+  --line:#dfdfdf;
+  --blue:#0058a3;
+  --yellow:#ffdb00;
+
+  --sans:"Google Sans", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --pad:clamp(20px, 5vw, 64px);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--bg);color-scheme:light;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+::selection{background:var(--yellow);color:var(--text);}
+a{color:inherit;text-decoration:none;}
+img{display:block;}
+b,strong{font-weight:700;color:var(--text);}
+[id]{scroll-margin-top:88px;}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--pad);}
+
+/* ---------- header ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:#f5f5f5f2;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  padding:clamp(14px,2.4vh,22px) var(--pad);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.mark img{height:40px;width:40px;object-fit:contain;filter:brightness(0);}
+.mark.fallback{height:40px;width:40px;border-radius:50%;background:var(--text);display:grid;place-items:center;}
+.mark.fallback::after{content:"GB";font-weight:700;font-size:13px;color:#fff;}
+.wordmark{font-weight:700;font-size:17px;letter-spacing:-.01em;}
+.nav-links{display:flex;align-items:center;gap:22px;}
+.nav-links a{font-size:14px;font-weight:700;color:var(--text);}
+.nav-links a:hover{text-decoration:underline;text-underline-offset:4px;}
+.nav-links a:last-child{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;}
+.nav-links a:last-child:hover{text-decoration-thickness:2px;}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font-size:14px;font-weight:700;color:var(--text-2);
+  display:flex;align-items:center;gap:10px;
+}
+.sec > .eyebrow:first-child::before,
+.hero > .eyebrow:first-child::before{
+  content:"";width:10px;height:10px;border-radius:50%;background:var(--yellow);
+}
+.h1{
+  margin-top:18px;
+  font-weight:700;
+  font-size:clamp(2.6rem,7vw,5.2rem);
+  line-height:1.02;letter-spacing:-.035em;
+  max-width:16ch;
+  text-wrap:balance;
+}
+.h2{
+  margin-top:12px;
+  font-weight:700;
+  font-size:clamp(1.9rem,4vw,3rem);
+  line-height:1.06;letter-spacing:-.03em;
+  text-wrap:balance;
+}
+.lede{margin-top:22px;font-size:18px;line-height:1.55;color:var(--text-2);max-width:52ch;}
+.sub{margin-top:14px;font-size:16px;line-height:1.6;color:var(--text-2);max-width:60ch;}
+.prose{font-size:16px;line-height:1.65;color:var(--text-2);}
+.prose p + p{margin-top:14px;}
+
+.hero{padding-top:clamp(48px,9vh,104px);}
+.sec{padding-top:clamp(72px,12vh,128px);}
+.body-block{margin-top:clamp(28px,4.5vh,44px);}
+
+/* ---------- three ideas ---------- */
+.principles{display:grid;gap:36px;}
+.principle{display:flex;flex-direction:column;gap:10px;}
+.code-n{font-size:14px;font-weight:700;color:var(--text-3);font-variant-numeric:tabular-nums;}
+.principle .principle-t{color:var(--text);font-size:clamp(1.25rem,2vw,1.5rem);font-weight:700;letter-spacing:-.02em;line-height:1.2;}
+.principle p{font-size:16px;line-height:1.6;color:var(--text-2);}
+
+/* ---------- strategies ---------- */
+.strats{display:grid;gap:0 64px;}
+.strat{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:28px;margin-bottom:56px;}
+.strat:last-child{margin-bottom:0;}
+.strat-tag{display:flex;gap:10px;font-size:14px;font-weight:700;color:var(--text-2);}
+.strat-tag span + span::before{content:"\00b7";margin-right:10px;color:var(--text-3);}
+.strat-name{
+  margin-top:10px;
+  font-size:clamp(1.8rem,3.4vw,2.6rem);
+  font-weight:700;letter-spacing:-.035em;line-height:1.05;
+}
+.strat-desc{margin-top:12px;font-size:16px;line-height:1.6;color:var(--text-2);max-width:46ch;}
+.strat-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.strat-val{
+  font-size:clamp(1.6rem,2.8vw,2.2rem);
+  font-weight:700;letter-spacing:-.03em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.val-sub{font-size:13px;font-weight:400;letter-spacing:0;color:var(--text-3);}
+.strat-lab{margin-top:8px;font-size:13px;line-height:1.4;color:var(--text-3);}
+
+.dl-row{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  padding:13px 0;
+  border-top:1px solid var(--line);
+}
+.dl-row:last-child{border-bottom:1px solid var(--line);}
+.dl-lab{font-size:15px;color:var(--text-2);}
+.dl-val{text-align:right;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;}
+.dl-sub{display:block;margin-top:3px;font-size:12px;font-weight:400;color:var(--text-3);}
+.dl-note{margin-top:28px;font-size:13px;line-height:1.6;color:var(--text-3);max-width:80ch;}
+
+/* ---------- promises ---------- */
+.promises{list-style:none;counter-reset:pr;display:grid;column-gap:64px;max-width:1040px;}
+.promises li{
+  counter-increment:pr;
+  display:grid;grid-template-columns:40px 1fr;
+  padding:16px 0;
+  border-top:1px solid var(--line);
+  font-size:16px;line-height:1.55;color:var(--text-2);
+}
+.promises li::before{
+  content:counter(pr,decimal-leading-zero);
+  font-size:14px;font-weight:700;color:var(--text-3);
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+
+/* ---------- about ---------- */
+.about{display:grid;gap:24px 64px;align-items:start;}
+.about-name{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;}
+.about .eyebrow{font-weight:400;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.chip{
+  font-size:13px;font-weight:700;
+  padding:8px 14px;border-radius:999px;
+  background:var(--surface);color:var(--text);
+}
+
+/* ---------- contact ---------- */
+.contact{padding-top:clamp(72px,12vh,128px);}
+.contact-title{
+  margin-top:14px;
+  font-size:clamp(2rem,4.6vw,3.4rem);
+  font-weight:700;line-height:1.04;letter-spacing:-.035em;
+  max-width:18ch;
+}
+.contact-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.contact-links a{
+  display:inline-flex;align-items:center;
+  height:52px;padding:0 28px;border-radius:999px;
+  font-size:14px;font-weight:700;
+  background:var(--surface);color:var(--text);
+  transition:background .2s ease;
+}
+.contact-links a:hover{background:var(--surface-hover);}
+.contact-links a:first-child{background:var(--text);color:#fff;}
+.contact-links a:first-child:hover{background:#333;}
+
+/* ---------- disclaimer + footer ---------- */
+.disc{margin-top:clamp(64px,10vh,104px);}
+.disc p{font-size:12px;line-height:1.7;color:var(--text-3);max-width:96ch;}
+footer.wrap{padding-bottom:calc(clamp(20px,3vh,28px) + env(safe-area-inset-bottom));}
+.foot{
+  margin-top:28px;padding-top:20px;
+  border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px;
+}
+.foot-links{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;}
+.foot-links a{font-size:14px;color:var(--text-2);}
+.foot-links a:hover{color:var(--text);text-decoration:underline;text-underline-offset:4px;}
+.sep{display:none;}
+.legal{font-size:12px;color:var(--text-3);}
+
+/* ---------- focus (IKEA blue) ---------- */
+a:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:4px;}
+
+/* ---------- reveal ---------- */
+.r{opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);}
+.r.in{opacity:1;transform:none;}
+
+/* ---------- responsive ---------- */
+@media (min-width:800px){
+  .principles{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px;}
+  .strats{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .strat{margin-bottom:0;}
+  .promises{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;grid-template-rows:repeat(5,auto);}
+  .about{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);}
+}
+@media (max-width:799px){
+  .nav-links a.jump-link{display:none;}
+}
+@media (max-width:639px){
+  .lede{font-size:16px;}
+  .contact-links a{height:48px;padding:0 22px;}
+  .foot{flex-direction:column;align-items:flex-start;}
+}
+@media (max-width:420px){
+  .strat-stats{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .r{opacity:1;transform:none;transition:none;}
+}
+</style>
+<noscript><style>.r{opacity:1;transform:none;}</style></noscript>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="wordmark">GreatBear Capital</span>
+    </a>
+    <nav class="nav-links">
+      <a class="jump-link" href="#stewardship">Stewardship</a>
+      <a class="jump-link" href="#strategies">Strategies</a>
+      <a class="jump-link" href="#about">About</a>
+      <a href="index.html">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="wrap hero">
+    <p class="eyebrow r">What we do</p>
+    <h1 class="h1 r" style="--d:.08s">We buy good businesses, and we keep them.</h1>
+    <p class="lede r" style="--d:.14s">Two concentrated, long-only equity portfolios, one in India and one global. Held for years, not quarters, and run under a single code of conduct that puts your capital first.</p>
+  </section>
+
+  <!-- HOW WE INVEST -->
+  <section class="wrap sec" id="approach">
+    <p class="eyebrow r">How we invest</p>
+    <h2 class="h2 r" style="--d:.06s">Three ideas, both strategies</h2>
+    <div class="principles body-block">
+      <div class="principle r">
+        <span class="code-n">1</span>
+        <p class="principle-t">Businesses, not tickers</p>
+        <p>We look at a company the way a private owner would: cash flows, market position, management, and whether it makes people's lives better.</p>
+      </div>
+      <div class="principle r" style="--d:.06s">
+        <span class="code-n">2</span>
+        <p class="principle-t">Buy, then hold</p>
+        <p>We think in five-year horizons and longer. We don't trade, time the market or rotate between asset classes. A position changes only when the business does.</p>
+      </div>
+      <div class="principle r" style="--d:.12s">
+        <span class="code-n">3</span>
+        <p class="principle-t">Fewer, better</p>
+        <p>Around a dozen companies per portfolio. Long only, no leverage, no shorting, and no sin stocks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGIES -->
+  <section class="wrap sec" id="strategies">
+    <p class="eyebrow r">Strategies</p>
+    <h2 class="h2 r" style="--d:.06s">Two portfolios</h2>
+    <p class="sub r" style="--d:.1s">Both are separately managed accounts. You own every holding directly, in your own name.</p>
+
+    <div class="strats body-block">
+
+      <article class="strat r" id="india">
+        <div>
+          <p class="strat-tag"><span>India &middot; Equity</span><span>Managed account</span></p>
+          <h3 class="strat-name">India Opportunities</h3>
+          <p class="strat-desc">Ten to twelve Indian companies bought at sensible prices with a real margin of safety, across the market cap spectrum, and held for the long term.</p>
+        </div>
+        <div class="strat-stats">
+          <div><div class="strat-val">14%+ <span class="val-sub">(18%+ INR)</span></div><div class="strat-lab">Annualised in USD</div></div>
+          <div><div class="strat-val">~12 yrs</div><div class="strat-lab">Track record</div></div>
+          <div><div class="strat-val">~5%</div><div class="strat-lab">Annual alpha vs Nifty 50</div></div>
+        </div>
+        <div class="dl">
+          <div class="dl-row"><span class="dl-lab">Minimum</span><span class="dl-val">$100,000</span></div>
+          <div class="dl-row"><span class="dl-lab">Fees</span><span class="dl-val">2% + 20%<span class="dl-sub">over a 15% hurdle, high watermark</span><span class="dl-sub">1% management fee above $1 Mn</span></span></div>
+          <div class="dl-row"><span class="dl-lab">Leverage</span><span class="dl-val">None</span></div>
+          <div class="dl-row"><span class="dl-lab">Custody</span><span class="dl-val">Orbis</span></div>
+        </div>
+      </article>
+
+      <article class="strat r" style="--d:.08s" id="global">
+        <div>
+          <p class="strat-tag"><span>Global &middot; Equity</span><span>Managed account</span></p>
+          <h3 class="strat-name">Global Opportunities</h3>
+          <p class="strat-desc">Global leaders with dominant market positions, strong free cash flow and powerful intangible assets: brands, networks and intellectual property.</p>
+        </div>
+        <div class="strat-stats">
+          <div><div class="strat-val">16.53%</div><div class="strat-lab">Annualised since Jan 2023</div></div>
+          <div><div class="strat-val">69.78%</div><div class="strat-lab">Total return since Jan 2023</div></div>
+          <div><div class="strat-val">5.15%</div><div class="strat-lab">One year return</div></div>
+        </div>
+        <div class="dl">
+          <div class="dl-row"><span class="dl-lab">Minimum</span><span class="dl-val">$100,000</span></div>
+          <div class="dl-row"><span class="dl-lab">Fees</span><span class="dl-val">2% + 20%<span class="dl-sub">over a 10% hurdle, high watermark</span><span class="dl-sub">1% management fee above $1 Mn</span></span></div>
+          <div class="dl-row"><span class="dl-lab">Leverage</span><span class="dl-val">None</span></div>
+          <div class="dl-row"><span class="dl-lab">Custody</span><span class="dl-val">Interactive Brokers</span></div>
+        </div>
+      </article>
+
+    </div>
+    <p class="dl-note r">Past performance is not indicative of future returns. Full terms, including setup and exit fees, are shared on request.</p>
+  </section>
+
+  <!-- STEWARDSHIP -->
+  <section class="wrap sec" id="stewardship">
+    <p class="eyebrow r">Stewardship</p>
+    <h2 class="h2 r" style="--d:.06s">Nine promises we keep</h2>
+    <p class="sub r" style="--d:.1s">Stewardship means looking after something on someone else's behalf, with their interests at heart. These are the terms on which we accept capital.</p>
+
+    <ol class="promises body-block">
+      <li class="r"><span><b>We are partners.</b> Most of our own wealth is invested alongside yours.</span></li>
+      <li class="r"><span><b>Survive first.</b> We aim for decent returns, not a roulette game.</span></li>
+      <li class="r"><span><b>We buy to own.</b> Not to flip. We grow with good companies, long term.</span></li>
+      <li class="r"><span><b>We fix mistakes fast.</b> When we are wrong, we act immediately.</span></li>
+      <li class="r"><span><b>Full transparency.</b> Every investor, large or small, gets the same information.</span></li>
+      <li class="r"><span><b>Bad news first.</b> Good news can always wait.</span></li>
+      <li class="r"><span><b>No conflicted deals.</b> We never take on incentives that cut against yours.</span></li>
+      <li class="r"><span><b>Dignity in every dealing.</b> Respect and care, for investors and team alike.</span></li>
+      <li class="r"><span><b>No side deals.</b> No confidential agreements and no special treatment for anyone.</span></li>
+    </ol>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="wrap sec" id="about">
+    <p class="eyebrow r">About</p>
+    <div class="about body-block">
+      <div class="r">
+        <p class="about-name">Saptarshi Das, CFA</p>
+        <p class="eyebrow" style="margin-top:12px">Director, GreatBear Capital</p>
+        <div class="chips">
+          <span class="chip">Asia Hedge 2018 nominated</span>
+          <span class="chip">Imperial College London</span>
+          <span class="chip">Ahmedabad, India</span>
+        </div>
+      </div>
+      <div class="prose r" style="--d:.08s">
+        <p>Saptarshi founded GreatBear in 2015 after moving back to India from London. There he worked with Octopus Investments, FQS Capital and Visiongain Global, managing a $75 Mn absolute return fund and overseeing $300 to 500 Mn of allocation to emerging and Asian markets.</p>
+        <p>He holds a Masters in Management from Imperial College London and trained as a mechanical engineer. GreatBear is built on a few simple habits: prudence, humility, deep research, patience and persistence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="wrap contact" id="contact">
+    <p class="eyebrow r">Get in touch</p>
+    <p class="contact-title r" style="--d:.06s">Reach out for a meaningful conversation.</p>
+    <div class="contact-links r" style="--d:.1s">
+      <a href="mailto:info@greatbearcapital.com">info@greatbearcapital.com</a>
+      <a href="https://saptarshiatgreatbear.substack.com/" target="_blank" rel="noopener">Publications on Substack</a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="disc">
+      <p><b>For accredited investors only.</b></p>
+      <p style="margin-top:10px">Stock investments are subject to market risks. Please read the IPS information and other related documents carefully before investing. Past performance is not indicative of future returns. Please consider your specific investment requirements before choosing an advisor, or designing a portfolio that suits your needs. The value of investments can go down as well as up, so you could get back less than you invest.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <nav class="foot-links">
+      <a href="index.html">Home</a>
+      <span class="sep"></span>
+      <a href="#strategies">Strategies</a>
+      <span class="sep"></span>
+      <a href="#stewardship">Stewardship</a>
+      <span class="sep"></span>
+      <a href="#about">About</a>
+    </nav>
+    <p class="legal">&copy; GreatBear Capital</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.r');
+  if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    els.forEach(function(el){el.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+
+</body>
+</html>

@@ -1,317 +1,192 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>GreatBear Capital</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-<meta name="theme-color" content="#011627" />
-<meta name="description" content="GreatBear Capital — stewardship led capital management." />
+<meta name="theme-color" content="#f5f5f5" />
+<meta name="description" content="GreatBear Capital: stewardship led capital management." />
 
 <meta property="og:title" content="GreatBear Capital" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.greatbearcapital.com/" />
 <meta property="og:image" content="https://www.greatbearcapital.com/images/gblogow.png" />
-<meta property="og:description" content="GreatBear Capital — Stewardship." />
+<meta property="og:description" content="GreatBear Capital: Stewardship." />
 <meta property="og:site_name" content="GreatBear Capital" />
 <meta property="og:locale" content="en_GB" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Ubuntu:wght@300;400;500&family=Yeseva+One&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&display=swap" />
 
 <style>
 :root{
-  --ink:#011627;
-  --ink-90:#011627e5;
-  --ink-60:#011627a0;
-  --ink-40:#01162766;
-  --ink-20:#01162733;
-  --ink-08:#01162714;
-  --cream:#faf9f7;
+  /* IKEA-style palette: flat grey ground, near-black type, blue for focus */
+  --bg:#f5f5f5;
+  --surface:#ebebeb;
+  --surface-hover:#dfdfdf;
+  --text:#111111;
+  --text-2:#484848;
+  --text-3:#767676;
+  --line:#dfdfdf;
+  --blue:#0058a3;
+  --yellow:#ffdb00;
 
-  --display:"Yeseva One", Georgia, "Times New Roman", serif;
-  --body:"Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --util:"Barlow Condensed", "Ubuntu", sans-serif;
-
-  --pad:clamp(22px, 5vw, 68px);
-  --rule:1px solid var(--ink-20);
+  --sans:"Google Sans", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --pad:clamp(20px, 5vw, 64px);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-/* dark theme — deep navy ground, cream type */
-:root[data-theme="dark"]{
-  --cream:#011627;
-  --ink:#faf9f7;
-  --ink-90:#faf9f7ec;
-  --ink-60:#faf9f7b0;
-  --ink-40:#faf9f77a;
-  --ink-20:#faf9f73d;
-  --ink-08:#faf9f71f;
-}
-:root[data-theme="dark"]{color-scheme:dark;}
-:root[data-theme="dark"] body::after{opacity:.035;}
 
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--cream);color-scheme:light;}
-body{
-  background:var(--cream);
-  color:var(--ink-90);
-  font-family:var(--body);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+html{
+  -webkit-text-size-adjust:100%;
+  background:var(--bg);
+  color-scheme:light;
 }
-::selection{background:var(--ink);color:var(--cream);}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+::selection{background:var(--yellow);color:var(--text);}
 a{color:inherit;text-decoration:none;}
 img{display:block;}
 
-/* film grain, kept from the original */
-body::after{
-  content:"";
-  position:fixed;inset:0;
-  pointer-events:none;z-index:9999;opacity:.022;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat:repeat;background-size:256px;
-}
-
-/* ---------- shell ---------- */
 .frame{
   min-height:100vh;
   min-height:100svh;
-  max-width:1220px;
+  max-width:1200px;
   margin:0 auto;
-  padding:clamp(22px,3.4vh,34px) var(--pad) clamp(22px,3.4vh,30px);
-  padding-bottom:calc(clamp(22px,3.4vh,30px) + env(safe-area-inset-bottom));
+  padding:clamp(18px,3vh,28px) var(--pad);
+  padding-bottom:calc(clamp(18px,3vh,28px) + env(safe-area-inset-bottom));
   display:flex;
   flex-direction:column;
-  gap:clamp(36px,6vh,72px);
+  gap:clamp(40px,7vh,80px);
 }
 
-/* ---------- brand bar ---------- */
-.brand{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding-bottom:clamp(16px,2.4vh,22px);
+/* ---------- header ---------- */
+.top{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
 }
-.mark img{height:52px;width:52px;object-fit:contain;}
+.brand{display:flex;align-items:center;gap:12px;}
+/* logo file is light; render it near-black */
+.mark img{height:40px;width:40px;object-fit:contain;filter:brightness(0);}
 .mark.fallback{
-  height:52px;width:52px;
-  border:1px solid var(--ink-20);
+  height:40px;width:40px;border-radius:50%;
+  background:var(--text);
   display:grid;place-items:center;
 }
-.mark.fallback::after{
-  content:"GB";
-  font-family:var(--display);
-  font-size:17px;
-  color:var(--ink);
-  letter-spacing:-.02em;
-}
-.wordmark{
-  font-family:var(--util);
-  font-weight:600;
-  font-size:clamp(15px,2.2vw,18px);
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  color:var(--ink);
-  line-height:1;
-}
+.mark.fallback::after{content:"GB";font-weight:700;font-size:13px;color:#fff;}
+.wordmark{font-weight:700;font-size:17px;letter-spacing:-.01em;}
 
-/* ---------- stage ---------- */
+.textlink{
+  font-size:14px;font-weight:700;
+  color:var(--text);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  text-decoration-thickness:1px;
+}
+.textlink:hover{text-decoration-thickness:2px;}
+
+/* ---------- hero ---------- */
 .stage{
   flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:clamp(44px,8vh,96px);
-  padding:clamp(12px,3vh,40px) 0;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(56px,10vh,112px);
 }
-
-.intro{display:grid;gap:26px;}
+.kicker{
+  font-size:14px;font-weight:700;color:var(--text-2);
+  display:flex;align-items:center;gap:10px;
+}
+.kicker::before{
+  content:"";width:10px;height:10px;border-radius:50%;
+  background:var(--yellow);
+}
 h1{
-  font-family:var(--display);
-  font-weight:400;
-  font-size:clamp(2.3rem,6.4vw,4.4rem);
-  line-height:1.04;
-  letter-spacing:-.028em;
-  color:var(--ink);
-  max-width:15ch;
+  margin-top:18px;
+  font-weight:700;
+  font-size:clamp(2.6rem,7.2vw,5.4rem);
+  line-height:1.02;
+  letter-spacing:-.035em;
+  max-width:13ch;
 }
 .standfirst{
-  font-size:14px;
-  font-weight:300;
-  line-height:1.7;
-  color:var(--ink-60);
-  max-width:50ch;
-}
-.standfirst .drop{
-  display:block;
-  width:38px;height:1px;
-  background:var(--ink-20);
-  margin-bottom:18px;
+  margin-top:22px;
+  font-size:17px;line-height:1.55;
+  color:var(--text-2);
+  max-width:44ch;
 }
 
-.steward-link{
-  display:inline-flex;align-items:center;gap:9px;margin-top:24px;
-  font-family:var(--util);font-size:13px;font-weight:600;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-60);
-  border-bottom:1px solid var(--ink-20);padding-bottom:5px;
-  transition:gap .35s ease,color .3s ease,border-color .3s ease;
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  margin-top:32px;
+  height:52px;padding:0 28px;
+  border-radius:999px;
+  background:var(--text);color:#fff;
+  font-size:14px;font-weight:700;
+  transition:background .2s ease;
 }
-.steward-link:hover{gap:16px;color:var(--ink);border-color:var(--ink);}
+.btn:hover{background:#333;}
 
-/* ---------- strategies ledger ---------- */
-.label{
-  font-family:var(--util);
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--ink-40);
-  margin-bottom:14px;
+/* ---------- what we do ---------- */
+.label{font-size:14px;font-weight:700;color:var(--text-2);}
+.line-link{
+  margin-top:14px;
+  display:inline-flex;align-items:center;gap:20px;
 }
-.ledger{position:relative;}
-.ledger::before{
-  content:"";
-  position:absolute;top:0;left:0;right:0;height:1px;
-  background:var(--ink-20);
-  transform:scaleX(0);transform-origin:left;
-  animation:draw .9s cubic-bezier(.2,.7,.2,1) .35s forwards;
+.line-link .t{
+  font-size:clamp(1.5rem,3.4vw,2.4rem);
+  font-weight:700;
+  letter-spacing:-.025em;
+  line-height:1.15;
+  text-decoration:underline;
+  text-decoration-color:transparent;
+  text-underline-offset:6px;
+  text-decoration-thickness:2px;
+  transition:text-decoration-color .2s ease;
 }
-.row{
-  position:relative;
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:20px;
-  padding:clamp(17px,2.3vw,25px) 0;
-  border-bottom:var(--rule);
-  isolation:isolate;
-}
-.row::before{
-  content:"";
-  position:absolute;
-  inset:0 -18px;
-  z-index:-1;
-  background:var(--ink-08);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .55s cubic-bezier(.2,.8,.2,1);
-}
-.row:hover::before,.row:focus-visible::before{transform:scaleX(1);}
-.row-name{
-  font-family:var(--display);
-  font-weight:400;
-  font-size:clamp(1.08rem,2.15vw,1.62rem);
-  line-height:1.25;
-  letter-spacing:-.015em;
-  color:var(--ink);
-  transition:transform .55s cubic-bezier(.2,.8,.2,1);
-}
-.row:hover .row-name{transform:translateX(6px);}
-.arrow{
-  display:inline-block;
-  margin-left:.5em;
-  font-family:var(--body);
-  font-size:.62em;
-  color:var(--ink-40);
-  opacity:0;
-  transform:translateX(-8px);
-  transition:opacity .4s ease,transform .5s cubic-bezier(.2,.8,.2,1);
-}
-.row:hover .arrow,.row:focus-visible .arrow{opacity:1;transform:translateX(0);}
-.row-meta{
+.line-link:hover .t{text-decoration-color:var(--text);}
+.round{
   flex:none;
-  font-family:var(--util);
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--ink-40);
-  white-space:nowrap;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--surface);
+  display:grid;place-items:center;
+  font-size:18px;
+  transition:background .2s ease,transform .3s ease;
 }
+.line-link:hover .round{background:var(--surface-hover);transform:translateX(4px);}
 
 /* ---------- footer ---------- */
 .foot{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px 30px;
-  padding-top:clamp(16px,2.4vh,22px);
-  border-top:var(--rule);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:12px 28px;
 }
-.foot-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;}
-.foot-links a{
-  font-size:13px;
-  color:var(--ink-60);
-  transition:color .3s ease;
-}
-.foot-links a:hover{color:var(--ink);}
-.sep{width:3px;height:3px;border-radius:50%;background:var(--ink-20);}
-.legal{
-  font-size:11px;
-  color:var(--ink-40);
-  letter-spacing:.01em;
-}
+.foot-links{display:flex;flex-wrap:wrap;gap:10px 24px;}
+.foot-links a{font-size:14px;color:var(--text-2);}
+.foot-links a:hover{color:var(--text);text-decoration:underline;text-underline-offset:4px;}
+.legal{font-size:12px;color:var(--text-3);}
+.foot-note{flex-basis:100%;font-size:12px;color:var(--text-3);}
 
-/* ---------- focus ---------- */
-a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
-.row:focus-visible{outline-offset:6px;}
+/* ---------- focus (IKEA blue) ---------- */
+a:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:4px;}
 
 /* ---------- motion ---------- */
-@keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
-@keyframes draw{to{transform:scaleX(1);}}
-.r{opacity:0;animation:rise .85s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s);}
+@keyframes rise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.r{opacity:0;animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s);}
 
-/* ---------- desktop ---------- */
-@media (min-width:800px){
-  .intro{gap:30px;}
-
-  .ledger{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-  .row{
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:22px;
-    padding:24px 26px 26px;
-    border-left:var(--rule);
-  }
-  .row:first-child{padding-left:0;border-left:none;}
-  .row::before{inset:0;}
-  .row:first-child::before{left:-18px;}
-  .row-name{
-    font-size:clamp(.98rem,1.45vw,1.22rem);
-    line-height:1.3;
-  }
-  .row:hover .row-name{transform:translateX(4px);}
-  .row-meta{font-size:11px;letter-spacing:.16em;}
-}
-
-/* ---------- mobile ---------- */
 @media (max-width:639px){
-  .mark img,.mark.fallback{height:44px;width:44px;}
-  h1{max-width:none;}
-  .row{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:9px;
-    padding:18px 0;
-  }
-  .row::before{inset:0 -12px;}
-  .row-meta{font-size:11px;}
-  .foot{flex-direction:column;align-items:flex-start;gap:14px;}
+  .standfirst{font-size:16px;}
+  .btn{height:48px;padding:0 24px;}
+  .round{width:42px;height:42px;font-size:16px;}
+  .foot{flex-direction:column;align-items:flex-start;}
 }
-
-@media (hover:none){
-  .arrow{opacity:.4;transform:none;}
-}
-
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto;}
-  .r,.ledger::before{animation:none;opacity:1;transform:none;}
-  .row::before,.row-name,.arrow{transition:none;}
+  .r{animation:none;opacity:1;transform:none;}
+  .round,.btn,.line-link .t{transition:none;}
 }
 </style>
 </head>
@@ -319,59 +194,41 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:4px;}
 
 <div class="frame">
 
-  <header class="brand r" style="--d:0s">
-    <span class="mark">
-      <img src="./images/gblogow.png" alt="" onerror="this.parentNode.classList.add('fallback');this.remove();" />
+  <header class="top r" style="--d:0s">
+    <span class="brand">
+      <span class="wordmark">GreatBear Capital</span>
     </span>
-    <span class="wordmark">GreatBear Capital</span>
+    <a class="textlink" href="mailto:info@greatbearcapital.com">Contact</a>
   </header>
 
   <main class="stage">
 
-    <div class="intro">
-      <h1 class="r" style="--d:.12s">Stewardship Led Capital Management</h1>
-      <div class="r" style="--d:.24s">
-        <p class="standfirst">
-          <span class="drop"></span>
-          GreatBear Capital is a private capital entity. 
-        </p>
-        <a class="steward-link" href="stewardship.html">The Stewardship Code <span>&rarr;</span></a>
-      </div>
-    </div>
+    <section>
+      <p class="kicker r" style="--d:.06s">Private capital</p>
+      <h1 class="r" style="--d:.12s">Stewardship led capital management</h1>
+      <p class="standfirst r" style="--d:.2s">GreatBear Capital is a private capital entity.</p>
+      <a class="btn r" style="--d:.26s" href="whatwedo.html#stewardship">The Stewardship Code <span>&rarr;</span></a>
+    </section>
 
-    <section class="strategies">
-      <p class="label r" style="--d:.34s">Strategies</p>
-      <div class="ledger">
-
-        <a class="row r" style="--d:.42s" href="https://www.greatbearcapital.com/IV">
-          <span class="row-name">India Opportunities<span class="arrow">&#8594;</span></span>
-          <span class="row-meta">India &middot; Equity</span>
-        </a>
-
-        <a class="row r" style="--d:.52s" href="https://www.greatbearcapital.com/GB">
-          <span class="row-name">Global Opportunities<span class="arrow">&#8594;</span></span>
-          <span class="row-meta">Global &middot; Equity</span>
-        </a>
-
-        <!-- <a class="row r" style="--d:.62s" href="https://www.greatbearcapital.com/AllSeasonsStrategy">
-          <span class="row-name">All Seasons Global Multi-Asset<span class="arrow">&#8594;</span></span>
-          <span class="row-meta">Global &middot; Multi-Asset</span>
-        </a> -->
-
-      </div>
+    <section class="r" style="--d:.34s">
+      <p class="label">What we do</p>
+      <a class="line-link" href="whatwedo.html">
+        <span class="t">We are investors of the boring kind.</span>
+        <span class="round">&rarr;</span>
+      </a>
     </section>
 
   </main>
 
-  <footer class="foot r" style="--d:.74s">
+  <footer class="foot r" style="--d:.42s">
     <nav class="foot-links">
       <a href="mailto:info@greatbearcapital.com">info@greatbearcapital.com</a>
-      <span class="sep"></span>
       <a href="https://saptarshiatgreatbear.substack.com/" target="_blank" rel="noopener">Publications on Substack</a>
-      <span class="sep"></span>
-      <a href="stewardship.html">Stewardship</a>
+      <a href="whatwedo.html">What we do</a>
+      <a href="whatwedo.html#stewardship">Stewardship</a>
     </nav>
     <p class="legal">&copy; GreatBear Capital</p>
+    <p class="foot-note">* For accredited investors only.</p>
   </footer>
 
 </div>
